@@ -1,0 +1,30 @@
+---
+title: "Práctica: Probabilidad condicional"
+---
+
+## Ejercicio 1
+
+Una empresa encuentra que el 60% de sus clientes compran el producto A
+y el 30% compran tanto A como B. De los clientes que compran A, ¿qué
+porcentaje también compra B?
+
+::: {.callout-note collapse="true"}
+## Solución
+
+$$P(B \mid A) = \frac{P(A \cap B)}{P(A)} = \frac{0.30}{0.60} = 0.50$$
+:::
+
+## Ejercicio 2
+
+En una fábrica, el 2% de las piezas son defectuosas. Un sensor detecta
+correctamente el 95% de las piezas defectuosas, pero también marca
+como defectuosas al 3% de las piezas buenas. Si el sensor marca una
+pieza como defectuosa, ¿cuál es la probabilidad de que realmente lo
+sea?
+
+::: {.callout-note collapse="true"}
+## Solución
+
+Este es un caso de Teorema de Bayes — inténtalo antes de ver
+`content/semanas/unidad-02-probabilidad.qmd` para revisar la fórmula.
+:::

@@ -1,18 +1,16 @@
-# _brand.yml — tu marca personal, aplicada automáticamente a TODAS las
-# presentaciones, tareas y docs (Quarto la detecta sola, no hay que
-# referenciarla en cada archivo).
+# _brand.yml — tu marca personal (NO la de ninguna universidad).
+# Aplica sola a revealjs/html/pdf sin tocar cada .qmd.
 #
-# ⚠️ TODO: estos colores son placeholders. Cámbialos por tu paleta real.
-# El logo de universidad NO va aquí a propósito — varía por oferta y se
-# inyecta como parámetro en content/blocks/portada.qmd.
+# Paleta propuesta como punto de partida — cámbiala cuando quieras,
+# es un solo archivo.
 
 color:
   palette:
-    azul-principal: "#1B4965"
-    dorado-acento: "#D4A017"
-    gris-oscuro: "#222222"
+    indigo: "#2E3A59"
+    terracota: "#D9764A"
+    gris-oscuro: "#22252A"
     blanco: "#FFFFFF"
-  primary: azul-principal
+  primary: indigo
   background: blanco
   foreground: gris-oscuro
 

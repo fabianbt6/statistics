@@ -5,4 +5,4 @@ Coloca aquí un logo por universidad, ej.:
   images/logos/tec.png
 
 El nombre de archivo que uses debe coincidir con el `logo_path` que le
-pases a nueva_oferta() en R/nueva_oferta.R.
+pases a nuevo_curso() en R/nuevo_curso.R.

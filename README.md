@@ -1,72 +1,119 @@
 # statistics
 
-Sistema para generar y mantener el material del curso de Estadística
-(presentaciones, tareas, docs) en Quarto, de forma modular y automatizada
-cuatri a cuatri — y para distintas universidades.
+Tu repo de estadística: entrega de cursos (presentaciones, tareas)
+automatizada por materia + universidad + cuatri, **más** una base de
+consulta personal (resúmenes, prácticas, laboratorios) y tutoriales
+interactivos — todo convive sin pisarse.
 
-## Idea central
+## Terminología
 
-El contenido vive **una sola vez** en `content/`. Cada oferta (una
-combinación universidad + cuatrimestre) es solo un archivo de parámetros
-en `ofertas/<universidad>/<periodo>/_variables.yml`. Renderizar una oferta
-inyecta esos parámetros (fechas, feriados, universidad, logo, docente) en
-el contenido fijo y genera HTML autocontenido en `_output/`, listo para
-compartir por correo/Drive/plataforma — sin depender de un link público.
+- **materia** — un curso completo independiente (ej. "estadística",
+  "series de tiempo"), con su propio programa, unidades, tareas.
+- **curso** — una combinación puntual universidad + cuatrimestre de una
+  materia (ej. "estadística en la UCR, 2026-C1").
+
+## Las cuatro partes del repo
+
+| Carpeta | Para qué | Se renderiza como |
+|---|---|---|
+| `materias/<materia>/content/` + `cursos/` | Dar clases de esa materia, por universidad+cuatri | revealjs (slides) |
+| `shared/` | Lo único que se reutiliza ENTRE materias (portada) | — |
+| `temas/` | Consulta personal: cualquier tema, cruza cualquier materia | html (documento) |
+| `tutoriales/` | Ejercicios interactivos (learnr) | Shiny, local — ver su README |
 
 ```
 statistics/
 ├── _quarto.yml              # config del proyecto (revealjs, embed-resources)
 ├── _brand.yml                # tu paleta de colores y tipografía personal
 ├── R/
-│   ├── nueva_oferta.R         # crea ofertas/<universidad>/<periodo>/_variables.yml
-│   └── render_oferta.R        # renderiza esa oferta a HTML autocontenido
-├── content/                  # el núcleo — se edita UNA vez
-│   ├── blocks/                # piezas modulares (portada, temas, ejercicios...)
-│   ├── semanas/                # cada semana ensambla los bloques que necesita
-│   ├── tareas/
-│   └── docs/                  # programa, rúbricas, etc.
-├── ofertas/
-│   └── EJEMPLO-UCR/2026-C1/_variables.yml
+│   ├── nuevo_curso.R          # crea materias/<materia>/cursos/<universidad>/<periodo>/_variables.yml
+│   └── render_curso.R         # renderiza ese curso a HTML autocontenido
+├── shared/
+│   └── portada.qmd            # plantilla de portada — reusable entre TODAS las materias
+├── materias/
+│   ├── README.md              # cómo agregar una materia nueva
+│   └── estadistica/
+│       ├── content/
+│       │   ├── blocks/bibliografia.qmd   # específica de esta materia
+│       │   ├── semanas/
+│       │   ├── tareas/
+│       │   └── docs/
+│       └── cursos/EJEMPLO-UCR/2026-C1/_variables.yml
+├── temas/                    # consulta personal, libre — ver temas/README.md
+│   └── probabilidad-condicional/{resumen,practica,laboratorio}.qmd
+├── tutoriales/                # learnr — motor distinto, ver tutoriales/README.md
+│   └── probabilidad-basica/tutorial.Rmd
 ├── images/logos/              # un logo por universidad
-└── _output/                  # HTML generados (no se versiona en git)
+└── _output/                  # HTML generados: _output/<materia>/<universidad>/<periodo>/
 ```
 
-## Contenido modular
+## Por qué existe `materias/`
 
-Cada bloque en `content/blocks/` es una pieza independiente (portada,
-tipos de datos, distribuciones de probabilidad, ejercicios, referencias).
-Una semana simplemente los ensambla con `{{< include >}}`:
+Al principio el repo asumía una sola materia (todo en `content/` y
+`cursos/` a nivel raíz). Eso se rompe en cuanto impartes un curso
+completo distinto (ej. Series de Tiempo, con sus propias unidades y
+bibliografía) — no solo una nota de repaso. `materias/` agrega ese
+nivel; ver `materias/README.md` para el patrón exacto de cómo agregar
+una nueva.
+
+`shared/portada.qmd` es la única pieza que de verdad se reutiliza
+entre materias, porque está 100% parametrizada (universidad, logo,
+docente, materia, unidad) y no tiene contenido propio de ninguna
+materia específica.
+
+## Contenido modular: bloques estructurales, no temáticos
+
+Al migrar el primer PPT real (Unidad 2: Probabilidad) quedó claro que
+el contenido de fondo (qué es probabilidad condicional, qué es Bayes)
+**no se repite** entre unidades — lo que se repite es el **patrón**:
+portada, agenda, divisor de sección, definición, ejercicio+solución,
+bibliografía.
+
+- `shared/portada.qmd` — plantilla real, los datos cambian por parámetro
+- `materias/<materia>/content/blocks/bibliografia.qmd` — los textos de
+  esa materia (varían entre materias, y a veces entre unidades — ver
+  `PATRONES.md`)
+
+El resto del patrón (divisores, definiciones, ejercicios) se logra con
+**clases CSS reutilizables** definidas en `styles.scss`, aplicadas
+directo en el `.qmd` de cada unidad:
 
 ```markdown
-{{< include ../blocks/portada.qmd >}}
-{{< include ../blocks/tipos-de-datos.qmd >}}
-{{< include ../blocks/distribuciones-probabilidad.qmd >}}
-{{< include ../blocks/ejercicios.qmd >}}
-{{< include ../blocks/referencias.qmd >}}
+## Probabilidad Condicional {.divisor}     <!-- fondo de marca, slide completa -->
+
+## Definición                              <!-- acento bajo el título, automático -->
+
+Sean $A$ y $B$ ...
 ```
 
-Para armar otra semana con otra combinación de temas, copias
-`content/semanas/semana-01.qmd` y cambias qué bloques incluye — el
-contenido de cada bloque no se duplica.
+Para una unidad nueva, copias
+`materias/estadistica/content/semanas/unidad-02-probabilidad.qmd` como
+plantilla y cambias el contenido — la *forma* (divisores, acentos,
+portada, bibliografía) se hereda sola.
 
-Editas un bloque una vez (ej. `tipos-de-datos.qmd`) y el cambio se
-refleja en todas las semanas que lo incluyan.
+Para patrones adicionales (tablas, código R, preguntas de discusión,
+slides destacadas, comparaciones de dos columnas, bibliografía que
+varía por unidad), ver **`PATRONES.md`**.
 
 ## Marca personal vs. logo de universidad
 
-- `_brand.yml` (raíz): tu paleta de colores y tipografía. Se aplica sola
-  a todo — revealjs, html, pdf — sin tocar cada archivo. **Edítalo con tus
-  colores reales**, ahora tiene placeholders.
+- `_brand.yml` (raíz): tu paleta de colores y tipografía **personal**,
+  aplica a **todas** las materias por igual. Trae una paleta
+  indigo/terracota como punto de partida; cámbiala cuando quieras.
+- `styles.scss`: define `.divisor`, `.destacado` y el acento bajo los
+  títulos — usa las variables `$brand-*` que Quarto genera
+  automáticamente desde `_brand.yml`.
 - Logo de universidad: **no** vive en `_brand.yml` porque cambia por
-  oferta. Se inyecta como parámetro (`params$logo_path`) directamente en
-  `content/blocks/portada.qmd`, y su valor real viene del
-  `_variables.yml` de cada oferta.
+  curso. Se inyecta como parámetro (`params$logo_path`) en
+  `shared/portada.qmd`, y su valor real viene del `_variables.yml` de
+  cada curso.
 
 ## Flujo para un cuatri nuevo
 
 ```r
-source("R/nueva_oferta.R")
-nueva_oferta(
+source("R/nuevo_curso.R")
+nuevo_curso(
+  materia      = "estadistica",
   universidad  = "UCR",
   anio         = 2026,
   cuatri       = 1,
@@ -75,13 +122,13 @@ nueva_oferta(
   logo_path    = "images/logos/ucr.png"
 )
 
-source("R/render_oferta.R")
-render_oferta(universidad = "UCR", anio = 2026, cuatri = 1)
+source("R/render_curso.R")
+render_curso(materia = "estadistica", universidad = "UCR", anio = 2026, cuatri = 1)
 ```
 
-Esto deja los `.html` autocontenidos en `_output/UCR/2026-C1/`, listos
-para compartir. Ninguna carpeta de `content/` se duplica ni se
-sobrescribe entre universidades o cuatris.
+Esto deja los `.html` autocontenidos en `_output/estadistica/UCR/2026-C1/`,
+listos para compartir. Ninguna carpeta de `content/` se duplica ni se
+sobrescribe entre materias, universidades o cuatris.
 
 ## Publicar en GitHub Pages (a futuro)
 
@@ -92,8 +139,11 @@ Pages — simplemente se agrega un workflow de GitHub Actions que llame a
 
 ## Pendientes / TODO
 
-- [ ] Reemplazar los colores placeholder en `_brand.yml`
-- [ ] Agregar logos reales en `images/logos/`
-- [ ] Migrar el contenido real de las presentaciones PPT a los bloques de
-      `content/blocks/`
-- [ ] Revisar/completar `content/docs/programa.qmd`
+- [ ] Ajustar la paleta indigo/terracota en `_brand.yml` si prefieres otros tonos
+- [ ] Agregar logos reales de universidad en `images/logos/`
+- [ ] Revisar `materias/estadistica/content/semanas/unidad-02-probabilidad.qmd`
+- [ ] Migrar el resto de unidades de Estadística siguiendo el mismo patrón
+- [ ] Completar `materias/estadistica/content/docs/programa.qmd` con el programa real
+- [ ] Cuando Series de Tiempo sea un curso real, seguir `materias/README.md`
+- [ ] Agregar más temas en `temas/` según los vayas necesitando consultar
+- [ ] Instalar `learnr` (`install.packages("learnr")`) para correr `tutoriales/`

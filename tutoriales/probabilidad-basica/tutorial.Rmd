@@ -1,0 +1,57 @@
+---
+title: "Tutorial: Probabilidad básica"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Bienvenida
+
+Este tutorial interactivo repasa probabilidad condicional con
+ejercicios que puedes correr y un quiz con retroalimentación.
+
+## Ejercicio: calcula P(A|B)
+
+Completa el código para calcular $P(A \mid B)$ cuando
+$P(A \cap B) = 0.2$ y $P(B) = 0.4$.
+
+```{r calculo, exercise=TRUE}
+interseccion <- 0.2
+p_b <- 0.4
+p_a_dado_b <- ___ / ___
+p_a_dado_b
+```
+
+```{r calculo-solution}
+interseccion <- 0.2
+p_b <- 0.4
+p_a_dado_b <- interseccion / p_b
+p_a_dado_b
+```
+
+## Quiz rápido
+
+```{r quiz1}
+question(
+  "¿Cuál es el rango posible de cualquier probabilidad?",
+  answer("0 a 1", correct = TRUE),
+  answer("-1 a 1"),
+  answer("0 a 100"),
+  answer("Puede ser cualquier número"),
+  allow_retry = TRUE
+)
+```
+
+```{r quiz2}
+question(
+  "Si P(A ∩ B) = P(A) * P(B), los eventos A y B son:",
+  answer("Independientes", correct = TRUE),
+  answer("Mutuamente excluyentes"),
+  answer("Dependientes"),
+  allow_retry = TRUE
+)
+```

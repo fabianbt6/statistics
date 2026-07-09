@@ -1,0 +1,48 @@
+/*-- scss:rules --*/
+
+// Divisor de sección: fondo de marca a toda la slide, texto blanco.
+// Uso: ## Título de la sección {.divisor}
+.reveal .slides section.divisor {
+  background-color: $brand-indigo;
+}
+.reveal .slides section.divisor h2 {
+  color: white;
+}
+
+// Acento bajo el título en las demás slides (no en portada ni divisores)
+.reveal .slides section:not(.divisor):not(.portada) h2 {
+  border-bottom: 2px solid $brand-terracota;
+  padding-bottom: 0.2em;
+  display: inline-block;
+}
+
+// Cuadro para la "idea clave" (equivalente a los recuadros punteados del PPT original)
+.idea-clave {
+  border: 2px dashed $brand-terracota;
+  border-radius: 8px;
+  padding: 0.6em 1em;
+  margin-top: 1em;
+  font-weight: 600;
+  text-align: center;
+}
+
+// Slide "destacada": caso de estudio / aplicación real con fondo de
+// marca, a diferencia de .divisor SÍ lleva bullets/contenido, no solo título.
+// Uso: ## Título {.destacado}
+.reveal .slides section.destacado {
+  background-color: $brand-indigo;
+}
+.reveal .slides section.destacado h2,
+.reveal .slides section.destacado li,
+.reveal .slides section.destacado p,
+.reveal .slides section.destacado a {
+  color: white;
+}
+.reveal .slides section.destacado a {
+  text-decoration: underline;
+}
+
+.logo-universidad {
+  display: block;
+  margin: 0.6em auto;
+}

@@ -1,0 +1,16 @@
+## `r params$materia` {.portada}
+
+### `r params$titulo_sesion`
+
+![](`r params$logo_path`){.logo-universidad height="80px"}
+
+**`r params$universidad`** — Cuatrimestre `r params$cuatri`, `r params$anio`
+
+**Docente:** `r params$profesor`
+
+::: {.notes}
+Bloque "portada" — se reutiliza en todas las unidades. Universidad y
+logo cambian solos según el curso (ver cursos/<universidad>/<periodo>/_variables.yml).
+La clase .portada evita que le apliquemos el acento bajo el título que
+sí llevan las demás slides.
+:::

@@ -1,14 +1,16 @@
-# R/nueva_oferta.R
+# R/nuevo_curso.R
 #
-# Crea una nueva "oferta" (una combinación universidad + cuatrimestre)
-# generando su archivo de parámetros en ofertas/<universidad>/<periodo>/_variables.yml
+# Crea un nuevo "curso" (una combinación universidad + cuatrimestre) para
+# una materia específica, generando su archivo de parámetros en
+# materias/<materia>/cursos/<universidad>/<periodo>/_variables.yml
 #
 # Esto es TODO lo que hay que crear a mano cada cuatri — nunca se duplica
-# contenido de content/.
+# contenido de materias/<materia>/content/.
 #
 # Ejemplo de uso:
-#   source("R/nueva_oferta.R")
-#   nueva_oferta(
+#   source("R/nuevo_curso.R")
+#   nuevo_curso(
+#     materia      = "estadistica",
 #     universidad  = "UCR",
 #     anio         = 2026,
 #     cuatri       = 1,
@@ -17,20 +19,27 @@
 #     logo_path    = "images/logos/ucr.png"
 #   )
 
-nueva_oferta <- function(universidad,
-                          anio,
-                          cuatri,
-                          fecha_inicio,
-                          feriados = character(0),
-                          profesor = "Fabián Brenes",
-                          logo_path = NULL) {
+nuevo_curso <- function(materia = "estadistica",
+                         universidad,
+                         anio,
+                         cuatri,
+                         fecha_inicio,
+                         feriados = character(0),
+                         profesor = "Fabián Brenes",
+                         logo_path = NULL) {
 
   if (!requireNamespace("yaml", quietly = TRUE)) {
     stop("Instala el paquete 'yaml': install.packages('yaml')")
   }
 
+  ruta_materia <- file.path("materias", materia)
+  if (!dir.exists(ruta_materia)) {
+    stop("No existe la materia '", materia, "' en materias/. ",
+         "Revisa el nombre o crea la carpeta primero (ver materias/README.md).")
+  }
+
   periodo <- paste0(anio, "-C", cuatri)
-  carpeta <- file.path("ofertas", universidad, periodo)
+  carpeta <- file.path(ruta_materia, "cursos", universidad, periodo)
   dir.create(carpeta, recursive = TRUE, showWarnings = FALSE)
 
   if (is.null(logo_path)) {
@@ -50,7 +59,7 @@ nueva_oferta <- function(universidad,
   ruta_salida <- file.path(carpeta, "_variables.yml")
   yaml::write_yaml(variables, ruta_salida)
 
-  message("Oferta creada: ", ruta_salida)
+  message("Curso creado: ", ruta_salida)
   if (!file.exists(logo_path)) {
     message("Recuerda colocar el logo en: ", logo_path)
   }

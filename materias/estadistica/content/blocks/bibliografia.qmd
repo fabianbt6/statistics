@@ -1,0 +1,11 @@
+## Bibliografía
+
+- Hogg, Robert V., Elliot A. Tanis, and Dale L. Zimmerman. 2015. *Probability
+  and Statistical Inference*. Pearson.
+- Sahu, Sujit. 2024. *Introduction to Probability, Statistics & R*. Springer.
+
+::: {.notes}
+Bloque reutilizable — son los textos del curso completo, no de una sola
+unidad. Si cambias de libro de texto, se actualiza una vez aquí y se
+refleja en todas las unidades que lo incluyan.
+:::

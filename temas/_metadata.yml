@@ -1,0 +1,4 @@
+format:
+  html:
+    embed-resources: true
+    toc: true

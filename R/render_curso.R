@@ -1,15 +1,15 @@
-# R/render_oferta.R
+# R/render_curso.R
 #
-# Renderiza todas las semanas, tareas y docs de content/ para UNA oferta
-# específica (universidad + periodo), inyectando sus parámetros y dejando
-# los HTML autocontenidos listos para compartir (sin depender de un link
-# público) en _output/<universidad>/<periodo>/
+# Renderiza todas las semanas, tareas y docs de materias/<materia>/content/
+# para UN curso específico (universidad + periodo), inyectando sus
+# parámetros y dejando los HTML autocontenidos listos para compartir en
+# _output/<materia>/<universidad>/<periodo>/
 #
 # Ejemplo de uso:
-#   source("R/render_oferta.R")
-#   render_oferta(universidad = "UCR", anio = 2026, cuatri = 1)
+#   source("R/render_curso.R")
+#   render_curso(materia = "estadistica", universidad = "UCR", anio = 2026, cuatri = 1)
 
-render_oferta <- function(universidad, anio, cuatri) {
+render_curso <- function(materia = "estadistica", universidad, anio, cuatri) {
 
   if (!requireNamespace("quarto", quietly = TRUE)) {
     stop("Instala el paquete 'quarto': install.packages('quarto')")
@@ -18,11 +18,12 @@ render_oferta <- function(universidad, anio, cuatri) {
     stop("Instala el paquete 'yaml': install.packages('yaml')")
   }
 
+  ruta_materia <- file.path("materias", materia)
   periodo <- paste0(anio, "-C", cuatri)
-  ruta_variables <- file.path("ofertas", universidad, periodo, "_variables.yml")
+  ruta_variables <- file.path(ruta_materia, "cursos", universidad, periodo, "_variables.yml")
 
   if (!file.exists(ruta_variables)) {
-    stop("No existe ", ruta_variables, ". Corre nueva_oferta() primero.")
+    stop("No existe ", ruta_variables, ". Corre nuevo_curso() primero.")
   }
 
   vars <- yaml::read_yaml(ruta_variables)
@@ -30,13 +31,14 @@ render_oferta <- function(universidad, anio, cuatri) {
   # espera un vector plano si el .qmd lo va a usar como tal.
   if (!is.null(vars$feriados)) vars$feriados <- unlist(vars$feriados)
 
-  salida <- file.path("_output", universidad, periodo)
+  salida <- file.path("_output", materia, universidad, periodo)
   dir.create(salida, recursive = TRUE, showWarnings = FALSE)
 
+  content_dir <- file.path(ruta_materia, "content")
   fuentes <- c(
-    list.files("content/semanas", pattern = "\\.qmd$", full.names = TRUE),
-    list.files("content/tareas",  pattern = "\\.qmd$", full.names = TRUE),
-    list.files("content/docs",    pattern = "\\.qmd$", full.names = TRUE)
+    list.files(file.path(content_dir, "semanas"), pattern = "\\.qmd$", full.names = TRUE),
+    list.files(file.path(content_dir, "tareas"),  pattern = "\\.qmd$", full.names = TRUE),
+    list.files(file.path(content_dir, "docs"),    pattern = "\\.qmd$", full.names = TRUE)
   )
 
   for (archivo in fuentes) {
@@ -54,7 +56,7 @@ render_oferta <- function(universidad, anio, cuatri) {
     }
   }
 
-  message("\nOferta '", universidad, " ", periodo, "' renderizada en: ", salida)
+  message("\nCurso '", materia, " / ", universidad, " ", periodo, "' renderizado en: ", salida)
   message("Estos archivos .html son autocontenidos (embed-resources: true) ",
           "y listos para compartir directamente.")
 

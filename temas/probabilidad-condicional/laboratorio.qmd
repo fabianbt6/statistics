@@ -1,0 +1,36 @@
+---
+title: "Laboratorio: Probabilidad condicional en R"
+---
+
+## Objetivo
+
+Verificar por simulación que $P(A \mid B) = \frac{P(A \cap B)}{P(B)}$.
+
+## Simulación
+
+```{r}
+#| eval: false
+set.seed(123)
+n <- 100000
+
+# Lanzamos dos dados
+dado1 <- sample(1:6, n, replace = TRUE)
+dado2 <- sample(1:6, n, replace = TRUE)
+
+A <- dado1 == 4                  # evento A: primer dado es 4
+B <- (dado1 + dado2) %% 2 == 1   # evento B: suma es impar
+
+P_A_dado_B <- mean(A[B])         # P(A | B) por simulación
+P_A_dado_B
+```
+
+## Para explorar
+
+- Cambia la definición de `B` y verifica si cambia el resultado.
+- Compara el resultado simulado contra el cálculo teórico manual.
+
+::: {.callout-tip}
+Este chunk está con `eval: false` a propósito — quítalo cuando lo
+corras tú, para no depender de tener R configurado al simplemente
+navegar el resumen.
+:::

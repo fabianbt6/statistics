@@ -1,5 +1,0 @@
-## Referencias
-
-- Triola, M. F. (2018). *Estadística*. Pearson.
-- Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2012). *Probabilidad
-  y estadística para ingeniería y ciencias*. Pearson.

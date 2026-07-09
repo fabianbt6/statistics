@@ -1,12 +1,16 @@
 project:
   type: default
+  render:
+    - "materias/**"
+    - "temas/**"
+    - "!tutoriales/**"   # learnr: motor distinto (Rmd + shiny), nunca vía quarto render
 
 format:
   revealjs:
     slide-number: true
     embed-resources: true   # HTML autocontenido: un solo archivo, sin carpetas "libs/" sueltas
-    theme: default
-    logo: ""                # el logo real se inyecta por oferta vía params en portada.qmd
+    theme: [default, styles.scss]
 
 # _brand.yml en la raíz se detecta automáticamente y aplica tu paleta/tipografía
 # personal a todos los formatos (revealjs, html, pdf/typst) sin tocar cada .qmd.
+# styles.scss agrega los divisores de sección y el acento bajo títulos.

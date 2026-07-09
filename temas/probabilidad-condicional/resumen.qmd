@@ -1,0 +1,35 @@
+---
+title: "Resumen: Probabilidad condicional"
+---
+
+## ¿Qué es?
+
+La probabilidad condicional mide la probabilidad de que ocurra un
+evento $A$, dado que ya sabemos que ocurrió otro evento $B$.
+
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
+
+## Cuándo se usa
+
+Cuando la información sobre un evento cambia lo que esperamos de otro
+— por ejemplo, la probabilidad de impago de un préstamo cambia si ya
+sabemos que las tasas de interés subieron.
+
+## Eventos independientes (caso especial)
+
+Si el conocer $B$ no cambia en nada la probabilidad de $A$, los eventos
+son **independientes**:
+
+$$P(A \cap B) = P(A)P(B) \quad \Longleftrightarrow \quad P(A \mid B) = P(A)$$
+
+## Errores comunes
+
+- Confundir $P(A \mid B)$ con $P(B \mid A)$ — no son lo mismo (para eso
+  existe el teorema de Bayes).
+- Asumir independencia sin verificarla con los datos.
+
+## Ver también
+
+- [Práctica](practica.qmd)
+- [Laboratorio en R](laboratorio.qmd)
+- Migración completa en clase: `content/semanas/unidad-02-probabilidad.qmd`
