@@ -1,0 +1,13 @@
+## Tipos de datos
+
+- **Cualitativos (categóricos)**
+  - Nominales: sin orden natural (ej. color de ojos)
+  - Ordinales: con orden natural (ej. nivel educativo)
+- **Cuantitativos**
+  - Discretos: valores contables (ej. número de hijos)
+  - Continuos: cualquier valor en un rango (ej. estatura)
+
+::: {.notes}
+Bloque reutilizable — edita este archivo una sola vez y el cambio se
+refleja en todas las semanas que lo incluyan vía {{< include >}}.
+:::

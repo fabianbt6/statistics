@@ -1,0 +1,20 @@
+---
+title: "Programa del curso"
+format: html
+params:
+  universidad: "Universidad de Ejemplo"
+  profesor: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+# Estadística — `r params$universidad`
+
+**Cuatrimestre `r params$cuatri`, `r params$anio`**
+**Docente:** `r params$profesor`
+
+## Contenidos
+
+1. Tipos de datos
+2. Distribuciones de probabilidad
+3. ...

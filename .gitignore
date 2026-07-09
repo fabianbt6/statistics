@@ -1,0 +1,7 @@
+_output/
+.quarto/
+*_files/
+*_cache/
+.Rproj.user/
+.Rhistory
+.RData

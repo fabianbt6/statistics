@@ -1,0 +1,9 @@
+## Distribuciones de probabilidad
+
+- **Discretas:** Binomial, Poisson, Hipergeométrica
+- **Continuas:** Normal, Exponencial, Uniforme continua
+
+::: {.notes}
+Bloque reutilizable — placeholder de contenido. Reemplaza con tu
+material real; la estructura modular no cambia.
+:::

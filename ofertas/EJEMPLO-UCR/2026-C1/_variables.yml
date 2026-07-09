@@ -1,0 +1,11 @@
+# Generado normalmente por R/nueva_oferta.R — este es un ejemplo manual
+# para que veas la forma del archivo.
+universidad: "UCR"
+anio: 2026
+cuatri: 1
+fecha_inicio: "2026-01-19"
+feriados:
+  - "2026-04-03"
+  - "2026-05-01"
+profesor: "Fabián Brenes"
+logo_path: "images/logos/ucr.png"

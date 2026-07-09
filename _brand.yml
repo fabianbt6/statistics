@@ -1,0 +1,24 @@
+# _brand.yml — tu marca personal, aplicada automáticamente a TODAS las
+# presentaciones, tareas y docs (Quarto la detecta sola, no hay que
+# referenciarla en cada archivo).
+#
+# ⚠️ TODO: estos colores son placeholders. Cámbialos por tu paleta real.
+# El logo de universidad NO va aquí a propósito — varía por oferta y se
+# inyecta como parámetro en content/blocks/portada.qmd.
+
+color:
+  palette:
+    azul-principal: "#1B4965"
+    dorado-acento: "#D4A017"
+    gris-oscuro: "#222222"
+    blanco: "#FFFFFF"
+  primary: azul-principal
+  background: blanco
+  foreground: gris-oscuro
+
+typography:
+  fonts:
+    - family: Inter
+      source: google
+  base: Inter
+  headings: Inter

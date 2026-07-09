@@ -1,0 +1,13 @@
+## Ejercicios
+
+1. Clasifique las siguientes variables según su tipo (cualitativa/cuantitativa,
+   nominal/ordinal/discreta/continua): edad, nivel de satisfacción, número de
+   hijos, color de cabello.
+2. Ejercicio 2...
+
+::: {.notes}
+Este bloque cambia con más frecuencia que los demás. Si en algún cuatri
+necesitas una versión distinta, considera un archivo en
+ofertas/<universidad>/<periodo>/overrides/ en vez de editar este bloque
+directamente (así no afectas a otras ofertas que ya se dieron).
+:::

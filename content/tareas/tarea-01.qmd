@@ -1,0 +1,17 @@
+---
+title: "Tarea 1"
+format: html
+params:
+  universidad: "Universidad de Ejemplo"
+  profesor: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+## Tarea 1 — `r params$universidad`
+
+**Cuatrimestre:** `r params$cuatri`, `r params$anio`
+**Docente:** `r params$profesor`
+
+1. Ejercicio 1...
+2. Ejercicio 2...
