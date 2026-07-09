@@ -1,11 +1,18 @@
 ## Bibliografía
 
-- Hogg, Robert V., Elliot A. Tanis, and Dale L. Zimmerman. 2015. *Probability
-  and Statistical Inference*. Pearson.
-- Sahu, Sujit. 2024. *Introduction to Probability, Statistics & R*. Springer.
+::: {#refs}
+:::
 
 ::: {.notes}
-Bloque reutilizable — son los textos del curso completo, no de una sola
-unidad. Si cambias de libro de texto, se actualiza una vez aquí y se
-refleja en todas las unidades que lo incluyan.
+Bloque reutilizable — las referencias se generan desde
+referencias/Estadistica.bib (sincronizado desde Zotero), no están
+escritas a mano. Requiere que el documento que incluye este bloque
+tenga en su YAML:
+
+    nocite: |
+      @hogg2015, @sahu2024
+
+Si cambias de libro de texto, ajusta el nocite en cada unidad que use
+este bloque — no hace falta tocar este archivo salvo que cambien las
+claves.
 :::

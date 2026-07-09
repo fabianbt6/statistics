@@ -23,8 +23,10 @@ interactivos — todo convive sin pisarse.
 
 ```
 statistics/
-├── _quarto.yml              # config del proyecto (revealjs, embed-resources)
+├── _quarto.yml              # config del proyecto (revealjs, embed-resources, bibliography)
 ├── _brand.yml                # tu paleta de colores y tipografía personal
+├── referencias/
+│   └── Estadistica.bib         # sincronizado desde Zotero (Better BibTeX) — ver su README
 ├── R/
 │   ├── nuevo_curso.R          # crea materias/<materia>/cursos/<universidad>/<periodo>/_variables.yml
 │   └── render_curso.R         # renderiza ese curso a HTML autocontenido
@@ -61,6 +63,20 @@ entre materias, porque está 100% parametrizada (universidad, logo,
 docente, materia, unidad) y no tiene contenido propio de ninguna
 materia específica.
 
+## Bibliografía (Zotero)
+
+`referencias/Estadistica.bib` es compartido entre toda la materia,
+`temas/`, y cualquier otro documento del repo — Quarto lo lee a nivel
+de proyecto, así que cualquier `.qmd` puede citar con `[@clave]` sin
+configurar nada más. Se sincroniza desde una colección de Zotero
+dedicada (Better BibTeX, exportación automática) — ver
+`referencias/README.md` para conectar la tuya.
+
+Artículos de investigación: se manejan en repos aparte (ciclo de vida
+y formato de entrega distintos), pero pueden compartir la misma
+librería de Zotero — cada repo simplemente configura su propia
+exportación automática desde la colección que le corresponda.
+
 ## Contenido modular: bloques estructurales, no temáticos
 
 Al migrar el primer PPT real (Unidad 2: Probabilidad) quedó claro que
@@ -70,8 +86,9 @@ portada, agenda, divisor de sección, definición, ejercicio+solución,
 bibliografía.
 
 - `shared/portada.qmd` — plantilla real, los datos cambian por parámetro
-- `materias/<materia>/content/blocks/bibliografia.qmd` — los textos de
-  esa materia (varían entre materias, y a veces entre unidades — ver
+- `materias/<materia>/content/blocks/bibliografia.qmd` — solo el
+  `::: {#refs} :::`; qué referencias muestra lo decide el `nocite:` de
+  cada unidad, citando desde `referencias/Estadistica.bib` (ver
   `PATRONES.md`)
 
 El resto del patrón (divisores, definiciones, ejercicios) se logra con
@@ -144,6 +161,9 @@ Pages — simplemente se agrega un workflow de GitHub Actions que llame a
 - [ ] Revisar `materias/estadistica/content/semanas/unidad-02-probabilidad.qmd`
 - [ ] Migrar el resto de unidades de Estadística siguiendo el mismo patrón
 - [ ] Completar `materias/estadistica/content/docs/programa.qmd` con el programa real
+- [ ] Conectar tu colección real de Zotero a `referencias/Estadistica.bib`
+      (ver `referencias/README.md`) y ajustar `[@clave]`/`nocite` si tus
+      citekeys de Better BibTeX no coinciden con el placeholder
 - [ ] Cuando Series de Tiempo sea un curso real, seguir `materias/README.md`
 - [ ] Agregar más temas en `temas/` según los vayas necesitando consultar
 - [ ] Instalar `learnr` (`install.packages("learnr")`) para correr `tutoriales/`

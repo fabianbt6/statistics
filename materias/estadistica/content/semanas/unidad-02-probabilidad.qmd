@@ -9,6 +9,8 @@ params:
   profesor: "Fabián Brenes Trejos"
   anio: 2026
   cuatri: 1
+nocite: |
+  @hogg2015, @sahu2024
 ---
 
 {{< include ../../../../shared/portada.qmd >}}

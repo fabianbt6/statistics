@@ -5,6 +5,8 @@ project:
     - "temas/**"
     - "!tutoriales/**"   # learnr: motor distinto (Rmd + shiny), nunca vía quarto render
 
+bibliography: referencias/Estadistica.bib
+
 format:
   revealjs:
     slide-number: true

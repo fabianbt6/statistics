@@ -110,21 +110,33 @@ $|\bar{x} - \mu_0| \geq t_{\alpha/2}(n-1) \cdot s/\sqrt{n}$
 *Fuente: Hogg, Tanis y Zimmerman (2015), p. 366*
 ```
 
-### Bibliografía por unidad (cuando no es la base del curso)
+### Bibliografía por unidad (cuando no es la base de la materia)
 
-La mayoría de unidades usan `{{< include ../blocks/bibliografia.qmd >}}`
-(Hogg + Sahu). Si una unidad usa textos distintos (como Series de
-Tiempo, que cita Metcalfe/Cowpertwait y Shumway/Stoffer), simplemente
-no uses el include — escribe la sección directo en esa unidad:
+Desde que conectamos Zotero, la bibliografía **no se escribe a mano** —
+se cita desde `referencias/Estadistica.bib` (ver `referencias/README.md`).
+El bloque `{{< include ../blocks/bibliografia.qmd >}}` solo pone el
+`::: {#refs} :::`; las claves que se muestran ahí las controla el
+`nocite:` en el YAML de cada unidad:
 
 ```markdown
-## Bibliografía
-
-- Metcalfe, A.; Cowpertwait, P. 2009. *Introductory Time Series with R*.
-  Springer New York.
-- Shumway, R.; Stoffer, D. 2011. *Time Series Analysis and Its
-  Applications*. Springer New York.
+---
+nocite: |
+  @hogg2015, @sahu2024
+---
 ```
+
+Si una unidad usa textos distintos (como Series de Tiempo, que citaría
+Metcalfe/Cowpertwait y Shumway/Stoffer), **no cambies el bloque
+compartido** — solo pon un `nocite:` distinto en el YAML de esa unidad:
+
+```markdown
+---
+nocite: |
+  @metcalfe2009, @shumway2011
+---
+```
+
+Las 4 claves ya están en `referencias/Estadistica.bib` como ejemplo.
 
 ## Un estilo de divisor, no dos
 
