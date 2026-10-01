@@ -1,0 +1,52 @@
+---
+title: "Estudio de caso"
+engine: knitr
+format:
+  html:
+    embed-resources: true
+    title-block-banner: false
+params:
+  universidad: "Universidad Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+**Valor:** 10% de la nota final
+**Entrega:** Fecha límite jueves 17 de diciembre
+**Modalidad de trabajo:** en grupos
+
+### En qué consiste
+
+Deben plantear un problema real de economía que se resuelve aplicando
+las herramientas matemáticas vistas en el curso (por ejemplo: sistemas de ecuaciones y matrices, derivadas y optimización, integrales, funciones de varias variables o ecuaciones diferenciales, según la unidad en curso).
+
+El objetivo es desarrollar el ejercicio matemático y explicar qué significa ese resultado para la situación económica planteada.
+
+### Qué deben entregar
+
+Un documento corto que incluya:
+
+1. Portada.
+2. El problema planteado.
+3. El desarrollo de la solución, paso a paso.
+4. La interpretación del resultado: qué dice ese resultado sobre la
+   situación económica del caso.
+5. Al menos tres conclusiones.
+6. Referencias bibliográficas, incluir al menos un artículo científico.
+
+### Rúbrica
+
+Cada criterio se evalúa en tres niveles: **Cumple** (2 puntos),
+**Cumple parcialmente** (1 punto) o **No cumple** (0 puntos). La nota
+final se calcula por regla de 3 sobre el total de puntos.
+
+| # | Criterio | Cumple | Cumple parcialmente | No cumple | Observaciones |
+|---|---|---|---|---|---|
+| 1 | Plantea bien el problema | | | | |
+| 2 | Resuelve correctamente usando las herramientas matemáticas del curso | | | | |
+| 3 | Explica qué significa el resultado en términos económicos | | | | |
+| 4 | Presenta conclusiones claras | | | | |
+| 5 | El documento está bien presentado (portada, orden, referencias si aplica) | | | | |
+
+**Puntaje total:** 10 puntos → equivalen al 10% de la nota final.

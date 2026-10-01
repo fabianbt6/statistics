@@ -1,0 +1,121 @@
+---
+title: "Guía de preparación — Presentación de la investigación final"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @james2023
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/investigacion-final-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía (identidad
+     interna "investigacion-final") no tiene número de unidad -- es la
+     sesión de cierre del curso y queda fuera del filtro numérico que
+     usa render_curso(unidades = ...) salvo cuando se llama con
+     unidades = NULL (que incluye todo el material). Ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Presentación de la investigación final
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Evaluar la investigación final de cada grupo según la competencia
+  específica del curso, verificando que integre herramientas de
+  varias unidades, no solo una.
+- Cerrar el curso con retroalimentación general sobre las 3 unidades
+  de evaluación (prácticas, casos, investigación).
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| (cierre del curso — no hay lectura nueva) | — | Última sesión; no introduce contenido nuevo de bibliografía. James et al. [@james2023] queda como referencia opcional si algún grupo aplicó modelos de regresión/clasificación más avanzados en su investigación. |
+
+## Guía de evaluación — checklist de integración de herramientas del curso
+
+El objetivo declarado de la investigación final es que el estudiante
+demuestre haber integrado herramientas de **varias** unidades del
+curso, no solo la más reciente (series de tiempo) o la más fácil de
+aplicar (descriptiva). Esta lista sirve como checklist rápido al
+escuchar cada presentación, para verificar qué tan integral fue el
+trabajo:
+
+- **Descripción de datos (unidad de descripción de datos):** ¿reportaron
+  medidas de tendencia central y dispersión apropiadas para el tipo de
+  variable que usaron? ¿Identificaron correctamente si su variable de
+  interés es continua, discreta, o categórica?
+- **Probabilidad y distribuciones (unidades de probabilidad y
+  distribuciones):** si el proyecto lo ameritaba, ¿identificaron o
+  supusieron una distribución razonable para su variable de interés?
+  (No todos los proyectos necesitan este bloque explícitamente, pero
+  vale la pena notar si lo omitieron cuando hubiera sido relevante.)
+- **Prueba de hipótesis / intervalos de confianza (unidades de pruebas
+  de hipótesis e intervalos de confianza):** ¿plantearon una pregunta
+  de investigación que se responde con una prueba formal, no solo con
+  una comparación visual de números? ¿La hipótesis nula y alternativa
+  están bien formuladas? ¿La conclusión usa el lenguaje correcto ("no
+  existe evidencia suficiente para rechazar...", nunca "se demuestra
+  que...")?
+- **ANOVA (unidad de análisis de varianza):** si compararon tres o más
+  grupos, ¿usaron ANOVA en vez de múltiples pruebas t por separado?
+  (Un error común: hacer varias pruebas t "porque es más simple", sin
+  reconocer el problema de inflación del error tipo I que discutimos
+  en la unidad de ANOVA — vale la pena señalarlo específicamente si
+  ocurre.)
+- **Series de tiempo (unidades de series de tiempo):** si su variable
+  de interés es una serie temporal, ¿evaluaron si era estacionaria
+  antes de sacar conclusiones? ¿Evitaron caer en una regresión espuria
+  si relacionaron dos series con tendencia?
+- **Comunicación de resultados:** ¿la interpretación económica de los
+  resultados estadísticos tiene sentido en el contexto elegido? ¿Se
+  distingue claramente entre "encontramos una asociación" y "hay una
+  relación causal" (recordando la advertencia de correlación ≠
+  causalidad de la unidad de descripción de datos)?
+
+## Formato de la presentación
+
+- Cada grupo presenta su investigación: problema, objetivos, datos,
+  métodos estadísticos aplicados, resultados y conclusiones.
+- Evidencia esperada: informe de investigación (ver la competencia
+  específica del curso en `content/docs/programa.qmd`).
+- Referencia de alcance: `fuente/Presentaciones ppt/15/` contiene un
+  ejemplo de un curso anterior (`Proyecto Final_grupo1.R`,
+  `DATOS.xlsx`, `datos_grupo1.Rdata`) útil como guía de formato y
+  profundidad esperada — no compartir el análisis específico de ese
+  proyecto con el grupo actual, solo usarlo como referencia propia del
+  docente sobre el nivel esperado.
+
+## Notas de preparación logística
+
+Dejar tiempo real para retroalimentación oral a cada grupo, no solo la
+nota escrita — es la última oportunidad de cerrar el ciclo de
+aprendizaje de todo el curso, y la retroalimentación verbal inmediata
+suele ser más valiosa pedagógicamente que un comentario escrito que el
+estudiante lee días después. Tener a mano la rúbrica de investigación
+del programa oficial durante todas las presentaciones. Si el número de
+grupos es grande, definir de antemano un tiempo fijo por grupo
+(presentación + preguntas + retroalimentación breve) para no quedarse
+sin tiempo para el cierre general del curso al final de la sesión.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Presentaciones de investigación final (todos los grupos, con el checklist de integración como guía de evaluación) | 145 min |
+| Retroalimentación final y cierre del curso | 35 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

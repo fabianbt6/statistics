@@ -2,15 +2,28 @@
 
 ### `r params$titulo_sesion`
 
-![](`r params$logo_path`){.logo-universidad height="80px"}
-
+::: {.portada-meta}
 **`r params$universidad`** — Cuatrimestre `r params$cuatri`, `r params$anio`
 
-**Docente:** `r params$profesor`
-
-::: {.notes}
-Bloque "portada" — se reutiliza en todas las unidades. Universidad y
-logo cambian solos según el curso (ver cursos/<universidad>/<periodo>/_variables.yml).
-La clase .portada evita que le apliquemos el acento bajo el título que
-sí llevan las demás slides.
+Docente: `r params$docente`
 :::
+
+<!-- Nota para el docente (comentario HTML, no visible para
+     estudiantes ni embebido en el HTML final — a diferencia de
+     ::: {.notes}, que sí queda accesible con embed-resources: true):
+
+     Bloque "portada" — se reutiliza en TODAS las semanas de TODAS las
+     materias (estadistica y matematica-economistas). Universidad y
+     datos del curso cambian solos según
+     cursos/<universidad>/<periodo>/_variables.yml — no hay nada que
+     tocar acá al cambiar de curso.
+
+     El logo YA NO va en la portada (a pedido explícito): ahora se usa
+     el mecanismo nativo de reveal.js/Quarto (`format.revealjs.logo`),
+     inyectado por render_curso.R vía el argumento `metadata` de
+     quarto_render() — no hace falta declararlo como params: en cada
+     .qmd. Ese logo nativo aparece como pie de página en TODAS las
+     demás slides, y se oculta específicamente en esta portada con un
+     pequeño script en shared/ocultar-logo-portada.html (incluido
+     project-wide vía _quarto.yml → include-after-body). Ver ese
+     archivo y R/render_curso.R para el detalle completo. -->

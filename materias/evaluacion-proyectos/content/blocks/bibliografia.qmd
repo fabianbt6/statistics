@@ -1,0 +1,22 @@
+## Bibliografía
+
+::: {#refs}
+:::
+
+<!-- Nota para el docente (comentario HTML, no visible para
+     estudiantes ni siquiera con embed-resources: true — a diferencia
+     de ::: {.notes}, que sí queda embebido y accesible):
+
+     Bloque reutilizable — las referencias se generan desde
+     referencias/EvaluacionProyectos.bib (bibliografía en español, de
+     acceso abierto, priorizando CEPAL/ILPES y MIDEPLAN Costa Rica —
+     ver ese archivo para la cobertura por sesión), no están escritas a
+     mano. Requiere que el documento que incluye este bloque tenga en
+     su YAML un nocite con las claves que aplican, por ejemplo:
+
+       nocite: |
+         @ilpes_marcologico42
+
+     Si una sesión usa solo un subconjunto, ajustá el nocite en esa
+     sesión — no hace falta tocar este archivo salvo que cambien las
+     claves del .bib. -->

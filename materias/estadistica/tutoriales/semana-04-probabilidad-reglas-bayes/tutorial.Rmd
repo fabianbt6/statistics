@@ -1,0 +1,222 @@
+---
+title: "Tutorial — Semana 4: Probabilidad condicional, independencia y Bayes"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Bienvenida
+
+Este tutorial verifica por simulación qué significa "condicionar" en
+probabilidad, distingue independencia de mutua exclusión, y calcula el
+teorema de Bayes con vectores en vez de sustitución número por número.
+
+## Probabilidad condicional por simulación
+
+Simulamos 100,000 veces el experimento de sacar dos bolas sin
+reemplazo de una caja con 7 azules y 3 rojas, y comparamos la
+proporción simulada contra el valor calculado a mano en la guía
+($7/9 \approx 0.778$).
+
+```{r bolas-demo, exercise=FALSE}
+set.seed(2026)
+caja <- c(rep("azul", 7), rep("roja", 3))
+n_sim <- 100000
+primera <- character(n_sim)
+segunda <- character(n_sim)
+for (i in 1:n_sim) {
+  extraccion <- sample(caja, size = 2, replace = FALSE)
+  primera[i] <- extraccion[1]
+  segunda[i] <- extraccion[2]
+}
+casos_roja_primero <- primera == "roja"
+mean(segunda[casos_roja_primero] == "azul")
+7 / 9
+```
+
+### Ejercicio 1 — probabilidad conjunta
+
+Usá la misma simulación (ya corrida arriba: `primera`, `segunda`) para
+estimar la probabilidad **conjunta** $P(\text{roja primero y azul
+segundo})$, sin condicionar en nada — sobre las 100,000 simulaciones
+completas. Comparala contra $(3/10)(7/9) = 7/30 \approx 0.233$.
+
+```{r ej1, exercise=TRUE, exercise.setup = "bolas-demo"}
+mean(primera == "roja" & segunda == ___)
+7/30
+```
+
+```{r ej1-solution}
+mean(primera == "roja" & segunda == "azul")
+7/30
+```
+
+## Independencia vs. mutua exclusión
+
+```{r dados-demo, exercise=FALSE}
+set.seed(2026)
+n_sim <- 200000
+rojo <- sample(1:6, n_sim, replace = TRUE)
+azul <- sample(1:6, n_sim, replace = TRUE)
+suma <- rojo + azul
+
+A <- rojo %% 2 == 0     # dado rojo par
+B <- suma > 7           # suma mayor a 7
+
+p_A <- mean(A); p_B <- mean(B); p_AyB <- mean(A & B)
+p_A * p_B
+p_AyB
+```
+
+Esos dos números salen casi iguales — es la definición de
+independencia, $P(A\cap B) = P(A)P(B)$, verificada por simulación.
+
+### Ejercicio 2 — eventos NO independientes
+
+Repetí la simulación con $C$ = "el dado rojo sale 5" y $D$ = "la suma
+es 11". Comparalos y decidí si son independientes.
+
+```{r ej2, exercise=TRUE, exercise.setup = "dados-demo"}
+C <- rojo == 5
+D <- suma == ___
+
+p_C <- mean(C); p_D <- mean(D); p_CyD <- mean(C & D)
+p_C * p_D
+p_CyD
+```
+
+```{r ej2-solution}
+C <- rojo == 5
+D <- suma == 11
+
+p_C <- mean(C); p_D <- mean(D); p_CyD <- mean(C & D)
+p_C * p_D
+p_CyD
+```
+
+```{r quiz-independencia}
+question(
+  "En el ejercicio anterior, p_C * p_D sale claramente menor que p_CyD. ¿Qué significa eso?",
+  answer("Que C y D NO son independientes -- conocer C aumenta la probabilidad de D", correct = TRUE),
+  answer("Que C y D son mutuamente excluyentes"),
+  answer("Que C y D son independientes"),
+  answer("Que hubo un error en la simulación"),
+  allow_retry = TRUE,
+  incorrect = "Si fueran independientes, p_C * p_D y p_CyD saldrían prácticamente iguales -- acá no es el caso."
+)
+
+question(
+  "Si dos eventos A y B son mutuamente excluyentes y ambos tienen probabilidad positiva, ¿pueden ser independientes?",
+  answer("No, nunca -- si son mutuamente excluyentes con probabilidad positiva, no pueden ser independientes", correct = TRUE),
+  answer("Sí, siempre"),
+  answer("Depende del experimento"),
+  allow_retry = TRUE,
+  incorrect = "Si son mutuamente excluyentes, P(A y B) = 0, pero P(A)*P(B) sería positivo -- no pueden coincidir, así que no son independientes."
+)
+```
+
+## Teorema de Bayes con vectores
+
+```{r bayes-demo, exercise=FALSE}
+previas <- c(A = 0.30, B = 0.40, C = 0.30)
+p_falla_dado_compania <- c(A = 0.05, B = 0.08, C = 0.10)
+
+p_falla <- sum(previas * p_falla_dado_compania)
+p_falla
+
+posteriores <- (previas * p_falla_dado_compania) / p_falla
+posteriores
+
+sum(posteriores)  # chequeo: debe dar 1
+```
+
+### Ejercicio 3 — chips (ejercicio 7 de la guía)
+
+Resolvé el ejercicio de las tres máquinas: participaciones
+35%/25%/40%, tasas de daño 2%/1%/3%. Calculá $P(\text{daño})$ y la
+probabilidad posterior de que un chip dañado venga de la máquina 3.
+
+```{r ej3, exercise=TRUE}
+previas <- c(M1 = 0.35, M2 = 0.25, M3 = ___)
+p_dano_dado_maquina <- c(M1 = 0.02, M2 = 0.01, M3 = 0.03)
+
+p_dano <- sum(previas * p_dano_dado_maquina)
+posteriores <- (previas * p_dano_dado_maquina) / p_dano
+
+p_dano
+posteriores
+```
+
+```{r ej3-solution}
+previas <- c(M1 = 0.35, M2 = 0.25, M3 = 0.40)
+p_dano_dado_maquina <- c(M1 = 0.02, M2 = 0.01, M3 = 0.03)
+
+p_dano <- sum(previas * p_dano_dado_maquina)
+posteriores <- (previas * p_dano_dado_maquina) / p_dano
+
+p_dano
+posteriores
+```
+
+## El ejercicio de los bancos (ambigüedad resuelta)
+
+Como se explica en la guía de preparación, usamos la interpretación
+"la tasa es mayor al 10%" para resolver el enunciado ambiguo.
+
+```{r bancos-demo, exercise=FALSE}
+bancos <- c("A", "B", "C", "D", "E", "F", "G")
+tasas <- c(25, 5, 30, 15, 7, 14, 7)
+participacion <- c(0.10, 0.15, 0.15, 0.14, 0.30, 0.04, 0.12)
+
+califica <- as.numeric(tasas > 10)
+p_tasa_mayor_10 <- sum(participacion * califica)
+
+posteriores_bancos <- (participacion * califica) / p_tasa_mayor_10
+names(posteriores_bancos) <- bancos
+round(posteriores_bancos, 4)
+```
+
+### Ejercicio 4 — cambiar el umbral
+
+Probá con el umbral "tasa >= 15%" en vez de "tasa > 10%". ¿Qué bancos
+califican ahora?
+
+```{r ej4, exercise=TRUE, exercise.setup = "bancos-demo"}
+califica <- as.numeric(tasas ___ 15)
+p_umbral <- sum(participacion * califica)
+posteriores_bancos <- (participacion * califica) / p_umbral
+names(posteriores_bancos) <- bancos
+round(posteriores_bancos, 4)
+```
+
+```{r ej4-solution}
+califica <- as.numeric(tasas >= 15)
+p_umbral <- sum(participacion * califica)
+posteriores_bancos <- (participacion * califica) / p_umbral
+names(posteriores_bancos) <- bancos
+round(posteriores_bancos, 4)
+```
+
+```{r quiz-bayes}
+question(
+  "En el teorema de Bayes, ¿qué representa la probabilidad POSTERIOR?",
+  answer("Lo que sabemos sobre un escenario después de observar la evidencia", correct = TRUE),
+  answer("Lo que sabíamos antes de observar cualquier evidencia"),
+  answer("La probabilidad de que la evidencia sea falsa"),
+  answer("Siempre es igual a la probabilidad previa"),
+  allow_retry = TRUE
+)
+```
+
+## Para cerrar
+
+Hoy vimos tres ideas centrales en código: condicionar es quedarse con
+el subconjunto de simulaciones donde algo ya ocurrió, independencia se
+verifica comparando el producto de probabilidades contra la conjunta,
+y Bayes con vectores sirve para cualquier partición sin reescribir la
+fórmula. La próxima semana empezamos con variables aleatorias y
+distribuciones de probabilidad.

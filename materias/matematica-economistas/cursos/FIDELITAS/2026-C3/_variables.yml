@@ -1,0 +1,17 @@
+# Generado a mano siguiendo el formato de R/nuevo_curso.R (equivalente a
+# correr: nuevo_curso(materia = "matematica-economistas", universidad =
+# "Fidélitas", anio = 2026, cuatri = 3, fecha_inicio = "2026-09-10",
+# logo_path = "/images/logos/fidelitas.jpg"))
+universidad: "Fidélitas"
+anio: 2026
+cuatri: 3
+fecha_inicio: "2026-09-10"
+feriados: []
+docente: "Fabián Brenes"
+logo_path: "/images/logos/fidelitas.jpg"
+# Modalidad del curso -- lee programa.qmd (params$formato). Valores válidos
+# hoy: "10-sesiones" o "15-sesiones" (ver materias/matematica-economistas/
+# README.md). Cambiar acá afecta a todos los renders de este curso; para
+# probar el otro formato una sola vez sin editar este archivo, pasar
+# formato = "..." directo a render_curso().
+formato: "10-sesiones"

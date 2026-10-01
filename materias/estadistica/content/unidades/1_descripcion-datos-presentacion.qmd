@@ -1,0 +1,268 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Descripción de datos"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Descripción de datos"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hanglee2023
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 1 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Tipos de datos y variable aleatoria
+- Medidas de tendencia central: media, mediana
+- Medidas de dispersión: varianza, desviación estándar, coeficiente
+  de variación
+- Medidas de asociación: covarianza, coeficiente de correlación
+- Laboratorio en R
+
+::: {.notes}
+"Esta sesión empezamos con contenido estadístico de verdad. Vamos a
+ver cómo describir un conjunto de datos: qué tipo de dato es, cómo
+resumirlo en un solo número que capture su centro, cómo medir qué tan
+dispersos están los datos, y cómo ver si dos variables se mueven
+juntas. Todo el vocabulario que usemos hoy — variable, parámetro,
+estadístico muestral — lo vamos a reutilizar durante todo el curso, así
+que si algo no queda claro, interrúmpanme."
+:::
+
+## Tipos de datos {.divisor}
+
+::: {.notes}
+"Antes de calcular cualquier cosa, tenemos que saber qué tipo de dato
+tenemos enfrente, porque eso determina qué operaciones tienen sentido."
+:::
+
+## Clasificación de los datos
+
+- **Categóricos nominales**: cualitativos, sin orden (ej. sexo,
+  provincia)
+- **Categóricos ordinales**: cualitativos, con orden (ej.
+  leve/moderado/severo)
+- **De conteo**: cuantitativos discretos (ej. número de hijos)
+- **De intervalo**: cuantitativos continuos, sin cero absoluto (ej.
+  temperatura en °C)
+- **De razón**: cuantitativos continuos, con cero absoluto (ej.
+  ingreso, peso)
+
+## Variable aleatoria
+
+Una **variable aleatoria** es una función que asigna un valor numérico
+a cada resultado posible de un experimento aleatorio.
+
+- $X$ discreta: toma valores contables (ej. número de clientes que
+  llegan a un banco en una hora)
+- $X$ continua: toma cualquier valor dentro de un rango (ej. el monto
+  de una transacción)
+
+::: {.notes}
+"Formalmente, una variable aleatoria es una función que le asigna un
+número a cada resultado posible de un experimento aleatorio. Por
+ejemplo, si el experimento es 'observar cuántos clientes llegan a una
+sucursal bancaria en una hora', la variable aleatoria es ese conteo:
+puede ser 0, 1, 2, 3... Eso es una variable discreta, porque toma
+valores contables. Si en cambio el experimento es 'observar el monto
+de la próxima transacción', la variable puede tomar cualquier valor
+dentro de un rango — eso es una variable continua. Guarden esta
+distinción, porque más adelante, en la unidad de distribuciones, vamos
+a ver que discretas y continuas se modelan con herramientas
+matemáticas distintas."
+:::
+
+## Medidas de tendencia central {.divisor}
+
+## Media
+
+Para una muestra $x_1, \dots, x_n$:
+
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+
+Es sensible a valores extremos (outliers).
+
+## Mediana
+
+Es el valor que divide los datos ordenados en dos mitades iguales. Si
+$n$ es impar, es el valor central; si $n$ es par, es el promedio de
+los dos valores centrales.
+
+No es sensible a valores extremos — por eso se prefiere para variables
+económicas con colas largas (ej. ingreso, patrimonio).
+
+## Para datos económicos, ¿media o mediana?
+
+::: {.incremental}
+Depende de:
+
+- El objetivo del análisis
+- La distribución de los datos (¿hay asimetría?)
+- El público con el que se está interactuando
+- El tipo de datos que se está analizando
+
+:::
+
+::: {.notes}
+"Veamos un ejemplo numérico concreto. Supongan estos ingresos
+mensuales, en miles de colones, de 5 personas: 400, 450, 500, 520 y
+8000. Calculen la media... [dar tiempo] ... da 1974. Ahora la
+mediana... es 500. ¿Cuál de las dos les parece más representativa de
+'cuánto gana una persona típica en este grupo'? [Esperar respuesta —
+la mediana]. Exacto: 4 de las 5 personas ganan menos de 550, pero la
+media está en casi 2000 porque un solo valor extremo la arrastra hacia
+arriba. Esto es exactamente lo que pasa con los datos de ingreso a
+nivel país: el ingreso promedio suele estar bastante por encima del
+ingreso mediano, porque la distribución del ingreso tiene una cola
+larga hacia arriba. Por eso los reportes de ingresos serios siempre
+reportan las dos medidas, nunca solo el promedio."
+:::
+
+## Medidas de dispersión {.divisor}
+
+## Varianza
+
+$$s^2 = \frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2$$
+
+Mide qué tan alejados están los datos de la media, en unidades al
+cuadrado.
+
+## Desviación estándar y coeficiente de variación
+
+**Desviación estándar:** $s = \sqrt{s^2}$ — misma unidad que los
+datos originales, más interpretable que la varianza.
+
+**Coeficiente de variación:**
+
+$$CV = \frac{s}{\bar{x}} \times 100\%$$
+
+Permite comparar la dispersión relativa entre variables con distintas
+unidades o escalas (ej. comparar la volatilidad del tipo de cambio
+contra la de una tasa de interés).
+
+::: {.notes}
+"Retomando el ejercicio inicial que hicimos al empezar el curso:
+generamos x1 con desviación estándar 5, y x2 con desviación estándar
+100, ambas con media 20. Ahora ya podemos ponerle número a lo que
+vieron visualmente: la desviación estándar es simplemente la raíz
+cuadrada de la varianza, y nos dice, en las mismas unidades que los
+datos originales, qué tan lejos están en promedio los datos de la
+media.
+
+Con los datos del ejemplo del ingreso: la varianza dio
+aproximadamente 10.87 millones, así que la desviación estándar es
+$\sqrt{10{,}871{,}830} \approx 3297$. Y el coeficiente de variación es
+$3297/1974 \times 100 \approx 167\%$. Un CV mayor a 100% es una señal
+de dispersión relativa muy alta — en este caso, refleja la
+desigualdad dentro del grupo. Recuerden: el CV solo tiene sentido
+cuando la media es positiva, y sirve sobre todo para comparar
+dispersión entre variables que están en escalas distintas — por
+ejemplo, no tiene sentido comparar directamente la desviación estándar
+del tipo de cambio (en colones) con la desviación estándar de una tasa
+de interés (en porcentaje), pero sí se pueden comparar sus
+coeficientes de variación."
+:::
+
+## Medidas de asociación {.divisor}
+
+## Covarianza
+
+$$s_{xy} = \frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})$$
+
+Indica la dirección de la relación lineal entre dos variables, pero no
+su magnitud (depende de las unidades).
+
+## Coeficiente de correlación
+
+$$r = \frac{s_{xy}}{s_x s_y}, \qquad -1 \leq r \leq 1$$
+
+Estandariza la covarianza — permite comparar la fuerza de la relación
+lineal entre distintos pares de variables, sin importar la escala.
+
+::: {.idea-clave}
+Correlación no implica causalidad: dos variables pueden estar
+correlacionadas por una tercera variable no observada, o por
+coincidencia.
+:::
+
+::: {.notes}
+"Este punto es tan importante que lo vamos a repetir varias veces en
+el curso: correlación NO implica causalidad. El ejemplo clásico: las
+ventas de helado y el número de ahogamientos en playas están
+correlacionados positivamente — cuando suben las ventas de helado,
+también suben los ahogamientos. ¿Comer helado causa ahogamientos? Por
+supuesto que no. Lo que pasa es que hay una tercera variable, la
+temperatura, que hace subir tanto las ventas de helado como la
+cantidad de gente que va a nadar. En economía este error es muy común:
+encontrar una correlación alta entre dos series y saltar a una
+conclusión de causalidad sin pensar en terceras variables o en la
+dirección de la causalidad."
+:::
+
+## Aplicación: transmisión de la tasa de política monetaria
+
+- La tasa de política monetaria es el principal instrumento del BCCR
+- La evidencia muestra que sus movimientos no se trasladan de forma
+  completa ni inmediata a las tasas de mercado
+- Factores que influyen en ese comportamiento: dolarización de la
+  economía, nivel de competencia bancaria, endeudamiento público,
+  déficit del BCCR
+
+::: {.notes}
+"Este es un ejemplo real, tomado de un estudio del Banco Central de
+Costa Rica. La tasa de política monetaria es la principal herramienta
+del BCCR para influir en la economía, pero la evidencia empírica
+muestra que sus cambios no se trasladan de forma completa ni
+inmediata a las tasas que efectivamente cobran los bancos. ¿Por qué?
+Varios factores: si buena parte del crédito está en dólares, el efecto
+de una tasa que rige en colones es menor. Si hay poca competencia
+entre bancos, estos no necesitan ajustar sus tasas tan rápido. Y el
+nivel de endeudamiento público y el déficit del propio Banco Central
+también afectan la liquidez del sistema por otras vías.
+
+El punto que quiero que se lleven de este ejemplo: si calculamos la
+correlación entre la tasa de política monetaria y las tasas de
+mercado, ese número es solo el punto de partida de un análisis serio
+de transmisión monetaria. No basta con mirar el coeficiente — hay que
+entender los factores estructurales detrás para interpretarlo
+correctamente."
+:::
+
+## Laboratorio en R
+
+- Calcular media, mediana, varianza, desviación estándar y CV de un
+  conjunto de datos económicos (ej. serie de tipo de cambio o de
+  inflación)
+- Calcular la covarianza y el coeficiente de correlación entre dos
+  variables
+- Interpretar los resultados en el contexto económico elegido
+
+::: {.notes}
+"Para cerrar la sesión, vamos a poner todo esto en práctica con datos
+reales. Abran R y vamos a trabajar con una serie de tipo de cambio o
+de inflación — usen la función `mean()` para la media, `median()` para
+la mediana, `var()` para la varianza, `sd()` para la desviación
+estándar, y para el coeficiente de variación simplemente dividen
+`sd(x)` entre `mean(x)` y multiplican por 100. Para la asociación
+entre dos variables, usen `cov(x, y)` y `cor(x, y)`. Lo importante no
+es solo que les salga el número, sino que puedan explicarme en una
+frase qué significa ese número en el contexto económico que eligieron
+— por ejemplo, '¿qué significa que el coeficiente de variación del
+tipo de cambio sea del 3%?' Nos vemos en la siguiente unidad, con
+probabilidad."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

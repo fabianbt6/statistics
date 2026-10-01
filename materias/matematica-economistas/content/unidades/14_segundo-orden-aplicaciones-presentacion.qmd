@@ -1,0 +1,48 @@
+---
+title: "Matemática para Economistas"
+subtitle: "Ecuaciones de segundo orden y aplicaciones a la economía"
+format: revealjs
+params:
+  materia: "Matemática para Economistas"
+  titulo_sesion: "Ecuaciones de segundo orden y aplicaciones a la economía"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @trench2013
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 14 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (10 o 15 sesiones, u otro formato futuro), y esa
+     decisión se toma al armar el curso, no en este archivo. Cada
+     unidad es un archivo autocontenido e independiente -- se puede
+     incluir, quitar o reordenar sin afectar a las demás. Ver
+     materias/matematica-economistas/README.md. -->
+
+## Contenido {.agenda}
+
+- Ecuaciones de segundo orden
+- Aplicaciones a la economía
+
+::: {.notes}
+Bienvenidos a esta sesión sobre Ecuaciones de segundo orden y aplicaciones a la economía.
+:::
+
+## Ecuaciones de segundo orden y aplicaciones a la economía {.divisor}
+
+<!-- TODO: contenido de la sesión — definiciones, ejemplos, ejercicios.
+     Seguir el patrón de materias/estadistica/content/unidades/3_probabilidad-reglas-bayes-presentacion.qmd
+     y PATRONES.md (tabla de datos, código R, pregunta de discusión, slide
+     destacada, comparación de columnas, figura con fuente citada).
+     Contenido a cubrir:
+     - Solución de ecuaciones lineales homogéneas y no homogéneas de segundo orden, método de variables separables
+     - Aplicaciones a la economía: crecimiento exponencial (ley exponencial de crecimiento)
+     - Función logística, modelo de telaraña, elasticidad de la demanda -->
+
+{{< include ../blocks/bibliografia.qmd >}}

@@ -1,0 +1,176 @@
+---
+title: "Tutorial — Semana 3: Probabilidad, conceptos y conteo"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+S <- 1:6
+A <- S[S %% 2 == 0]
+B <- S[S > 3]
+```
+
+## Bienvenida
+
+Este tutorial traduce a código los tres bloques de la sesión:
+conjuntos y eventos, probabilidad verificada por simulación, y conteo
+con `factorial()`, `choose()` y `combn()`.
+
+## Espacio muestral y eventos
+
+En R, el espacio muestral de un dado es un vector, y un evento es
+cualquier subconjunto.
+
+```{r conjuntos-demo, exercise=FALSE}
+S <- 1:6
+A <- S[S %% 2 == 0]   # "sale par"
+B <- S[S > 3]         # "sale mayor a 3"
+A
+B
+union(A, B)
+intersect(A, B)
+setdiff(S, A)
+```
+
+### Ejercicio 1 — De Morgan
+
+Comprobá la ley de De Morgan $(A \cup B)^c = A^c \cap B^c$ con código:
+calculá el lado izquierdo con `setdiff(S, union(A, B))` y el lado
+derecho con `intersect(setdiff(S, A), setdiff(S, B))`. Deberían
+darte el mismo resultado.
+
+```{r ej1, exercise=TRUE, exercise.setup = "conjuntos-demo"}
+setdiff(S, union(A, B))
+intersect(setdiff(S, ___), setdiff(S, ___))
+```
+
+```{r ej1-solution}
+setdiff(S, union(A, B))
+intersect(setdiff(S, A), setdiff(S, B))
+```
+
+### Ejercicio 2 — un evento nuevo
+
+Definí el evento $C$ = "sale un número menor o igual a 2", y calculá
+$A \cap C$. ¿Son $A$ y $C$ mutuamente excluyentes?
+
+```{r ej2, exercise=TRUE, exercise.setup = "conjuntos-demo"}
+C <- S[S <= ___]
+intersect(A, C)
+```
+
+```{r ej2-solution}
+C <- S[S <= 2]
+intersect(A, C)
+```
+
+```{r quiz-exclusion}
+question(
+  "A = {2,4,6} (par) y C = {1,2} (menor o igual a 2). ¿Son mutuamente excluyentes?",
+  answer("No, porque comparten el resultado 2", correct = TRUE),
+  answer("Sí, porque no son el mismo evento"),
+  answer("No se puede saber sin más información"),
+  allow_retry = TRUE,
+  incorrect = "Mutuamente excluyentes significa que la intersección es vacía -- revisá qué te dio intersect(A, C)."
+)
+```
+
+## Probabilidad por simulación
+
+Simulamos 100,000 lanzamientos de un dado para estimar
+$P(A \cup B)$ y comparar contra la fórmula
+$P(A\cup B) = P(A) + P(B) - P(A\cap B)$.
+
+```{r sim-demo, exercise=FALSE}
+set.seed(2026)
+lanzamientos <- sample(1:6, size = 100000, replace = TRUE)
+
+p_A <- mean(lanzamientos %in% A)
+p_B <- mean(lanzamientos %in% B)
+p_AyB <- mean(lanzamientos %in% intersect(A, B))
+p_AoB_simulado <- mean(lanzamientos %in% union(A, B))
+
+p_A; p_B; p_AyB; p_AoB_simulado
+p_A + p_B - p_AyB   # comparación con la fórmula
+```
+
+### Ejercicio 3 — complemento por simulación
+
+Usá la misma simulación para estimar $P(A^c)$ (la probabilidad de que
+NO salga un número par) y comparala contra $1 - P(A)$.
+
+```{r ej3, exercise=TRUE, exercise.setup = "sim-demo"}
+p_A_complemento <- mean(!(lanzamientos %in% ___))
+p_A_complemento
+1 - p_A
+```
+
+```{r ej3-solution}
+p_A_complemento <- mean(!(lanzamientos %in% A))
+p_A_complemento
+1 - p_A
+```
+
+## Métodos de conteo
+
+```{r conteo-demo, exercise=FALSE}
+# Permutaciones: puestos de gerente, subgerente, tesorero entre 8 candidatos
+factorial(8) / factorial(8 - 3)
+
+# Combinaciones: comités de 3 personas de un grupo de 8
+choose(8, 3)
+
+# Relación: P(n,r) = C(n,r) * r!
+choose(8, 3) * factorial(3)
+```
+
+### Ejercicio 4 — postres
+
+Un restaurante tiene 6 postres y un cliente elige 2 para compartir (el
+orden no importa). Calculá cuántas combinaciones posibles hay con
+`choose()`, y después listalas todas con `combn()`.
+
+```{r ej4, exercise=TRUE}
+postres <- c("Tiramisu", "Flan", "Cheesecake", "Brownie", "Helado", "Torta")
+
+choose(6, ___)
+combn(postres, ___)
+```
+
+```{r ej4-solution}
+postres <- c("Tiramisu", "Flan", "Cheesecake", "Brownie", "Helado", "Torta")
+
+choose(6, 2)
+combn(postres, 2)
+```
+
+```{r quiz-conteo}
+question(
+  "¿Cuántos comités distintos de 3 personas se pueden formar con un grupo de 8 candidatos (sin distinguir cargos)?",
+  answer("56", correct = TRUE),
+  answer("336"),
+  answer("24"),
+  answer("512"),
+  allow_retry = TRUE,
+  incorrect = "Como no importa el orden, es una combinación: C(8,3) = 8!/(3!5!). 336 es la permutación P(8,3), que sí distingue orden."
+)
+
+question(
+  "¿Cuál es la diferencia clave entre una permutación y una combinación?",
+  answer("En la permutación el orden importa; en la combinación no", correct = TRUE),
+  answer("La permutación es para conjuntos pequeños y la combinación para conjuntos grandes"),
+  answer("No hay ninguna diferencia real, son sinónimos"),
+  answer("La combinación siempre da un número mayor que la permutación"),
+  allow_retry = TRUE
+)
+```
+
+## Para cerrar
+
+Tradujimos a código los tres bloques de la sesión: conjuntos y
+operaciones (`union`, `intersect`, `setdiff`), probabilidad verificada
+por simulación, y conteo con `factorial()`, `choose()` y `combn()`. La
+próxima semana seguimos con probabilidad condicional y Bayes, que se
+apoyan directamente en estas mismas operaciones de conjuntos.

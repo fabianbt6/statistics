@@ -1,0 +1,143 @@
+---
+title: "Guía de preparación — Sesión 2: Marco Lógico del proyecto"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @ilpes_marcologico42
+---
+
+<!-- Documento de preparación docente. Ver también
+     content/semanas/semana-02-marco-logico-presentacion.qmd para las
+     slides con el guión de exposición. -->
+
+# Sesión 2. Marco Lógico del proyecto
+
+**Fecha: viernes 9 de octubre de 2026.**
+
+## Objetivos de aprendizaje
+
+- Construir el árbol de problemas y el árbol de objetivos de su propio
+  proyecto, con relaciones de causalidad claras.
+- Entender la estructura de la matriz de Marco Lógico (fin, propósito,
+  componentes, actividades) y cómo cada nivel se conecta con el
+  siguiente.
+- Redactar indicadores medibles, con sus medios de verificación y los
+  supuestos externos de los que depende el proyecto.
+- Dejar avanzada (idealmente completa) la matriz de Marco Lógico de su
+  proyecto, como insumo directo para identificar costos y beneficios en
+  la Sesión 3.
+
+## Capítulos sugeridos
+
+| Recurso | Sección | Por qué |
+|---|---|---|
+| Ortegón, Pacheco y Prieto, *Metodología del marco lógico* (ILPES/CEPAL, Serie Manuales N.º 42) [@ilpes_marcologico42] | Capítulos 2 y 3 (identificación del problema; la matriz de marco lógico) | Es la referencia central y completa de toda la sesión — árbol de problemas, árbol de objetivos y matriz, con ejemplos aplicados. |
+
+## Contexto y por qué importa esta sesión
+
+El Marco Lógico es el paso que conecta el planteamiento del problema
+(Sesión 1) con la identificación de costos y beneficios (Sesión 3): la
+matriz completa —en particular componentes y actividades— es
+literalmente el mapa de dónde van a salir los costos del proyecto, y
+fin/propósito son de donde van a salir los beneficios. Si un grupo
+llega a la Sesión 3 sin una matriz razonablemente completa, va a
+tener dificultad para identificar costos y beneficios de forma
+ordenada — conviene ser exigente hoy con que cada grupo termine, al
+menos, el árbol de problemas/objetivos y las dos primeras filas de la
+matriz (fin y propósito) antes de salir de la sesión.
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Repaso rápido de los proyectos de cada grupo
+2. Qué es el Marco Lógico y para qué sirve
+3. Árbol de problemas
+4. Árbol de objetivos
+5. La matriz de Marco Lógico: fin, propósito, componentes, actividades
+6. Indicadores, medios de verificación y supuestos
+7. Dinámica: construcción del Marco Lógico en grupo
+8. Cierre, próxima sesión y lecturas asignadas
+
+## Desarrollo — para tu propio estudio antes de la tutoría
+
+### 1. Árbol de problemas — errores comunes a corregir
+
+- **Confundir causa con síntoma**: preguntar "¿por qué pasa esto?" en
+  cadena hasta llegar a algo intervenible con un proyecto (ej. no basta
+  con "pobreza" como causa de desnutrición — hay que bajar un nivel más:
+  "bajo acceso a programas de alimentación complementaria").
+- **Problema central demasiado amplio**: si el árbol tiene más de 4-5
+  causas directas y ninguna se puede desarrollar en profundidad, es
+  señal de que el problema sigue siendo demasiado general (ver notas de
+  la Sesión 1 sobre acotar el tema).
+- **Efectos que en realidad son causas de otro problema**: mantener la
+  distinción — los efectos van siempre hacia arriba del problema
+  central, nunca al lado.
+
+### 2. Árbol de objetivos — la inversión debe ser literal
+
+Cada casilla del árbol de problemas tiene una contraparte positiva
+directa en el árbol de objetivos. Ejemplo aplicado (tema: desempleo
+juvenil):
+
+| Árbol de problemas | Árbol de objetivos |
+|---|---|
+| Problema central: alta tasa de desempleo juvenil en la Zona Sur | Objetivo central: reducida la tasa de desempleo juvenil en la Zona Sur |
+| Causa: baja pertinencia de la oferta de formación técnica | Medio: mejorada la pertinencia de la oferta de formación técnica |
+| Efecto: mayor migración de jóvenes hacia el GAM | Fin: reducida la migración de jóvenes hacia el GAM |
+
+Si el objetivo central del árbol de objetivos no coincide con el
+objetivo general que el grupo redactó en la Sesión 1, es el momento de
+ajustar uno de los dos — mejor detectarlo ahora que en la Sesión 4.
+
+### 3. La matriz — ejemplo aplicado completo (para usar si un grupo se traba)
+
+Usando el mismo ejemplo de desempleo juvenil:
+
+| Nivel | Resumen narrativo | Indicador | Medio de verificación | Supuesto |
+|---|---|---|---|---|
+| Fin | Contribuir a reducir la migración de jóvenes hacia el GAM | Tasa de migración interna de jóvenes 18-24 años de la Zona Sur | Encuesta Nacional de Hogares (INEC) | Se mantienen las condiciones económicas generales de la región |
+| Propósito | Reducida la tasa de desempleo juvenil en la Zona Sur | % de jóvenes 18-24 años desempleados en la Zona Sur | Encuesta Continua de Empleo (INEC) | Las empresas locales mantienen o aumentan su demanda de mano de obra |
+| Componente | Jóvenes capacitados en oficios técnicos pertinentes a la demanda local | N.º de jóvenes certificados por cohorte | Registros administrativos del programa | Existe demanda laboral real para esos oficios en la región |
+| Actividad | Diseño curricular con empresas locales; ejecución de cohortes de capacitación | Presupuesto ejecutado vs. programado | Registros contables del programa | Se cuenta con instructores calificados disponibles en la región |
+
+### 4. Indicadores — la prueba de "¿esto se puede medir de verdad?"
+
+Para cada indicador que un grupo proponga, pedirles que respondan: ¿de
+dónde saldría este dato en la vida real? Si no pueden nombrar una
+fuente concreta (una encuesta, un registro administrativo, una base de
+datos institucional), el indicador probablemente esté mal planteado o
+sea demasiado abstracto — hay que reformularlo antes de pasar a la
+Sesión 3.
+
+### 5. Dinámica de trabajo en grupo — facilitación
+
+- Circular activamente durante la construcción del árbol de
+  problemas — es donde más se traban, sobre todo distinguiendo causas
+  de síntomas.
+- Si un grupo termina rápido el árbol, empujarlos a avanzar componentes
+  y actividades, no solo fin y propósito.
+- Cerrar pidiendo que cada grupo comparta su árbol de problemas (no la
+  matriz completa) — es más rápido de mostrar y de retroalimentar en
+  grupo grande.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Repaso rápido de los proyectos de cada grupo | 10 min |
+| Exposición breve: Marco Lógico, árbol de problemas/objetivos, matriz | 20 min |
+| Trabajo en grupo: árbol de problemas y de objetivos | 30 min |
+| Trabajo en grupo: matriz (fin, propósito, indicadores tentativos) | 30 min |
+| Puesta en común (árbol de problemas, 2 min por grupo) | 20 min |
+| Cierre, próxima sesión y lecturas asignadas | 10 min |
+| **Total** | **120 min** |
+
+## Referencias completas
+
+Ver `referencias/EvaluacionProyectos.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada presentación.

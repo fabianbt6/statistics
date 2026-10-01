@@ -1,48 +1,267 @@
 /*-- scss:rules --*/
 
-// Divisor de sección: fondo de marca a toda la slide, texto blanco.
-// Uso: ## Título de la sección {.divisor}
-.reveal .slides section.divisor {
-  background-color: $brand-indigo;
+// ============================================================
+// Línea editorial propia — azules (ver _brand.yml), tipografía en
+// pt (tamaño predecible, no relativo — técnica tomada del skill de
+// reveal.js: revisar SKILL.md/references/base-styles.css), viñetas
+// personalizadas, espaciado consistente. Degradados/color plano
+// SOLO en portada/divisores/slide de título.
+// ============================================================
+
+// ---- Layout base — padding consistente en todas las slides ----
+.reveal .slides section {
+  padding: 40px 60px;
+  box-sizing: border-box;
 }
-.reveal .slides section.divisor h2 {
+
+// ---- Tipografía base — pt en vez de em/rem (tamaño predecible,
+// no se compone con el tamaño del elemento padre; ver SKILL.md del
+// skill de reveal.js) ------------------------------------------
+.reveal .slides section:not(.portada):not(#title-slide) h2 {
+  font-size: 30pt;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.reveal .slides section p,
+.reveal .slides section li {
+  font-size: 18pt;
+  line-height: 1.5;
+}
+
+// ---- Tablas — tamaño fijo en pt, mismo criterio que arriba ------
+// FALTABA esta regla (encontrado 2026-10-01, con una tabla real que
+// se cortaba en matematica-economistas/1_operaciones-matrices). Sin
+// esto, una tabla hereda el tamaño de letra grande del TEMA de
+// reveal.js por defecto (no el 18pt del resto del contenido), porque
+// ninguna regla de acá la tocaba -- con 5+ filas eso desborda la
+// slide. {.smaller} en el .qmd NO alcanza para arreglarlo: esa clase
+// reduce el tamaño a nivel de toda la slide de forma relativa, pero
+// el 18pt de arriba es un valor absoluto que no se escala con ella
+// (y las tablas, sin regla propia, ni siquiera heredan ESE 18pt).
+// Más compacta que el cuerpo normal a propósito: una tabla casi
+// siempre comparte slide con texto de pregunta/contexto arriba.
+.reveal .slides section table {
+  font-size: 15pt;
+  width: 100%;
+  border-collapse: collapse;
+}
+.reveal .slides section th,
+.reveal .slides section td {
+  padding: 0.3em 0.6em;
+}
+
+// ---- Viñetas personalizadas (puntos redondos con el acento) ---
+// Reemplaza el bullet default del navegador — técnica del skill de
+// reveal.js, se ve más cuidado que el bullet nativo.
+.reveal .slides section ul {
+  list-style: none;
+  padding-left: 0;
+}
+.reveal .slides section ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 0.4em;
+}
+.reveal .slides section ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: $brand-azul-acento;
+}
+.reveal .slides section.destacado ul li::before {
+  background: $brand-azul-medio;
+}
+
+// ---- Portada manual (shared/portada.qmd) --------------------
+// Sigue en uso por "estadistica". Color plano (no degradado) —
+// tratamiento tipo "portada de revista". SIN logo (a pedido explícito).
+// Uso: ## `r params$materia` {.portada}
+.reveal .slides section.portada {
+  background: $brand-azul-profundo;
   color: white;
-}
-
-// Acento bajo el título en las demás slides (no en portada ni divisores)
-.reveal .slides section:not(.divisor):not(.portada) h2 {
-  border-bottom: 2px solid $brand-terracota;
-  padding-bottom: 0.2em;
-  display: inline-block;
-}
-
-// Cuadro para la "idea clave" (equivalente a los recuadros punteados del PPT original)
-.idea-clave {
-  border: 2px dashed $brand-terracota;
-  border-radius: 8px;
-  padding: 0.6em 1em;
-  margin-top: 1em;
-  font-weight: 600;
   text-align: center;
 }
 
-// Slide "destacada": caso de estudio / aplicación real con fondo de
-// marca, a diferencia de .divisor SÍ lleva bullets/contenido, no solo título.
+.reveal .slides section.portada h2 {
+  font-size: 44pt;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: white;
+  margin-bottom: 0.15em;
+}
+
+.reveal .slides section.portada h3 {
+  font-size: 22pt;
+  font-weight: 400;
+  color: $brand-azul-hielo;
+  opacity: 0.9;
+  margin-top: 0;
+  margin-bottom: 1.6em;
+}
+
+// Universidad / cuatrimestre / docente — discreto, debajo del subtítulo
+.portada-meta {
+  font-size: 12pt;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+.portada-meta p {
+  margin: 0.25em 0;
+}
+
+// ---- Slide de título nativa de reveal.js/Quarto --------------
+// "matematica-economistas" ya no usa shared/portada.qmd: usa esta
+// slide automática, poblada SOLO desde title/subtitle (nombre del
+// curso + contenido de la sesión) — a pedido explícito, SIN autor ni
+// fecha/universidad/cuatrimestre. render_curso.R ya no inyecta nada
+// de eso vía metadata; si el YAML de la semana no trae author/date,
+// Quarto simplemente no genera esos párrafos, así que acá no hace
+// falta ni ocultarlos con CSS. Mismo tratamiento visual que
+// .portada, para que se vea igual de cuidada. El fondo se pone vía
+// title-slide-attributes en _quarto.yml (data-background-color) —
+// acá solo se estiliza el texto.
+//
+// OJO: el selector es #title-slide (ID), NO .title-slide (clase) —
+// Quarto genera esta slide como
+// <section id="title-slide" class="quarto-title-block center">,
+// no con una clase "title-slide". Con el selector de clase, esta
+// regla completa nunca hacía match y la slide de título se veía con
+// el tamaño de letra por defecto de Quarto (chico) en vez del
+// nuestro — se detectó comparando el HTML generado directamente.
+//
+// reveal.js pisa el "display" de la slide activa con un estilo
+// inline en runtime; sin !important el centrado no se aplica pese a
+// que la regla compila bien (se confirmó revisando el CSS embebido
+// del HTML generado).
+.reveal .slides section#title-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+// 44pt -> 54pt: título del curso más grande, a pedido.
+.reveal .slides section#title-slide h1.title {
+  font-size: 54pt;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: white;
+  margin-bottom: 0.25em;
+}
+
+// Título (h1) sin cambios: mismo tipo y tamaño de siempre (54pt,
+// 700, misma tipografía global).
+//
+// Subtítulo (contenido de la sesión): subido otra vez, de 32pt a
+// 38pt — más grande, a pedido. El centrado ya venía dado por el
+// contenedor (section#title-slide con flex + align-items:center +
+// text-align:center !important, más arriba), pero se agrega acá
+// text-align:center y width:100% EXPLÍCITOS en el propio párrafo
+// para que quede centrado sin depender de que el navegador calcule
+// bien el ancho de una caja "shrink-to-fit" en un contenedor flex —
+// más robusto, mismo efecto visual.
+.reveal .slides section#title-slide p.subtitle {
+  font-size: 38pt;
+  font-weight: 400;
+  color: $brand-azul-hielo;
+  opacity: 0.95;
+  margin-top: 0;
+  width: 100%;
+  text-align: center !important;
+}
+
+// ---- Divisor de sección: color plano, contenido centrado ------
+// Uso: ## Título de la sección {.divisor}
+// Mismo tono que portada/título ($brand-azul-profundo, no azul-medio)
+// para que toda la "familia" de slides de color plano se vea
+// consistente en vez de dos azules distintos sin relación aparente.
+// display/flex con !important por la misma razón que en title-slide.
+.reveal .slides section.divisor {
+  background: $brand-azul-profundo;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.reveal .slides section.divisor h2 {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  font-size: 40pt;
+  border-bottom: none;
+}
+
+// ---- Acento bajo el título en las demás slides ---------------
+// (no en portada, título ni divisores) — línea fina, no protagonismo
+.reveal .slides section:not(.divisor):not(.portada):not(#title-slide) h2 {
+  border-bottom: 3px solid $brand-azul-acento;
+  padding-bottom: 0.25em;
+  display: inline-block;
+}
+
+// ---- "Idea clave" — callout editorial (barra lateral, sin caja) --
+.idea-clave {
+  border-left: 4px solid $brand-azul-acento;
+  background-color: transparent;
+  padding: 0.5em 0 0.5em 1em;
+  margin-top: 1em;
+  font-weight: 600;
+  text-align: left;
+}
+
+// ---- "Destacada": caso de estudio / aplicación real -------------
+// Callout editorial claro (barra + fondo tenue), NO slide invertida.
 // Uso: ## Título {.destacado}
 .reveal .slides section.destacado {
-  background-color: $brand-indigo;
+  background: $brand-azul-hielo;
+  border-left: 8px solid $brand-azul-acento;
 }
-.reveal .slides section.destacado h2,
+.reveal .slides section.destacado h2 {
+  color: $brand-azul-profundo;
+  border-bottom: none;
+}
 .reveal .slides section.destacado li,
-.reveal .slides section.destacado p,
-.reveal .slides section.destacado a {
-  color: white;
+.reveal .slides section.destacado p {
+  color: $brand-gris-oscuro;
 }
 .reveal .slides section.destacado a {
+  color: $brand-azul-medio;
   text-decoration: underline;
 }
 
-.logo-universidad {
-  display: block;
-  margin: 0.6em auto;
+// ---- "Agenda" — slide de contenido/agenda al inicio de la sesión --
+// Fondo normal (blanco), pero el título y la lista quedan centrados
+// en la slide y con letra más grande que el cuerpo normal (18pt) —
+// es la primera slide real que ve el grupo, tiene que verse como
+// una portada de agenda, no como una slide más de contenido.
+// Uso: ## Contenido {.agenda}
+.reveal .slides section.agenda {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.reveal .slides section.agenda h2 {
+  margin-bottom: 0.6em;
+}
+// La lista se centra como bloque en la slide, pero el texto de cada
+// viñeta queda alineado a la izquierda DENTRO de ese bloque — es lo
+// que se ve prolijo en una lista con viñetas (centrar cada línea de
+// texto individualmente, en cambio, se ve desprolijo).
+.reveal .slides section.agenda ul {
+  display: inline-block;
+  text-align: left;
+}
+.reveal .slides section.agenda ul li {
+  font-size: 26pt;
 }

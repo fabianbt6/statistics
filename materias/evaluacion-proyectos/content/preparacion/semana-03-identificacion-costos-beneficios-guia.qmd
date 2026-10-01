@@ -1,0 +1,162 @@
+---
+title: "Guía de preparación — Sesión 3: Identificación y valoración de costos y beneficios; precios sociales"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @ilpes_metodologiageneral39, @ilpes_evaluacionsocial37
+---
+
+<!-- Documento de preparación docente. Ver también
+     content/semanas/semana-03-identificacion-costos-beneficios-presentacion.qmd
+     para las slides con el guión de exposición. -->
+
+# Sesión 3. Identificación y valoración de costos y beneficios; precios sociales
+
+**Fecha: viernes 6 de noviembre de 2026.**
+
+## Objetivos de aprendizaje
+
+- Clasificar los costos y beneficios de su proyecto en directos,
+  indirectos, tangibles, intangibles y externalidades.
+- Entender por qué la evaluación social usa precios sociales (de
+  cuenta) en vez de precios de mercado, y qué distorsiones los separan
+  (impuestos, subsidios, aranceles, desempleo).
+- Comprender el concepto de factor de conversión y de precio sombra, y
+  cuándo se necesita cada uno.
+- Dejar una lista completa y clasificada de los costos y beneficios de
+  su proyecto, con una primera nota sobre cuáles necesitan precio
+  sombra o factor de conversión — insumo directo para calcular los
+  indicadores en la Sesión 4.
+
+## Capítulos sugeridos
+
+| Recurso | Sección | Por qué |
+|---|---|---|
+| ILPES/CEPAL, *Metodología general de identificación, preparación y evaluación de proyectos de inversión pública* (Serie Manuales N.º 39) [@ilpes_metodologiageneral39] | Capítulos sobre identificación de costos y beneficios, factores de conversión y precios de cuenta | Referencia técnica central de la sesión — de ahí sale toda la terminología (costo de oportunidad, factor de conversión, precio de cuenta). |
+| ILPES/CEPAL, *Evaluación social de proyectos* (Serie Manuales N.º 37) [@ilpes_evaluacionsocial37] | Capítulos sobre precios sociales y precios sombra | Complementa con el tratamiento de precios sombra para bienes sin mercado (salud, educación, seguridad). |
+
+## Contexto y por qué importa esta sesión
+
+Esta sesión es, en muchos sentidos, el corazón conceptual del curso:
+es donde se introduce formalmente la diferencia entre evaluación
+financiera y evaluación social de proyectos, que es la pregunta
+generativa de todo el programa oficial. Conviene no apurar esta
+sesión — si un grupo sale sin entender por qué un precio de mercado
+puede no reflejar el costo real para la sociedad, la Sesión 4
+(cálculo de indicadores) se les va a volver un ejercicio mecánico sin
+sentido, en vez de una herramienta de decisión.
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Repaso rápido de la matriz de Marco Lógico de cada grupo
+2. Tipos de costos y beneficios (directos, indirectos, tangibles,
+   intangibles, externalidades)
+3. Precios de mercado vs. precios sociales — por qué difieren
+4. Factores de conversión y precios de cuenta
+5. Precios sombra
+6. Dinámica: identificación y clasificación de costos y beneficios en grupo
+7. Cierre, próxima sesión y lecturas asignadas
+
+## Desarrollo — para tu propio estudio antes de la tutoría
+
+### 1. Por qué los precios de mercado se distorsionan — casos típicos
+
+- **Impuestos y aranceles**: inflan el precio de mercado por encima del
+  costo real de producir o importar el bien; para la sociedad, ese
+  monto es solo una transferencia interna (de quien paga el impuesto al
+  Estado), no un costo adicional de recursos.
+- **Subsidios**: reducen el precio de mercado por debajo del costo real
+  de producción; igual que el impuesto, es una transferencia, no un
+  ahorro real de recursos.
+- **Mercados monopólicos u oligopólicos**: el precio de mercado incluye
+  una renta monopólica que no refleja el costo marginal real de
+  producir el bien.
+- **Desempleo en el mercado laboral**: si existe desempleo involuntario
+  en la zona, el salario de mercado puede sobrestimar el verdadero
+  costo de oportunidad de emplear a un trabajador —que, de no ser
+  contratado, permanecería desempleado en vez de producir algo en otro
+  empleo.
+
+### 2. Factor de conversión de la mano de obra — ejemplo numérico simple
+
+Si el salario de mercado de un trabajador no calificado en una zona
+con alto desempleo es de ₡350.000 mensuales, pero se estima que su
+costo de oportunidad real (lo que dejaría de producir en su siguiente
+mejor alternativa, considerando la probabilidad de que esté
+desempleado) es de ₡245.000, el factor de conversión de la mano de
+obra sería:
+
+$$FC_{\text{mano de obra}} = \frac{245.000}{350.000} = 0{,}70$$
+
+Es decir, el precio de cuenta de esa mano de obra es el 70% de su
+precio de mercado. (Este es un ejemplo ilustrativo para la sesión —
+en la Sesión 4 se puede profundizar si el grupo necesita un valor más
+preciso para su tema específico, según lo que reporten los manuales
+de referencia.)
+
+### 3. Factor de conversión de la divisa — idea general
+
+Cuando un proyecto usa insumos importados (o cuando el tipo de cambio
+oficial está distorsionado por controles cambiarios), se aplica un
+factor de conversión de la divisa para ajustar el precio de esos
+insumos a su verdadero costo en moneda nacional. En el caso de Costa
+Rica, con un tipo de cambio de mercado relativamente libre, este ajuste
+suele ser menor que en países con controles cambiarios fuertes — vale
+la pena mencionarlo para que los grupos no sobrestimen su relevancia en
+el contexto costarricense actual, pero sin descartarlo si su proyecto
+depende fuertemente de insumos importados.
+
+### 4. Precios sombra — cómo guiar a los grupos sin exigir precisión excesiva
+
+Para beneficios sin mercado (una vida salvada, un año de escolaridad,
+la reducción de la criminalidad), lo razonable en este curso es que
+cada grupo proponga **un método de aproximación**, no un número
+definitivo:
+
+- **Costos evitados**: cuánto le costaría al sistema de salud/educación/
+  seguridad no resolver el problema (ej. costo de atender una
+  enfermedad prevenible).
+- **Disposición a pagar**: cuánto estaría dispuesta a pagar la sociedad
+  o el beneficiario por ese resultado (encuestas, estudios de
+  valoración contingente ya publicados por otros).
+- **Retorno indirecto observable**: por ejemplo, el diferencial salarial
+  promedio asociado a un año adicional de escolaridad, como aproximación
+  al valor de la educación.
+
+Es preferible que el grupo diga explícitamente "usamos el método de
+costos evitados, con este supuesto" a que inventen un número sin
+método declarado.
+
+### 5. Dinámica de trabajo en grupo — facilitación
+
+- Empezar pidiendo la lista de actividades de su matriz de Marco Lógico
+  (Sesión 2) — cada actividad es un costo a clasificar.
+  Beneficios: derivarlos de fin y propósito.
+- Para cada costo/beneficio, pedir explícitamente: ¿tiene precio de
+  mercado observable? ¿Necesitaría precio sombra? ¿Necesitaría factor
+  de conversión?
+- Los grupos que trabajen con mano de obra de zonas de alto desempleo,
+  o con insumos importados, son los que más se benefician de discutir
+  factores de conversión en detalle — priorizar el tiempo de
+  acompañamiento ahí.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Repaso rápido: matriz de Marco Lógico de cada grupo | 10 min |
+| Exposición breve: costos/beneficios, precios sociales, factores de conversión, precios sombra | 25 min |
+| Trabajo en grupo: identificación y clasificación de costos y beneficios | 50 min |
+| Puesta en común (dudas y hallazgos comunes) | 20 min |
+| Cierre, próxima sesión y lecturas asignadas | 15 min |
+| **Total** | **120 min** |
+
+## Referencias completas
+
+Ver `referencias/EvaluacionProyectos.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada presentación.

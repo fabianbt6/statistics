@@ -1,0 +1,21 @@
+# Generado a mano siguiendo el formato de R/nuevo_curso.R (equivalente a
+# correr: nuevo_curso(materia = "evaluacion-proyectos", universidad =
+# "FIDELITAS", anio = 2026, cuatri = 3, fecha_inicio = "2026-09-18",
+# docente = "Marianne Pérez Gómez", logo_path = "/images/logos/fidelitas.jpg"))
+#
+# Cadencia NO semanal/quincenal regular: las 5 sesiones están
+# intercaladas con las 10 sesiones de "estadistica" (mismo cuatri,
+# mismo profesor Fabián Brenes, mismo slot de los viernes) para que
+# nunca choquen, salvo la sesión 1 de ambos cursos, que sí coincide el
+# mismo viernes a propósito. fecha_inicio/feriados no se usan hoy en
+# ningún script de render (ver R/render_curso.R) — se documentan aquí
+# las 5 fechas reales para no perderlas de vista:
+#   Sesión 1: 2026-09-18  Sesión 2: 2026-10-09  Sesión 3: 2026-11-06
+#   Sesión 4: 2026-11-27  Sesión 5: 2026-12-18
+universidad: "FIDELITAS"
+anio: 2026
+cuatri: 3
+fecha_inicio: "2026-09-18"
+feriados: []
+docente: "Marianne Pérez Gómez"
+logo_path: "/images/logos/fidelitas.jpg"

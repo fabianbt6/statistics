@@ -1,0 +1,185 @@
+---
+title: "Guía de preparación — Probabilidad — conceptos y técnicas de conteo"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015
+---
+
+<!-- Documento EXHAUSTIVO de preparación docente. Ver también
+     content/unidades/2_probabilidad-conceptos-presentacion.qmd -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 2 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Probabilidad — conceptos y técnicas de conteo
+
+Duración: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Aplicar operaciones y leyes de teoría de conjuntos a eventos.
+- Aplicar los axiomas y propiedades de la función de probabilidad.
+- Resolver problemas de conteo usando el principio de multiplicación,
+  permutaciones y combinaciones.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo | Por qué |
+|---|---|---|
+| Hogg, Tanis y Zimmerman, *Probability and Statistical Inference* [@hogg2015] | Cap. 1, "Probability" | Cubre el 100% del contenido: teoría de conjuntos aplicada, axiomas, teoremas, técnicas de conteo. |
+
+## Desarrollo teórico completo
+
+### 1. Espacio muestral y eventos
+
+El **espacio muestral** $S$ es el conjunto de todos los resultados
+posibles de un experimento aleatorio. Un **evento** $A$ es cualquier
+subconjunto de $S$ ($A \subseteq S$). Ejemplo: lanzar un dado,
+$S=\{1,2,3,4,5,6\}$; el evento "sale par" es $A=\{2,4,6\}$.
+
+### 2. Operaciones de conjuntos — desarrollo con diagramas de Venn
+
+- **Unión** $A \cup B$: elementos que están en $A$, en $B$, o en
+  ambos.
+- **Intersección** $A \cap B$: elementos que están en ambos.
+- **Complemento** $A^c$: elementos de $S$ que no están en $A$.
+- **Diferencia** $A - B = A \cap B^c$: elementos de $A$ que no están
+  en $B$.
+- **Mutuamente excluyentes**: $A \cap B = \emptyset$ — no pueden
+  ocurrir simultáneamente.
+
+**Leyes de De Morgan** (importantes, se usan constantemente al
+simplificar probabilidades de complementos de uniones/intersecciones):
+
+$$(A \cup B)^c = A^c \cap B^c \qquad (A \cap B)^c = A^c \cup B^c$$
+
+Interpretación verbal: "no (A o B)" es lo mismo que "no A y no B"; "no
+(A y B)" es lo mismo que "no A o no B".
+
+### 3. Axiomas de probabilidad (Kolmogorov)
+
+Dado un espacio muestral $S$, una función $P$ que asigna un número a
+cada evento es una función de probabilidad si cumple:
+
+1. $P(A) \geq 0$ para todo evento $A$.
+2. $P(S) = 1$.
+3. **Aditividad numerable:** si $A_1, A_2, A_3, \dots$ son eventos
+   mutuamente excluyentes dos a dos, entonces
+   $P(A_1 \cup A_2 \cup \dots) = P(A_1) + P(A_2) + \dots$
+
+**Propiedades derivadas** (se demuestran a partir de los axiomas —
+vale la pena mostrar al menos una demostración corta en clase para que
+vean que no son "reglas sueltas"):
+
+- $P(\emptyset) = 0$. *Demostración:* $S = S \cup \emptyset$, con $S$
+  y $\emptyset$ mutuamente excluyentes, entonces por el axioma 3,
+  $P(S) = P(S) + P(\emptyset)$, y como $P(S)=1$ (axioma 2),
+  $P(\emptyset) = 0$.
+- $P(A^c) = 1 - P(A)$. *Demostración:* $S = A \cup A^c$, mutuamente
+  excluyentes, entonces $P(S) = P(A) + P(A^c) = 1$.
+- **Regla general de la suma:**
+  $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+  *Intuición:* al sumar $P(A) + P(B)$ se cuenta la intersección
+  $A \cap B$ dos veces, por eso hay que restarla una vez.
+- Si $A \subseteq B$, entonces $P(A) \leq P(B)$ (monotonía).
+
+### 4. Ejercicio 1 — resolución completa paso a paso
+
+*Enunciado:* De un grupo de pequeños empresarios, el 30% contratan
+servicios de contabilidad Y planificación financiera. El 10% no
+contrata ninguno de los dos. La probabilidad de contratar contabilidad
+supera en 20 puntos porcentuales a la de contratar planificación
+financiera. ¿Cuál es $P(\text{contabilidad})$?
+
+*Solución:*
+
+Sea $C$ = contrata contabilidad, $F$ = contrata planificación
+financiera.
+
+- Dato 1: $P(C \cap F) = 0.30$
+- Dato 2: $P((C\cup F)^c) = 0.10 \Rightarrow P(C\cup F) = 1-0.10 = 0.90$
+  (usando $P(A^c)=1-P(A)$ con $A = C\cup F$)
+- Dato 3: $P(C) = P(F) + 0.20$
+
+Usando la regla de la suma:
+$$P(C\cup F) = P(C) + P(F) - P(C\cap F)$$
+$$0.90 = \big(P(F)+0.20\big) + P(F) - 0.30$$
+$$0.90 = 2P(F) - 0.10 \Rightarrow P(F) = 0.50$$
+$$P(C) = 0.50 + 0.20 = 0.70$$
+
+*Verificación:* $P(C\cup F) = 0.70+0.50-0.30 = 0.90$ ✓ (coincide con
+el dato 2).
+
+### 5. Técnicas de conteo — desarrollo formal
+
+**Principio de multiplicación.** Si una tarea consta de $k$ pasos
+sucesivos, con $n_1$ formas de hacer el paso 1, $n_2$ formas de hacer
+el paso 2 (independientemente de cómo se hizo el paso 1), etc., el
+número total de formas de completar la tarea es $n_1 \times n_2 \times
+\cdots \times n_k$.
+
+*Ejemplo:* un banco ofrece 3 tipos de cuenta y 4 tipos de tarjeta —
+hay $3\times4=12$ combinaciones posibles de cuenta+tarjeta.
+
+**Factorial:** $n! = n(n-1)(n-2)\cdots 1$, con $0!=1$ por convención.
+Cuenta las formas de ordenar $n$ objetos distintos en una fila.
+
+**Permutaciones** (muestreo sin reemplazo, el orden importa): número
+de formas de elegir y ordenar $r$ objetos de un total de $n$:
+
+$$P(n,r) = \frac{n!}{(n-r)!}$$
+
+*Derivación intuitiva:* hay $n$ opciones para el primer lugar,
+$n-1$ para el segundo (ya se usó una), ..., $n-r+1$ para el lugar
+$r$-ésimo. El producto
+$n(n-1)\cdots(n-r+1) = \dfrac{n!}{(n-r)!}$.
+
+**Combinaciones** (el orden NO importa): número de formas de elegir
+$r$ objetos de un total de $n$, sin importar el orden:
+
+$$C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!} = \frac{P(n,r)}{r!}$$
+
+*Derivación:* cada combinación de $r$ objetos se puede ordenar de
+$r!$ formas distintas (cada una es una permutación distinta), así que
+$P(n,r) = C(n,r) \times r!$, de donde se despeja $C(n,r)$.
+
+**Criterio práctico para decidir cuál usar:** preguntar "¿importa el
+orden de selección?" — placas de carro, claves numéricas, podios de
+una competencia → sí importa (permutación). Comités, manos de cartas,
+muestras para una encuesta → no importa (combinación).
+
+## Ejercicios de la sesión — desarrollo extendido
+
+**Ejemplo de permutación:** ¿de cuántas formas se pueden asignar los
+puestos de gerente, subgerente y tesorero entre 8 candidatos
+igualmente calificados? $P(8,3) = \dfrac{8!}{5!} = 8\times7\times6 =
+336$.
+
+**Ejemplo de combinación:** ¿de cuántas formas se puede formar un
+comité de 3 personas de un grupo de 8? $C(8,3) = \dfrac{8!}{3!5!} =
+56$. Nótese que $336 = 56 \times 3!= 56\times 6$ — confirma la
+relación $P(n,r)=C(n,r)\cdot r!$.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Teoría de conjuntos: operaciones y leyes (con diagramas de Venn) | 25 min |
+| Axiomas de probabilidad y propiedades (con demostración corta) | 25 min |
+| Ejercicio 1, resuelto paso a paso en la pizarra | 20 min |
+| Métodos de conteo: multiplicación, factorial | 20 min |
+| Permutaciones y combinaciones (con derivación) | 30 min |
+| Ejemplos de permutación/combinación + Práctica 1 (inicio) | 60 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` y `content/blocks/bibliografia.qmd`.

@@ -1,0 +1,247 @@
+---
+title: "Guía de preparación — Pruebas de hipótesis"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015, @hanglee2023
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/6_pruebas-hipotesis-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 6 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Pruebas de hipótesis
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Enunciar el Teorema del Límite Central y explicar por qué justifica
+  el uso de Z o t incluso cuando los datos originales no son normales.
+- Plantear correctamente $H_0$ y $H_1$ para un problema de una media,
+  distinguiendo pruebas de una y dos colas.
+- Ejecutar el procedimiento completo de una prueba de hipótesis de una
+  media (varianza conocida y desconocida) y concluir con base en el
+  valor p, entendiendo qué significa realmente ese número.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Hogg, Tanis y Zimmerman, *Probability and Statistical Inference* [@hogg2015] | Capítulo 8 (Tests) | Desarrollo formal de pruebas de hipótesis de una media, error tipo I/II y valor p — referencia principal de la sesión (ver p. 366-367 para los ejemplos con varianza conocida/desconocida). |
+| Hang Lee, *Foundations of Applied Statistical Methods* [@hanglee2023] | Sección 2.2.4 (Hypothesis Testing) | Complemento más aplicado/intuitivo, útil si algún estudiante necesita una segunda explicación del mismo procedimiento. |
+
+## Desarrollo teórico completo
+
+### 1. Teorema del Límite Central (TLC)
+
+**Enunciado.** Sea $X_1, X_2, \dots, X_n$ una muestra aleatoria de
+cualquier distribución con media $\mu$ y varianza $\sigma^2$ finitas
+(sin importar la forma de esa distribución — puede ser Bernoulli,
+Poisson, uniforme, muy asimétrica, lo que sea). Entonces, a medida que
+$n$ crece, la distribución de la media muestral $\bar{X}$ se aproxima
+a una distribución normal:
+
+$$\bar{X} \approx N\!\left(\mu, \frac{\sigma^2}{n}\right) \quad \text{para } n \text{ suficientemente grande}$$
+
+**Por qué es tan importante.** Este teorema es la razón matemática por
+la cual podemos usar Z o t para hacer inferencia sobre una media
+poblacional, **incluso cuando no sabemos —o no nos importa— cuál es la
+distribución de los datos individuales**. No necesitamos que cada
+observación $X_i$ sea normal; necesitamos que el *promedio* de muchas
+observaciones se comporte como normal, y eso lo garantiza el TLC bajo
+condiciones muy generales.
+
+**Conexión con lo ya visto en el curso.** Este es un buen momento para
+conectar con dos cosas que ya vieron: primero, el laboratorio de
+Poisson de la unidad de distribuciones discretas, donde generaron
+muestras de tamaño 10, 20 y 10,000 y notaron que el histograma se iba
+pareciendo cada vez más a una campana — eso era el TLC actuando,
+aunque todavía no lo habíamos nombrado formalmente. Segundo, el
+ejercicio inicial de R de la primera sesión del curso (`rnorm` con
+distintos $n$), donde ya empezaron a ver informalmente cómo el tamaño
+de muestra afecta la forma de una distribución simulada.
+
+**Nota sobre la varianza de la media muestral.** Fíjense que la
+varianza de $\bar{X}$ es $\sigma^2/n$ — no $\sigma^2$. Esto significa
+que, a medida que aumenta el tamaño de muestra, la media muestral se
+vuelve cada vez *menos* variable — se concentra cada vez más cerca del
+verdadero $\mu$. Este es el fundamento matemático de por qué "más
+datos" da estimaciones más precisas, algo intuitivo que ahora tiene
+respaldo formal.
+
+### 2. Prueba de hipótesis: el procedimiento general
+
+Una prueba de hipótesis es un procedimiento formal para decidir, con
+base en evidencia muestral, si una afirmación sobre un parámetro
+poblacional (la **hipótesis nula**, $H_0$) es razonable, frente a una
+**hipótesis alternativa** ($H_1$). El procedimiento tiene cuatro pasos
+fijos que se van a repetir en todas las pruebas del curso (media,
+proporción, ANOVA):
+
+1. Plantear $H_0$ y $H_1$ (siempre $H_0$ contiene el signo de igualdad).
+2. Elegir un nivel de significancia $\alpha$ y determinar el valor
+   crítico correspondiente (o, equivalentemente, calcular el valor p).
+3. Calcular el estadístico de prueba con los datos de la muestra.
+4. Comparar y concluir: rechazar o no rechazar $H_0$.
+
+### 3. Error tipo I y error tipo II
+
+| | $H_0$ verdadera | $H_0$ falsa |
+|---|---|---|
+| Rechazar $H_0$ | Error tipo I ($\alpha$) | Decisión correcta |
+| No rechazar $H_0$ | Decisión correcta | Error tipo II ($\beta$) |
+
+$\alpha$, el **nivel de significancia**, es la probabilidad de
+rechazar $H_0$ cuando en realidad es verdadera — es una probabilidad
+que **nosotros elegimos** de antemano (típicamente 1%, 5% o 10%), no
+algo que se calcule de los datos. $\beta$ es la probabilidad del error
+opuesto: no rechazar $H_0$ cuando en realidad es falsa. $1-\beta$ se
+llama la **potencia** de la prueba — la probabilidad de detectar
+correctamente que $H_0$ es falsa cuando efectivamente lo es.
+
+**La analogía del sistema judicial**, útil para la intuición en clase:
+$H_0$ es "inocente hasta que se demuestre lo contrario". Un error tipo
+I es condenar a un inocente (rechazar $H_0$ siendo verdadera); un
+error tipo II es dejar libre a un culpable (no rechazar $H_0$ siendo
+falsa). Ambos errores son costosos, pero de forma distinta, y reducir
+uno típicamente aumenta el otro para un tamaño de muestra fijo —la
+única forma de reducir ambos simultáneamente es aumentar el tamaño de
+muestra.
+
+### 4. El valor p
+
+El valor p es la probabilidad de observar un estadístico de prueba
+tan extremo, o más extremo, que el calculado con la muestra, **bajo el
+supuesto de que $H_0$ es verdadera**.
+
+**Interpretación correcta (y un error común a corregir en clase):** el
+valor p **no** es "la probabilidad de que $H_0$ sea verdadera" — es un
+error de interpretación extremadamente común, incluso entre
+profesionales, y vale la pena dedicarle un momento explícito en clase.
+El valor p es la probabilidad de los datos observados (o algo más
+extremo), asumiendo que $H_0$ es cierta — es una afirmación sobre los
+datos condicionada en la hipótesis, no una afirmación sobre la
+probabilidad de la hipótesis en sí.
+
+**Regla de decisión:** si el valor p es menor que $\alpha$, se
+rechaza $H_0$ — la evidencia observada sería demasiado inusual para
+haber ocurrido por azar si $H_0$ fuera realmente cierta. Si el valor p
+es mayor o igual a $\alpha$, no se rechaza $H_0$ — no porque hayamos
+"probado" que es cierta, sino porque no hay evidencia suficiente en
+contra.
+
+### 5. Prueba de hipótesis de una media
+
+**Caso 1: varianza poblacional conocida.**
+
+$$Z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}$$
+
+Este estadístico mide cuántas desviaciones estándar (del error
+estándar de la media) está la media muestral observada, $\bar{x}$, del
+valor hipotético $\mu_0$ bajo $H_0$. Por el TLC, bajo $H_0$ este
+estadístico sigue (aproximadamente, o exactamente si los datos son
+normales) una distribución normal estándar. Se compara contra el valor
+crítico $z_\alpha$ o $z_{\alpha/2}$ según la prueba sea de una o dos
+colas (Hogg, p. 366).
+
+**Caso 2: varianza poblacional desconocida (el caso casi siempre
+real).**
+
+$$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}, \qquad \text{con } n-1 \text{ grados de libertad}$$
+
+Es exactamente el mismo estadístico, pero reemplazando la $\sigma$
+desconocida por su estimación muestral $s$. Como vimos en la unidad
+anterior (distribuciones — normal, t, F y ji-cuadrada), ese reemplazo
+introduce incertidumbre adicional, por lo que el estadístico sigue una
+distribución t (no normal) con $n-1$ grados de libertad (Hogg, p. 367).
+
+**Región de rechazo**, según el tipo de prueba:
+
+- Dos colas ($H_1: \mu \neq \mu_0$): rechazar $H_0$ si
+  $|t| > t_{\alpha/2, \, n-1}$
+- Una cola derecha ($H_1: \mu > \mu_0$): rechazar $H_0$ si
+  $t > t_{\alpha, \, n-1}$
+- Una cola izquierda ($H_1: \mu < \mu_0$): rechazar $H_0$ si
+  $t < -t_{\alpha, \, n-1}$
+
+**Cómo decidir entre una y dos colas:** depende de la pregunta de
+investigación. Si la pregunta es simplemente "¿la media es distinta
+de $\mu_0$?" (sin dirección específica), es de dos colas. Si la
+pregunta tiene una dirección explícita —"¿la media es *mayor* que
+$\mu_0$?" o "¿es *menor*?"— es de una cola. La dirección de $H_1$
+siempre debe decidirse **antes** de ver los datos, nunca después
+—decidir la dirección después de observar el resultado es una forma
+de sesgo que infla artificialmente la probabilidad de encontrar
+significancia.
+
+## Ejercicio de la sesión — resolución completa
+
+Con los datos de la variable `W` (n=24 observaciones), se pide una
+prueba de hipótesis de una media con $H_0: \mu = 0$ contra
+$H_1: \mu \neq 0$ (dos colas), con `t.test()` en R.
+
+**Cálculos (para tener el número exacto antes de la clase):**
+
+- $n = 24$
+- $\bar{x} = 0.07875$
+- $s = 0.25492$ (desviación estándar muestral)
+- Error estándar: $s/\sqrt{n} = 0.25492/\sqrt{24} = 0.05204$
+- Estadístico: $t = \dfrac{0.07875 - 0}{0.05204} = 1.5134$
+- Grados de libertad: $n-1 = 23$
+- Valor p (dos colas) $\approx 0.1438$
+
+**Conclusión (con $\alpha=0.10$, el nivel usado en el ejemplo de la
+presentación):** como el valor p (0.1438) es **mayor** que $\alpha$
+(0.10), **no se rechaza $H_0$**. No existe suficiente evidencia
+estadística, con un nivel de significancia del 10%, para concluir que
+la media poblacional de W es distinta de cero.
+
+**Código R para reproducir esto en clase:**
+
+```r
+W <- c(0.28, 0.01, 0.13, 0.33, -0.03, 0.07, -0.18, -0.14,
+       -0.33, 0.01, 0.22, 0.29, -0.08, 0.23, 0.08, 0.04,
+       -0.30, -0.08, 0.09, 0.70, 0.33, -0.34, 0.50, 0.06)
+t.test(W, mu = 0)
+```
+
+`t.test()` en R devuelve directamente el estadístico t, los grados de
+libertad, el valor p y un intervalo de confianza del 95% para la
+media —conceptos que se conectan directamente con la unidad de
+intervalos de confianza, más adelante en el curso—. Aprovechen para
+señalar en clase que el intervalo de confianza que imprime R debería
+(y va a) incluir el cero, consistente con no haber rechazado
+$H_0:\mu=0$ — es una buena forma de mostrar la conexión entre pruebas
+de hipótesis e intervalos de confianza antes de llegar formalmente a
+esa unidad.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Teorema del Límite Central (enunciado + conexión con unidades previas) | 25 min |
+| Prueba de hipótesis: procedimiento general, H0/H1, error I/II | 30 min |
+| Valor p: definición correcta e interpretación errónea común | 20 min |
+| Prueba de una media, varianza conocida (Z) | 20 min |
+| Prueba de una media, varianza desconocida (t) + región de rechazo | 30 min |
+| Ejercicio con la variable W en R (`t.test`) | 35 min |
+| Discusión de resultados | 20 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

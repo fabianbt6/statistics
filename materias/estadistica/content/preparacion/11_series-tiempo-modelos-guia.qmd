@@ -1,0 +1,248 @@
+---
+title: "Guía de preparación — Series de tiempo — regresión espuria y modelos básicos"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @cryerchan2008
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/11_series-tiempo-modelos-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 11 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Series de tiempo — regresión espuria y modelos básicos
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Reconocer los síntomas de una regresión espuria entre series no
+  estacionarias, y explicar por qué ocurre.
+- Definir formalmente estacionariedad débil, y usar el operador de
+  rezago (backshift) para escribir y distinguir conceptualmente los
+  modelos AR, MA y ARMA.
+- Generar un pronóstico simple con un modelo ajustado en R e
+  interpretar la banda de incertidumbre.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Cryer & Chan, *Time Series Analysis with Applications in R* [@cryerchan2008] | Capítulo 3 (Trends) y Capítulo 4 (Models for Stationary Time Series) | Cap. 3 da la base de estacionariedad necesaria para entender regresión espuria; cap. 4 desarrolla AR, MA y ARMA — mantenerlo a nivel muy introductorio, sin entrar en identificación/estimación formal (excede el alcance del curso). |
+
+## Nota de contexto (contenido nuevo)
+
+Esta es la sesión con más contenido genuinamente nuevo del curso — el
+material fuente antiguo (pptx) solo cubría regresión espuria; el
+operador backshift y los modelos AR/MA/ARMA se desarrollaron desde cero
+para este programa reordenado. Decisión del docente (2026-09-18): en
+vez de desarrollar cada modelo por separado con sus propiedades —que da
+para mucho más que una sesión—, el énfasis se puso en el operador de
+rezago (backshift) como notación unificadora: permite escribir los tres
+modelos sin ambigüedad y es la base para poder implementarlos
+manualmente (ej. en una hoja de cálculo), no solo para usarlos en R.
+Mantener el desarrollo de AR/MA/ARMA a nivel de reconocimiento
+conceptual apoyado en esa notación, sin pedir a los estudiantes que
+identifiquen o estimen un modelo Box-Jenkins completo con ACF/PACF —
+eso pertenece a un curso de econometría de series de tiempo más
+avanzado.
+
+## Desarrollo teórico completo
+
+### 1. Estacionariedad — definición formal (idea intuitiva primero, luego formal)
+
+Una serie $Y_t$ es (débilmente) **estacionaria** si cumple tres
+condiciones:
+
+1. La media es constante en el tiempo: $E(Y_t) = \mu$ para todo $t$
+   (no depende de $t$).
+2. La varianza es constante en el tiempo: $Var(Y_t) = \sigma^2$ para
+   todo $t$.
+3. La covarianza entre dos observaciones, $Cov(Y_t, Y_{t+k})$, depende
+   únicamente de la distancia temporal $k$ entre ellas (el "rezago"),
+   no del momento específico $t$ en que se miden.
+
+**Intuición práctica para reconocerla visualmente:** una serie
+estacionaria "fluctúa alrededor de un nivel fijo", sin una tendencia
+sistemática de crecimiento o decrecimiento, y con una dispersión de
+las fluctuaciones que se ve más o menos igual de "ancha" a lo largo de
+todo el gráfico. Una serie **no** estacionaria típica es una que crece
+sistemáticamente (como el PIB en niveles, que vimos en la unidad
+anterior) o cuya varianza cambia claramente con el tiempo.
+
+**Un dato práctico importante:** muchas series económicas *no* son
+estacionarias en niveles, pero su **primera diferencia**
+($\Delta Y_t = Y_t - Y_{t-1}$) sí suele serlo — por ejemplo, el PIB en
+niveles crece sistemáticamente (no estacionario), pero la *tasa de
+crecimiento* del PIB de un trimestre a otro suele fluctuar alrededor
+de un nivel relativamente estable (más cerca de ser estacionaria).
+Este es el motivo práctico detrás del laboratorio de esta sesión, que
+pide evaluar si la serie original o su primera diferencia parece
+estacionaria.
+
+### 2. Regresión espuria — por qué ocurre
+
+**El problema.** Si se estima una regresión lineal simple entre dos
+series de tiempo que **no** son estacionarias —por ejemplo, ambas
+crecen sistemáticamente con el tiempo, aunque no tengan ninguna
+relación económica real entre sí—, es posible obtener un coeficiente
+de determinación $R^2$ alto y estadísticos t altamente significativos,
+sugiriendo una relación fuerte, **sin que exista ninguna relación
+causal ni siquiera correlacional genuina** entre las variables. Esto
+se llama **regresión espuria**.
+
+**Por qué ocurre (intuición).** Dos series no estacionarias que
+simplemente tienden a crecer con el tiempo —por la razón que sea, cada
+una con su propia dinámica— van a parecer "moverse juntas" solo porque
+ambas se mueven en la misma dirección general a lo largo del tiempo,
+no porque una explique realmente a la otra. Un ejemplo clásico y
+divertido, mencionado frecuentemente en la literatura (Granger y
+Newbold, 1974, quienes documentaron formalmente este fenómeno): el
+número de patentes de Estados Unidos y el consumo total de queso
+mozzarella en el mismo país están altamente correlacionados a lo largo
+de las décadas, simplemente porque ambos han crecido de forma
+sostenida — no porque exista ninguna relación causal entre comer queso
+y patentar inventos.
+
+**Señal de alerta práctica:** estadísticos t y F muy altos (que
+rechazan con fuerza $H_0$ de coeficientes iguales a cero, exactamente
+como en la unidad de pruebas de hipótesis), combinados con un $R^2$
+alto, en un modelo entre dos series sin ninguna relación económica
+plausible entre sí — y, frecuentemente, con un estadístico
+Durbin-Watson muy bajo (indicando fuerte autocorrelación en los
+residuos, señal de que el modelo no está capturando bien la dinámica
+temporal). El Durbin-Watson no es contenido de este curso, pero vale
+la pena mencionarlo si algún estudiante ya lo conoce de otro curso.
+
+**La solución práctica:** verificar la estacionariedad de las series
+antes de estimar una regresión (con pruebas formales como la prueba de
+Dickey-Fuller, fuera del alcance de este curso, o al menos con
+inspección visual y con la primera diferencia si es necesario), o
+trabajar directamente con las series diferenciadas si no son
+estacionarias en niveles.
+
+### 3. El operador de rezago (backshift) y los modelos AR, MA, ARMA escritos con él
+
+**Por qué el énfasis está en la notación, y no en desarrollar cada
+modelo a fondo.** AR, MA y ARMA, desarrollados con el detalle que
+amerita cada uno (identificación, estimación, diagnóstico), dan para un
+curso completo de series de tiempo — no caben en una sola sesión
+introductoria. Lo que sí es alcanzable en el tiempo disponible, y de
+mayor valor pedagógico, es la notación con la que se escriben: el
+operador de rezago (*backshift*, $B$). Conocerla no es solo elegante —
+es lo que permite, por ejemplo, implementar manualmente la proyección
+de un modelo ARMA en una hoja de cálculo (Excel), sabiendo con
+precisión qué rezagos y qué coeficientes entran en cada paso, sin
+depender de que R lo calcule automáticamente (decisión del docente,
+2026-09-18).
+
+**El operador backshift.** Definido como $B\,Y_t = Y_{t-1}$ —
+"retrocede" la serie un período. Aplicado $k$ veces, retrocede $k$
+períodos: $B^k Y_t = Y_{t-k}$.
+
+**Diferenciación con $B$.** La primera diferencia que se usó para
+evaluar estacionariedad se escribe $(1-B)Y_t = Y_t - Y_{t-1}$;
+diferenciar $d$ veces es $(1-B)^d Y_t$ — esta es, de hecho, la "I"
+(integrado) de la sigla ARIMA, que combina diferenciación con AR y MA
+(fuera del alcance de esta sesión, pero vale la pena que el docente
+pueda nombrar la conexión si surge la pregunta).
+
+**AR, MA y ARMA con notación de $B$:**
+
+$$\text{AR}(p): \ \phi(B)Y_t = \varepsilon_t, \quad \phi(B) = 1-\phi_1B-\dots-\phi_pB^p$$
+$$\text{MA}(q): \ Y_t = \theta(B)\varepsilon_t, \quad \theta(B) = 1+\theta_1B+\dots+\theta_qB^q$$
+$$\text{ARMA}(p,q): \ \phi(B)Y_t = \theta(B)\varepsilon_t$$
+
+**Verificación con el caso AR(1):** $\phi(B) = 1-\phi_1B$, entonces
+$\phi(B)Y_t=\varepsilon_t$ se expande a
+$(1-\phi_1B)Y_t=\varepsilon_t \Leftrightarrow
+Y_t-\phi_1Y_{t-1}=\varepsilon_t \Leftrightarrow
+Y_t=\phi_1Y_{t-1}+\varepsilon_t$ — el modelo autorregresivo de
+siempre, solo que expresado de forma compacta. Análogamente, un MA(1)
+es $Y_t=(1+\theta_1B)\varepsilon_t=\varepsilon_t+\theta_1\varepsilon_{t-1}$.
+La diferencia conceptual entre AR y MA sigue siendo la misma que antes:
+AR depende de valores pasados de la propia serie, MA depende de shocks
+pasados — solo que ahora ambos se escriben con el mismo tipo de
+polinomio en $B$, lo que hace evidente por qué ARMA es simplemente la
+combinación de los dos ($\phi(B)Y_t=\theta(B)\varepsilon_t$).
+
+**Conexión con la condición de estacionariedad (opcional, si el grupo
+va bien).** Para un AR(1), la condición $|\phi_1|<1$ mencionada arriba
+no es arbitraria: sale de pedir que la raíz de $\phi(B)=1-\phi_1B=0$
+(es decir, $B=1/\phi_1$) quede *fuera* del círculo unitario, lo que
+equivale a $|1/\phi_1|>1 \Leftrightarrow |\phi_1|<1$. No hace falta
+que los estudiantes deriven esto — alcanza con mostrar que la condición
+sale directamente de la notación, no que alguien la inventó.
+
+**Nivel de profundidad recomendado para esta sesión:** no desarrollar
+identificación (ACF/PACF) ni estimación formal — igual que antes. La
+diferencia con un desarrollo tradicional de esta sesión es que ya no se
+dedica tiempo a desarrollar los tres modelos por separado con todas sus
+propiedades; el tiempo se invierte en que la notación con $B$ quede
+clara, porque es una base transferible (útil incluso fuera de R) en vez
+de solo un catálogo de acrónimos. Aun así, los estudiantes deben saber
+que R puede ajustar estos modelos automáticamente con `arima()` (o
+`auto.arima()` del paquete `forecast`, que elige automáticamente $p$ y
+$q$ mediante un criterio de información como AIC).
+
+### 4. Introducción al pronóstico
+
+Un modelo de series de tiempo ajustado (por ejemplo, un ARMA) permite
+generar **pronósticos**: proyecciones del valor futuro de la serie.
+Estos pronósticos vienen acompañados de una **banda de incertidumbre**
+(un intervalo de confianza para la predicción, análogo en espíritu a
+los intervalos de confianza de la unidad de intervalos de confianza,
+pero para un valor futuro en vez de para un parámetro poblacional) que
+típicamente se **amplía** mientras más lejano es el horizonte de
+pronóstico — tiene sentido intuitivamente: es mucho más fácil predecir
+con precisión qué va a pasar mañana que qué va a pasar dentro de dos
+años, porque la incertidumbre acumulada crece con cada período
+adicional hacia el futuro.
+
+## Laboratorio en R
+
+- Retomar la serie del PIB o del tipo de cambio usada en la unidad
+  anterior (series de tiempo — componentes y descomposición).
+- Evaluar visualmente si la serie (o su primera diferencia) parece
+  estacionaria — recuerden el criterio: fluctuación alrededor de un
+  nivel fijo, sin tendencia sistemática ni cambios claros en la
+  dispersión.
+- Ajustar un modelo simple con `arima()` (por ejemplo,
+  `arima(serie_diferenciada, order = c(1,0,0))` para un AR(1)) y
+  generar un pronóstico de corto plazo con `predict()`, o usando el
+  paquete `forecast` con `forecast::forecast()`, que además da un
+  gráfico con la banda de incertidumbre ya incorporada — muy útil para
+  visualizar directamente el punto anterior sobre la banda que se
+  amplía con el horizonte.
+
+Ver `fuente/Presentaciones ppt/12/Lab - series de tiempo parte II.R` y
+`Tipo de Cambio.xlsx` como base de datos y código de partida para este
+laboratorio.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Estacionariedad: definición formal e idea intuitiva | 20 min |
+| Regresión espuria: el problema, por qué ocurre, señales de alerta | 30 min |
+| Operador backshift y notación de AR, MA, ARMA | 40 min |
+| Introducción al pronóstico y banda de incertidumbre | 15 min |
+| Laboratorio en R (`arima`, `forecast`) | 55 min |
+| **Total** | **160 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

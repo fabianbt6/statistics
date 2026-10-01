@@ -1,0 +1,184 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Pruebas de hipótesis — laboratorio y Caso 1"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Pruebas de hipótesis — laboratorio y Caso 1"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015, @hanglee2023
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 7 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Repaso integrador: distribuciones, medidas descriptivas, pruebas de
+  hipótesis de una media
+- Laboratorio de pruebas de hipótesis en R
+- **Presentación de Caso 1**
+
+::: {.notes}
+Hoy es una sesión mixta y tiene una lógica distinta a las anteriores.
+La primera mitad es un repaso integrador de todo lo que hemos visto
+hasta ahora —desde el inicio del curso hasta la prueba de hipótesis
+que vimos en la unidad anterior— más un laboratorio corto en R que
+junta todas esas piezas en un solo ejercicio. La segunda mitad, que es
+la más importante de hoy, son las presentaciones de Caso 1 de los
+grupos, que vale 10% de la nota final.
+
+Administren bien el tiempo: el repaso y el laboratorio deben ser
+breves, no más de 60 a 90 minutos combinados, para dejar suficiente
+espacio a las presentaciones — si tienen varios grupos, calculen
+cuánto tiempo necesitan por grupo y avísenlo desde el inicio de la
+clase, para que todos sepan cuánto tiempo tienen.
+:::
+
+## Repaso {.divisor}
+
+::: {.notes}
+Antes de las presentaciones, hagamos un repaso rápido —no una clase
+nueva— de las piezas que ya tienen para poder evaluar el trabajo de
+sus compañeros con criterio, y para que ustedes mismos vean cómo se
+conecta todo lo que hemos visto hasta ahora.
+:::
+
+## Lo que hemos estudiado hasta ahora
+
+- Tipos de datos y variable aleatoria
+- Distribuciones de probabilidad: valor esperado, varianza, función
+  de probabilidad
+- Medidas de tendencia central, dispersión y asociación
+- Prueba de hipótesis de una media
+
+::: {.notes}
+Repasemos brevemente cada bloque. De la unidad de descripción de
+datos, tenemos las medidas descriptivas: media, mediana, varianza,
+coeficiente de variación, y la advertencia de que correlación no
+implica causalidad. De las unidades de probabilidad: los axiomas,
+técnicas de conteo, probabilidad condicional, independencia y el
+teorema de Bayes. De las unidades de distribuciones: Bernoulli,
+binomial y Poisson como discretas; normal, t, χ² y F como continuas.
+Y de la unidad anterior, el procedimiento completo de una prueba de
+hipótesis de una media, con el Teorema del Límite Central como su
+fundamento.
+
+La idea de este repaso no es volver a explicar cada tema en detalle
+—para eso están las guías de preparación de cada unidad, que tienen el
+desarrollo completo—, sino mostrar cómo estas piezas se conectan entre
+sí en un análisis económico real, que es justo lo que sus compañeros
+van a mostrar en las presentaciones de Caso 1.
+:::
+
+## ¿Para qué sirve todo esto en el análisis económico?
+
+**Medidas de tendencia central:** primer acercamiento a una serie
+económica, resumir una variable de interés, análisis exploratorio.
+
+**Medidas de dispersión:** conocer la variabilidad de una serie,
+identificar posibles valores extremos (outliers).
+
+**Asociación:** identificar si existe relación lineal entre variables
+— **nunca** para inferir causalidad.
+
+**Pruebas de hipótesis:** probar una afirmación con respaldo
+estadístico, a partir de evidencia empírica (muestral).
+
+::: {.notes}
+Esta diapositiva es, en el fondo, el mapa completo de para qué sirve
+la estadística descriptiva e inferencial en economía: primero
+describimos los datos —tendencia central, dispersión—, después
+exploramos relaciones entre variables —siempre con la advertencia de
+que asociación no es causalidad—, y finalmente, cuando queremos
+afirmar algo con respaldo formal —no solo "me parece que"— usamos una
+prueba de hipótesis.
+
+Aprovecho para reforzar el error tipo I y tipo II con una segunda
+analogía, distinta a la del sistema judicial que vimos en la unidad
+anterior: piensen en una prueba médica diagnóstica. La **sensibilidad**
+de la prueba es la tasa de verdaderos positivos —detectar
+correctamente la enfermedad cuando el paciente sí la tiene—, análoga a
+la potencia de una prueba de hipótesis. La **especificidad** es la
+tasa de verdaderos negativos —dar negativo cuando el paciente
+realmente no tiene la enfermedad—. Un falso positivo es análogo al
+error tipo I; un falso negativo, al error tipo II. Dos analogías
+distintas —judicial y médica— suelen ayudar a que el concepto quede
+más firme, según qué le haga más sentido a cada estudiante.
+:::
+
+## Laboratorio {.divisor}
+
+::: {.notes}
+Ahora hacemos el ejercicio integrador en R, antes de pasar a las
+presentaciones.
+:::
+
+## Ejercicio de repaso en R
+
+- Retomar una base de datos económica ya usada en sesiones anteriores
+- Calcular estadísticas descriptivas (media, mediana, varianza, CV)
+- Plantear y resolver una prueba de hipótesis de una media con
+  `t.test()`
+- Interpretar el resultado en el contexto económico elegido
+
+::: {.notes}
+Para este laboratorio, retomen una base de datos que ya hayan usado en
+sesiones anteriores —por ejemplo, los datos de la ECE que vamos a usar
+también en la próxima unidad, o cualquier serie económica que hayan
+estado trabajando—. La idea es que en un solo flujo de trabajo en R,
+calculen primero las estadísticas descriptivas que vimos en la unidad
+de descripción de datos, y luego, sobre la misma variable, ejecuten
+una prueba de hipótesis con `t.test()` como practicamos en la unidad
+anterior. Esto refuerza que no son temas separados, sino un flujo
+natural de análisis: describir primero, inferir después.
+
+Denles unos 30 minutos para hacer este ejercicio en parejas o
+individualmente, y luego sigan directo a las presentaciones de Caso 1.
+:::
+
+## Presentación de Caso 1 {.divisor}
+
+::: {.notes}
+Llegamos a la parte más importante de la sesión de hoy: las
+presentaciones de Caso 1. Esto vale 10% de la nota final, así que
+denle la seriedad correspondiente en la evaluación y en el tiempo que
+le dedican.
+:::
+
+## Caso 1 (10% de la nota final)
+
+Los grupos presentan su análisis del Caso 1, aplicando las técnicas y
+métodos estadísticos vistos hasta esta unidad (descripción de datos,
+probabilidad, distribuciones, pruebas de hipótesis).
+
+::: {.notes}
+Ver la rúbrica de estudio de caso en el programa oficial
+(`fuente/Programa - Teoría Estadística y Métodos Cuantitativos con
+eval.docx`) para los criterios de evaluación detallados.
+
+Mientras cada grupo presenta, tomen notas específicas —no solo una
+nota global— sobre: si identificaron correctamente el tipo de
+variable y de datos con que trabajaron; si las medidas descriptivas
+que usaron son las apropiadas para esos datos; si, en caso de plantear
+una prueba de hipótesis, la hipótesis nula y alternativa están bien
+formuladas y la conclusión está redactada con el lenguaje correcto
+—"no existe evidencia suficiente para rechazar", no "se demuestra
+que"—; y si la interpretación económica del resultado tiene sentido en
+el contexto que eligieron. Esa retroalimentación específica, dada al
+final de cada presentación o al cierre de la sesión, vale mucho más
+para el aprendizaje que solo la nota numérica.
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

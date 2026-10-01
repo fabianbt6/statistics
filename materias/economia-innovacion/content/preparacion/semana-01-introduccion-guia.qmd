@@ -1,0 +1,201 @@
+---
+title: "Guía de preparación — Sesión 1: Bienvenida, conceptos principales y tendencias"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @cepal2025panorama, @ocde2016perspectivas, @bm2025paradoja, @ompi2025gii, @escorsavalls2003
+---
+
+<!-- Documento EXHAUSTIVO de preparación docente. Objetivo: que esta
+     guía sola alcance para dar la clase, sin tener que revisar la
+     bibliografía completa antes. Ver también
+     content/semanas/semana-01-introduccion-presentacion.qmd para las
+     slides con el guión de exposición. -->
+
+# Sesión 1. Bienvenida: conceptos principales y tendencias
+
+Duración aproximada: **3 horas** (bloque semanal estándar de
+Fidélitas — 2 horas de teoría + 1 hora de trabajo práctico, según el
+programa oficial). Primera de las **7 sesiones presenciales** del
+curso; no hay entrega ni sesión asincrónica antes de la Sesión 2.
+
+## Objetivos de aprendizaje
+
+- Comprender la estructura, el cronograma de 7 sesiones y el esquema
+  de evaluación del curso (mapas mentales, estudios de caso,
+  discusiones, proyecto final).
+- Entender la metodología ABP del curso: máximo 30 minutos de
+  exposición por sesión, el resto dedicado a discusión y dinámicas.
+- Identificar la innovación como motor del cambio económico (Schumpeter,
+  destrucción creativa) y distinguir los cuatro tipos de innovación del
+  Manual de Oslo (producto, proceso, organizacional, mercadotecnia).
+- Ubicar el proceso de innovación y creación de valor (I+D → protección
+  del conocimiento → difusión/adopción → valor), como mapa de las
+  próximas tres unidades del curso.
+- Interpretar, con cifras reales, la brecha de innovación entre América
+  Latina y el resto del mundo (inversión en I+D, proporción de empresas
+  que innovan).
+- Aplicar estos conceptos a un caso real conocido por el estudiante
+  (empresa u organización costarricense), en la dinámica de discusión.
+
+## Capítulos sugeridos
+
+| Recurso | Sección | Por qué |
+|---|---|---|
+| CEPAL, *Panorama de las Políticas de Desarrollo Productivo en ALC 2025* [@cepal2025panorama] | Resumen ejecutivo | Panorama regional de políticas de innovación — contexto para toda la sesión. |
+| OCDE, *Perspectivas de la OCDE en Ciencia, Tecnología e Innovación en América Latina* [@ocde2016perspectivas] | Introducción | Marco conceptual y políticas tecnológicas internacionales. |
+| Banco Mundial (2025), *La paradoja de la innovación en América Latina* [@bm2025paradoja] | Completo (es corto) | Fuente de las dos cifras que se usan en los gráficos de la sesión (I+D % PIB y % de empresas que innovan). Léelo completo antes de la clase por si surgen preguntas de seguimiento. |
+| OMPI, *Índice Mundial de Innovación* [@ompi2025gii] | Página de resultados | Para poder responder si alguien pregunta por la posición específica de Costa Rica (no se afirma un número exacto en las slides porque no se verificó con certeza — remite al sitio de la OMPI si preguntan). |
+| Escorsa Castells & Valls Pasola, *Tecnología e innovación en la empresa* [@escorsavalls2003] | Cap. introductorio | Para la definición de innovación y transición hacia la Unidad 2 (próxima sesión). |
+
+## Contexto y por qué importa esta sesión
+
+Esta es la primera sesión de un curso con una modalidad distinta a la
+de otras materias: 7 sesiones presenciales (no 15), sin entregas
+asincrónicas, y con un límite explícito de 30 minutos de exposición
+por sesión. Dos cosas no deben tratarse como trámite: (1) dejar
+clarísimo desde hoy que **todo** se presenta y discute en sesión — no
+hay plataforma de entregas entre clases — porque es fácil que el
+estudiante espere un aula virtual con tareas semanales como en otros
+cursos; y (2) modelar desde la Sesión 1 el formato real de cada
+sesión (exposición corta + discusión larga), para que el grupo llegue
+a la Sesión 2 ya sabiendo cómo participar.
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Bienvenida y ronda de presentación
+2. Revisión del programa, la evaluación y la metodología ABP
+3. ¿Qué es la economía de la innovación? Innovación en la teoría
+   económica (Schumpeter)
+4. Tipos de innovación (Manual de Oslo)
+5. El proceso de innovación y la creación de valor
+6. Tendencias actuales: la brecha de innovación en América Latina
+   (con los dos gráficos), Costa Rica en el mapa global, otras
+   tendencias (digitalización/IA, colaboración universidad-empresa,
+   propiedad intelectual)
+7. Dinámica de discusión en grupos pequeños
+8. Cierre, próxima sesión y lecturas asignadas
+
+## Desarrollo — para tu propio estudio antes de clase
+
+### 1. El programa y la evaluación — lo que hay que dejar sin ambigüedad
+
+El esquema de evaluación tiene 4 componentes, que suman 100%:
+
+- **4 mapas mentales** (7,5% cada uno = 30%) — uno por sesión, de la
+  Sesión 2 a la 5.
+- **3 estudios de caso** (10% cada uno = 30%) — uno por sesión, de la
+  Sesión 3 a la 5 (junto con el mapa mental correspondiente).
+- **4 discusiones** (2,5% cada una = 10%) — una por sesión, de la
+  Sesión 2 a la 5.
+- **Proyecto final** (30%: avance 10% en la Sesión 6, presentación 20%
+  **únicamente** en la Sesión 7) — no se presenta antes.
+
+Todos los entregables se presentan y se discuten en la sesión
+presencial correspondiente — no hay una plataforma donde se suban
+tareas entre sesiones. Esto conviene repetirlo explícitamente, porque
+contrasta con la experiencia típica de otros cursos.
+
+### 2. Innovación en la teoría económica — desarrollo conceptual
+
+Joseph Schumpeter (1942) introdujo la idea de que la innovación no es
+un evento aislado sino un proceso continuo de **"destrucción
+creativa"**: las nuevas tecnologías, productos y formas de organización
+desplazan a las existentes, reconfigurando los mercados y generando
+tanto ganadores como perdedores. Ejemplos útiles para la clase: el
+streaming desplazando al alquiler de películas físicas, los pagos
+digitales desplazando al efectivo, la inteligencia artificial generativa
+desplazando ciertas tareas de oficina.
+
+Un segundo punto conceptual: en los modelos económicos clásicos, la
+tecnología era un factor "exógeno" (dado, no explicado por el modelo).
+Las teorías de **crecimiento endógeno** (a partir de los años 80)
+tratan la innovación como resultado de decisiones económicas —
+inversión en I+D, educación, instituciones — y no como una fuerza
+externa. Esto conecta directamente con el porqué de un curso completo
+dedicado al tema.
+
+Tercer punto: los **sistemas de innovación** (nacionales, regionales,
+sectoriales) explican por qué el desempeño innovador no depende solo
+de una empresa aislada, sino de su relación con universidades,
+gobierno, financiamiento y otras empresas — idea que se retoma en la
+Unidad 2 (próxima sesión) con la colaboración universidad-empresa.
+
+### 3. Tipos de innovación — Manual de Oslo
+
+El Manual de Oslo (OCDE/Eurostat) es el estándar internacional para
+clasificar innovación. Sus cuatro categorías, con ejemplos que pueden
+usarse en clase si el grupo se queda callado:
+
+- **De producto**: un banco que lanza una nueva app de pagos.
+- **De proceso**: una fábrica que automatiza una línea de producción.
+- **Organizacional**: una empresa que pasa a trabajo remoto/híbrido con
+  nuevas formas de coordinación.
+- **De mercadotecnia**: un cambio de empaque o de estrategia de precios
+  (ej. modelos de suscripción en vez de compra única).
+
+### 4. Las cifras de la brecha regional — para responder preguntas de seguimiento
+
+Los dos gráficos de la sesión usan cifras del Banco Mundial (2025),
+atribuidas a William Maloney, economista jefe del Banco Mundial para
+América Latina y el Caribe:
+
+- **Inversión en I+D**: América Latina y el Caribe invierte 0,62% del
+  PIB, frente a un promedio mundial de 2,62% — una brecha de
+  aproximadamente 4 veces.
+- **Proporción de empresas que innovan**: en Chile, 10% de las
+  empresas innova, frente a 50% en Reino Unido y Francia — una brecha
+  de 5 veces.
+- **Dato adicional (no graficado, pero útil si preguntan)**: el Banco
+  Mundial estima que el 83% de la divergencia de productividad entre
+  países latinoamericanos y economías avanzadas (Japón, Suecia, España)
+  se explica por la adopción lenta y parcial de tecnologías ya
+  existentes — no por falta de invención propia. Es un buen argumento
+  para enfatizar que innovar no es solo "inventar", sino también
+  adoptar y difundir tecnología ya disponible.
+
+No se incluyó en las slides la posición específica de Costa Rica en el
+Índice Mundial de Innovación de la OMPI porque no se verificó con
+certeza al momento de preparar este material — si algún estudiante
+pregunta, remitir a https://www.wipo.int/global_innovation_index/es
+para el dato actualizado.
+
+### 5. Dinámica de discusión — facilitación
+
+Al cierre de la parte conceptual, el grupo se divide en equipos de 3-4
+personas para discutir tres preguntas (empresa/organización
+costarricense que consideren innovadora, tipo de innovación según el
+Manual de Oslo, y obstáculos para innovar en Costa Rica). Sugerencias
+de facilitación:
+
+- Dar 10 minutos de discusión en grupo antes de pedir que compartan.
+- No corregir la clasificación "incorrecta" de un tipo de innovación en
+  el momento — mejor anotarla y usarla como ejemplo al cierre para
+  reforzar la diferencia entre categorías.
+- Aprovechar esta dinámica para formar una primera impresión de quiénes
+  podrían trabajar bien juntos en el proyecto final (sin comprometerse
+  todavía a la conformación definitiva de grupos).
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Bienvenida y ronda de presentación | 20 min |
+| Revisión del programa, evaluación y metodología (ABP) | 20 min |
+| Exposición: conceptos principales y tendencias (**máximo 30 min**) | 30 min |
+| Dinámica de discusión en grupos pequeños | 60 min |
+| Puesta en común (plenaria) | 25 min |
+| Conformación preliminar de grupos para el proyecto final | 15 min |
+| Cierre, próxima sesión y lecturas asignadas | 10 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/EconomiaInnovacion.bib` para el detalle bibliográfico
+completo (incluye enlaces de acceso abierto a cada fuente), y
+`content/blocks/bibliografia.qmd` para el bloque reutilizable que
+genera la sección de referencias en cada presentación.

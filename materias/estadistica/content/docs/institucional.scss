@@ -1,0 +1,109 @@
+/*-- scss:defaults --*/
+
+// Paleta institucional Fidélitas (tomada del docx MALLA ECONOMIA 2026),
+// deliberadamente distinta de tu _brand.yml personal (índigo) — este
+// archivo aplica SOLO a programa.qmd (theme: [default, institucional.scss]
+// + brand: false en su YAML), no al resto del proyecto.
+$primary: #2F5496 !default;
+$body-color: #2C2C2C !default;
+$body-bg: #FFFFFF !default;
+$link-color: #0563C1 !default;
+$font-family-sans-serif: Arial, Helvetica, "Liberation Sans", sans-serif !default;
+
+/*-- scss:rules --*/
+
+// El título Quarto por defecto queda oculto: usamos el encabezado
+// propio (.programa-header) con el logo institucional en su lugar.
+#title-block-header {
+  display: none;
+}
+
+// Nota editorial para el docente (ver bloque .notes en programa.qmd) —
+// no debe verse en el documento que reciben los estudiantes.
+.notes {
+  display: none;
+}
+
+.programa-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 3px solid $primary;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+
+  img {
+    height: 50px;
+    width: auto;
+  }
+
+  .programa-header-titles {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.5rem;
+    color: $primary;
+    border: none;
+    padding: 0;
+  }
+
+  p {
+    margin: 0;
+    color: #5B5F66;
+    font-size: 0.95rem;
+  }
+}
+
+h1, h2 {
+  color: $primary;
+}
+
+h2 {
+  border-bottom: 1px solid #D0CECE;
+  padding-bottom: 6px;
+  margin-top: 2.2rem;
+}
+
+h3 {
+  color: #375C9C;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th, td {
+  border: 1px solid #D0CECE;
+  padding: 8px 10px;
+  vertical-align: top;
+}
+
+thead th {
+  background-color: $primary;
+  color: #FFFFFF;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #E7E6E6;
+}
+
+.nota-cronograma {
+  background-color: #F6F7F9;
+  border: 1px solid #C9D4E6;
+  border-left: 4px solid #0070C0;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 16px 0 20px 0;
+  font-size: 0.9rem;
+  color: #5B5F66;
+
+  strong {
+    color: $body-color;
+  }
+}

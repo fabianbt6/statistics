@@ -1,0 +1,202 @@
+---
+title: "Guía de preparación — Series de tiempo — componentes y descomposición"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @cryerchan2008
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/10_series-tiempo-componentes-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 10 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Series de tiempo — componentes y descomposición
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Definir qué es una serie de tiempo y en qué se diferencia
+  fundamentalmente de los datos de corte transversal vistos hasta
+  ahora en el curso.
+- Identificar y definir formalmente los tres componentes clásicos de
+  una serie de tiempo (tendencia-ciclo, estacionalidad, ruido).
+- Descomponer una serie de tiempo económica real en R e interpretar
+  cada componente.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Cryer & Chan, *Time Series Analysis with Applications in R* [@cryerchan2008] | Capítulos 2-3 (Fundamental Concepts, Trends) | Da el marco formal de estacionariedad y tendencias que complementa el material ya desarrollado en el pptx original de descomposición. |
+
+## Nota de contexto (unidad nueva)
+
+Esta es una unidad completamente nueva en el programa reordenado — no
+existía en el docx oficial original. Se agregó porque el material
+fuente de un pptx antiguo (carpeta 12) ya cubría descomposición de
+series de tiempo con un buen ejemplo aplicado (PIB real de Costa Rica),
+y el usuario decidió incorporarla formalmente como unidad propia del
+curso, con Cryer & Chan como referencia bibliográfica de respaldo. Por
+eso el trabajo de esta sesión es sobre todo de *encuadre conceptual* —
+explicar bien qué es una serie de tiempo y por qué el orden temporal
+cambia las reglas del juego respecto a todo lo visto hasta ahora — más
+que de contenido completamente nuevo.
+
+## Desarrollo teórico completo
+
+### 1. ¿Qué es una serie de tiempo, y por qué es distinta a lo visto hasta ahora?
+
+Una serie de tiempo es una secuencia de observaciones $Y_1, Y_2,
+\dots, Y_T$ de una variable, medidas en momentos sucesivos y
+ordenados en el tiempo — por ejemplo, el PIB trimestral, el tipo de
+cambio diario, la inflación mensual.
+
+**La diferencia fundamental con todo lo visto en el curso hasta
+ahora.** En las unidades anteriores (desde descripción de datos hasta
+análisis de varianza), trabajamos casi siempre con la idea implícita
+de que las observaciones de una muestra son **independientes** entre
+sí — es el supuesto detrás de, por ejemplo, la fórmula de la varianza
+de la suma en la binomial, o los supuestos del ANOVA. En una serie de
+tiempo, ese supuesto deja de ser razonable: el valor de $Y_t$ hoy
+está, casi siempre, correlacionado con el valor de $Y_{t-1}$ de ayer o
+del período anterior — el PIB de este trimestre se parece al del
+trimestre pasado, la inflación de este mes tiene relación con la del
+mes anterior. Esta correlación entre observaciones sucesivas de la
+misma serie se llama **autocorrelación**, y es el concepto central que
+distingue el análisis de series de tiempo del resto de la estadística
+que han visto hasta ahora. En esta sesión introductoria no vamos a
+calcular autocorrelación formalmente —eso es contenido de la siguiente
+unidad (series de tiempo — modelos)—, pero es importante que quede
+claro desde ya que "el orden importa" es la idea que organiza toda la
+unidad.
+
+### 2. Los tres componentes clásicos
+
+**Tendencia-ciclo ($T_t$):** el comportamiento de largo plazo de la
+serie — si crece, decrece, o se mantiene relativamente estable a lo
+largo de muchos períodos, dejando de lado las fluctuaciones de corto
+plazo. En series económicas, la tendencia suele reflejar el
+crecimiento estructural de la economía (crecimiento poblacional,
+productividad, acumulación de capital), mientras que el componente
+cíclico captura las fluctuaciones de mediano plazo asociadas al ciclo
+económico (expansiones y recesiones) — en la práctica, ambos suelen
+estimarse juntos como un solo componente "tendencia-ciclo", porque es
+difícil separarlos con precisión sin supuestos adicionales.
+
+**Estacionalidad ($S_t$):** un patrón que se repite con una
+periodicidad fija y conocida —cada trimestre, cada mes, cada día de la
+semana—. En economía, la estacionalidad es extremadamente común: las
+ventas del comercio suben en diciembre por las fiestas, el turismo
+sube en temporada alta, la producción agrícola varía según la época de
+cosecha. Un punto importante para la clase: la estacionalidad es
+**predecible** y se repite con el mismo patrón período tras período —
+eso la distingue del componente cíclico, que no tiene una periodicidad
+fija.
+
+**Ruido blanco o residuo ($R_t$):** lo que queda después de remover
+tendencia-ciclo y estacionalidad. Idealmente, el residuo no debería
+tener ninguna estructura predecible restante —ninguna autocorrelación,
+media cero, varianza constante—; si el residuo *sí* muestra estructura
+(por ejemplo, todavía hay autocorrelación), es una señal de que el
+modelo de descomposición no capturó toda la información sistemática de
+la serie, y que hace falta un modelo más sofisticado — como los que se
+van a ver en la siguiente unidad (modelos AR/MA/ARMA).
+
+### 3. Modelos de descomposición: aditivo vs. multiplicativo
+
+$$\text{Aditivo:} \quad Y_t = T_t + S_t + R_t \qquad\qquad \text{Multiplicativo:} \quad Y_t = T_t \times S_t \times R_t$$
+
+**Cómo decidir cuál usar (criterio visual práctico):** grafiquen la
+serie y observen la amplitud de las fluctuaciones estacionales a lo
+largo del tiempo. Si la amplitud de la estacionalidad se mantiene
+más o menos constante sin importar el nivel de la serie, el modelo
+aditivo es apropiado. Si la amplitud de la estacionalidad *crece*
+proporcionalmente cuando la serie está en niveles más altos —algo muy
+común en series económicas que crecen con el tiempo, como ventas o
+PIB nominal—, el modelo multiplicativo es más apropiado. Un truco
+práctico adicional: un modelo multiplicativo se puede convertir en
+aditivo tomando logaritmos de la serie original, porque
+$\log(T_t \times S_t \times R_t) = \log T_t + \log S_t + \log R_t$ —
+esto es lo que hace, en el fondo, la práctica común de "trabajar con
+la serie en logaritmos" en econometría de series de tiempo.
+
+### 4. Procedimiento de descomposición
+
+1. Graficar la serie original y hacer una inspección visual —¿hay
+   tendencia?, ¿hay un patrón estacional visible?
+2. Estimar y remover la tendencia-ciclo — típicamente con una media
+   móvil (promediar cada observación con sus vecinas cercanas, para
+   suavizar las fluctuaciones de corto plazo y dejar ver el
+   movimiento de largo plazo).
+3. Sobre la serie ya sin tendencia, estimar el componente estacional
+   —promediando, por ejemplo, todos los valores del mismo trimestre a
+   través de los distintos años, para obtener un "factor estacional"
+   típico de cada trimestre—.
+4. Lo que queda después de remover tendencia y estacionalidad es el
+   componente de ruido o residuo.
+
+En R, este procedimiento completo se puede ejecutar con la función
+`decompose()` (implementa el método clásico de medias móviles descrito
+arriba) o con `stl()` (un método más moderno y flexible, "Seasonal and
+Trend decomposition using Loess", que suele dar resultados más suaves
+y robustos). Vale la pena mostrar ambas en el laboratorio y comparar
+sus resultados visualmente.
+
+## Aplicación: PIB real de Costa Rica
+
+**Datos de la sesión:** usar el archivo
+`fuente/Presentaciones ppt/12/PIBr.xlsx` (PIB real trimestral de Costa
+Rica, I trimestre 1991 al IV trimestre 2024) como fuente de datos
+real, y `Lab - series de tiempo.R` como base del código de
+descomposición.
+
+**Preguntas guía para la discusión en clase:**
+
+- ¿Se observa una tendencia de largo plazo? (Debería ser claramente
+  creciente, reflejando el crecimiento estructural de la economía
+  costarricense a lo largo de más de tres décadas.)
+- ¿Hay un patrón estacional visible entre trimestres? (Buscar si
+  ciertos trimestres son sistemáticamente más altos o bajos que otros
+  — en muchas economías, el último trimestre del año tiende a ser más
+  alto por el consumo de fin de año.)
+- ¿Qué eventos económicos podrían explicar quiebres o caídas visibles
+  en la serie? Con este rango de fechas (1991-2024), los estudiantes
+  deberían poder identificar visualmente al menos: la crisis
+  financiera global de 2008-2009 (caída visible), y sobre todo la
+  caída abrupta del PIB durante la pandemia de COVID-19 en 2020,
+  seguida de una recuperación — este último es probablemente el quiebre
+  más dramático visible en toda la serie, y un buen punto de discusión
+  sobre las limitaciones de un modelo de descomposición clásico frente
+  a un choque tan atípico (un evento así no es "estacional" ni parte
+  de la "tendencia" normal — es una ruptura estructural que ningún
+  modelo de descomposición simple captura bien).
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| ¿Qué es una serie de tiempo? Diferencia con datos de corte transversal, autocorrelación (preview) | 20 min |
+| Componentes: tendencia-ciclo, estacionalidad, ruido (con ejemplos económicos) | 30 min |
+| Aditivo vs. multiplicativo: criterio de decisión | 15 min |
+| Procedimiento de descomposición | 20 min |
+| Aplicación: PIB real de Costa Rica (discusión guiada) | 30 min |
+| Laboratorio en R (`decompose`, `stl`) | 45 min |
+| **Total** | **160 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

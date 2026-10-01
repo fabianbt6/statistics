@@ -1,0 +1,252 @@
+---
+title: "Guía de preparación — Descripción de datos"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hanglee2023
+---
+
+<!-- Documento EXHAUSTIVO de preparación docente. Ver también
+     content/unidades/1_descripcion-datos-presentacion.qmd -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 1 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Descripción de datos
+
+Duración: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Clasificar una variable según su tipo (nominal, ordinal, de conteo,
+  de intervalo, de razón).
+- Calcular e interpretar media y mediana, y justificar cuál usar según
+  el contexto.
+- Calcular e interpretar varianza, desviación estándar y coeficiente
+  de variación.
+- Calcular e interpretar covarianza y coeficiente de correlación.
+- Aplicar estos conceptos a una variable económica real en R.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo | Por qué |
+|---|---|---|
+| Hang Lee, *Foundations of Applied Statistical Methods* [@hanglee2023] | Cap. 1, secciones 1.1–1.4 | Cubre exactamente el temario de esta sesión (tipos de dato, tendencia central, dispersión, asociación) con el mismo enfoque aplicado. |
+
+## Desarrollo teórico completo
+
+### 1. Tipos de datos
+
+La clasificación estándar (Hang Lee, 1.1) distingue:
+
+- **Nominal**: categorías sin orden natural (sexo, provincia, sector
+  económico). Solo tiene sentido contar frecuencias — no se puede
+  promediar.
+- **Ordinal**: categorías con orden, pero sin distancia numérica
+  interpretable (nivel de riesgo: bajo/medio/alto). La mediana sí
+  tiene sentido; la media, no de forma estricta.
+- **De conteo**: cuantitativa discreta (número de sucursales, número
+  de empleados). Toma valores enteros no negativos.
+- **De intervalo**: cuantitativa continua sin cero absoluto
+  (temperatura en °C: 0°C no significa "ausencia de temperatura").
+- **De razón**: cuantitativa continua con cero absoluto que sí
+  significa ausencia de la magnitud (ingreso, precio, cantidad
+  producida: 0 sí significa "nada").
+
+**Por qué importa esta distinción:** determina qué operaciones
+estadísticas son válidas. No tiene sentido calcular el "sector
+económico promedio" (nominal), pero sí tiene sentido calcular el
+ingreso promedio (razón).
+
+### 2. Variable aleatoria — puente hacia probabilidad
+
+Formalmente, una variable aleatoria $X$ es una función que asigna un
+número real a cada resultado de un experimento aleatorio,
+$X: S \to \mathbb{R}$. Se distingue entre:
+
+- $X$ **discreta**: el conjunto de valores posibles es contable
+  (finito o infinito numerable). Ejemplo: número de clientes en una
+  fila.
+- $X$ **continua**: el conjunto de valores posibles es un intervalo de
+  números reales. Ejemplo: el monto de una transacción bancaria.
+
+Esta distinción se retoma formalmente en las unidades de distribuciones
+discretas y distribuciones continuas, más adelante en el curso.
+
+### 3. Medidas de tendencia central — desarrollo
+
+**Media aritmética.** Para una muestra $x_1, x_2, \dots, x_n$:
+
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+
+Propiedad clave: la media minimiza la suma de los cuadrados de las
+desviaciones, $\sum_i (x_i - c)^2$, sobre todos los valores posibles
+de $c$ — es decir, $\bar{x}$ es el valor que hace que
+$\sum_i (x_i - \bar{x})^2$ sea mínimo. Esta propiedad es la que
+conecta la media con el método de mínimos cuadrados que se usa en
+regresión (fuera del alcance de este curso, pero vale mencionarlo si
+algún estudiante pregunta "por qué la media y no otro promedio").
+
+Debilidad: es sensible a valores extremos. Si $x_n \to \infty$,
+$\bar{x} \to \infty$ también, sin límite.
+
+**Mediana.** Ordenados los datos $x_{(1)} \leq x_{(2)} \leq \dots \leq
+x_{(n)}$:
+
+$$
+\text{Mediana} = \begin{cases}
+x_{((n+1)/2)} & \text{si } n \text{ es impar} \\[4pt]
+\dfrac{x_{(n/2)} + x_{(n/2+1)}}{2} & \text{si } n \text{ es par}
+\end{cases}
+$$
+
+Propiedad: es **robusta** a valores extremos — mover el valor máximo
+de la muestra a infinito no cambia la mediana. Por eso se prefiere
+para variables con distribuciones asimétricas o colas largas.
+
+**Ejemplo numérico para desarrollar en clase:** ingresos mensuales de
+5 personas (en miles de colones): 400, 450, 500, 520, 8000. La media
+es $\bar{x} = 1974$, muy alejada de la experiencia típica del grupo
+(4 de 5 personas ganan menos de 550). La mediana es 500 — mucho más
+representativa. Este ejemplo es más contundente que el genérico del
+BCCR para ilustrar el punto de "media vs. mediana en variables con
+asimetría".
+
+### 4. Medidas de dispersión — desarrollo
+
+**Varianza muestral:**
+
+$$s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2$$
+
+**Por qué se divide entre $n-1$ y no entre $n$:** el divisor $n-1$
+(en vez de $n$) hace que $s^2$ sea un **estimador insesgado** de la
+varianza poblacional $\sigma^2$ — es decir, $E[s^2] = \sigma^2$. Si se
+dividiera entre $n$, el estimador subestimaría sistemáticamente la
+varianza poblacional (porque $\bar{x}$ está, por construcción, más
+cerca de los datos de la muestra que el verdadero $\mu$ poblacional).
+Este es un resultado que se puede mencionar sin demostrar formalmente
+en este curso introductorio — basta con que quede claro que $n-1$ no
+es arbitrario.
+
+**Desviación estándar:** $s = \sqrt{s^2}$, en las mismas unidades que
+los datos — más interpretable que $s^2$ (unidades al cuadrado).
+
+**Coeficiente de variación:**
+
+$$CV = \frac{s}{\bar{x}} \times 100\%$$
+
+Solo tiene sentido cuando $\bar{x} > 0$ (variables de razón). Permite
+comparar la dispersión relativa entre variables de distinta escala o
+unidad — ejemplo: comparar la volatilidad del tipo de cambio (colones
+por dólar, valores ~500-600) contra la volatilidad de una tasa de
+interés (porcentaje, valores ~3-10) — comparar sus desviaciones
+estándar directamente no dice nada, porque están en escalas distintas;
+comparar sus CV sí.
+
+### 5. Medidas de asociación — desarrollo
+
+**Covarianza:**
+
+$$s_{xy} = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})$$
+
+Signo: positivo si $x$ e $y$ tienden a moverse en la misma dirección;
+negativo si se mueven en direcciones opuestas. Magnitud: no es
+interpretable directamente porque depende de las unidades de $x$ y de
+$y$ (covarianza entre PIB en millones de dólares y desempleo en
+porcentaje tiene una escala arbitraria).
+
+**Coeficiente de correlación de Pearson:**
+
+$$r = \frac{s_{xy}}{s_x \, s_y}, \qquad -1 \leq r \leq 1$$
+
+Es la covarianza estandarizada — no depende de las unidades. $r=1$:
+relación lineal perfecta positiva. $r=-1$: relación lineal perfecta
+negativa. $r=0$: no hay relación **lineal** (puede haber relación no
+lineal).
+
+**Advertencia importante para remarcar en clase:** correlación no
+implica causalidad. Ejemplos clásicos para dar en clase: el número de
+ahogamientos y las ventas de helado están correlacionados
+positivamente (ambos suben en verano), sin que uno cause al otro —
+existe una tercera variable (la temperatura) que explica ambos.
+
+## Ejercicios de la sesión — desarrollo extendido
+
+Con los datos de ingreso del ejemplo de la sección 3 (400, 450, 500,
+520, 8000, en miles de colones):
+
+$$\bar{x} = \frac{400+450+500+520+8000}{5} = 1974$$
+
+$$s^2 = \frac{1}{4}\left[(400-1974)^2+(450-1974)^2+(500-1974)^2+(520-1974)^2+(8000-1974)^2\right]$$
+
+$$s^2 \approx 10{,}871{,}830, \qquad s \approx 3297.2, \qquad CV = \frac{3297.2}{1974}\times100\% \approx 167\%$$
+
+Un CV superior a 100% es una señal fuerte de alta dispersión relativa
+—vale la pena preguntar a la clase qué interpretación económica tiene
+un CV tan alto en un grupo de ingresos (alta desigualdad en la
+muestra).
+
+## Aplicación económica — desarrollo extendido
+
+La transmisión de la tasa de política monetaria (TPM) del BCCR a las
+tasas de mercado es un ejemplo real de por qué la covarianza/
+correlación son solo el punto de partida de un análisis económico, no
+el final. La evidencia empírica (fuente: BCCR, ver enlace en
+`fuente/Presentaciones ppt/2/`) muestra que el traspaso no es completo
+ni inmediato. Factores que lo explican:
+
+- **Dolarización de la economía:** si una parte importante del crédito
+  está en dólares, los movimientos de la TPM (que rige tasas en
+  colones) tienen menor efecto agregado.
+- **Nivel de competencia bancaria:** en mercados menos competitivos,
+  los bancos ajustan sus tasas con menor sensibilidad a la TPM.
+- **Endeudamiento público y déficit del BCCR:** afectan la liquidez
+  del sistema y las tasas de referencia de mercado por canales
+  distintos a la TPM.
+
+Este ejemplo sirve para que el estudiante entienda que un coeficiente
+de correlación alto (o bajo) entre TPM y tasas de mercado, sin
+contexto, puede llevar a conclusiones apresuradas — hay que entender
+el mecanismo económico detrás.
+
+## Práctica en R — desarrollo extendido
+
+```r
+# Ejemplo con una serie simulada de tipo de cambio
+tc <- c(...)  # o importar datos reales
+
+mean(tc); median(tc)
+var(tc); sd(tc)
+sd(tc)/mean(tc) * 100  # coeficiente de variación
+
+# Asociación entre dos variables
+cov(tc, tasa_interes)
+cor(tc, tasa_interes)
+```
+
+Verificar antes de clase que `mean()`, `median()`, `var()`, `sd()`,
+`cov()` y `cor()` corren sin instalar paquetes adicionales (son parte
+de R base).
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Tipos de datos y variable aleatoria | 20 min |
+| Medidas de tendencia central (media, mediana) + ejemplo del ingreso asimétrico | 30 min |
+| Medidas de dispersión (varianza, DE, CV) | 30 min |
+| Medidas de asociación (covarianza, correlación) | 25 min |
+| Aplicación BCCR + discusión | 20 min |
+| Laboratorio en R | 55 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` y `content/blocks/bibliografia.qmd`.

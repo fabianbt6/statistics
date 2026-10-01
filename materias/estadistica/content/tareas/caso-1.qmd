@@ -1,0 +1,56 @@
+---
+title: "Caso 1: Análisis descriptivo"
+engine: knitr
+format:
+  html:
+    embed-resources: true
+    title-block-banner: false
+params:
+  universidad: "Universidad Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+**Valor:** 20% de la nota final
+**Entrega:** Sesión 5 (viernes 23 de octubre de 2026) — presentación en clase
+**Modalidad de trabajo:** en grupos (máximo 3 grupos)
+**Duración de la presentación:** máximo 30 minutos por grupo
+
+### En qué consiste
+
+Este caso es el punto de partida del **Trabajo de Investigación Final**
+(30% de la nota, sesión 10): la variable económica que elijan acá es
+la **misma** que van a usar y profundizar en ese trabajo, así que
+conviene elegirla pensando ya en lo que van a necesitar más adelante
+(datos disponibles con suficiente frecuencia e historial, y relevancia
+económica real).
+
+Deben:
+
+1. Seleccionar una variable económica de interés nacional (mensual o
+   trimestral) — usando la API del Banco Central de Costa Rica (ver
+   `content/unidades/1_descripcion-datos-presentacion.qmd`, sección de
+   aplicación BCCR, para cómo consultar los datos con su API key).
+2. Justificar la elección de la variable (relevancia económica,
+   disponibilidad y calidad de los datos).
+3. Realizar un análisis descriptivo completo:
+   - Cantidad de observaciones.
+   - Periodicidad de la serie.
+   - Gráfico de la serie de tiempo y gráfico de densidad.
+   - Identificación de valores extremos.
+4. Preparar una presentación de máximo 30 minutos.
+
+### Rúbrica
+
+| # | Criterio | Descripción | Puntos |
+|---|---|---|---|
+| 1 | Selección y justificación de la variable | Variable relevante económicamente, con datos disponibles y de buena calidad; justificación clara de por qué se eligió | 20 |
+| 2 | Análisis descriptivo básico | Reporta correctamente la cantidad de observaciones y la periodicidad de la serie | 15 |
+| 3 | Gráficos | Gráfico de la serie de tiempo y gráfico de densidad, bien construidos y correctamente etiquetados | 25 |
+| 4 | Valores extremos | Identifica los valores extremos y los comenta de forma razonada | 20 |
+| 5 | Claridad y organización | Presentación bien estructurada, clara, y respeta el tiempo máximo asignado | 20 |
+| | **Total** | | **100** |
+
+**Puntaje total:** 100 puntos → equivalen al 20% de la nota final
+(regla de 3).

@@ -1,0 +1,191 @@
+---
+title: "Guía de preparación — Presentación del curso e introducción a R"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @dalgaard2008
+---
+
+<!-- Documento EXHAUSTIVO de preparación docente. Objetivo: que esta
+     guía sola alcance para dar la clase, sin tener que revisar la
+     bibliografía completa antes. Ver también
+     content/unidades/intro-presentacion.qmd
+     para las slides con el guión de exposición. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía es la unidad 0
+     (numeración interna consecutiva que usa render_curso(unidades = ...)
+     para filtrar contenido, empezando en 0 para incluir la intro). El
+     título visible no incluye ese número. Ver R/README.md. -->
+
+# Guía docente — Presentación del curso e introducción a R
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Comprender la estructura, cronograma y esquema de evaluación del curso.
+- Instalar y configurar R y un entorno de desarrollo (RStudio o Positron).
+- Ejecutar comandos básicos de R: asignación, generación de números
+  aleatorios, gráficos elementales.
+- Observar de forma empírica (sin fórmulas todavía) el efecto de la
+  dispersión sobre la forma de un histograma — semilla conceptual para
+  la unidad de descripción de datos.
+
+## Capítulos sugeridos
+
+| Recurso | Sección | Por qué |
+|---|---|---|
+| Dalgaard, *Introductory Statistics with R* [@dalgaard2008] | Cap. 1, "Basics" | Instalación, sintaxis mínima de R, primer gráfico. Es la única lectura de referencia necesaria para hoy — el resto de la sesión es administrativo. |
+
+No hace falta revisar Hogg, Hang Lee ni ningún otro texto de la
+bibliografía obligatoria para esta sesión: no hay contenido
+estadístico formal todavía.
+
+## Contexto y por qué importa esta sesión
+
+La primera sesión de un curso ABP (Aprendizaje Basado en Problemas)
+cumple dos funciones que no deben tratarse como "trámite": (1) fijar
+expectativas correctas sobre cómo se evalúa el curso, para evitar
+sorpresas más adelante, en las sesiones de los estudios de caso y de
+la investigación final; y (2) resolver los problemas de instalación de
+software ANTES de que dependan de R para hacer un ejercicio con nota.
+Un problema de instalación no resuelto en esta primera sesión se
+convierte en un problema de "no pude hacer la práctica" en la sesión
+siguiente (descripción de datos).
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Bienvenida y contexto institucional (Escuela de Administración de
+   Negocios y Economía)
+2. Ronda de presentación de estudiantes
+3. Revisión del programa: unidades, cronograma, evaluación
+4. Introducción conceptual a R: qué es, por qué se usa
+5. Instalación y configuración de R + RStudio/Positron
+6. Ejercicio inicial en R
+
+## Desarrollo — para tu propio estudio antes de clase
+
+### 1. Contexto institucional
+
+El curso es EC-720, Teoría Estadística y Métodos Cuantitativos, del
+Bachillerato en Economía de la Universidad Fidélitas. Antes de la
+clase, ten a mano (o menciona verbalmente) los contactos de
+coordinación — están en el material fuente original
+(`fuente/Presentaciones ppt/1/Intro.pptx`, slides 3-7): coordinación
+del curso, subdirección de economía, y los correos de TCU/TFG por si
+algún estudiante pregunta por esos procesos (no son parte de este
+curso, pero suelen surgir preguntas).
+
+### 2. El programa y la evaluación — lo que hay que dejar sin ambigüedad
+
+El esquema de evaluación de este cuatrimestre (2026-C3, curso
+comprimido a **10 sesiones reales**, viernes intercalados con
+`evaluacion-proyectos`) tiene 3 componentes, que suman 100%:
+
+- **3 prácticas** (10% cada una = 30%): Práctica 1 en la sesión de
+  distribuciones (sesión 3), Práctica 2 en la sesión de ANOVA (sesión
+  6), Práctica 3 en la sesión de series de tiempo — modelos (sesión 8).
+- **2 estudios de caso** (20% cada uno = 40%): Caso 1 se presenta en la
+  sesión de estimación e intervalos de confianza (sesión 5) — se movió
+  de la sesión 4 a la 5 para dar más tiempo de trabajarlo tras el
+  laboratorio de pruebas de hipótesis —, y **el Caso 2 es la actividad
+  participativa de números índices** (sesión 9) — no es un tercer
+  entregable aparte. Esto es fácil de malinterpretar si no se aclara
+  explícitamente el primer día.
+- **Investigación final** (30%): un estudio económico que incluya como
+  uno de sus objetivos un análisis estadístico, se presenta en la
+  última sesión del curso (sesión 10).
+
+Ver `content/docs/programa.qmd` para el cronograma completo de las 10
+sesiones con fechas.
+
+### 3. ¿Qué es R? — desarrollo conceptual
+
+R es un lenguaje de programación estadística creado en 1993 por Ross
+Ihaka y Robert Gentleman, profesores de la Universidad de Auckland
+(Nueva Zelanda) — de ahí el nombre (las iniciales de ambos). Es de
+código abierto (open source) y gratuito, distribuido bajo licencia
+GNU GPL, lo que lo diferencia de alternativas comerciales como SPSS o
+Stata.
+
+**Orientación a objetos:** en R, casi todo es un "objeto" — un vector,
+una tabla de datos, un modelo ajustado, incluso una función son
+objetos que se pueden asignar a un nombre y manipular. Esto contrasta
+con lenguajes procedurales donde el foco está en la secuencia de pasos
+más que en los objetos que esos pasos transforman.
+
+**Por qué R y no otra herramienta:** R nació como una herramienta de
+estadísticos, para estadísticos — su ecosistema de paquetes (CRAN
+tiene más de 20,000 paquetes) cubre prácticamente cualquier técnica
+estadística publicada, desde las más clásicas (las de este curso)
+hasta las más recientes en investigación académica.
+
+### 4. Instalación — pasos concretos
+
+1. Instalar R desde CRAN (cran.r-project.org) — elegir la versión para
+   el sistema operativo correspondiente (Windows/Mac/Linux).
+2. Instalar RStudio Desktop (posit.co) o Positron como entorno de
+   desarrollo — ambos son gratuitos. R es el "motor", RStudio/Positron
+   es la interfaz donde se escribe y ejecuta el código.
+3. Verificar la instalación abriendo la consola y ejecutando
+   `2 + 2` — debe devolver `4`.
+4. Instalar el paquete base que se usará a lo largo del curso, si no
+   viene preinstalado: `install.packages(c("ggplot2"))` (opcional para
+   hoy, pero útil adelantarlo).
+
+**Errores comunes de instalación:** en Windows, olvidar instalar Rtools
+si más adelante se necesita compilar paquetes desde código fuente
+(no debería ser necesario para este curso); en Mac, problemas de
+permisos si se instala una versión muy antigua de Xcode command line
+tools. Si surge un problema de instalación que no se resuelve en los
+primeros 15-20 minutos, es mejor anotar el caso y seguir con el resto
+del grupo, resolviendo individualmente después de clase.
+
+### 5. Ejercicio inicial — desarrollo extendido
+
+El ejercicio pide:
+
+```r
+x1 <- rnorm(n = 100, mean = 20, sd = 5)
+hist(x1)
+
+x2 <- rnorm(n = 100, mean = 20, sd = 100)
+hist(x2)
+```
+
+**Qué esperar y qué señalar:** ambos histogramas están centrados
+alrededor de 20 (misma media), pero `x2` tiene una dispersión mucho
+mayor — el eje horizontal de su histograma será mucho más ancho, y las
+barras estarán mucho más repartidas. Este es el primer contacto
+experiencial con el concepto de **varianza/desviación estándar**, que
+se formaliza recién en la unidad de descripción de datos — el objetivo
+hoy es solo que lo *vean*, no que lo calculen.
+
+Explicación de la función `rnorm`: genera `n` observaciones aleatorias
+de una distribución normal con media `mean` y desviación estándar
+`sd`. Es una función de simulación — cada vez que se ejecuta, genera
+números distintos (a menos que se fije una semilla con `set.seed()`,
+concepto que se puede mencionar de pasada, sin profundizar).
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Bienvenida y presentación de la escuela/coordinación | 15 min |
+| Ronda de presentación de estudiantes | 25 min |
+| Revisión del programa y cronograma (incluir aclaración del Caso 2 y del calendario de 10 sesiones) | 30 min |
+| Introducción conceptual a R | 20 min |
+| Instalación de R/RStudio/Positron | 40 min |
+| Ejercicio inicial en R (rnorm + hist) | 30 min |
+| Cierre y dudas | 20 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada presentación.

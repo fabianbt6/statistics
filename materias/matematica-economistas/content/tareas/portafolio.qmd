@@ -1,0 +1,54 @@
+---
+title: "Portafolio"
+engine: knitr
+format:
+  html:
+    embed-resources: true
+    title-block-banner: false
+params:
+  universidad: "Universidad Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+**Valor:** 40% de la nota final (avance 15% + entrega final 25%)
+**Modalidad de trabajo:** individual
+
+### En qué consiste
+
+Es una carpeta personal que cada estudiante va llenando a lo largo
+del curso, unidad por unidad. Es un trabajo que se construye progresivamente, conforme se avanza en las unidades.
+
+### Qué incluye
+
+Por cada unidad del curso, el estudiante agrega al portafolio:
+
+1. Un resumen corto de lo que se vio en esa unidad.
+2. Un ejercicio resuelto por el propio estudiante.
+3. Una nota corta (una o dos líneas) sobre para qué sirve ese tema en
+   la vida real o en economía.
+
+### Entregas
+
+**Avance (15%):** se entrega a mitad del curso, con las unidades
+vistas hasta ese momento.
+
+**Entrega final (25%):** se entrega al final del curso, con todas
+las unidades completas más una reflexión final corta (qué aprendió,
+qué le costó más, qué le sirvió para entender mejor la economía).
+
+### Rúbrica
+
+Cada criterio se evalúa en tres niveles: **Cumple** (2 puntos),
+**Cumple parcialmente** (1 punto) o **No cumple** (0 puntos).
+
+| # | Criterio | Cumple | Cumple parcialmente | No cumple | Observaciones |
+|---|---|---|---|---|---|
+| 1 | Incluye todas las unidades correspondientes | | | | |
+| 2 | Los ejercicios están bien resueltos | | | | |
+| 3 | Explica claramente para qué sirve cada tema | | | | |
+| 4 | Está ordenado y bien presentado (y trae la reflexión final, solo en la entrega final) | | | | |
+
+**Puntaje total:** 8 puntos → equivalen, según la entrega, al 15%
+(avance) o al 25% (entrega final) de la nota final (regla de 3).

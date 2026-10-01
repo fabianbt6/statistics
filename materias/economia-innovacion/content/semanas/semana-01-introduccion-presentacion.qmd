@@ -1,0 +1,358 @@
+---
+title: "Economía de la Innovación"
+subtitle: "Bienvenida: conceptos principales y tendencias"
+format: revealjs
+params:
+  materia: "Economía de la Innovación"
+  titulo_sesion: "Bienvenida: conceptos principales y tendencias"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @cepal2025panorama, @ocde2016perspectivas, @bm2025paradoja, @ompi2025gii, @escorsavalls2003
+---
+
+## Contenido {.agenda}
+
+- 👋 Bienvenida y presentación del curso
+- 🧭 Metodología: 7 sesiones teórico-prácticas
+- 💡 ¿Qué es la economía de la innovación?
+- 📚 Innovación en la teoría económica
+- 🧩 Tipos de innovación
+- 📊 Tendencias actuales
+- 🗣️ Dinámica de discusión
+
+::: {.notes}
+"Buenos días/tardes a todos, bienvenidos al curso de Economía de la
+Innovación. Mi nombre es Marianne Pérez Gómez y voy a ser su docente
+este cuatrimestre. Hoy vamos a dedicar la primera media hora a tres
+cosas: conocernos un poco, revisar cómo va a funcionar el curso —que
+tiene una modalidad distinta a otros cursos que han llevado— y entrar
+en materia con los conceptos básicos de la economía de la innovación y
+algunas tendencias actuales. El resto de la sesión la vamos a dedicar a
+conversar, porque este es un curso donde ustedes van a participar
+mucho más de lo que exponen desde el frente."
+:::
+
+## Bienvenida {.divisor}
+
+## Antes de empezar
+
+- 🙋 Nombre y carrera
+- 💼 Experiencia laboral (si la tienen)
+- 💭 ¿Qué entienden hoy por "innovación"?
+- 🏭 ¿Conocen algún caso de innovación tecnológica en una empresa costarricense?
+
+::: {.notes}
+"Vamos a dar una vuelta rápida por el grupo. Cuéntenme su nombre, en
+qué nivel de la carrera están, y si tienen experiencia laboral en qué
+área. Después quiero que me digan, en una frase, qué entienden hoy por
+'innovación' — no hay respuesta incorrecta, es solo para ver de dónde
+partimos. Y si se les ocurre algún caso de una empresa costarricense
+que haya innovado —puede ser tecnología, un proceso nuevo, un modelo de
+negocio— cuéntenlo. Esto me ayuda a calibrar los ejemplos que voy a
+usar durante el curso."
+:::
+
+## Programa del curso {.divisor}
+
+## EC-910 Economía de la Innovación
+
+- Licenciatura en Economía, 3 créditos, 15 semanas
+- Modalidad: **7 sesiones presenciales, teórico-prácticas** — no hay
+  entregas asincrónicas separadas
+- Evaluación: 4 mapas mentales (30%), 3 estudios de caso (30%), 4
+  discusiones (10%), proyecto final (30%: avance 10% + presentación 20%)
+- El proyecto final se presenta **únicamente en la última sesión**
+
+::: {.notes}
+"El curso tiene 6 unidades que vamos a cubrir en 7 sesiones
+presenciales, aproximadamente cada dos semanas. Entre sesión y sesión
+van a tener lecturas y trabajo independiente, pero lo que sí quiero que
+quede clarísimo es la evaluación: cuatro mapas mentales que valen 7,5%
+cada uno, tres estudios de caso de 10% cada uno, cuatro discusiones de
+2,5% cada una, y el proyecto final que vale 30% —un 10% por el avance
+que van a entregar antes de la última sesión, y un 20% por la
+presentación final, que hacemos exclusivamente en la sesión 7, la
+última del curso. No hay entregas sueltas fuera de estas sesiones —
+todo se presenta y se discute en clase.
+
+¿Alguna pregunta sobre cómo se evalúa el curso antes de seguir?"
+:::
+
+## Metodología {.divisor}
+
+## Cómo vamos a trabajar
+
+- Aprendizaje Basado en Problemas (ABP): parto de un caso o pregunta
+  real, no de la teoría pura
+- Cada sesión: **máximo 30 minutos** de exposición de mi parte
+- El resto de la sesión: discusión, mapas mentales, análisis de casos
+- Ustedes llegan con las lecturas ya hechas — la sesión es para
+  discutir, no para que yo lea diapositivas
+
+::: {.notes}
+"La metodología de este curso es aprendizaje basado en problemas. Eso
+significa que en cada sesión yo voy a exponer un máximo de 30 minutos
+—lo esencial para entender el tema— y el resto del tiempo lo vamos a
+usar para que ustedes trabajen: discutan, resuelvan un caso, construyan
+un mapa mental. Para que esto funcione, necesito que lleguen a cada
+sesión con la lectura asignada ya hecha. Si no leyeron, la discusión no
+funciona."
+:::
+
+## ¿Qué es la economía de la innovación? {.divisor}
+
+## Un punto de partida
+
+- Estudia cómo se generan, difunden y adoptan las nuevas tecnologías,
+  productos y procesos en la economía
+- No es solo "inventar cosas nuevas": incluye cómo las empresas
+  compiten, cómo se protege el conocimiento y cómo las políticas
+  públicas influyen en ese proceso
+- Pregunta central del curso: ¿cómo evaluamos los factores que
+  determinan la innovación y su impacto en la sociedad y las empresas?
+
+## Innovación en la teoría económica
+
+- **Joseph Schumpeter** (1942): la innovación como motor del cambio
+  económico — el concepto de **"destrucción creativa"**: las nuevas
+  tecnologías desplazan a las viejas y reconfiguran los mercados
+- La innovación deja de ser un factor externo ("exógeno") a la
+  economía y pasa a explicarse desde adentro del sistema (crecimiento
+  "endógeno")
+- Los **sistemas de innovación** (nacionales, regionales, sectoriales)
+  explican por qué unos países/empresas innovan más que otros: no
+  depende solo de una empresa aislada, sino de su relación con
+  universidades, gobierno y otras empresas
+
+::: {.notes}
+"La idea de Schumpeter es central para todo el curso: la innovación no
+es un evento aislado, es un proceso de 'destrucción creativa' donde lo
+nuevo desplaza a lo viejo. Piensen en cómo el streaming desplazó al
+alquiler de películas, o cómo los pagos digitales están desplazando el
+efectivo. Ese desplazamiento genera ganadores y perdedores, y eso es
+justamente lo que vamos a analizar durante el curso: quién gana, quién
+pierde, y qué papel juega la política pública en ese proceso."
+:::
+
+## Tipos de innovación {.destacado}
+
+Según la clasificación internacional estándar (Manual de Oslo, OCDE/Eurostat)
+
+:::: {.columns}
+::: {.column width="50%"}
+**📦 De producto**
+
+Un bien o servicio nuevo o mejorado
+
+**⚙️ De proceso**
+
+Una forma nueva o mejorada de producir o entregar
+:::
+::: {.column width="50%"}
+**🏢 Organizacional**
+
+Nuevos métodos de organización del trabajo o de las relaciones
+externas de la empresa
+
+**📣 De mercadotecnia**
+
+Cambios en diseño, empaque, posicionamiento o precio
+:::
+::::
+
+## El proceso de innovación y la creación de valor {.destacado}
+
+<div style="text-align:center; font-size:1.3em; margin-top:0.5em;">
+🔬 I+D&nbsp; → &nbsp;🛡️ Protección del conocimiento&nbsp; → &nbsp;🌐 Difusión y adopción&nbsp; → &nbsp;💰 Valor de mercado
+</div>
+
+- La innovación **no crea valor por sí sola** — crea valor cuando se
+  adopta, se difunde y se traduce en productividad o en un producto que
+  el mercado paga por tener
+- Estos tres primeros pasos (I+D, protección, difusión) son, en ese
+  orden, las próximas tres unidades del curso
+
+## Tendencias actuales {.divisor}
+
+## La paradoja de la innovación en América Latina {.destacado}
+
+- Banco Mundial (2025): la región tiene potencial de innovación, pero
+  un desempeño persistentemente bajo frente a su nivel de ingreso
+- Baja inversión en I+D como porcentaje del PIB comparada con el
+  promedio mundial
+- Alta proporción de empresas que **no innovan en absoluto** —el reto
+  no es solo tecnológico, es de gestión, financiamiento y políticas
+
+## Brecha en inversión de I+D
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 4.5
+
+library(ggplot2)
+
+datos_id <- data.frame(
+  categoria = c("América Latina y el Caribe", "Promedio mundial"),
+  porcentaje = c(0.62, 2.62)
+)
+datos_id$categoria <- factor(datos_id$categoria, levels = datos_id$categoria)
+
+ggplot(datos_id, aes(x = categoria, y = porcentaje, fill = categoria)) +
+  geom_col(width = 0.5, show.legend = FALSE) +
+  geom_text(aes(label = paste0(porcentaje, "%")), vjust = -0.6, size = 7,
+            color = "#1C222B") +
+  scale_fill_manual(values = c("#B0263D", "#2F9BE0")) +
+  scale_y_continuous(limits = c(0, 3), expand = expansion(mult = c(0, 0.1))) +
+  labs(x = NULL, y = "Inversión en I+D (% del PIB)") +
+  theme_minimal(base_size = 17) +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+*Fuente: Banco Mundial (2025), "La paradoja de la innovación en
+América Latina"*
+
+::: {.notes}
+"Esta es una brecha de cuatro veces: mientras el mundo invierte en
+promedio 2,62% del PIB en investigación y desarrollo, América Latina y
+el Caribe invierte apenas 0,62%. Y esto no es solo un problema de
+recursos — el Banco Mundial estima que el 83% de esta brecha con
+economías avanzadas se explica por la adopción lenta y parcial de
+tecnologías ya existentes, no por falta de invención propia."
+:::
+
+## Brecha en innovación empresarial
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 4.5
+
+datos_firmas <- data.frame(
+  pais = c("Chile", "Reino Unido / Francia"),
+  porcentaje = c(10, 50)
+)
+datos_firmas$pais <- factor(datos_firmas$pais, levels = datos_firmas$pais)
+
+ggplot(datos_firmas, aes(x = pais, y = porcentaje, fill = pais)) +
+  geom_col(width = 0.5, show.legend = FALSE) +
+  geom_text(aes(label = paste0(porcentaje, "%")), vjust = -0.6, size = 7,
+            color = "#1C222B") +
+  scale_fill_manual(values = c("#B0263D", "#2F9BE0")) +
+  scale_y_continuous(limits = c(0, 60), expand = expansion(mult = c(0, 0.1))) +
+  labs(x = NULL, y = "% de empresas que innovan") +
+  theme_minimal(base_size = 17) +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+*Fuente: Banco Mundial (2025), "La paradoja de la innovación en
+América Latina"*
+
+::: {.notes}
+"En Chile, solo el 10% de las empresas innova, frente a un 50% en
+Reino Unido o Francia — cinco veces menos. Esto ilustra que la
+innovación no es solo un tema de un puñado de empresas de tecnología
+de punta: es una brecha generalizada en el tejido empresarial de la
+región, y es exactamente el tipo de problema que este curso les va a
+dar herramientas para analizar."
+:::
+
+## Costa Rica y la región en el mapa global
+
+- El **Índice Mundial de Innovación** (OMPI, actualización anual)
+  permite comparar el desempeño de Costa Rica frente a otros países en
+  insumos (instituciones, capital humano, infraestructura) y resultados
+  de innovación
+- La OCDE documenta que las políticas tecnológicas en América Latina
+  tienden a estar menos articuladas entre países que en otras regiones
+  — hay espacio para la cooperación regional
+
+## Otras tendencias para tener en el radar
+
+- 🤖 Digitalización acelerada y adopción de inteligencia artificial en
+  procesos productivos
+- 🤝 Mayor peso de la colaboración universidad-empresa como fuente de
+  innovación (tema de la próxima sesión)
+- ⚖️ Políticas de propiedad intelectual cada vez más relevantes en
+  acuerdos comerciales internacionales
+
+::: {.notes}
+"Quiero cerrar la parte teórica con tres tendencias que vamos a ir
+retomando durante el curso. Primero, la paradoja de la innovación en
+América Latina: invertimos poco en I+D comparado con nuestro nivel de
+ingreso, y muchas empresas simplemente no innovan. Segundo, hay formas
+de medir esto —el Índice Mundial de Innovación de la OMPI— que nos
+permiten comparar a Costa Rica con otros países, y eso nos va a servir
+para el proyecto final. Y tercero, la digitalización y la inteligencia
+artificial están acelerando el ritmo de este proceso de destrucción
+creativa del que hablamos con Schumpeter."
+:::
+
+## Dinámica de discusión {.divisor}
+
+## Para conversar en grupos pequeños
+
+::: {.incremental}
+- ¿Qué empresa u organización costarricense identifican como
+  innovadora, y por qué?
+- ¿Esa innovación fue de producto, de proceso, organizacional o de
+  mercadotecnia?
+- ¿Qué obstáculos creen que enfrentan las empresas en Costa Rica para
+  innovar?
+:::
+
+::: {.notes}
+"Formen grupos de 3-4 personas. Tienen 10 minutos para discutir estas
+tres preguntas y después cada grupo comparte en un minuto su
+conclusión. No busco la respuesta 'correcta' — busco que empiecen a
+aplicar los conceptos de hoy (tipos de innovación, destrucción
+creativa) a un caso real que ustedes conozcan."
+:::
+
+## Cierre y próxima sesión
+
+- Próxima sesión (Sesión 2): Unidad 2 — I+D, intraemprendedores,
+  colaboración universidad-empresa y parques tecnológicos
+- Entregable de la próxima sesión: **Mapa mental 1** + **Discusión 1**
+
+::: {.notes}
+"Para cerrar: en la próxima sesión vamos a ver investigación y
+desarrollo, intraemprendimiento, colaboración universidad-empresa y
+parques tecnológicos. Van a traer listo el Mapa mental 1 sobre ese
+tema, y vamos a hacer la primera discusión en vivo. En la siguiente
+diapositiva les dejo exactamente qué tienen que leer antes de esa
+sesión — no es opcional, la discusión no funciona si no llegan con la
+lectura hecha."
+:::
+
+## Lecturas para la próxima sesión {.destacado}
+
+**Sesión 2 — Unidad 2: I+D, intraemprendedores, colaboración
+universidad-empresa y parques tecnológicos**
+
+- 📄 CEPAL — *Políticas para la innovación en las pequeñas y medianas
+  empresas en América Latina*
+- 📄 OCDE (2013) — *Start-up América Latina: promoviendo la innovación
+  en la región*
+- 📖 Escorsa Castells, P. & Valls Pasola, J. — *Tecnología e innovación
+  en la empresa* (capítulo sobre I+D y parques/clústeres tecnológicos)
+
+Enlaces y ficha completa de cada fuente: `referencias/EconomiaInnovacion.bib`
+
+::: {.notes}
+"Las dos primeras son documentos cortos y de acceso abierto —
+CEPAL y OCDE— léanlos completos, no son largos. El libro de Escorsa y
+Valls es más extenso; para esta sesión les pido solo el capítulo sobre
+I+D y parques tecnológicos, no el libro completo. El enlace exacto de
+cada uno está en el archivo de referencias del repositorio del curso."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

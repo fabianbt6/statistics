@@ -1,0 +1,193 @@
+---
+title: "Guía de preparación — Números índice — actividad participativa (Caso 3)"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/12_numeros-indice-actividad-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 12 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Números índice — actividad participativa (Caso 3)
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Aplicar los conceptos de números índice a un caso real de política
+  económica (ej. IPC).
+- Completar la actividad participativa que constituye el Caso 3 de la
+  evaluación.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| (actividad aparte — no usa la bibliografía general del curso) | — | Se trabaja con documento propio y la guía de lectura sobre metodología del IPC ya existente en `fuente/Presentaciones ppt/14/`. |
+
+## Nota importante sobre el alcance de esta guía
+
+Esta sesión se desarrolla, por decisión explícita, **fuera** del flujo
+de presentaciones reveal.js de las demás sesiones: se conduce con un
+documento propio y una actividad participativa, no con una exposición
+magistral apoyada en slides — de ahí que la presentación de esta
+sesión (`content/unidades/12_numeros-indice-actividad-presentacion.qmd`)
+sea intencionalmente un marcador de posición, no una presentación
+desarrollada como las demás. Esta guía, sin embargo, sí incluye un
+desarrollo teórico completo de números índice, para que quien prepare
+el documento propio de la actividad tenga a mano las fórmulas y
+definiciones formales sin tener que ir directamente a un libro de
+texto — aunque el desarrollo del **documento y la dinámica de la
+actividad en sí** quedan pendientes de definir por separado, como se
+acordó al planificar el curso.
+
+## Desarrollo teórico completo — números índice (referencia para preparar la actividad)
+
+### 1. ¿Qué es un número índice?
+
+Un número índice mide el cambio relativo de una variable (precio,
+cantidad, valor) entre un período base y un período de comparación,
+normalizando el valor del período base a 100 (o a 1, según la
+convención). Es la herramienta estadística estándar para resumir, en
+un solo número, cómo ha cambiado un conjunto de precios o cantidades a
+lo largo del tiempo — el ejemplo más conocido, y el que motiva esta
+sesión, es el Índice de Precios al Consumidor (IPC), que resume cómo
+cambia el costo de una canasta de bienes y servicios representativa
+del consumo de los hogares.
+
+**Índice simple (un solo bien):**
+
+$$I_t = \frac{P_t}{P_0} \times 100$$
+
+donde $P_t$ es el precio en el período $t$ y $P_0$ es el precio en el
+período base. Un índice simple es fácil de calcular pero de uso
+limitado en la práctica, porque casi nunca nos interesa el precio de
+un solo bien — nos interesa el costo de una **canasta** de muchos
+bienes juntos, que es donde surgen los índices compuestos.
+
+### 2. Índices compuestos: Laspeyres y Paasche
+
+El problema central al construir un índice para una canasta de muchos
+bienes es decidir **con qué cantidades ponderar** cada bien —porque no
+todos los bienes pesan igual en el gasto total de un hogar—. Las dos
+soluciones clásicas, y las más usadas en la práctica (incluyendo la
+metodología del IPC en la mayoría de países), son:
+
+**Índice de Laspeyres** (pondera con las cantidades del período
+**base**):
+
+$$L_t = \frac{\sum_i P_{i,t} \, Q_{i,0}}{\sum_i P_{i,0} \, Q_{i,0}} \times 100$$
+
+**Índice de Paasche** (pondera con las cantidades del período
+**actual**):
+
+$$Pa_t = \frac{\sum_i P_{i,t} \, Q_{i,t}}{\sum_i P_{i,0} \, Q_{i,t}} \times 100$$
+
+**Diferencia conceptual clave:** Laspeyres responde la pregunta
+"¿cuánto costaría hoy comprar la misma canasta que se compraba en el
+período base?" — mantiene fija la canasta de consumo del pasado.
+Paasche responde una pregunta distinta: "¿cuánto cuesta hoy la canasta
+que se compra hoy, comparado con lo que hubiera costado esa misma
+canasta en el período base?" — usa la canasta de consumo actual.
+
+**Por qué importa la elección (sesgo de sustitución):** Laspeyres
+tiende a **sobreestimar** el aumento del costo de vida verdadero,
+porque no permite que los consumidores sustituyan bienes que se
+encarecieron relativamente por otros más baratos —algo que la gente sí
+hace en la realidad—. Paasche tiende a **subestimar** ese aumento, por
+una razón simétrica. Este fenómeno se llama **sesgo de sustitución**,
+y es una de las razones por las que instituciones como el INEC (en
+Costa Rica) o las oficinas de estadística de otros países revisan
+periódicamente la canasta base del IPC.
+
+### 3. Índice de Fisher
+
+Como una forma de corregir parcialmente el sesgo de sustitución, el
+**índice de Fisher** (o "ideal de Fisher") se define como la media
+geométrica de Laspeyres y Paasche:
+
+$$F_t = \sqrt{L_t \times Pa_t}$$
+
+Al combinar ambos enfoques, el índice de Fisher suaviza los sesgos
+opuestos de cada uno, aunque es más exigente en términos de datos
+—requiere conocer las cantidades tanto del período base como del
+período actual, algo que Laspeyres no necesita—.
+
+### 4. La metodología del IPC (contexto para la actividad)
+
+El material fuente de esta sesión
+(`fuente/Presentaciones ppt/14/Guía de Lectura - metodología del
+IPC.docx`) profundiza en cómo se construye en la práctica un índice de
+precios al consumidor real: la selección de la canasta representativa
+(basada en encuestas de gastos de los hogares), la ponderación de cada
+categoría de gasto (alimentación, vivienda, transporte, etc.), la
+frecuencia de actualización de la canasta base, y el tratamiento de
+bienes que cambian de calidad con el tiempo (un problema práctico
+importante: si un teléfono celular mejora su calidad de un año a otro,
+¿cómo se distingue un aumento de precio de una mejora de calidad?).
+Estos temas prácticos son un buen punto de partida para la discusión
+participativa de la sesión, más allá de las fórmulas puramente
+matemáticas.
+
+## Ejemplo numérico simple (para ilustrar la mecánica antes de la actividad)
+
+Supongamos una canasta de dos bienes, con precios y cantidades en el
+período base (0) y el período actual (t):
+
+| Bien | $P_0$ | $Q_0$ | $P_t$ | $Q_t$ |
+|---|---|---|---|---|
+| Arroz (kg) | 800 | 10 | 950 | 8 |
+| Transporte (pasaje) | 500 | 20 | 600 | 22 |
+
+**Laspeyres** (pondera con $Q_0$):
+
+$$L_t = \frac{(950)(10)+(600)(20)}{(800)(10)+(500)(20)}\times 100 = \frac{9500+12000}{8000+10000}\times100 = \frac{21500}{18000}\times100 \approx 119.4$$
+
+**Paasche** (pondera con $Q_t$):
+
+$$Pa_t = \frac{(950)(8)+(600)(22)}{(800)(8)+(500)(22)}\times 100 = \frac{7600+13200}{6400+11000}\times100 = \frac{20800}{17400}\times100 \approx 119.5$$
+
+**Fisher:** $F_t = \sqrt{119.4 \times 119.5} \approx 119.5$
+
+Interpretación: con cualquiera de los tres índices, el costo de esta
+canasta aumentó aproximadamente 19.4-19.5% entre el período base y el
+período actual. Este es un buen ejemplo pequeño para mostrar en clase
+antes de entrar en la actividad participativa con datos reales del
+IPC, porque los tres métodos dan resultados muy parecidos cuando los
+cambios de cantidad son moderados —la diferencia entre ellos se hace
+más notoria cuando hay sustitución fuerte entre bienes.
+
+## Notas de preparación logística
+
+Documentar aquí como recordatorio de que esta sesión **sí** cuenta
+como el Caso 3 de la evaluación (10%), a pesar de tener un formato
+distinto a una presentación grupal tradicional — no perder de vista
+esta nota al calcular calificaciones. La dinámica específica de la
+actividad participativa (formato, entregable, rúbrica) queda pendiente
+de definir en un documento aparte, según lo acordado al planificar el
+curso.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Breve introducción teórica (índice simple, Laspeyres, Paasche, Fisher, con el ejemplo numérico) | 30 min |
+| Actividad participativa (formato a definir en el documento propio) | 150 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

@@ -1,0 +1,68 @@
+---
+title: "Matemática para Economistas"
+subtitle: "Ética"
+format: revealjs
+params:
+  materia: "Matemática para Economistas"
+  titulo_sesion: "Ética"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 15 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito -- ver
+     materias/matematica-economistas/README.md.
+
+     Esta unidad NO es una clase de teoría matemática: es la sesión
+     del foro evaluado (10% de la nota, ver programa.qmd -- valor
+     actualizado; el programa institucional original decía 5%, ya
+     superado). No hay divisor de "Teoría" ni "Ejercicios" ni
+     "Práctica en R" -- el foro mismo es la actividad. Tampoco hay
+     bibliografía asignada: ninguno de los 5 libros de la materia
+     trata ética o filosofía de la matemática. -->
+
+## Esta sesión
+
+- No hay clase magistral — es la sesión del **foro evaluado**
+- Objetivo: reflexionar sobre la relación entre la matemática y la
+  ética en el ejercicio profesional del economista
+- Entrega también: **portafolio final** (todas las unidades del curso)
+
+## Foro evaluado {.divisor}
+
+## Tema del foro {.destacado}
+
+**Ética y matemática: aspectos sobre la praxis. Influencia de la
+matemática en el quehacer del economista — implicaciones éticas.**
+
+Participación individual. Valor: 10% de la nota final del curso.
+
+## Preguntas orientadoras
+
+::: {.incremental}
+- ¿Qué significa actuar éticamente al construir o presentar un modelo
+  matemático que va a influir en una decisión económica real?
+- Un modelo matemático "funciona" (predice bien) pero se usa para
+  justificar una decisión injusta — ¿es un problema del modelo, de
+  quien lo interpreta, o de ambos?
+- ¿Qué responsabilidad tiene el economista cuando simplifica la
+  realidad en supuestos matemáticos (linealidad, racionalidad,
+  información perfecta) que sabe que no se cumplen del todo?
+:::
+
+## Cómo participar
+
+- Publicá tu posición inicial (no solo una opinión general — tomá una
+  postura concreta y sustentala)
+- Respondé al menos a un compañero con una contraargumentación real,
+  no solo "estoy de acuerdo"
+- Usá vocabulario disciplinar (no lenguaje coloquial) y mantené un
+  tono respetuoso incluso en el desacuerdo
+- Se evalúa: vocabulario y sintaxis, construcción del argumento
+  (postura, estructura, justificación, contraargumentación,
+  refutación), y actitud (respeto, flexibilidad, colaboración)

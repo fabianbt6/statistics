@@ -1,0 +1,212 @@
+---
+title: "Evaluación Económica y Social de Proyectos"
+subtitle: "Sesión 4: Indicadores económicos y sociales"
+format: revealjs
+params:
+  materia: "Evaluación Económica y Social de Proyectos"
+  titulo_sesion: "Indicadores económicos y sociales"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @ilpes_evaluacionsocial37, @ilpes_metodologiageneral39
+---
+
+## Contenido {.agenda}
+
+- 🔄 Repaso: su lista de costos y beneficios clasificados
+- 📉 Tasa social de descuento
+- 📊 Valor Actual Neto Económico (VANE)
+- 📈 Tasa Interna de Rendimiento Económico (TIRE)
+- ⚖️ Relación Beneficio-Costo (B/C) y costo-efectividad
+- 🗣️ Dinámica: calculen los indicadores de su proyecto
+
+::: {.notes}
+"Bienvenidos a la Sesión 4, la última antes de la presentación final.
+Con su lista de costos y beneficios ya clasificada, hoy vamos a
+traducir todo eso en indicadores que permiten decidir si un proyecto
+social conviene o no desde el punto de vista económico: VANE, TIRE,
+relación beneficio-costo y costo-efectividad."
+:::
+
+## Repaso rápido {.divisor}
+
+## Su lista de costos y beneficios
+
+- Cada grupo comparte en 1 minuto: su costo principal y su beneficio
+  principal, y si alguno requiere precio sombra o factor de conversión
+
+::: {.notes}
+"Recordemos rápido lo que cada grupo trae de la sesión pasada. Esto
+nos sirve para calibrar el resto de la sesión: si la mayoría de los
+proyectos tiene beneficios que requieren precio sombra, vamos a
+dedicar más tiempo a cómo se incorporan esos precios sombra al cálculo
+de los indicadores."
+:::
+
+## Tasa social de descuento {.divisor}
+
+## ¿Por qué descontamos flujos futuros?
+
+- Un colón hoy vale más que un colón dentro de un año — por eso los
+  flujos de costos y beneficios futuros se **descuentan** a valor
+  presente
+- La **tasa social de descuento** refleja el costo de oportunidad de los
+  recursos para la sociedad como un todo (no la tasa de interés de
+  mercado que usaría un inversionista privado)
+- En Costa Rica, MIDEPLAN publica una tasa social de descuento oficial
+  para evaluar proyectos de inversión pública — es la que se debe usar
+  como referencia en proyectos sociales del país
+
+::: {.notes}
+"La tasa social de descuento es distinta de la tasa de interés
+comercial que usaría un banco o una empresa privada — representa el
+costo de oportunidad de usar recursos escasos en este proyecto en vez
+de en otro proyecto público alternativo. MIDEPLAN publica
+periódicamente una tasa social de descuento oficial para Costa Rica;
+para efectos de este curso, si su tema no encuentra una tasa oficial
+actualizada, pueden usar una tasa de referencia razonable (por ejemplo,
+entre 4% y 8% real anual) y dejar explícito el supuesto — lo importante
+es que entiendan su rol en el cálculo, no que memoricen un número
+exacto."
+:::
+
+## Valor Actual Neto Económico (VANE) {.destacado}
+
+$$VANE = \sum_{t=0}^{n} \frac{B_t - C_t}{(1+i)^t}$$
+
+- $B_t$: beneficios económicos (valorados a precios sociales) en el
+  período $t$
+- $C_t$: costos económicos (valorados a precios sociales) en el
+  período $t$
+- $i$: tasa social de descuento
+- **Criterio de decisión**: si $VANE > 0$, el proyecto genera más
+  bienestar social que su costo de oportunidad — conviene ejecutarlo
+
+::: {.notes}
+"El VANE es exactamente la misma lógica del VAN financiero que quizás
+ya conocen, pero con dos cambios clave: los beneficios y costos están
+valorados a precios sociales (no de mercado), y la tasa de descuento es
+la tasa social, no la tasa de interés comercial. Si el VANE es positivo,
+el proyecto genera más beneficio social, en valor presente, que lo que
+cuesta —conviene ejecutarlo desde el punto de vista económico-social.
+Practiquen con un flujo simplificado de su propio proyecto: 3 o 4
+períodos, con beneficios y costos aproximados, ya valorados a precios
+sociales según lo que trabajaron en la sesión pasada."
+:::
+
+## Tasa Interna de Rendimiento Económico (TIRE)
+
+- Es la tasa de descuento que hace que el $VANE = 0$
+- **Criterio de decisión**: si $TIRE > $ tasa social de descuento, el
+  proyecto es rentable socialmente
+- Es útil para comparar proyectos entre sí, pero puede tener problemas
+  cuando los flujos cambian de signo varias veces — en ese caso, el
+  VANE es un criterio más confiable
+
+::: {.notes}
+"La TIRE responde la pregunta '¿hasta qué tasa de descuento seguiría
+siendo rentable este proyecto?'. Es un indicador muy usado porque es
+fácil de comunicar —se compara directamente contra la tasa social de
+descuento—, pero adviertan a los grupos que si sus flujos de costos y
+beneficios cambian de signo más de una vez a lo largo del tiempo, la
+TIRE puede dar resultados ambiguos o múltiples soluciones; en ese caso,
+confíen más en el VANE."
+:::
+
+## Relación Beneficio-Costo y costo-efectividad {.destacado}
+
+:::: {.columns}
+::: {.column width="50%"}
+**Relación Beneficio-Costo (B/C)**
+
+$$\frac{B}{C} = \frac{\sum \frac{B_t}{(1+i)^t}}{\sum \frac{C_t}{(1+i)^t}}$$
+
+Si $B/C > 1$, el proyecto es rentable socialmente
+:::
+::: {.column width="50%"}
+**Costo-Efectividad**
+
+$$CE = \frac{\text{Costo total (valor presente)}}{\text{Unidades de resultado logrado}}$$
+
+Útil cuando el beneficio **no se puede monetizar** (ej. costo por año
+de vida saludable ganado)
+:::
+::::
+
+::: {.notes}
+"La relación beneficio-costo es el cociente entre el valor presente de
+los beneficios y el valor presente de los costos —si es mayor que uno,
+el proyecto conviene. El costo-efectividad se usa cuando el beneficio
+central del proyecto no se puede monetizar del todo —por ejemplo, en
+salud es común usar el costo por año de vida saludable ganado, o en
+educación el costo por estudiante que permanece en el sistema— y sirve
+sobre todo para comparar distintas alternativas que persiguen el mismo
+tipo de resultado, no para decidir en términos absolutos si el
+proyecto conviene o no."
+:::
+
+## Dinámica: calculen los indicadores de su proyecto {.divisor}
+
+## Trabajo en grupo (el resto de la sesión)
+
+::: {.incremental}
+- Con su lista de costos y beneficios (Sesión 3), armen un flujo
+  simplificado de 3-4 períodos, con valores aproximados a precios
+  sociales
+- Elijan una tasa social de descuento razonable y justifíquenla
+- Calculen el VANE y, si pueden, la TIRE del proyecto
+- Si su beneficio principal no se puede monetizar, calculen en su
+  lugar un indicador de costo-efectividad
+- Prepárense: esto es la base numérica de su presentación final
+:::
+
+::: {.notes}
+"El resto de la sesión es trabajo en grupo, con calculadora o Excel en
+mano. No busco precisión absoluta en los números —busco que el
+razonamiento sea correcto: que usen precios sociales, no de mercado;
+que descuenten con una tasa social justificada; y que interpreten
+correctamente el resultado (¿el proyecto conviene o no, y por qué?).
+Esto es literalmente el corazón numérico de lo que van a presentar en
+la última sesión."
+:::
+
+## Cierre y próxima sesión
+
+- Próxima sesión (Sesión 5, **18 de diciembre**): **cierre del curso y
+  presentación final** de cada proyecto
+- Entre sesiones: terminen el documento completo (antecedentes,
+  justificación, problema, objetivos, Marco Lógico, costos/beneficios,
+  indicadores, conclusiones y recomendaciones) y preparen su presentación
+
+::: {.notes}
+"Para el 18 de diciembre, cada grupo entrega el documento completo del
+proyecto y hace su presentación final —recordemos que esta
+presentación vale el 20% de la nota, y el documento completo otro 40%.
+Aprovechen las semanas entre sesiones para pulir la coherencia de todo
+el trabajo: que el problema, los objetivos, el Marco Lógico, los
+costos/beneficios y los indicadores cuenten, todos juntos, una sola
+historia coherente sobre su proyecto."
+:::
+
+## Sobre la presentación final {.destacado}
+
+- Duración sugerida: **10-15 minutos por grupo** + preguntas
+- Debe cubrir, en orden: problema y objetivos → Marco Lógico (resumen)
+  → costos y beneficios principales → indicadores y su interpretación
+  → conclusiones y recomendaciones
+- Se evalúa la coherencia del proyecto completo, no solo el cálculo
+  numérico
+
+::: {.notes}
+"Sean explícitos con el formato de la presentación final desde ya, para
+que no se sorprendan el 18 de diciembre: 10 a 15 minutos por grupo,
+siguiendo el mismo orden que han construido sesión a sesión, y con
+espacio para preguntas del resto del curso. La nota de la presentación
+no depende solo de que los números salgan 'bien', sino de que se note
+que el proyecto es coherente de principio a fin."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

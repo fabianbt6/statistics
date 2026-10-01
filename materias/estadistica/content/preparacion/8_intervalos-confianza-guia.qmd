@@ -1,0 +1,216 @@
+---
+title: "Guía de preparación — Estimación e intervalos de confianza"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015, @hanglee2023
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/8_intervalos-confianza-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 8 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Estimación e intervalos de confianza
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Explicar por qué se prefiere un intervalo a una estimación puntual.
+- Derivar la fórmula del intervalo de confianza de una media a partir
+  de la distribución del estadístico de prueba visto en la unidad
+  anterior (pruebas de hipótesis).
+- Construir e interpretar correctamente (en sentido frecuentista, no
+  bayesiano) un intervalo de confianza para una media y para una
+  proporción.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Hogg, Tanis y Zimmerman, *Probability and Statistical Inference* [@hogg2015] | Capítulo 7 (Interval Estimation) | Desarrollo formal de intervalos para media y proporción — referencia principal de la sesión. |
+| Hang Lee, *Foundations of Applied Statistical Methods* [@hanglee2023] | Sección 2.2.6 (Interval Estimation and Confidence Interval) | Complemento aplicado, útil para reforzar la interpretación correcta del intervalo. |
+
+## Desarrollo teórico completo
+
+### 1. ¿Por qué un intervalo y no un solo valor?
+
+Una estimación puntual —como la media muestral $\bar{x}$— es un solo
+número, y casi con certeza **no** coincide exactamente con el
+parámetro poblacional verdadero $\mu$: es una aproximación basada en
+una muestra particular, y otra muestra habría dado un número
+ligeramente distinto. Un intervalo de confianza reconoce esa
+incertidumbre explícitamente, dando un **rango de valores plausibles**
+en vez de un único número, junto con una medida de qué tan confiables
+son esos límites.
+
+En el análisis económico, parámetros de interés —medias, tasas de
+crecimiento, elasticidades— casi nunca se observan directamente y
+deben estimarse a partir de muestras. Los intervalos de confianza
+cuantifican esa incertidumbre de forma explícita y comunicable, algo
+que una estimación puntual sola no puede hacer.
+
+### 2. Intervalo de confianza de la media — derivación completa
+
+**De dónde sale la fórmula.** Partimos exactamente del mismo
+estadístico que usamos en la prueba de hipótesis de la unidad anterior
+(pruebas de hipótesis):
+
+$$t = \frac{\bar{x}-\mu}{s/\sqrt{n}} \sim t_{n-1}$$
+
+Como sabemos que este estadístico sigue una distribución t con $n-1$
+grados de libertad, sabemos también que, con probabilidad $1-\alpha$,
+cae dentro del rango $[-t_{\alpha/2,n-1}, \; t_{\alpha/2,n-1}]$ — los
+valores críticos que dejan $\alpha/2$ de probabilidad en cada cola.
+Formalmente:
+
+$$P\!\left(-t_{\alpha/2,n-1} \leq \frac{\bar{x}-\mu}{s/\sqrt{n}} \leq t_{\alpha/2,n-1}\right) = 1-\alpha$$
+
+Despejando $\mu$ de esta desigualdad doble —multiplicando por
+$s/\sqrt{n}$ y luego reordenando para aislar $\mu$ en el centro—
+llegamos a:
+
+$$P\!\left(\bar{x} - t_{\alpha/2,n-1}\frac{s}{\sqrt{n}} \leq \mu \leq \bar{x} + t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}\right) = 1-\alpha$$
+
+Esa es exactamente la fórmula del intervalo de confianza:
+
+$$\bar{x} \pm t_{\alpha/2, \, n-1} \cdot \frac{s}{\sqrt{n}}$$
+
+(o con $z_{\alpha/2}$ en vez de $t_{\alpha/2,n-1}$ si se conoce la
+varianza poblacional $\sigma$, exactamente el mismo criterio de
+"conocida vs. desconocida" que vimos en la unidad anterior para
+pruebas de hipótesis).
+
+**Interpretación correcta (frecuentista) — el punto más delicado de
+la sesión.** La interpretación correcta es: *"si se repitiera el
+muestreo muchas veces y se construyera un intervalo de esta forma cada
+vez, el 95% de esos intervalos contendrían al verdadero valor de
+$\mu$."* Esto **no** significa que hay 95% de probabilidad de que
+$\mu$ esté en *este* intervalo específico ya calculado — una vez que el
+intervalo está calculado con una muestra particular, $\mu$ o está
+dentro de él o no está, no hay aleatoriedad restante en esa afirmación.
+La aleatoriedad está en el *procedimiento de construcción* del
+intervalo, no en el parámetro $\mu$ (que es una constante fija,
+aunque desconocida) ni en el intervalo ya calculado. Practicar esta
+frase exacta antes de la clase, porque es fácil resbalar hacia la
+interpretación incorrecta ("hay 95% de probabilidad de que $\mu$ esté
+aquí") sin darse cuenta.
+
+**Conexión directa con pruebas de hipótesis (unidades anteriores).**
+Un intervalo de confianza del $(1-\alpha)$% y una prueba de hipótesis
+de dos colas al nivel $\alpha$ están directamente relacionados: si
+$\mu_0$ cae **fuera** del intervalo de confianza, entonces se
+rechazaría $H_0:\mu=\mu_0$ a ese mismo nivel de significancia; si cae
+**dentro**, no se rechazaría. Esto es exactamente lo que vieron con el
+`t.test()` de la unidad anterior: el intervalo que imprime R junto con
+el valor p es consistente con la decisión de la prueba.
+
+### 3. Intervalo de confianza de una proporción
+
+Se usa cuando interesa la proporción $p$ de una población con cierta
+característica (intención de voto, tasa de aprobación, tasa de
+incumplimiento). Se codifica cada observación como 0/1 (Bernoulli), y
+$\hat{p} = Y/n$ (con $Y$ el número de "éxitos" en la muestra) es el
+estimador natural de $p$.
+
+**De dónde sale la fórmula.** Recordando la unidad de distribuciones
+discretas, $Var(\hat{p}) = Var(Y/n) = \frac{1}{n^2}Var(Y) =
+\frac{np(1-p)}{n^2} = \frac{p(1-p)}{n}$ (usando que $Y$ es una suma de
+$n$ Bernoullis independientes, como la binomial). El error estándar de
+$\hat{p}$ es entonces $\sqrt{p(1-p)/n}$, y en la práctica se reemplaza
+el $p$ desconocido dentro de la raíz por su estimación $\hat{p}$ (esto
+es válido para $n$ razonablemente grande, por el TLC aplicado a la
+suma de Bernoullis). El intervalo resultante es:
+
+$$\hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+Se usa $z_{\alpha/2}$ (no $t$) porque, a diferencia del caso de la
+media, aquí no hay una "varianza desconocida que hay que estimar por
+separado con $s$" — la varianza de una proporción está completamente
+determinada por $p$ mismo (y $n$), así que una vez que se sustituye
+$\hat{p}$, la aproximación normal vía TLC es la que se usa
+directamente.
+
+## Ejercicios de la sesión — soluciones completas
+
+**Ejercicio 4 (intención de voto).** $Y=185$ de $n=351$, $\alpha=5\%$
+($z_{0.025}=1.96$).
+
+$$\hat{p} = \frac{185}{351} \approx 0.5271$$
+
+$$\text{Error estándar} = \sqrt{\frac{0.5271(1-0.5271)}{351}} \approx 0.02665$$
+
+$$\text{IC 95\%} = 0.5271 \pm 1.96(0.02665) \approx 0.5271 \pm 0.0522 = (0.4748,\; 0.5793)$$
+
+Interpretación: con 95% de confianza, la verdadera proporción de
+votantes a favor del candidato está entre 47.5% y 57.9%. Punto
+importante para discutir en clase: como el intervalo **incluye** el
+50%, no hay evidencia suficientemente fuerte, a este nivel de
+confianza, para concluir que el candidato tiene una mayoría clara —
+esto conecta directamente con la lógica de pruebas de hipótesis vista
+antes.
+
+**Ejercicio 5 (reforma fiscal).** $Y=600$ de $n=1200$, $\alpha=5\%$.
+
+$$\hat{p} = \frac{600}{1200} = 0.5$$
+
+$$\text{Error estándar} = \sqrt{\frac{0.5(0.5)}{1200}} \approx 0.01443$$
+
+$$\text{IC 95\%} = 0.5 \pm 1.96(0.01443) \approx 0.5 \pm 0.0283 = (0.4717,\; 0.5283)$$
+
+Punto pedagógico útil para comparar con el ejercicio 4: aunque
+$\hat{p}$ es prácticamente el mismo en ambos casos (~0.50 vs. ~0.53),
+el intervalo del ejercicio 5 es más angosto porque el tamaño de
+muestra es mayor (1200 vs. 351) — un buen momento para remarcar,
+numéricamente, que un $n$ mayor produce un error estándar menor
+(porque $n$ está en el denominador dentro de la raíz cuadrada) y por
+lo tanto un intervalo más preciso.
+
+## Laboratorio: Encuesta Continua de Empleo (ECE) 2025
+
+Con la variable `Ingreso_total` de la base ECE 2025, se pide: graficar
+la densidad, calcular mediana, media, varianza, desviación estándar y
+coeficiente de variación, y construir el intervalo de confianza de la
+media con $\alpha=5\%$.
+
+**Nota de preparación:** verificar de antemano que la base de datos
+esté accesible y que la variable `Ingreso_total` cargue correctamente,
+antes de la sesión — este laboratorio es el cierre natural de casi
+todo el curso hasta este punto (descriptiva de la unidad de
+descripción de datos, prueba de hipótesis de la unidad de pruebas de
+hipótesis, e intervalos de hoy), así que vale la pena que corra sin
+contratiempos técnicos en vivo. Si la variable de ingreso tiene una
+distribución muy asimétrica (típico en variables de ingreso), es un
+buen momento para recordar que el TLC sigue funcionando para la
+*media muestral* aun cuando los datos individuales no sean simétricos,
+siempre que $n$ sea razonablemente grande — que, con una encuesta como
+la ECE, ciertamente lo es.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Introducción: ¿por qué un intervalo? | 15 min |
+| Intervalo de confianza de la media (derivación completa) | 30 min |
+| Ejercicios 1-2 (media) | 25 min |
+| Intervalo de confianza de una proporción (derivación) | 25 min |
+| Ejercicios 4-5 (proporción, con comparación de tamaños de muestra) | 25 min |
+| Laboratorio ECE 2025 | 60 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

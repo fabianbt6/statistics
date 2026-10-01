@@ -1,0 +1,327 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Distribuciones de probabilidad — Bernoulli, binomial y Poisson"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Distribuciones de probabilidad — Bernoulli, binomial y Poisson"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 4 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Distribución de probabilidad: conceptos básicos
+- Esperanza matemática y varianza de una variable aleatoria
+- Distribución de Bernoulli
+- Distribución Binomial
+- Distribución de Poisson
+- Laboratorio en R
+
+::: {.notes}
+Bienvenidos a esta unidad. Ya tenemos las herramientas de probabilidad
+—axiomas, condicional, independencia, Bayes— así que hoy las usamos
+para construir algo nuevo: distribuciones de probabilidad. Una
+distribución de probabilidad es, en el fondo, una forma sistemática de
+repartir la probabilidad total entre todos los valores posibles de una
+variable aleatoria, un concepto que ya introdujimos de forma informal
+en la unidad de descripción de datos.
+
+La sesión de hoy tiene esta estructura: primero formalizamos esperanza
+y varianza de una variable aleatoria discreta —que son los análogos
+poblacionales de la media y varianza muestral que ya conocen—; luego
+vemos tres distribuciones discretas específicas, cada una construida
+sobre la anterior: Bernoulli, que es el bloque más simple; binomial,
+que es una suma de Bernoullis; y Poisson, que resulta ser un caso
+límite de la binomial. Cerramos con un laboratorio en R para ver cómo
+se comportan estas distribuciones con datos simulados.
+
+La referencia de hoy es Hogg, capítulo 2, "Discrete Distributions".
+:::
+
+## Distribución de probabilidad {.divisor}
+
+::: {.notes}
+Antes de ver distribuciones específicas, necesitamos el concepto
+general: ¿qué es, formalmente, una distribución de probabilidad?
+:::
+
+## Concepto
+
+Una **distribución de probabilidad** reparte el total de probabilidad
+(que suma 1) entre todos los posibles valores que puede tomar una
+variable aleatoria.
+
+::: {.notes}
+Recuerden la variable aleatoria que vimos en la unidad de probabilidad:
+es una función que asigna un número a cada resultado del espacio
+muestral. Una distribución de probabilidad simplemente le dice cuánta
+probabilidad —cuánto "peso"— tiene cada uno de esos valores posibles.
+Y como vimos con los axiomas de probabilidad, esos pesos tienen que
+ser todos no negativos y sumar exactamente 1, porque algo tiene que
+pasar.
+:::
+
+## Esperanza matemática
+
+Para una variable aleatoria discreta $X$ con función de probabilidad
+$p(x)$:
+
+$$E(X) = \mu = \sum_{x} x \, p(x)$$
+
+Es el valor promedio que se espera obtener si el experimento se
+repitiera un número infinito de veces.
+
+::: {.notes}
+La esperanza matemática es un promedio ponderado: multiplico cada
+valor posible de $X$ por su probabilidad, y sumo. A diferencia del
+promedio simple que calculan con datos —donde cada dato pesa
+$1/n$—, aquí cada valor pesa exactamente su probabilidad $p(x)$.
+
+La interpretación es frecuentista: si pudieran repetir el experimento
+aleatorio un número enorme de veces y promediar los resultados
+observados, ese promedio se acercaría cada vez más a $E(X)$. Esta idea
+—que el promedio de muchas repeticiones converge al valor esperado—
+es la ley de los grandes números, que van a formalizar en cursos
+posteriores, pero ya la pueden usar intuitivamente desde ahora.
+
+Una propiedad clave que vamos a usar mucho hoy: la esperanza es
+lineal. Eso significa que $E(aX+b) = aE(X)+b$, y sobre todo que
+$E(X+Y) = E(X)+E(Y)$ — la esperanza de una suma es la suma de las
+esperanzas, y esto es cierto **siempre**, incluso si $X$ y $Y$ no son
+independientes. Vamos a usar exactamente esta propiedad para derivar
+la esperanza de la binomial en un momento.
+:::
+
+## Varianza de una variable aleatoria
+
+$$Var(X) = \sigma^2 = E[(X-\mu)^2] = \sum_x (x-\mu)^2 p(x)$$
+
+Mide la dispersión de la variable aleatoria alrededor de su valor
+esperado — es el análogo poblacional de la varianza muestral vista en
+la unidad de descripción de datos.
+
+::: {.notes}
+Esta es exactamente la misma idea de varianza que vimos en la unidad
+de descripción de datos, solo que ahora es poblacional —usa
+probabilidades en vez de frecuencias relativas observadas—. En la
+práctica casi nunca se calcula con esta fórmula directamente; se usa
+una fórmula corta, algebraicamente equivalente:
+
+$$Var(X) = E(X^2) - [E(X)]^2$$
+
+Vale la pena mostrar de dónde sale, porque la van a usar todo el
+curso: expandiendo el cuadrado dentro de la esperanza,
+$E[(X-\mu)^2] = E[X^2 - 2\mu X + \mu^2]$, y usando linealidad, esto es
+$E(X^2) - 2\mu E(X) + \mu^2$. Como $E(X)=\mu$, el término del medio es
+$-2\mu^2$, así que queda $E(X^2) - 2\mu^2 + \mu^2 = E(X^2) - \mu^2$,
+que es exactamente $E(X^2) - [E(X)]^2$.
+
+También necesitamos una propiedad de la varianza para lo que sigue:
+si $X$ y $Y$ son **independientes**, entonces
+$Var(X+Y) = Var(X)+Var(Y)$. A diferencia de la esperanza, esta
+propiedad de la varianza sí requiere independencia — no es válida en
+general.
+:::
+
+## Distribución de Bernoulli {.divisor}
+
+::: {.notes}
+Empezamos con el bloque de construcción más simple de todos: un solo
+ensayo con dos resultados posibles. Todo lo que viene después —la
+binomial, y luego la Poisson— se construye a partir de este bloque.
+:::
+
+## Definición
+
+Un **experimento de Bernoulli** tiene dos resultados posibles,
+mutuamente excluyentes y exhaustivos (éxito/fracaso).
+
+- $p$ = probabilidad de éxito, $q = 1-p$ = probabilidad de fracaso
+- Una secuencia de ensayos de Bernoulli ocurre cuando el experimento
+  se repite de forma independiente, manteniendo $p$ constante
+
+$$E(X) = p, \qquad Var(X) = p(1-p)$$
+
+::: {.notes}
+Codificamos "éxito" como $X=1$ y "fracaso" como $X=0$. Con esa
+codificación, la esperanza sale directo de la definición:
+$E(X) = 0\times(1-p) + 1\times p = p$. Es decir, la esperanza de un
+ensayo de Bernoulli es simplemente la probabilidad de éxito — tiene
+sentido, porque si $p$ es alto, esperamos "más éxito en promedio".
+
+Para la varianza, el truco es que como $X$ solo toma valores 0 y 1,
+$X^2$ toma exactamente los mismos valores —porque $0^2=0$ y
+$1^2=1$— así que $E(X^2)=E(X)=p$. Usando la fórmula corta:
+$Var(X) = E(X^2)-[E(X)]^2 = p - p^2 = p(1-p)$.
+
+Van a ver esta fórmula, $p(1-p)$, muchísimas veces más adelante en el
+curso —reaparece en intervalos de confianza para proporciones—, así
+que vale la pena que quede bien internalizada desde ahora: la varianza
+de Bernoulli es máxima cuando $p=0.5$ y se reduce hacia los extremos
+($p$ cerca de 0 o de 1), porque ahí el resultado es casi predecible.
+:::
+
+## Distribución Binomial {.divisor}
+
+::: {.notes}
+Ahora subimos un nivel: en vez de un solo ensayo de Bernoulli,
+repetimos el experimento $n$ veces de forma independiente y contamos
+cuántos éxitos obtuvimos en total. Eso es la distribución binomial.
+:::
+
+## Definición
+
+Cuenta el número de éxitos $X$ en $n$ ensayos de Bernoulli
+independientes, cada uno con probabilidad de éxito $p$:
+
+$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}, \qquad k = 0,1,\dots,n$$
+
+$$E(X) = np, \qquad Var(X) = np(1-p)$$
+
+::: {.destacado}
+Aplicación económica: número de clientes que incumplen un préstamo de
+$n$ clientes independientes, cada uno con la misma probabilidad de
+incumplimiento $p$.
+:::
+
+::: {.notes}
+Vamos a construir esta fórmula juntos, no solo mostrarla. Para que
+$X=k$, necesito exactamente $k$ éxitos y $n-k$ fracasos, en *alguna*
+secuencia posible. La probabilidad de una secuencia particular
+—digamos, éxito, éxito, fracaso, éxito, fracaso...— es, por
+independencia, el producto de las probabilidades individuales:
+$p^k(1-p)^{n-k}$, sin importar en qué orden vengan los éxitos y
+fracasos dentro de esa secuencia. Y el número de secuencias distintas
+que logran exactamente $k$ éxitos entre $n$ ensayos es precisamente
+$\\binom{n}{k}$ — la combinación que derivamos en la unidad de
+probabilidad, porque estamos eligiendo *cuáles* de los $n$ ensayos son
+los éxitos, sin que importe el orden dentro de esos $k$. Multiplicando
+"cuántas secuencias hay" por "la probabilidad de cada una", llegamos a
+la fórmula.
+
+Para la esperanza, hay una forma mucho más elegante que sumar
+directamente sobre la fórmula: escribo $X$ como la suma de $n$
+variables de Bernoulli independientes, $X=X_1+X_2+\\dots+X_n$, donde
+cada $X_i$ vale 1 si el ensayo $i$ fue éxito. Por la linealidad de la
+esperanza —que vimos hace un momento y que no requiere
+independencia—, $E(X) = E(X_1)+\\dots+E(X_n) = p+p+\\dots+p = np$.
+
+Para la varianza, como ahora sí tenemos independencia entre los $X_i$,
+puedo sumar las varianzas: $Var(X) = Var(X_1)+\\dots+Var(X_n) =
+p(1-p)+\\dots+p(1-p) = np(1-p)$.
+
+Esta técnica —escribir una variable compleja como suma de variables
+simples e independientes— es extremadamente poderosa y la van a ver
+una y otra vez en cursos más avanzados de estadística y econometría.
+
+El ejemplo de riesgo crediticio en la guía de preparación tiene un
+cálculo numérico completo con $n=10$ clientes y $p=0.05$ — vale la
+pena resolverlo en clase con los estudiantes antes de pasar a Poisson.
+:::
+
+## Distribución de Poisson {.divisor}
+
+::: {.notes}
+La tercera distribución de hoy responde a un tipo de pregunta
+distinta: ya no "cuántos éxitos en $n$ ensayos", sino "cuántos eventos
+ocurren en un intervalo de tiempo o espacio". Resulta que, matemática
+mente, la Poisson es un caso límite de la binomial — vamos a explicar
+esa conexión antes de dar la fórmula.
+:::
+
+## Definición
+
+Modela el número de eventos que ocurren en un intervalo fijo de
+tiempo o espacio, cuando los eventos ocurren de forma independiente a
+una tasa promedio constante $\lambda$:
+
+$$P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!}, \qquad k=0,1,2,\dots$$
+
+$$E(X) = Var(X) = \lambda$$
+
+::: {.destacado}
+Aplicación económica: número de transacciones fraudulentas detectadas
+por día, número de clientes que llegan a una sucursal bancaria por hora.
+:::
+
+::: {.notes}
+Imaginen que dividen un intervalo de tiempo —digamos, una hora— en un
+número enormemente grande de sub-intervalos diminutos, tan pequeños
+que en cada uno la probabilidad de que ocurra un evento es minúscula.
+Si en el límite, cuando el número de sub-intervalos $n$ crece hacia
+infinito y la probabilidad $p$ de cada uno decrece hacia cero, el
+producto $np$ se mantiene constante e igual a $\\lambda$ —la tasa
+promedio de eventos por hora—, entonces el número total de eventos en
+esa hora sigue exactamente una distribución de Poisson con ese
+parámetro $\\lambda$.
+
+Esta conexión explica directamente por qué $E(X)=Var(X)=\\lambda$:
+tomando el límite de $E(X)=np=\\lambda$, que es constante por
+construcción, y de $Var(X)=np(1-p)$, que tiende a $np\\times 1 =
+\\lambda$ porque $1-p\\to 1$ cuando $p\\to 0$.
+
+Un criterio práctico muy útil para decidir en un problema real si
+usar binomial o Poisson: si hay un número fijo y conocido de "ensayos"
+con dos resultados posibles por ensayo —por ejemplo, "de 20 clientes,
+¿cuántos incumplen?"— es binomial. Si están contando eventos que
+ocurren en un intervalo continuo, sin un número natural de "ensayos"
+—por ejemplo, "¿cuántas transacciones fraudulentas ocurren en un
+día?"— es Poisson. Otro indicio útil, si tienen datos reales: en la
+Poisson, la media y la varianza son siempre iguales; en la binomial,
+la varianza es siempre *menor* que la media (porque $1-p<1$). Si en
+sus datos la varianza observada es aproximadamente igual a la media,
+eso sugiere que un modelo Poisson podría ajustar bien.
+
+El ejemplo de fraude bancario en la guía de preparación tiene el
+cálculo completo con $\\lambda=3$ transacciones por día — resuélvanlo
+en clase antes de pasar al laboratorio.
+:::
+
+## Laboratorio en R
+
+Generar 3 conjuntos de datos con `rpois()` y distintos tamaños de
+muestra, manteniendo `lambda = 40`:
+
+```r
+rpois(n = 10, lambda = 40)
+rpois(n = 20, lambda = 40)
+rpois(n = 10000, lambda = 40)
+```
+
+Graficar cada uno (`hist`) y discutir: ¿qué le pasa a la forma de la
+distribución empírica a medida que aumenta el tamaño de muestra?
+
+::: {.notes}
+El punto pedagógico del laboratorio es mostrar cómo la distribución
+empírica converge a la forma teórica de Poisson —y, con $\\lambda=40$
+que es relativamente grande, se acerca visualmente a una campana tipo
+normal— a medida que crece $n$. No hace falta todavía nombrar el
+Teorema del Límite Central formalmente, eso lo formalizamos más
+adelante, en la unidad de pruebas de hipótesis, pero sí vale la pena
+que los estudiantes noten el patrón: con $n=10$ el histograma se ve
+irregular y disperso, con $n=10{,}000$ ya se ve una forma suave y
+simétrica, centrada cerca de 40 —que es exactamente $E(X)=\\lambda=40$
+que calculamos en la teoría—.
+
+Esto cierra la sesión de hoy. La próxima sesión seguimos con
+distribuciones, pero ahora continuas: normal, t-student, χ² y F, que
+son las que vamos a usar constantemente en la unidad de pruebas de
+hipótesis.
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

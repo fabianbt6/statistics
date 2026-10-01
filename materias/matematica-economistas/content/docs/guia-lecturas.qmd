@@ -1,0 +1,72 @@
+---
+title: "Guía de lecturas — EC-620 Matemática para Economistas"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @stewart2021, @kuttler2021, @buscalc2013, @trench2013, @axler2024
+---
+
+# Guía de lecturas por semana
+
+**`r params$universidad`** — Cuatrimestre `r params$cuatri`, `r params$anio`
+**Docente:** `r params$docente`
+
+::: {.notes}
+Los capítulos indicados son a nivel de **capítulo**, verificados contra
+la tabla de contenidos de cada libro (ver `referencias/MatEconomistas.bib`
+para la nota de cobertura de cada uno). Los números de **sección**
+exactos pueden variar levemente según la edición/impresión de tu copia
+— revisalos en tu propio PDF antes de asignarlos como lectura obligatoria
+al estudiante. Los libros están en
+`materias/matematica-economistas/bibliografia/` (carpeta de trabajo).
+:::
+
+| Semana | Tema | Libro principal (capítulo) | Refuerzo / aplicación económica |
+|---|---|---|---|
+| 1 | Operaciones con matrices | Kuttler — cap. de matrices (suma, producto) | — |
+| 2 | Sistemas de ecuaciones lineales (Jordan-Gauss) | Kuttler — cap. de sistemas de ecuaciones / eliminación gaussiana | — |
+| 3 | Aplicaciones: equilibrio de mercado, matrices de costos | Kuttler — mismo capítulo de sistemas | Business Calculus — cap. 1 (funciones lineales, equilibrio) |
+| 4 | Límites y derivadas, exponencial/logarítmica, grado superior | Stewart — cap. 2 (Límites y derivadas) y cap. 3 (Reglas de derivación) | — |
+| 5 | Máximos/mínimos, 2da derivada, análisis marginal, elasticidad | Stewart — cap. 4 (Aplicaciones de la derivación) | Business Calculus — cap. 2 (optimización, elasticidad) |
+| 6 | Integrales definidas/indefinidas, técnicas | Stewart — cap. 5 (Integrales) y cap. 7 (Técnicas de integración) | — |
+| 7 | Aplicaciones: funciones marginales/totales, valor presente | Stewart — cap. 6 (Aplicaciones de la integración) | Business Calculus — cap. 3 (valor presente de flujo continuo) |
+| 8 | Curva de Lorenz, superávit, modelo de Domar | Stewart — cap. 6 (integrales de aplicación) | **Sin libro que lo cubra directamente — contenido propio** (ver nota abajo) |
+| 9 | Representación gráfica, derivadas parciales | Stewart — cap. 14 (Derivadas parciales) | Business Calculus — cap. 4 (funciones de dos variables) |
+| 10 | Optimización, funciones implícitas/homogéneas, Euler | Stewart — cap. 14 (Derivadas parciales, optimización) | **Teorema de Euler: contenido propio** (Stewart no lo nombra así) |
+| 11 | Aplicaciones: productividad marginal, elasticidades cruzadas | Stewart — cap. 14 | Business Calculus — cap. 4 (optimización de dos variables) |
+| 12 | Definición de ecuación diferencial, separables/homogéneas | Trench — cap. 2 (First Order Equations) | — |
+| 13 | Ecuaciones lineales 1er orden, Bernoulli, Ricatti | Trench — cap. 2 | **Bernoulli y Ricatti por nombre: contenido propio** (ver nota) |
+| 14 | Ecuaciones 2do orden, crecimiento exponencial/logístico | Trench — cap. 4 (Applications) y cap. 5 (Linear Second Order) | **Modelo de telaraña: contenido propio** (es de tiempo discreto) |
+| 15 | Ética y matemática | — | Sin libro asignado — contenido y preguntas de reflexión propias |
+
+## Notas sobre los huecos
+
+Ya lo habíamos identificado al elegir la bibliografía, pero lo dejo
+explícito aquí para que no se pierda al planificar el estudio:
+
+- **Semana 8** (curva de Lorenz, modelo de Domar): son modelos
+  específicos de economía que ningún libro de cálculo puro trae. Vas a
+  necesitar prepararlos como contenido propio (yo puedo redactar el
+  planteamiento matemático cuando lleguemos a esa semana).
+- **Semana 10** (teorema de Euler para funciones homogéneas): Stewart
+  no lo nombra así explícitamente, aunque el concepto de función
+  homogénea sí puede derivarse de su tratamiento de derivadas
+  parciales — hay que redactarlo aparte.
+- **Semana 13** (Bernoulli, Ricatti por nombre): Trench no las nombra
+  así — hay que redactarlas como contenido propio, aunque la técnica
+  general (factor integrante, sustitución) sí sale de sus capítulos de
+  ecuaciones lineales.
+- **Semana 14** (modelo de telaraña): es un modelo de tiempo discreto
+  (ecuaciones en diferencias), no diferencial — ningún libro de la
+  bibliografía lo cubre; se redacta aparte.
+- **Semana 15** (ética): ninguno de los 5 libros trata ética o
+  filosofía de la matemática.
+
+## Bibliografía completa
+
+::: {#refs}
+:::

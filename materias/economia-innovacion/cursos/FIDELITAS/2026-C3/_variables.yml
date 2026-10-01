@@ -1,0 +1,11 @@
+# Generado a mano siguiendo el formato de R/nuevo_curso.R (equivalente a
+# correr: nuevo_curso(materia = "economia-innovacion", universidad =
+# "FIDELITAS", anio = 2026, cuatri = 3, fecha_inicio = "2026-09-10",
+# docente = "Marianne Pérez Gómez", logo_path = "/images/logos/fidelitas.jpg"))
+universidad: "FIDELITAS"
+anio: 2026
+cuatri: 3
+fecha_inicio: "2026-09-10"
+feriados: []
+docente: "Marianne Pérez Gómez"
+logo_path: "/images/logos/fidelitas.jpg"

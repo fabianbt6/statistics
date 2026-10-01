@@ -1,0 +1,247 @@
+---
+title: "Evaluación Económica y Social de Proyectos"
+subtitle: "Sesión 1: Bienvenida, naturaleza de los proyectos sociales y planteamiento del problema"
+format: revealjs
+params:
+  materia: "Evaluación Económica y Social de Proyectos"
+  titulo_sesion: "Bienvenida, naturaleza de los proyectos sociales y planteamiento del problema"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @cepal_guiainversionsocial, @cepal_cohen_proyectossociales, @mideplan2022_guiapip
+---
+
+## Contenido {.agenda}
+
+- 👋 Bienvenida y presentación del curso
+- 🧭 Metodología: 5 sesiones de tutoría, todo gira alrededor de un solo proyecto
+- 💡 ¿Qué es un proyecto social o de desarrollo?
+- 🇨🇷 Los proyectos sociales en Costa Rica
+- 👥 Formación de grupos y elección de tema
+- 📝 Primeros pasos del proyecto: antecedentes, justificación, problema y objetivos
+- 🗣️ Dinámica de discusión y arranque del trabajo en grupo
+
+::: {.notes}
+"Buenos días/tardes, bienvenidos al curso de Evaluación Económica y
+Social de Proyectos. Mi nombre es Marianne Pérez Gómez y voy a
+acompañarlos en estas 5 sesiones de tutoría. A diferencia de otros
+cursos, aquí no hay unidades separadas ni exámenes: todo el curso gira
+alrededor de un único proyecto que ustedes van a construir, paso a
+paso, sesión a sesión, y que vale el 100% de la nota. Hoy vamos a
+conocernos, entender cómo funciona el curso, y dejar arrancado el
+primer paso: elegir el tema y plantear el problema."
+:::
+
+## Bienvenida {.divisor}
+
+## Antes de empezar
+
+- 🙋 Nombre y carrera
+- 💭 ¿Qué entienden por "proyecto social"?
+- 🏥 ¿Conocen algún proyecto social o programa público en Costa Rica
+  (salud, educación, vivienda, pensiones)?
+
+::: {.notes}
+"Empecemos con una vuelta rápida: su nombre, en qué nivel de la carrera
+están, y en una frase qué entienden por 'proyecto social'. Si conocen
+algún programa público costarricense —de salud, educación, vivienda,
+pensiones— cuéntenlo brevemente; nos va a servir como ejemplo más
+adelante."
+:::
+
+## Cómo funciona este curso {.divisor}
+
+## EC-912 Evaluación Económica y Social de Proyectos — formato tutorías
+
+- Licenciatura en Economía, modalidad de **tutorías: 5 sesiones**
+  (en vez de las 15 semanas del curso regular)
+- **Evaluación: 100% Proyecto final**, repartido en avances por sesión:
+  - Avances de las sesiones 1 a 4 (cada uno un paso del documento): **40%**
+  - Documento final completo: **40%**
+  - Presentación/defensa en la sesión 5: **20%**
+- Cada sesión es un **paso del proyecto**, no una unidad teórica aislada
+- El resto del tiempo, después de una explicación breve, se dedica a
+  **debate y avance en grupo** de su propio proyecto
+
+::: {.notes}
+"Quiero que quede clarísimo desde hoy: no hay debates ni mapas mentales
+sueltos, no hay exámenes — el 100% de la nota es un solo proyecto que
+van a ir construyendo en cada sesión. El 40% son los avances que
+entregan sesión a sesión (esta sesión, la de Marco Lógico, la de
+identificación de costos y beneficios, y la de indicadores), el 40% es
+el documento final completo y coherente, y el 20% restante es la
+presentación y defensa del proyecto en la última sesión, el 18 de
+diciembre. Cada sesión yo voy a explicar lo mínimo necesario del paso
+correspondiente —15 a 20 minutos— y el resto lo dedicamos a que
+ustedes trabajen en su propio proyecto y lo discutamos entre todos."
+:::
+
+## ¿Qué es un proyecto social o de desarrollo? {.divisor}
+
+## Un punto de partida
+
+- Un proyecto social busca resolver problemas de salud, educación,
+  seguridad, justicia, nutrición o bienestar familiar, con el objetivo
+  de mejorar la calidad de vida de las personas
+- A diferencia de un proyecto privado, su rentabilidad no se mide solo
+  en dinero: se mide en **bienestar social**
+- Pregunta central del curso: **¿cómo aplicamos las metodologías de
+  evaluación de proyectos para medir el retorno social de una
+  inversión, y no solo su retorno financiero?**
+
+::: {.notes}
+"La diferencia clave con la evaluación financiera de proyectos que tal
+vez ya vieron en otros cursos es esta: un proyecto social no se evalúa
+por cuánta ganancia genera, sino por cuánto bienestar genera para la
+sociedad, incluso cuando no hay un precio de mercado que lo mida
+directamente. Por eso necesitamos herramientas distintas —precios
+sociales, Marco Lógico, indicadores económicos— que vamos a ir
+construyendo en las próximas sesiones, siempre aplicados a su propio
+proyecto."
+:::
+
+## Los proyectos sociales en Costa Rica {.destacado}
+
+- El Sistema Nacional de Inversión Pública, coordinado por **MIDEPLAN**,
+  regula cómo se identifican, formulan y evalúan los proyectos de
+  inversión pública en el país — incluyendo los proyectos sociales
+- Instituciones como la CCSS, el IMAS, el MEP o la CNP ejecutan
+  proyectos sociales que compiten por los mismos recursos públicos
+  limitados — de ahí la importancia de evaluarlos bien
+- Referencia de consulta durante todo el curso: *Guía Metodológica para
+  la Identificación, Formulación y Evaluación de Proyectos de Inversión
+  Pública* (MIDEPLAN, 2022)
+
+## Formación de grupos y elección de tema {.divisor}
+
+## Temas disponibles para el proyecto final
+
+Grupos de **máximo 4 integrantes**. Cada grupo elige (o se le asigna)
+uno de estos temas, tal como indica el programa oficial:
+
+:::: {.columns}
+::: {.column width="50%"}
+- 💼 Desempleo
+- 🍽️ Desnutrición
+- ♿ Discapacidad
+:::
+::: {.column width="50%"}
+- ⚖️ Índice de desigualdad social
+- 👴 Pensiones y seguridad social en Costa Rica
+- 🎓 Calidad de la educación primaria y secundaria
+:::
+::::
+
+::: {.notes}
+"Formen grupos de máximo 4 personas. Estos son los mismos temas del
+programa oficial del curso regular — desempleo, desnutrición,
+discapacidad, desigualdad social, pensiones y seguridad social, y
+calidad de la educación primaria y secundaria. La idea es que elijan un
+tema que les interese de verdad, porque lo van a desarrollar en
+profundidad durante las próximas 4 sesiones."
+:::
+
+## Los primeros pasos del proyecto {.divisor}
+
+## Lo que van a entregar hoy (avance de la Sesión 1)
+
+1. **Antecedentes**: recorrido breve de cómo ha evolucionado el
+   problema elegido en Costa Rica (¿mejora, empeora, se mantiene?)
+2. **Justificación**: por qué vale la pena estudiarlo — cifras,
+   estudios previos, beneficios y beneficiarios potenciales
+3. **Formulación del problema**: como una pregunta (nunca como
+   afirmación), consistente con el tema, cuya respuesta no puede ser
+   sí/no
+4. **Objetivo general**: el hilo conductor de todo el trabajo
+5. **Objetivos específicos** (mínimo 3): verbos en infinitivo que
+   impliquen pensamiento, no acción; ninguno repite el verbo del
+   objetivo general
+
+::: {.notes}
+"Este es el primer paso del documento final, y lo van a dejar
+esbozado hoy mismo en grupo. Insisto en la formulación del problema:
+tiene que ser una pregunta, no una afirmación, y la respuesta no puede
+ser simplemente sí o no —por ejemplo, no vale '¿el desempleo es un
+problema en Costa Rica?', pero sí vale algo como '¿qué factores
+explican la persistencia del desempleo juvenil en la Zona Sur de Costa
+Rica?'. Para los objetivos específicos, recuerden: mínimo tres, con
+verbos en infinitivo que impliquen un proceso de pensamiento —analizar,
+comparar, evaluar— no una acción operativa, y ninguno debe repetir el
+verbo que usaron en el objetivo general."
+:::
+
+## Dinámica de discusión y trabajo en grupo {.divisor}
+
+## Para trabajar en sus grupos (el resto de la sesión)
+
+::: {.incremental}
+- Elijan el tema y formen el grupo (máx. 4 integrantes)
+- Discutan: ¿qué saben ya del problema en Costa Rica? ¿qué cifras o
+  antecedentes conocen?
+- Redacten un primer borrador de la pregunta de investigación
+- Redacten un objetivo general y al menos 3 objetivos específicos
+- Prepárense para compartir su avance en dos minutos al cierre
+:::
+
+::: {.notes}
+"El resto de la sesión es para que trabajen en grupo. Circulen entre
+ustedes las cifras o antecedentes que ya conozcan sobre su tema —no
+hace falta investigación exhaustiva todavía, eso viene con la lectura
+asignada para la próxima sesión. Al final de la sesión cada grupo
+comparte, en dos minutos, su tema, su pregunta de investigación
+preliminar y su objetivo general. No busco la versión perfecta hoy —
+busco que salgan con una base clara para seguir trabajando antes de la
+próxima sesión."
+:::
+
+## Cierre y próxima sesión
+
+- Próxima sesión (Sesión 2, **9 de octubre**): **Marco Lógico** — van a
+  construir el árbol de problemas, el árbol de objetivos y la matriz de
+  marco lógico de su propio proyecto
+- Entre sesiones: terminen de redactar antecedentes, justificación,
+  problema y objetivos; empiecen a recopilar cifras/datos de fuentes
+  oficiales sobre su tema (INEC, CCSS, MEP, IMAS, según corresponda)
+
+::: {.notes}
+"Para la próxima sesión, el 9 de octubre, van a traer terminado el
+primer paso del documento —antecedentes, justificación, problema y
+objetivos— y vamos a entrar de lleno en Marco Lógico, que es la
+herramienta que van a usar para estructurar toda la lógica de su
+proyecto. Aprovechen las semanas entre sesiones para buscar datos
+reales de fuentes oficiales sobre su tema; eso les va a servir muchísimo
+cuando lleguemos a identificar costos y beneficios."
+:::
+
+## Lecturas para la próxima sesión {.destacado}
+
+**Sesión 2 — Marco Lógico**
+
+- 📄 ILPES/CEPAL (Ortegón, Pacheco y Prieto) — *Metodología del marco
+  lógico para la planificación, el seguimiento y la evaluación de
+  proyectos y programas* (Serie Manuales N.º 42)
+
+Además, para consulta durante todo el curso:
+
+- 📄 CEPAL — *Guía metodológica general para la preparación y
+  evaluación de proyectos de inversión social*
+- 📄 CEPAL/DDS (Cohen y Martínez) — *Manual: Formulación, evaluación y
+  monitoreo de proyectos sociales*
+- 📄 MIDEPLAN (2022) — *Guía Metodológica para la Identificación,
+  Formulación y Evaluación de Proyectos de Inversión Pública*
+
+Enlaces y ficha completa de cada fuente: `referencias/EvaluacionProyectos.bib`
+
+::: {.notes}
+"El manual de Marco Lógico del ILPES/CEPAL es de lectura obligatoria
+para la próxima sesión, es corto y muy práctico —léanlo completo. Los
+otros tres son de consulta durante todo el curso, no hace falta
+leerlos enteros ahora; se los voy a ir señalando por capítulo según
+avancemos. Todos son de acceso abierto, sin necesidad de usuario
+institucional."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

@@ -1,7 +1,22 @@
-_output/
+# Los .html/_files generados al renderizar viven junto al _variables.yml
+# de cada curso (materias/<materia>/cursos/<universidad>/<periodo>/) —
+# ya no en una carpeta _output/ aparte. Se ignoran solo los artefactos
+# generados ahí, nunca el _variables.yml (que sí se versiona).
+materias/*/cursos/**/*.html
+
+# El .html que genera rmarkdown::run()/render() sobre cada tutorial.Rmd
+# (learnr) es un artefacto regenerado cada vez que se corre — nunca es
+# el entregable (el entregable es el .Rmd + los datos que lo acompañan
+# en su propia carpeta). tutorial_files/ ya cae bajo *_files/ más abajo.
+materias/*/tutoriales/**/tutorial.html
+
 .quarto/
 *_files/
 *_cache/
 .Rproj.user/
 .Rhistory
 .RData
+
+/.quarto/
+**/*.quarto_ipynb
+_herramientas/revealjs-skill/

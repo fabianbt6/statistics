@@ -1,0 +1,503 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Probabilidad — conceptos y técnicas de conteo"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Probabilidad — conceptos y técnicas de conteo"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 2 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Repaso de teoría de conjuntos
+- Probabilidad: conceptos básicos y teoremas
+- Métodos de conteo: permutaciones y combinaciones
+
+::: {.notes}
+Buenos días/tardes a todos. Hoy entramos al bloque de probabilidad.
+Esta es, literalmente, la base matemática de todo lo que viene después
+en el curso — pruebas de hipótesis, intervalos de confianza, análisis
+de varianza, todo está construido sobre estos conceptos. Así que aunque
+algunas cosas de teoría de conjuntos les puedan sonar a repaso de
+secundaria, les pido que no las subestimen: más adelante, cuando
+veamos el teorema de Bayes, vamos a necesitar exactamente estas ideas
+de eventos mutuamente excluyentes y exhaustivos. Si hoy quedan claros,
+la siguiente sesión va a fluir mucho mejor.
+
+La sesión de hoy tiene tres bloques: primero un repaso rápido de
+teoría de conjuntos, porque el lenguaje de la probabilidad está escrito
+en ese lenguaje; segundo, los axiomas y propiedades de la probabilidad,
+con un ejercicio completo aplicado a un contexto de negocios; y
+tercero, técnicas de conteo — permutaciones y combinaciones — que
+vamos a necesitar más adelante para calcular probabilidades en
+espacios muestrales grandes. Al final tienen la Práctica 1 para
+aplicar todo esto.
+
+La referencia principal de hoy es Hogg, Tanis y Zimmerman (2015),
+capítulo 1, "Probability". Si tienen el PDF a mano, esta sesión sigue
+ese capítulo casi en el mismo orden.
+:::
+
+## Teoría de conjuntos {.divisor}
+
+::: {.notes}
+Antes de hablar de probabilidad como tal, necesitamos un lenguaje
+preciso para describir "resultados posibles" y "eventos". Ese lenguaje
+es la teoría de conjuntos. No se preocupen, no vamos a hacer teoría de
+conjuntos abstracta — solo lo mínimo necesario para poder escribir
+probabilidades sin ambigüedad.
+:::
+
+## Conceptos básicos
+
+- **Espacio muestral ($S$):** conjunto de todos los resultados
+  posibles de un experimento aleatorio
+- **Evento:** cualquier subconjunto de $S$
+- **Conjunto vacío ($\emptyset$):** evento que no puede ocurrir
+
+::: {.notes}
+Empecemos por el espacio muestral, que denotamos con la letra $S$.
+Es, literalmente, la lista de todo lo que podría pasar cuando hacemos
+un experimento aleatorio. Por ejemplo, si lanzamos un dado, $S = \{1,
+2, 3, 4, 5, 6\}$. Si medimos el tiempo de espera de un cliente en una
+fila, $S$ podría ser todos los números reales positivos.
+
+Un evento es cualquier subconjunto de ese espacio muestral — es decir,
+cualquier colección de resultados que nos interese. Por ejemplo, "sacar
+un número par" en el dado es el evento $A = \{2, 4, 6\}$, que es un
+subconjunto de $S$. Noten que un evento puede tener un solo resultado,
+varios, todos, o ninguno.
+
+El conjunto vacío, que denotamos $\emptyset$, es el evento que
+nunca puede ocurrir — por ejemplo, "sacar un 7" al lanzar un dado de
+seis caras. Vamos a usar este concepto en un momento cuando hablemos
+de la probabilidad de eventos imposibles.
+:::
+
+## Operaciones de conjuntos
+
+- **Unión** ($A \cup B$): ocurre $A$, $B$, o ambos
+- **Intersección** ($A \cap B$): ocurren ambos $A$ y $B$
+- **Complemento** ($A^c$): no ocurre $A$
+- **Diferencia** ($A - B$): ocurre $A$ pero no $B$
+
+::: {.notes}
+Con el espacio muestral y los eventos definidos, necesitamos formas de
+combinarlos. La unión, $A \cup B$, es el evento "ocurre $A$, o $B$, o
+ambos" — piensen en esto como un "o" inclusivo. La intersección,
+$A \cap B$, es más restrictiva: es el evento "ocurren $A$ y $B$ al
+mismo tiempo".
+
+El complemento, $A^c$, es simplemente "todo lo que no es $A$" dentro
+del espacio muestral — es la negación del evento. Y la diferencia,
+$A - B$, es "ocurre $A$ pero no $B$" — noten que esto es equivalente a
+$A \cap B^c$.
+
+Estas cuatro operaciones son las piezas de Lego con las que vamos a
+construir prácticamente cualquier evento complejo que nos interese
+calcular.
+:::
+
+## Leyes de conjuntos
+
+- Conmutativa: $A \cup B = B \cup A$
+- Asociativa: $(A \cup B) \cup C = A \cup (B \cup C)$
+- Distributiva: $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+- Leyes de De Morgan: $(A \cup B)^c = A^c \cap B^c$
+
+::: {.notes}
+Estas leyes son análogas a las que ya conocen del álgebra con números
+—conmutativa, asociativa, distributiva— y funcionan de la misma
+manera lógica, solo que ahora con conjuntos en vez de números.
+
+Quiero que se detengan un momento en las leyes de De Morgan, porque son
+las que más se usan en la práctica y las que menos intuitivas resultan
+a primera vista. La primera ley dice que el complemento de una unión es
+la intersección de los complementos: $(A \cup B)^c = A^c \cap B^c$. En
+palabras: "no ocurre A ni B" es lo mismo que decir "no ocurre A, y
+además no ocurre B". La segunda ley, análoga, es
+$(A \cap B)^c = A^c \cup B^c$: "no ocurren ambos A y B" es lo mismo que
+"no ocurre A, o no ocurre B". Estas leyes son extremadamente útiles
+cuando calculamos la probabilidad de "al menos uno" de varios eventos,
+porque a veces es mucho más fácil calcular el complemento —"ninguno
+ocurre"— y restar de 1.
+:::
+
+## Probabilidad {.divisor}
+
+::: {.notes}
+Ya tenemos el lenguaje. Ahora vamos a definir formalmente qué es una
+probabilidad — no de manera intuitiva, sino con una definición
+matemática precisa que después vamos a poder manipular con reglas
+claras.
+:::
+
+## Definición axiomática
+
+Para un espacio muestral $S$ y un evento $A$, la probabilidad $P(A)$
+cumple:
+
+1. $P(A) \geq 0$
+2. $P(S) = 1$
+3. Si $A_1, A_2, \dots$ son mutuamente excluyentes,
+   $P(A_1 \cup A_2 \cup \dots) = P(A_1) + P(A_2) + \dots$
+
+::: {.notes}
+Esta es la definición axiomática de probabilidad, propuesta por
+Kolmogorov, y es el fundamento de toda la estadística moderna. Son
+solo tres reglas, pero de ellas se deriva absolutamente todo lo demás.
+
+El primer axioma dice que ninguna probabilidad puede ser negativa —
+tiene sentido, no existe "menos diez por ciento de probabilidad" de
+que algo pase. El segundo dice que la probabilidad de que ocurra
+"algo" dentro del espacio muestral completo es exactamente 1, o sea,
+100%: algo de lo posible tiene que pasar. El tercero, el más importante
+para el cálculo práctico, dice que si tengo eventos mutuamente
+excluyentes —es decir, que no pueden ocurrir al mismo tiempo, como
+"sacar un 2" y "sacar un 5" en un solo lanzamiento de dado— entonces la
+probabilidad de que ocurra cualquiera de ellos es simplemente la suma
+de sus probabilidades individuales.
+
+Quiero que noten algo: estos tres axiomas no nos dicen cómo calcular
+probabilidades específicas en el mundo real —eso depende del
+problema—, pero sí nos dan las reglas matemáticas que cualquier
+asignación de probabilidades válida tiene que respetar.
+:::
+
+## Propiedades de la función P
+
+- $P(\emptyset) = 0$
+- $P(A^c) = 1 - P(A)$
+- $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+- Si $A \subset B$, entonces $P(A) \leq P(B)$
+
+::: {.notes}
+Estas cuatro propiedades no son axiomas nuevos — se derivan
+directamente de los tres axiomas que acabamos de ver. Vale la pena
+mostrar rápidamente de dónde salen dos de ellas, porque eso ayuda a
+entender que la probabilidad no es un conjunto arbitrario de reglas
+sino un sistema lógico coherente.
+
+Para $P(\emptyset) = 0$: como $S$ y $\emptyset$ son mutuamente
+excluyentes y su unión es $S$, por el axioma 3 tenemos
+$P(S) = P(S) + P(\emptyset)$, y como $P(S) = 1$ por el axioma 2,
+despejando queda $P(\emptyset) = 0$. Es decir, el evento imposible
+tiene probabilidad cero, como esperábamos, pero ahora lo derivamos en
+vez de solo asumirlo.
+
+Para $P(A^c) = 1 - P(A)$: como $A$ y $A^c$ son mutuamente excluyentes
+y $A \cup A^c = S$, por el axioma 3, $P(S) = P(A) + P(A^c)$, y como
+$P(S)=1$, despejando obtenemos $P(A^c) = 1 - P(A)$. Esta propiedad la
+vamos a usar muchísimo: cada vez que calcular "al menos uno" sea
+complicado, calculamos el complemento —"ninguno"— y restamos de 1.
+
+La tercera, la regla general de la suma, es la versión de la unión
+para eventos que **no** son necesariamente mutuamente excluyentes:
+resto la intersección porque, si simplemente sumara $P(A)$ más $P(B)$,
+estaría contando dos veces la región donde ambos ocurren. Vamos a usar
+esta fórmula exactamente en el ejercicio que sigue.
+
+La cuarta, la monotonía, es intuitiva: si $A$ es un subconjunto de
+$B$, entonces $A$ no puede ser "más probable" que $B$, porque todo lo
+que hace que $A$ ocurra también hace que $B$ ocurra.
+:::
+
+## Ejercicio 1
+
+De un grupo de pequeños empresarios, el 30% contratan servicios de
+contabilidad y planificación financiera, y el 10% no contrata ninguno
+de los dos servicios. La probabilidad de contratar a un contador
+supera en 20% a la de contratar al planificador financiero.
+
+¿Cuál es la probabilidad de seleccionar aleatoriamente un empresario
+que contrate los servicios de contabilidad?
+
+::: {.notes}
+Vamos a resolver este ejercicio juntos, en clase, paso a paso, en vez
+de simplemente mostrar la respuesta. Primero traduzcamos el enunciado
+a notación. Llamemos $C$ al evento "contrata contabilidad" y $F$ al
+evento "contrata planificación financiera".
+
+El enunciado dice tres cosas. Primero, "30% contratan ambos" se
+traduce como $P(C \cap F) = 0.30$. Segundo, "10% no contrata ninguno
+de los dos" se traduce, usando la ley de De Morgan que vimos hace un
+momento, como $P((C \cup F)^c) = 0.10$, y por la propiedad del
+complemento, $P(C \cup F) = 1 - 0.10 = 0.90$. Tercero, "la probabilidad
+de contratar contador supera en 20% a la del planificador" se traduce
+como $P(C) = P(F) + 0.20$.
+
+Pídanle a los estudiantes que intenten identificar estas tres
+ecuaciones antes de que ustedes las escriban — es el paso donde más se
+equivocan, no en el álgebra.
+:::
+
+## Ejercicio 1: Solución
+
+- $C$ = contrata contabilidad, $F$ = contrata planificación financiera
+- $P(C \cap F) = 0.30$, $P(C \cup F)^c = 0.10 \Rightarrow P(C \cup F) = 0.90$
+- $P(C) = P(F) + 0.20$
+
+$$P(C \cup F) = P(C) + P(F) - P(C \cap F)$$
+$$0.90 = (P(F) + 0.20) + P(F) - 0.30 \Rightarrow P(F) = 0.50$$
+$$P(C) = 0.50 + 0.20 = 0.70$$
+
+::: {.notes}
+Ahora aplicamos la regla general de la suma que vimos antes:
+$P(C \cup F) = P(C) + P(F) - P(C \cap F)$. Sustituyendo lo que ya
+tenemos: $0.90 = P(C) + P(F) - 0.30$, y como $P(C) = P(F) + 0.20$,
+sustituyo esa expresión en lugar de $P(C)$:
+$0.90 = (P(F) + 0.20) + P(F) - 0.30$.
+
+Simplifico: $0.90 = 2P(F) - 0.10$, entonces $2P(F) = 1.00$, y por lo
+tanto $P(F) = 0.50$. Con eso, $P(C) = P(F) + 0.20 = 0.50 + 0.20 =
+0.70$.
+
+Verifiquen siempre el resultado sustituyendo de vuelta en la ecuación
+original: $P(C \cup F) = 0.70 + 0.50 - 0.30 = 0.90$. Coincide con lo
+que sabíamos, así que la respuesta es consistente. La probabilidad de
+que un empresario contrate servicios de contabilidad es del 70%.
+
+Este es un buen ejemplo de cómo traducir un problema verbal de
+negocios en un sistema de ecuaciones basado en las propiedades de la
+probabilidad — es exactamente el tipo de razonamiento que les voy a
+pedir en la Práctica 1 y en evaluaciones futuras.
+:::
+
+## Métodos de conteo {.divisor}
+
+::: {.notes}
+Cambiamos de tema dentro de la misma unidad. Hasta ahora hemos
+trabajado con probabilidades que nos daban directamente en el
+enunciado. Pero en muchos problemas reales necesitamos *contar*
+cuántos resultados posibles hay, para poder calcular una probabilidad
+como "casos favorables sobre casos totales". Para eso necesitamos
+técnicas de conteo: el principio de multiplicación, permutaciones y
+combinaciones.
+:::
+
+## Principio de multiplicación
+
+Si una tarea se puede hacer en $k$ pasos, con $n_1$ formas de hacer el
+primer paso, $n_2$ formas el segundo, etc., el número total de formas
+de hacer la tarea completa es:
+
+$$n_1 \times n_2 \times \dots \times n_k$$
+
+::: {.notes}
+Este principio es la base de todo lo que sigue. La idea es simple:
+si tengo que tomar una serie de decisiones independientes, una tras
+otra, el número total de combinaciones posibles es el producto del
+número de opciones en cada paso. Un ejemplo clásico: si un menú tiene
+3 entradas, 4 platos fuertes y 2 postres, el número de combinaciones
+posibles de un menú completo es $3 \times 4 \times 2 = 24$. Simple,
+pero es la base de todo lo que viene: factorial, permutaciones y
+combinaciones son, en el fondo, aplicaciones repetidas de este mismo
+principio.
+:::
+
+## n factorial
+
+$$n! = n \times (n-1) \times (n-2) \times \dots \times 1, \qquad 0! = 1$$
+
+Cuenta el número de formas de ordenar $n$ objetos distintos.
+
+::: {.notes}
+El factorial de $n$, que se escribe $n!$, es el producto de todos los
+enteros positivos desde $n$ hasta 1. Por ejemplo, $4! = 4 \times 3
+\times 2 \times 1 = 24$. Esto responde la pregunta: "¿de cuántas
+formas distintas puedo ordenar $n$ objetos diferentes en una fila?"
+Piensen en por qué: para el primer lugar de la fila tengo $n$ opciones,
+para el segundo lugar ya usé una, entonces tengo $n-1$ opciones, para
+el tercero $n-2$, y así sucesivamente hasta llegar a 1. Es el principio
+de multiplicación aplicado a este caso específico. Por convención
+matemática, $0! = 1$ — no hay nada que ordenar, y hay exactamente una
+forma de "no hacer nada".
+:::
+
+## Muestreo con y sin reemplazo
+
+- **Sin reemplazo:** un objeto seleccionado no vuelve a estar
+  disponible (permutaciones)
+- **Con reemplazo:** un objeto seleccionado puede volver a ser
+  seleccionado
+
+::: {.notes}
+Antes de ver las fórmulas de permutaciones y combinaciones, es
+importante distinguir estos dos escenarios de muestreo, porque
+cambian completamente el conteo. "Sin reemplazo" significa que una vez
+que elegimos un objeto, ya no está disponible para la siguiente
+elección — por ejemplo, elegir 3 personas de un comité para ocupar 3
+cargos distintos: una vez que alguien es elegido presidente, ya no
+puede ser también tesorero. "Con reemplazo" significa que el mismo
+objeto puede volver a salir seleccionado — por ejemplo, lanzar un
+dado varias veces: el mismo número puede repetirse. Las fórmulas de
+permutaciones y combinaciones que vamos a ver ahora asumen muestreo
+**sin** reemplazo, que es el caso más común en los problemas que vamos
+a trabajar.
+:::
+
+## Permutaciones (muestreo sin reemplazo)
+
+Número de formas de ordenar $r$ objetos tomados de un total de $n$,
+donde el orden importa:
+
+$$P(n,r) = \frac{n!}{(n-r)!}$$
+
+::: {.notes}
+La fórmula de permutaciones cuenta cuántas formas hay de elegir y
+ordenar $r$ objetos de un total de $n$ disponibles, cuando el orden en
+que los elijo sí importa. Vamos a derivar esta fórmula usando el
+principio de multiplicación, porque entender de dónde sale les va a
+ayudar mucho más que memorizarla.
+
+Imaginen que tienen que llenar $r$ posiciones distintas —por ejemplo,
+presidente, vicepresidente y tesorero— eligiendo entre $n$ candidatos.
+Para la primera posición tengo $n$ opciones. Para la segunda, ya usé
+un candidato, entonces tengo $n-1$ opciones. Para la tercera, $n-2$
+opciones. Y así sucesivamente hasta la posición $r$, donde tengo
+$n - (r-1) = n - r + 1$ opciones. Multiplicando todas estas opciones
+por el principio de multiplicación:
+
+$$n \times (n-1) \times (n-2) \times \dots \times (n-r+1)$$
+
+Este producto, escrito de forma compacta usando factoriales, es
+exactamente $\dfrac{n!}{(n-r)!}$ — porque $n!$ incluye todos los
+factores desde $n$ hasta 1, y al dividir entre $(n-r)!$ estamos
+"cancelando" los factores desde $(n-r)$ hasta 1, dejando solo el
+producto que necesitamos. Van a ver esta fórmula aplicada en un
+ejercicio completo en un momento.
+:::
+
+## Combinaciones
+
+Número de formas de elegir $r$ objetos de un total de $n$, donde el
+orden **no** importa:
+
+$$C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$$
+
+::: {.idea-clave}
+La diferencia clave entre permutación y combinación es si el orden de
+selección importa o no — en una permutación sí, en una combinación no.
+:::
+
+::: {.notes}
+Ahora bien, ¿qué pasa si no me importa el orden, solo qué grupo de
+objetos queda seleccionado? Por ejemplo, elegir 3 personas de un grupo
+de 8 para formar un comité, sin distinguir cargos — no importa si Ana
+fue elegida "primero" o "tercero", lo único que importa es que Ana,
+Beto y Carla quedaron en el comité.
+
+Para llegar a la fórmula de combinaciones, partimos de la fórmula de
+permutaciones que ya derivamos, $P(n,r) = \dfrac{n!}{(n-r)!}$, y nos
+damos cuenta de que esa fórmula cuenta cada grupo de $r$ personas
+**varias veces** — exactamente $r!$ veces, una por cada forma distinta
+de ordenar esas mismas $r$ personas. Entonces, para contar cada grupo
+una sola vez, dividimos entre $r!$:
+
+$$C(n,r) = \frac{P(n,r)}{r!} = \frac{n!}{r!(n-r)!}$$
+
+Esta relación, $P(n,r) = C(n,r) \times r!$, es muy útil para
+verificar sus cálculos: si calculan una combinación y quieren
+verificarla, multipliquen por $r!$ y deberían obtener la permutación
+correspondiente. Vamos a usar exactamente esta verificación en el
+ejercicio de la Práctica y en la guía de preparación.
+
+La idea clave que deben llevarse de esta diapositiva: pregúntense
+siempre "¿importa el orden aquí?" Si la respuesta es sí —como en
+elegir quién es presidente, quién vicepresidente, quién tesorero— es
+una permutación. Si la respuesta es no —como elegir simplemente qué
+tres personas integran un comité, sin cargos distintos— es una
+combinación.
+:::
+
+## Resumen: muestreo, permutaciones y combinaciones {.smaller}
+
+| Escenario | ¿Orden importa? | ¿Se repite? | Fórmula |
+|---|---|---|---|
+| **Permutación** | Sí | No | $P(n,r) = \dfrac{n!}{(n-r)!}$ |
+| **Combinación** | No | No | $C(n,r) = \dfrac{n!}{r!(n-r)!}$ |
+| **Con reemplazo** | Sí | Sí | $n^r$ |
+
+::: {.notes}
+Esta tabla resume las tres ideas de la sección de conteo en un solo
+vistazo, y es una buena referencia para cuando estén resolviendo la
+práctica. La pregunta clave para decidir en qué fila cae un problema es
+siempre la misma, en dos pasos: primero, ¿el objeto elegido puede
+volver a salir elegido, o "se gasta" al usarlo? (con o sin reemplazo);
+segundo, si no se puede repetir, ¿importa el orden en que se eligen los
+objetos, o solo importa el grupo final? (permutación vs. combinación).
+
+Un ejemplo por fila, para anclar la tabla: permutación es elegir
+presidente, vicepresidente y tesorero de un comité (importa quién
+queda en cada puesto); combinación es elegir simplemente qué 3
+personas integran un comité, sin cargos distintos; con reemplazo es,
+por ejemplo, lanzar un dado 3 veces, donde el mismo número puede salir
+más de una vez, y por el principio de multiplicación el total es
+$n \times n \times \dots \times n$ ($r$ veces) $= n^r$. Este último
+caso lo vamos a retomar si aparece en algún ejercicio de probabilidad
+condicional en la próxima sesión.
+:::
+
+## Ejercicio 2
+
+Un club tiene 6 candidatos para ocupar dos puestos: presidente y
+secretario (la misma persona no puede ocupar los dos puestos).
+
+a) ¿De cuántas formas se pueden asignar los dos puestos entre los 6
+   candidatos?
+b) ¿De cuántas formas se puede elegir, en cambio, un comité de 2
+   personas entre esos 6 candidatos, sin distinguir cargos?
+
+::: {.notes}
+Este ejercicio es más corto que el Ejercicio 1 a propósito — el
+objetivo aquí no es combinar varios conceptos en un solo enunciado,
+sino que quede clarísima la diferencia entre permutación y combinación
+usando los mismos números en ambos incisos. Pídanle a los estudiantes
+que antes de calcular nada respondan una sola pregunta para cada
+inciso: "¿importa aquí quién queda en cada puesto, o solo quién queda
+seleccionado?" Eso ya les dice si es (a) permutación o (b) combinación,
+antes de tocar ninguna fórmula.
+:::
+
+## Ejercicio 2: Solución
+
+- $n = 6$ candidatos, $r = 2$ seleccionados
+- (a) Los puestos son distintos → el orden importa → **permutación**
+- (b) El comité no distingue cargos → el orden no importa → **combinación**
+
+$$P(6,2) = \frac{6!}{(6-2)!} = \frac{6!}{4!} = 30$$
+$$C(6,2) = \frac{6!}{2!(6-2)!} = \frac{6!}{2!\,4!} = 15$$
+
+::: {.notes}
+Para (a): con 6 candidatos y 2 puestos distintos, para el primer
+puesto tengo 6 opciones y para el segundo ya usé una, entonces 5
+opciones: $6 \times 5 = 30$, que es justo $P(6,2) = 6!/4! = 30$.
+
+Para (b): como el comité no distingue cargos, cada pareja de personas
+se está contando dos veces en el resultado anterior (una vez por cada
+orden posible de asignarles los puestos), entonces divido entre
+$2! = 2$: $C(6,2) = P(6,2)/2! = 30/2 = 15$.
+
+Aprovechen para verificar con la relación que vimos antes:
+$P(n,r) = C(n,r) \times r!$, en este caso
+$30 = 15 \times 2$. Coincide, así que ambos resultados son
+consistentes entre sí.
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

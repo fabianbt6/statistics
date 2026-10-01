@@ -1,0 +1,208 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Presentación del curso e introducción a R"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Presentación del curso e introducción a R"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @dalgaard2008
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Este archivo es la unidad 0 (numeración interna consecutiva que usa
+     render_curso(unidades = ...) para filtrar contenido, empezando en 0
+     para poder incluir la intro del curso junto con el resto). El
+     título visible NO incluye ese número. Render manual: quarto render
+     materias/estadistica/content/unidades/0_intro-presentacion.qmd -->
+
+## Contenido {.agenda}
+
+- Espacio para conocernos
+- Revisar el plan de estudio
+- Introducción a R
+- Configuración de R
+
+::: {.notes}
+"Buenos días/tardes a todos, bienvenidos al curso de Teoría
+Estadística y Métodos Cuantitativos. Mi nombre es Fabián Brenes y voy
+a ser su profesor este cuatrimestre. Antes de entrar en materia,
+vamos a dedicar esta primera sesión a tres cosas: conocernos un poco,
+revisar juntos el programa del curso para que quede clarísimo cómo se
+evalúa, y dejar instalado R, que es la herramienta que vamos a usar
+durante todo el curso. No se preocupen si nunca han programado antes
+— empezamos desde cero."
+:::
+
+## Espacio para conocernos {.divisor}
+
+## Antes de empezar
+
+- Encender la cámara
+- Experiencia laboral
+- Expectativa del curso
+- Nivel en el que están en la carrera
+- ¿Cuáles cursos de matemática y estadística han llevado?
+- ¿Conocen R o Python?
+
+::: {.notes}
+"Vamos a dar una vuelta rápida por el grupo. Les pido que enciendan la
+cámara si están de forma virtual, y que me cuenten en un minuto: su
+nombre, si tienen experiencia laboral y en qué área, qué esperan de
+este curso, en qué nivel de la carrera están, qué cursos de matemática
+o estadística ya llevaron, y si tienen algún conocimiento previo de R
+o Python. Esto me ayuda mucho a calibrar el ritmo de las próximas
+sesiones — si la mayoría ya vio algo de programación, podemos avanzar
+un poco más rápido en la parte de R." [Dar la vuelta al grupo, anotar
+mentalmente o en papel quiénes ya conocen R — sirve para formar
+parejas de laboratorio más adelante, mezclando experiencia.]
+:::
+
+## Revisión del plan de estudio {.divisor}
+
+## Programa del curso
+
+- Código EC-720 — Teoría Estadística y Métodos Cuantitativos
+- 8 unidades: descripción de datos, probabilidad, distribuciones,
+  pruebas de hipótesis, intervalos de confianza, ANOVA, series de
+  tiempo (introducción) y números índice (actividad participativa)
+- Cuatrimestre 2026-C3: curso comprimido a **10 sesiones** (viernes,
+  intercalados con el curso `evaluacion-proyectos`)
+- Evaluación: **3 prácticas (10% c/u = 30%)**, **2 estudios de caso
+  (20% c/u = 40%, uno de ellos la actividad de números índices)**,
+  investigación final (30%)
+- Ver `content/docs/programa.qmd` para el detalle completo y el
+  cronograma de sesiones del cuatrimestre
+
+::: {.notes}
+"El curso está organizado en 8 unidades. Empezamos con descripción de
+datos, seguimos con probabilidad y distribuciones, y luego entramos en
+la parte de inferencia: pruebas de hipótesis, intervalos de confianza
+y análisis de varianza. Después vamos a ver una unidad nueva, una
+introducción a series de tiempo, y cerramos con números índices.
+
+Antes de entrar en la evaluación, una aclaración de calendario
+importante: este cuatrimestre (2026-C3) el curso se dicta en 10
+sesiones, no en 15 semanas — los viernes de este curso se intercalan
+con los del curso de Evaluación de Proyectos, que da la profesora
+Marianne Pérez Gómez. Hoy, 18 de setiembre, es la única fecha que
+ambos cursos comparten.
+
+Sobre la evaluación, quiero ser muy claro en un punto que suele
+confundir: tenemos 3 prácticas que valen 10% cada una, para un 30%
+total. Tenemos 2 estudios de caso que valen 20% cada uno, para un 40%.
+El Caso 1 lo vamos a presentar más adelante en el curso, un poco
+después de pruebas de hipótesis, para que tengan más tiempo de
+trabajarlo; y — esto es lo importante — el Caso 2 **es** la actividad
+participativa de números índices que vamos a hacer hacia el final del
+curso. No es un tercer trabajo aparte, es ese mismo ejercicio el que
+cuenta como el segundo caso. Por último, tenemos una investigación
+final que vale 30% y se presenta en la última sesión del curso.
+
+¿Alguna pregunta sobre cómo se evalúa el curso antes de seguir?"
+[Pausa real para preguntas — este es el momento de resolver dudas de
+evaluación, no en la sesión de presentación del Caso 1.]
+:::
+
+## Introducción a R {.divisor}
+
+## ¿Qué es R?
+
+- Lenguaje de programación creado por dos profesores de la
+  Universidad de Auckland (Nueva Zelanda)
+- Licencia abierta y gratuita
+- Orientado a objetos: se enfoca en los objetos que se buscan
+  manipular, en vez de la lógica de la manipulación en sí
+
+## ¿Por qué aprender R?
+
+- Es gratuito y de licencia abierta
+- Diseñado principalmente para análisis estadístico
+- Permite análisis de distintas complejidades
+- Cuenta con una amplia librería de paquetes estadísticos
+
+::: {.notes}
+"R es un lenguaje de programación pensado específicamente para
+estadística. Lo crearon Ross Ihaka y Robert Gentleman, dos profesores
+de la Universidad de Auckland, en Nueva Zelanda, a inicios de los años
+90 — de hecho el nombre 'R' viene de las iniciales de ambos. Es
+software libre: pueden descargarlo, usarlo y modificarlo sin pagar
+ninguna licencia, lo cual es una ventaja enorme frente a programas
+como SPSS o Stata, que son de pago.
+
+Una característica técnica importante: R está orientado a objetos.
+Esto significa que casi todo lo que hacemos en R — un conjunto de
+datos, un gráfico, el resultado de una prueba estadística — es un
+'objeto' que podemos guardar con un nombre y seguir usando después.
+Vamos a ver esto en la práctica en un momento.
+
+¿Por qué vale la pena invertir tiempo en aprender R, más allá de que
+sea gratis? Primero, porque está diseñado desde el inicio para hacer
+estadística — no es un lenguaje de propósito general al que le
+agregaron estadística después. Segundo, porque tiene una comunidad
+enorme: hay más de veinte mil paquetes disponibles en su repositorio
+oficial, CRAN, que cubren casi cualquier técnica estadística que
+puedan necesitar, desde lo más básico que vemos en este curso hasta
+métodos de investigación de punta."
+:::
+
+## Configuración de R {.divisor}
+
+## Instalación
+
+- Instalar R (CRAN) y luego RStudio o Positron
+- Verificar que ambos abren correctamente antes de continuar
+- Instalar paquetes base que se usarán durante el curso
+
+## Ejercicio inicial
+
+- Con `rnorm`, genere una variable `x1` de 100 observaciones, con
+  media 20 y desviación estándar 5. Grafíquela con `hist`.
+- Genere otra variable `x2` de 100 observaciones, con media 20 y
+  desviación estándar 100, y grafíquela con `hist`.
+- ¿Qué pueden concluir al comparar ambos gráficos?
+
+::: {.notes}
+"Vamos a instalar dos cosas: primero R en sí, que lo bajamos de
+cran.r-project.org, y después un entorno de trabajo — puede ser
+RStudio o Positron, ambos gratuitos. R es el motor, RStudio o Positron
+es donde ustedes van a escribir y ejecutar el código. Denme unos
+minutos para que instalen ambos programas; si tienen algún problema,
+levanten la mano y voy pasando por Zoom/en el aula.
+
+[Dar 15-20 minutos de instalación activa, circulando por el grupo]
+
+Una vez que tengan R funcionando, abran la consola y escriban
+`2 + 2` — si les devuelve `4`, están listos.
+
+Ahora vamos a hacer el primer ejercicio, que es sencillo pero
+importante. Les voy a pedir que generen dos variables con la función
+`rnorm`. Esta función genera números aleatorios que siguen una
+distribución normal — no se preocupen todavía por qué es 'normal',
+eso lo vemos más adelante en el curso. Lo que le tienen que decir a la
+función es cuántos números quieren, cuál es el promedio, y cuál es la
+desviación estándar.
+
+Primero: `x1 <- rnorm(n = 100, mean = 20, sd = 5)`, y después
+`hist(x1)` para verlo graficado.
+
+Segundo: la misma idea, pero ahora con una desviación estándar mucho
+más grande: `x2 <- rnorm(n = 100, mean = 20, sd = 100)`, y
+`hist(x2)`.
+
+Miren los dos histogramas uno al lado del otro. ¿Qué diferencia ven?
+[Esperar respuestas] Exacto — ambos están centrados más o menos en 20,
+porque le pedimos la misma media a los dos. Pero el segundo está
+mucho más 'esparcido' — los valores están mucho más lejos del centro.
+Eso es lo que llamamos dispersión, y la vamos a medir formalmente más
+adelante, en la unidad de descripción de datos, con la varianza y la
+desviación estándar. Por ahora, quédense con la idea visual: mayor
+desviación estándar, histograma más ancho."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

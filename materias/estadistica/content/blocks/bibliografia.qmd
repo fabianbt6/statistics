@@ -10,7 +10,11 @@ escritas a mano. Requiere que el documento que incluye este bloque
 tenga en su YAML:
 
     nocite: |
-      @hogg2015, @sahu2024
+      @hogg2015, @hanglee2023
+
+Citekeys disponibles (ver referencias/Estadistica.bib): hogg2015,
+hanglee2023, dalgaard2008, cryerchan2008 (unidad de series de tiempo),
+james2023 y shao2003 (opcionales/complementarios).
 
 Si cambias de libro de texto, ajusta el nocite en cada unidad que use
 este bloque — no hace falta tocar este archivo salvo que cambien las

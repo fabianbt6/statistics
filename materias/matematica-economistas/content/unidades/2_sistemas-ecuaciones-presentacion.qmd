@@ -1,0 +1,358 @@
+---
+title: "Matemática para Economistas"
+subtitle: "Sistemas de ecuaciones lineales (Jordan-Gauss)"
+format: revealjs
+params:
+  materia: "Matemática para Economistas"
+  titulo_sesion: "Sistemas de ecuaciones lineales (Jordan-Gauss)"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @kuttler2021, @buscalc2013
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 2 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito -- ver
+     materias/matematica-economistas/README.md.
+
+     Desarrollada el 2026-09-29 (antes era un TODO). Es la SEGUNDA
+     parte de la Sesión 2 del calendario (la primera es la Unidad 1,
+     operaciones con matrices) -- se apoya directamente en identidad y
+     determinante, vistos en esa unidad. La antigua Unidad 3
+     ("equilibrio-mercado") se retiró: su contenido de aplicación
+     económica (equilibrio de mercado) ahora es el cierre de ESTA
+     unidad, en vez de tener un archivo aparte -- mismo patrón que la
+     Unidad 1 (cerrar con una aplicación económica propia). -->
+
+## Contenido {.agenda}
+
+- Sistemas de ecuaciones lineales: forma matricial $Ax=b$
+- Matriz aumentada y operaciones elementales de fila
+- Método de Gauss-Jordan
+- Tipos de solución: única, infinitas, ninguna
+- Aplicación a la economía: equilibrio de mercado
+
+::: {.notes}
+Bienvenidos de nuevo. La sesión pasada vimos operaciones con matrices
+-- suma, resta, transponer, identidad, determinante y multiplicación.
+Hoy usamos todo eso para resolver sistemas de ecuaciones lineales con
+el método de Gauss-Jordan, y cerramos calculando un equilibrio de
+mercado real.
+:::
+
+## Sistemas de ecuaciones lineales {.divisor}
+
+::: {.notes}
+Empecemos por conectar esto con lo que ya saben del colegio: un
+sistema de ecuaciones lineales es un conjunto de ecuaciones que
+queremos resolver simultáneamente. Lo que agregamos hoy es la
+maquinaria de matrices para resolverlos de forma sistemática, sin
+depender de "adivinar" qué variable despejar primero.
+:::
+
+## Forma matricial: $Ax = b$
+
+Un sistema de ecuaciones lineales se puede escribir como una única
+ecuación matricial:
+
+$$\begin{aligned}
+2x + y &= 5 \\
+x - y &= 1
+\end{aligned}
+\qquad\Longleftrightarrow\qquad
+\underbrace{\begin{pmatrix} 2 & 1 \\ 1 & -1 \end{pmatrix}}_{A}
+\underbrace{\begin{pmatrix} x \\ y \end{pmatrix}}_{x}
+= \underbrace{\begin{pmatrix} 5 \\ 1 \end{pmatrix}}_{b}$$
+
+$A$ es la **matriz de coeficientes**, $x$ el vector de incógnitas, $b$
+el vector de términos independientes.
+
+::: {.notes}
+La matriz $A$ se arma con los coeficientes de cada variable, respetando
+el orden: primera columna para $x$, segunda para $y$. El vector $x$
+son las incógnitas que buscamos, y $b$ es lo que queda del lado
+derecho de cada ecuación.
+
+Acá es donde se conecta con la sesión pasada: si multiplicamos $A$ por
+el vector $x$ usando la regla de multiplicación de matrices que ya
+conocen, recuperamos exactamente las dos ecuaciones originales —
+verifíquenlo mentalmente: la primera fila de $A$ por $x$ da $2x+y$, que
+debe ser igual a la primera entrada de $b$, que es 5.
+
+Y acá está la razón por la que vimos el determinante la sesión pasada:
+si $\det(A) \neq 0$, este sistema tiene **solución única**. Vamos a
+calcular $\det(A)$ para este sistema en un momento, como parte del
+método.
+:::
+
+## Matriz aumentada y operaciones elementales
+
+La **matriz aumentada** $[A \mid b]$ junta la matriz de coeficientes y
+el vector de términos independientes en una sola tabla:
+
+$$[A \mid b] = \left(\begin{array}{cc|c} 2 & 1 & 5 \\ 1 & -1 & 1 \end{array}\right)$$
+
+Podemos transformarla con **operaciones elementales de fila** sin
+cambiar el conjunto de soluciones:
+
+1. Intercambiar dos filas.
+2. Multiplicar una fila por un escalar distinto de cero.
+3. Sumar a una fila un múltiplo de otra fila.
+
+::: {.notes}
+La matriz aumentada es solo una forma cómoda de escribir el sistema
+sin repetir las variables $x$, $y$ en cada paso — trabajamos
+directamente con los números.
+
+Las tres operaciones elementales son la clave de todo el método: cada
+una de ellas, aplicada a la matriz aumentada, produce un sistema
+**equivalente** al original — mismo conjunto de soluciones, aunque los
+números cambien. Esto es exactamente lo mismo que ya hacían en el
+colegio cuando "sumaban o restaban ecuaciones" para eliminar una
+variable — acá lo hacemos de forma sistemática, fila por fila.
+:::
+
+## Método de Gauss-Jordan
+
+**Objetivo:** usar las operaciones elementales para llevar la matriz
+de coeficientes a la forma de la **matriz identidad** — ahí la
+solución se lee directamente de la última columna.
+
+$$\left(\begin{array}{cc|c} 2 & 1 & 5 \\ 1 & -1 & 1 \end{array}\right)
+\;\longrightarrow\; \cdots \;\longrightarrow\;
+\left(\begin{array}{cc|c} 1 & 0 & x_0 \\ 0 & 1 & y_0 \end{array}\right)$$
+
+::: {.notes}
+Este es el punto donde se conecta directamente con lo que vimos la
+sesión pasada sobre la matriz identidad: el objetivo entero del
+método de Gauss-Jordan es transformar la parte izquierda de la matriz
+aumentada hasta que se vea exactamente como $I$. Cuando lo logramos,
+la columna de la derecha ES la solución — $x$ y $y$ quedan despejados
+directamente, sin ningún paso extra de sustitución.
+
+No hay una única secuencia "correcta" de operaciones elementales para
+llegar ahí — distintas personas pueden tomar caminos distintos y
+llegar al mismo resultado. Lo que sí es fijo es el objetivo: columna
+por columna, de izquierda a derecha, conseguir un 1 en la diagonal y
+ceros en el resto de esa columna.
+:::
+
+## Ejemplo: Gauss-Jordan paso a paso
+
+$$\left(\begin{array}{cc|c} 2 & 1 & 5 \\ 1 & -1 & 1 \end{array}\right)
+\xrightarrow{R_1 \leftrightarrow R_2}
+\left(\begin{array}{cc|c} 1 & -1 & 1 \\ 2 & 1 & 5 \end{array}\right)
+\xrightarrow{R_2 \to R_2 - 2R_1}
+\left(\begin{array}{cc|c} 1 & -1 & 1 \\ 0 & 3 & 3 \end{array}\right)$$
+
+$$\xrightarrow{R_2 \to R_2/3}
+\left(\begin{array}{cc|c} 1 & -1 & 1 \\ 0 & 1 & 1 \end{array}\right)
+\xrightarrow{R_1 \to R_1 + R_2}
+\left(\begin{array}{cc|c} 1 & 0 & 2 \\ 0 & 1 & 1 \end{array}\right)$$
+
+**Solución:** $x = 2$, $y = 1$. Verificación: $2(2)+1=5$ ✓,
+$2-1=1$ ✓.
+
+::: {.notes}
+Vamos paso a paso en la pizarra. Primero intercambio las filas porque
+me conviene empezar con un 1 en la esquina superior izquierda (no es
+obligatorio, pero ahorra una división). Después, para hacer cero la
+primera entrada de la fila 2, le resto 2 veces la fila 1: $2 - 2(1) =
+0$, $1 - 2(-1) = 3$, $5 - 2(1) = 3$.
+
+Ahora divido toda la fila 2 entre 3 para dejar un 1 en su diagonal.
+Finalmente, para hacer cero la segunda entrada de la fila 1, le sumo
+la fila 2: $-1 + 1 = 0$, $1 + 1 = 2$.
+
+Ya quedó la identidad a la izquierda, así que leo la solución
+directamente de la columna de la derecha: $x=2$, $y=1$. Siempre
+verifiquen sustituyendo en las ecuaciones originales — acá $2(2)+1=5$
+y $2-1=1$, ambas se cumplen.
+:::
+
+## Ejercicio — Gauss-Jordan
+
+Resuelva el sistema con Gauss-Jordan:
+
+$$\begin{aligned}
+x + 2y &= 7 \\
+3x - y &= 7
+\end{aligned}$$
+
+::: {.notes}
+Antes de empezar, pregunten: ¿cuál es la matriz de coeficientes $A$?
+$\begin{pmatrix}1&2\\3&-1\end{pmatrix}$. ¿Cuánto da $\det(A)$?
+$(1)(-1)-(2)(3) = -1-6=-7 \neq 0$ — así que ya sabemos, antes de
+resolver, que hay solución única. Denles unos minutos para intentarlo
+antes de resolver juntos.
+:::
+
+## Ejercicio — Gauss-Jordan: solución
+
+$$\left(\begin{array}{cc|c} 1 & 2 & 7 \\ 3 & -1 & 7 \end{array}\right)
+\xrightarrow{R_2 \to R_2 - 3R_1}
+\left(\begin{array}{cc|c} 1 & 2 & 7 \\ 0 & -7 & -14 \end{array}\right)
+\xrightarrow{R_2 \to R_2/(-7)}
+\left(\begin{array}{cc|c} 1 & 2 & 7 \\ 0 & 1 & 2 \end{array}\right)$$
+
+$$\xrightarrow{R_1 \to R_1 - 2R_2}
+\left(\begin{array}{cc|c} 1 & 0 & 3 \\ 0 & 1 & 2 \end{array}\right)$$
+
+**Solución:** $x = 3$, $y = 2$. Verificación: $3+2(2)=7$ ✓,
+$3(3)-2=7$ ✓.
+
+::: {.notes}
+Mismo procedimiento: primero hago cero la primera entrada de la fila 2
+restando 3 veces la fila 1. Después divido la fila 2 entre -7 para
+dejar un 1. Finalmente hago cero la segunda entrada de la fila 1
+restando 2 veces la fila 2. La solución queda $x=3$, $y=2$ — y
+efectivamente coincide con que $\det(A)=-7\neq0$ anticipaba solución
+única.
+:::
+
+## Tipos de solución
+
+No todo sistema tiene solución única. Al terminar Gauss-Jordan pueden
+aparecer tres casos:
+
+- **Solución única:** la matriz de coeficientes se reduce a $I$ (lo
+  que vimos hasta ahora). Ocurre cuando $\det(A) \neq 0$.
+- **Infinitas soluciones:** aparece una fila de puros ceros
+  ($0 = 0$) — sobra una ecuación, redundante con las demás.
+- **Ninguna solución:** aparece una fila del tipo $0 = k$ con
+  $k \neq 0$ — una contradicción.
+
+::: {.notes}
+Esto es importante porque Gauss-Jordan no solo sirve para encontrar la
+solución cuando existe — también nos avisa, en el propio proceso,
+cuando el sistema no se comporta como esperábamos. Si en algún paso
+llegan a una fila de todo ceros, no es un error de cálculo: significa
+que esa ecuación no aportaba información nueva. Si llegan a una fila
+de ceros que iguala a un número distinto de cero, tampoco es un error:
+significa que las ecuaciones se contradicen entre sí, y el sistema no
+tiene solución.
+:::
+
+## Ejercicio — Tipo de solución
+
+¿Qué tipo de solución tiene este sistema?
+
+$$\begin{aligned}
+x + y &= 2 \\
+2x + 2y &= 5
+\end{aligned}$$
+
+::: {.notes}
+Denles un momento para que apliquen Gauss-Jordan y vean qué pasa.
+:::
+
+## Ejercicio — Tipo de solución: solución
+
+$$\left(\begin{array}{cc|c} 1 & 1 & 2 \\ 2 & 2 & 5 \end{array}\right)
+\xrightarrow{R_2 \to R_2 - 2R_1}
+\left(\begin{array}{cc|c} 1 & 1 & 2 \\ 0 & 0 & 1 \end{array}\right)$$
+
+La fila 2 dice $0 = 1$ — una contradicción. **El sistema no tiene
+solución.**
+
+::: {.notes}
+Al restar 2 veces la fila 1 a la fila 2, la parte izquierda se anula
+por completo (0 y 0), pero el lado derecho da 1, no 0. Eso es
+literalmente decir "$0=1$", que es falso siempre. Geométricamente,
+esto corresponde a dos rectas paralelas que nunca se cruzan — tiene
+sentido: si dividen la segunda ecuación entre 2, da $x+y=2.5$, que es
+paralela a $x+y=2$ pero nunca coincide con ella.
+:::
+
+## Cálculo del determinante utilizando el Método de Gauss
+
+$$A = \begin{pmatrix} 1 & 2 & 3 \\ 0 & 1 & 4 \\ 5 & 6 & 0 \end{pmatrix}$$
+Solución: 
+
+$$
+\left(\begin{array}{rrr} 1 & 2 & 3 \\ 0 & 1 & 4 \\ 5 & 6 & 0 \end{array}\right)
+\xrightarrow{R_3 \to R_3 - 5R_1}
+\left(\begin{array}{rrr} 1 & 2 & 3 \\ 0 & 1 & 4 \\ 0 & -4 & -15 \end{array}\right)
+\xrightarrow{R_3 \to R_3 - 4R_2}
+\left(\begin{array}{rrr} 1 & 2 & 3 \\ 0 & 1 & 4 \\ 0 & 0 & 1 \end{array}\right)
+$$
+Al obtener una matriz triangular, el determinante se calcula multiplicando la diagonal
+
+$$ det(A) = 1 * 1 * 1  = 1 $$
+
+## Aplicación a la economía {.destacado}
+
+**Equilibrio de mercado**
+
+Un mercado tiene funciones de demanda y oferta:
+
+$$Q_d = 100 - 4P \qquad Q_s = -20 + 6P$$
+
+En equilibrio, $Q_d = Q_s = Q$. Reescribiendo como sistema lineal en
+$Q$ y $P$:
+
+$$\begin{aligned}
+Q + 4P &= 100 \\
+Q - 6P &= -20
+\end{aligned}
+\qquad\Longleftrightarrow\qquad
+\begin{pmatrix} 1 & 4 \\ 1 & -6 \end{pmatrix}
+\begin{pmatrix} Q \\ P \end{pmatrix}
+= \begin{pmatrix} 100 \\ -20 \end{pmatrix}$$
+
+::: {.notes}
+Esta es la aplicación que cierra la unidad: un problema de equilibrio
+de mercado, resuelto con exactamente la misma herramienta que
+acabamos de practicar.
+
+Tenemos una función de demanda, que baja con el precio (a mayor
+precio, menos cantidad demandada), y una función de oferta, que sube
+con el precio. El equilibrio de mercado es el punto donde ambas
+cantidades coinciden: ni falta ni sobra producto.
+
+Para plantear esto como sistema lineal, despejo $Q$ de cada ecuación y
+paso todo al lado izquierdo: de $Q=100-4P$ obtengo $Q+4P=100$; de
+$Q=-20+6P$ obtengo $Q-6P=-20$. Ahora tengo dos ecuaciones lineales en
+dos incógnitas, $Q$ y $P$ — exactamente el mismo tipo de sistema que
+resolvimos hace un momento, solo que ahora las variables representan
+cantidad y precio de equilibrio, no simplemente "$x$" y "$y$".
+:::
+
+## Aplicación: resolución con Gauss-Jordan
+
+$$\left(\begin{array}{cc|c} 1 & 4 & 100 \\ 1 & -6 & -20 \end{array}\right)
+\xrightarrow{R_2 \to R_2 - R_1}
+\left(\begin{array}{cc|c} 1 & 4 & 100 \\ 0 & -10 & -120 \end{array}\right)$$
+
+$$\xrightarrow{R_2 \to R_2/(-10)}
+\left(\begin{array}{cc|c} 1 & 4 & 100 \\ 0 & 1 & 12 \end{array}\right)
+\xrightarrow{R_1 \to R_1 - 4R_2}
+\left(\begin{array}{cc|c} 1 & 0 & 52 \\ 0 & 1 & 12 \end{array}\right)$$
+
+**Equilibrio:** $P^{*} = 12$, $Q^{*} = 52$. Verificación:
+$Q_d = 100-4(12) = 52$ ✓; $Q_s = -20+6(12) = 52$ ✓.
+
+::: {.notes}
+Mismo procedimiento de siempre. Resto la fila 1 a la fila 2 para hacer
+cero la primera entrada. Divido la fila 2 entre -10 para dejar un 1.
+Y resto 4 veces la fila 2 a la fila 1 para hacer cero esa entrada
+también. La columna de la derecha me da directamente la solución: el
+precio de equilibrio es 12, y a ese precio se transan 52 unidades.
+
+Verifiquemos con las ecuaciones originales: con $P=12$, la demanda da
+$100-48=52$, y la oferta da $-20+72=52$ — coinciden, como esperábamos
+de un punto de equilibrio.
+
+Este mismo tipo de sistema es el que se usa, con más ecuaciones y más
+variables, para plantear modelos de varios mercados relacionados entre
+sí, o para las matrices de costos y ventas que van a ver en unidades
+más adelante en el curso.
+:::
+
+
+{{< include ../blocks/bibliografia.qmd >}}

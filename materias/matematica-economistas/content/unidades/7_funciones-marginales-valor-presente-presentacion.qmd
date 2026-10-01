@@ -1,0 +1,48 @@
+---
+title: "Matemática para Economistas"
+subtitle: "Aplicaciones a la economía: funciones marginales y valor presente"
+format: revealjs
+params:
+  materia: "Matemática para Economistas"
+  titulo_sesion: "Aplicaciones a la economía: funciones marginales y valor presente"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @stewart2021, @buscalc2013
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 7 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (10 o 15 sesiones, u otro formato futuro), y esa
+     decisión se toma al armar el curso, no en este archivo. Cada
+     unidad es un archivo autocontenido e independiente -- se puede
+     incluir, quitar o reordenar sin afectar a las demás. Ver
+     materias/matematica-economistas/README.md. -->
+
+## Contenido {.agenda}
+
+- Funciones marginales y totales
+- Inversión y valor presente
+
+::: {.notes}
+Bienvenidos a esta sesión sobre Aplicaciones a la economía: funciones marginales y valor presente.
+:::
+
+## Aplicaciones a la economía: funciones marginales y valor presente {.divisor}
+
+<!-- TODO: contenido de la sesión — definiciones, ejemplos, ejercicios.
+     Seguir el patrón de materias/estadistica/content/unidades/3_probabilidad-reglas-bayes-presentacion.qmd
+     y PATRONES.md (tabla de datos, código R, pregunta de discusión, slide
+     destacada, comparación de columnas, figura con fuente citada).
+     Contenido a cubrir:
+     - Aplicaciones a la economía: funciones marginales y funciones totales
+     - Inversión y formación de capital
+     - Valor presente de flujo de efectivo -->
+
+{{< include ../blocks/bibliografia.qmd >}}

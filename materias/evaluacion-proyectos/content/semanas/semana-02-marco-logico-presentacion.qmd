@@ -1,0 +1,216 @@
+---
+title: "Evaluación Económica y Social de Proyectos"
+subtitle: "Sesión 2: Marco Lógico del proyecto"
+format: revealjs
+params:
+  materia: "Evaluación Económica y Social de Proyectos"
+  titulo_sesion: "Marco Lógico del proyecto"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @ilpes_marcologico42
+---
+
+## Contenido {.agenda}
+
+- 🔄 Repaso rápido: dónde quedaron sus proyectos
+- 🌳 Árbol de problemas
+- 🎯 Árbol de objetivos
+- 📊 Matriz de Marco Lógico: fines, propósito, componentes, actividades
+- 📏 Indicadores, medios de verificación y supuestos
+- 🗣️ Dinámica: construir el Marco Lógico de su proyecto
+
+::: {.notes}
+"Bienvenidos a la Sesión 2. Antes de empezar, quiero que cada grupo
+recuerde en una frase su problema y su objetivo general —esto nos va a
+servir de base para todo lo de hoy. La herramienta central de esta
+sesión es el Marco Lógico, que van a usar para ordenar la lógica
+completa de su proyecto: de qué problema parte, qué objetivos persigue,
+y cómo se van a verificar los resultados."
+:::
+
+## Repaso rápido {.divisor}
+
+## ¿Dónde quedó su proyecto?
+
+- Cada grupo comparte en 1 minuto: tema, problema y objetivo general
+- ¿Encontraron ya cifras o antecedentes reales sobre su tema?
+
+::: {.notes}
+"Demos una vuelta rápida —un minuto por grupo— para refrescar el
+problema y objetivo general de cada quien, y para que todos tengamos
+presente en qué van los demás. Si alguien encontró ya cifras de INEC,
+CCSS, MEP o alguna otra fuente oficial, que las mencione: nos van a
+servir más adelante para valorar costos y beneficios."
+:::
+
+## El Marco Lógico {.divisor}
+
+## ¿Qué es el Marco Lógico?
+
+- Metodología para **planificar, dar seguimiento y evaluar** proyectos
+  y programas, desarrollada y difundida por CEPAL/ILPES
+- Organiza la lógica de un proyecto en dos pasos:
+  1. **Identificación del problema**: árbol de problemas → árbol de
+     objetivos
+  2. **Matriz de Marco Lógico**: resumen estructurado del proyecto en
+     una sola tabla
+- Su gran ventaja: obliga a que el problema, los objetivos, las
+  actividades y los indicadores queden **coherentes entre sí**
+
+::: {.notes}
+"El Marco Lógico es probablemente la herramienta más usada en América
+Latina para diseñar proyectos de desarrollo —la van a encontrar en
+casi cualquier proyecto financiado por organismos multilaterales o por
+el Estado costarricense. Su valor no es solo llenar una tabla: es
+obligarlos a pensar de forma coherente, para que el objetivo que
+persiguen realmente responda al problema que identificaron, y que los
+indicadores que propongan realmente midan ese objetivo."
+:::
+
+## Árbol de problemas {.destacado}
+
+- Se coloca el **problema central** (el que ya formularon en la Sesión 1)
+- Hacia abajo: las **causas** del problema (directas e indirectas)
+- Hacia arriba: los **efectos** que ese problema genera
+- Regla de oro: cada causa/efecto debe estar conectado con una relación
+  de causalidad clara, no solo "relacionado con el tema"
+
+::: {.notes}
+"El árbol de problemas se construye como un diagrama de causa y
+efecto: el problema central va en el tronco, las causas hacia abajo
+—organizadas en directas e indirectas— y los efectos hacia arriba.
+Un error común es poner como 'causa' algo que en realidad es solo otro
+síntoma del mismo problema; para evitarlo, pregúntense siempre '¿por
+qué pasa esto?' hasta llegar a una causa que sí se pueda intervenir con
+un proyecto."
+:::
+
+## Árbol de objetivos
+
+- Se construye **invirtiendo** cada elemento del árbol de problemas: la
+  causa negativa se convierte en un medio positivo, el efecto negativo
+  se convierte en un fin positivo
+- El problema central se convierte en el **objetivo central** del
+  proyecto (coincide con su objetivo general de la Sesión 1 — si no
+  coincide, hay que revisar uno de los dos)
+
+::: {.notes}
+"El árbol de objetivos es un espejo positivo del árbol de problemas:
+donde había 'alta deserción escolar' (causa negativa), ahora hay
+'reducida la deserción escolar' (medio positivo); donde había 'menor
+empleabilidad futura' (efecto negativo), ahora hay 'mejorada la
+empleabilidad futura' (fin positivo). El objetivo central de este árbol
+tiene que calzar con el objetivo general que redactaron en la sesión
+pasada — si no calza, es señal de que hay que ajustar uno de los dos, y
+está bien hacerlo ahora."
+:::
+
+## La Matriz de Marco Lógico {.destacado}
+
+| Nivel | Qué captura |
+|---|---|
+| **Fin** | El objetivo superior al que contribuye el proyecto (efecto de largo plazo, ej. "mejorar el bienestar social") |
+| **Propósito** | El objetivo directo del proyecto (efecto esperado sobre la población objetivo) |
+| **Componentes** | Los productos o resultados concretos que el proyecto entrega |
+| **Actividades** | Las acciones necesarias para producir cada componente |
+
+Cada nivel lleva, en la matriz completa: **indicadores**, **medios de
+verificación** y **supuestos** (factores externos que deben cumplirse
+para que la lógica funcione).
+
+::: {.notes}
+"La matriz es un resumen de cuatro filas por cuatro columnas. Las filas
+son los niveles: fin, propósito, componentes, actividades — de lo más
+general a lo más operativo. Las columnas son: resumen narrativo (lo que
+ya vimos), indicadores (cómo se mide cada nivel), medios de
+verificación (de dónde sale ese dato) y supuestos (qué tiene que
+cumplirse fuera del control del proyecto para que la lógica siga
+funcionando). Por ejemplo, si el componente es 'jóvenes capacitados en
+oficios técnicos', un supuesto podría ser 'existe demanda laboral para
+esos oficios en la región' — si ese supuesto falla, el proyecto no
+logra su propósito aunque el componente se haya entregado bien."
+:::
+
+## Indicadores, medios de verificación y supuestos
+
+- **Indicador**: debe ser medible, con meta y plazo (ej. "80% de
+  beneficiarios empleados a los 6 meses de terminar el curso")
+- **Medio de verificación**: la fuente concreta de ese dato (encuesta,
+  registro administrativo, base de datos institucional)
+- **Supuesto**: condición externa que el proyecto no controla, pero de
+  la que depende su éxito
+
+::: {.notes}
+"Insistan en que los indicadores sean medibles y con meta —no vale
+'mejorar la empleabilidad' como indicador, tiene que ser algo como '80%
+de beneficiarios empleados a los 6 meses'. Y para cada indicador,
+pregunten de dónde va a salir ese dato en la vida real —ese es el medio
+de verificación. Los supuestos son el elemento que más se les olvida:
+son los riesgos externos, las condiciones que tienen que darse fuera
+del proyecto para que funcione."
+:::
+
+## Dinámica: construyan el Marco Lógico de su proyecto {.divisor}
+
+## Trabajo en grupo (el resto de la sesión)
+
+::: {.incremental}
+- Construyan el árbol de problemas de su tema (mínimo 2 causas
+  directas, cada una con al menos una causa indirecta)
+- Inviertan el árbol para obtener el árbol de objetivos
+- Llenen al menos las dos primeras filas de la matriz (fin y
+  propósito), con un indicador tentativo para cada una
+- Prepárense para compartir su árbol de problemas en 2 minutos al cierre
+:::
+
+::: {.notes}
+"El resto de la sesión es trabajo en grupo. No esperen la matriz
+completa hoy —con el árbol de problemas, el árbol de objetivos, y fin y
+propósito con un indicador tentativo cada uno, ya tienen un avance
+sólido. Los componentes y actividades, y el resto de indicadores,
+supuestos y medios de verificación, los pueden seguir refinando después
+de la sesión, ya con las cifras que vayan encontrando."
+:::
+
+## Cierre y próxima sesión
+
+- Próxima sesión (Sesión 3, **6 de noviembre**): **Identificación y
+  valoración de costos y beneficios; precios sociales**
+- Entre sesiones: terminen su matriz de Marco Lógico completa
+  (componentes, actividades, indicadores, medios de verificación,
+  supuestos)
+
+::: {.notes}
+"Para el 6 de noviembre, quiero su matriz de Marco Lógico completa —
+las cuatro filas, con indicadores, medios de verificación y supuestos.
+Esa matriz nos va a servir de mapa para identificar, en la próxima
+sesión, todos los costos y beneficios de su proyecto: cada componente
+y actividad tiene un costo, y cada nivel superior (propósito, fin)
+tiene beneficios asociados."
+:::
+
+## Lecturas para la próxima sesión {.destacado}
+
+**Sesión 3 — Identificación y valoración de costos y beneficios;
+precios sociales**
+
+- 📄 ILPES/CEPAL — *Metodología general de identificación, preparación
+  y evaluación de proyectos de inversión pública* (Serie Manuales N.º 39)
+- 📄 ILPES/CEPAL — *Evaluación social de proyectos* (Serie Manuales N.º 37)
+
+Enlaces y ficha completa de cada fuente: `referencias/EvaluacionProyectos.bib`
+
+::: {.notes}
+"Ambos manuales son extensos; para la próxima sesión les pido
+solamente los capítulos sobre identificación y valoración de costos y
+beneficios, y sobre precios sociales —no el documento completo. En la
+próxima sesión les indico exactamente qué páginas revisar según su
+tema, para no hacerles perder tiempo con secciones que no les van a
+servir."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

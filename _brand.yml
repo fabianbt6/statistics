@@ -1,16 +1,20 @@
 # _brand.yml — tu marca personal (NO la de ninguna universidad).
 # Aplica sola a revealjs/html/pdf sin tocar cada .qmd.
 #
-# Paleta propuesta como punto de partida — cámbiala cuando quieras,
-# es un solo archivo.
+# Paleta en escalas de azul — tu sello, distinto del material oficial
+# de cualquier universidad. Un solo archivo si querés ajustar el tono.
 
 color:
   palette:
-    indigo: "#2E3A59"
-    terracota: "#D9764A"
-    gris-oscuro: "#22252A"
+    # Historial: #0A2540 (casi negro) -> #0F3460 (azul marino) -> ahora
+    # índigo, más oscuro y con un matiz violeta, a pedido explícito.
+    azul-profundo: "#281E5D"   # fondo de portada/divisores — índigo
+    azul-medio: "#154C82"      # degradado, segundo tono
+    azul-acento: "#2F9BE0"     # acentos, bordes, detalles (el más vivo)
+    azul-hielo: "#EAF4FC"      # texto/subtítulos sobre fondo oscuro
+    gris-oscuro: "#1C222B"
     blanco: "#FFFFFF"
-  primary: indigo
+  primary: azul-profundo
   background: blanco
   foreground: gris-oscuro
 

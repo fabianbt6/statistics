@@ -1,0 +1,198 @@
+---
+title: "Guía de preparación — Distribuciones — normal, t, F y ji-cuadrada"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/5_distribuciones-continuas-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 5 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Distribuciones — normal, t, F y ji-cuadrada
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Describir las propiedades de la distribución normal y estandarizar
+  una variable normal.
+- Explicar, con la derivación matemática de fondo, por qué se usa
+  t-student en vez de la normal cuando la varianza es desconocida.
+- Reconocer el rol de χ² y F como distribuciones derivadas de la
+  normal, usadas en inferencia de varianzas y ANOVA.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Hogg, Tanis y Zimmerman, *Probability and Statistical Inference* [@hogg2015] | Capítulo 3 (Continuous Distributions) y Capítulo 4 (Bivariate Distributions) | Cap. 3 cubre la normal; cap. 4 cubre la derivación de t, F y χ² a partir de la normal. |
+
+## Desarrollo teórico completo
+
+### 1. Distribución normal
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \qquad -\infty < x < \infty$$
+
+Es simétrica alrededor de $\mu$, con forma de campana. El parámetro
+$\mu$ desplaza el centro de la campana; $\sigma$ controla qué tan
+"ancha" o "angosta" es. Dos propiedades prácticas que conviene
+mencionar en clase: aproximadamente 68% de la probabilidad cae dentro
+de $\mu \pm 1\sigma$, 95% dentro de $\mu \pm 2\sigma$, y 99.7% dentro
+de $\mu \pm 3\sigma$ (la "regla empírica" o regla 68-95-99.7).
+
+**Estandarización.** Cualquier variable normal $X \sim N(\mu,\sigma^2)$
+se puede transformar en una normal estándar $Z \sim N(0,1)$ mediante:
+
+$$Z = \frac{X-\mu}{\sigma}$$
+
+**Por qué funciona esta transformación:** restar $\mu$ centra la
+variable en 0 (porque $E(X-\mu) = E(X)-\mu = \mu-\mu = 0$), y dividir
+entre $\sigma$ reescala la varianza a 1 (porque
+$Var\!\left(\frac{X-\mu}{\sigma}\right) = \frac{1}{\sigma^2}Var(X) =
+\frac{\sigma^2}{\sigma^2}=1$, usando la propiedad $Var(aX)=a^2Var(X)$).
+Esta estandarización es lo que permite usar **una sola tabla** de
+probabilidades (la tabla Z) para cualquier normal, sin importar sus
+valores específicos de $\mu$ y $\sigma$ — algo que van a usar
+constantemente a partir de la unidad de pruebas de hipótesis.
+
+**Por qué la normal es tan central en estadística.** La razón profunda
+—que se formaliza en la siguiente unidad (pruebas de hipótesis) con el
+Teorema del Límite Central— es que la distribución de la media
+muestral $\bar{X}$ se aproxima a una normal a medida que crece el
+tamaño de muestra $n$, **sin importar la forma de la distribución
+original de los datos**. Esto es lo que permite construir pruebas de
+hipótesis e intervalos de confianza válidos incluso cuando los datos
+individuales no son normales, siempre que la muestra sea razonablemente
+grande.
+
+### 2. Distribución t-student
+
+Se usa quien quiere hacer inferencia sobre la media de una población
+normal, pero **no conoce la varianza poblacional $\sigma^2$** y tiene
+que estimarla con la varianza muestral $s^2$. En ese caso, la
+estadística
+
+$$T = \frac{\bar{X}-\mu}{s/\sqrt{n}}$$
+
+ya no sigue una normal estándar exacta, sino una distribución
+t-student con $n-1$ grados de libertad. Intuitivamente: al reemplazar
+$\sigma$ (una constante conocida) por $s$ (una cantidad aleatoria,
+estimada de la misma muestra), estamos introduciendo una fuente
+adicional de variabilidad, y esa variabilidad extra es lo que hace que
+la distribución t tenga **colas más pesadas** que la normal —más
+probabilidad en los extremos, reflejando la incertidumbre añadida por
+no conocer $\sigma$ con certeza—.
+
+**Grados de libertad y convergencia a la normal.** A medida que
+aumenta $n$ (y por lo tanto los grados de libertad $n-1$), la
+estimación $s$ se vuelve cada vez más precisa como aproximación de
+$\sigma$, y la distribución t converge a la normal estándar. En la
+práctica, con $n>30$ la diferencia entre usar t o Z es casi
+despreciable, aunque el criterio formal correcto sigue siendo: si no
+se conoce $\sigma$ poblacional, usar t con $n-1$ grados de libertad,
+sin importar el tamaño de muestra (con software estadístico esto no
+cuesta nada extra, así que no hay razón práctica para usar la
+aproximación normal salvo cuando se hacen cálculos a mano con tablas).
+
+### 3. Distribución ji-cuadrada (χ²)
+
+Se define como la suma de $k$ variables normales estándar
+independientes, cada una elevada al cuadrado:
+
+$$\chi^2_{(k)} = Z_1^2 + Z_2^2 + \dots + Z_k^2$$
+
+donde $k$ son los grados de libertad. Como es una suma de cuadrados,
+$\chi^2$ solo toma valores no negativos, y su distribución está
+sesgada a la derecha (no es simétrica, a diferencia de la normal y la
+t) — aunque a medida que $k$ crece, se vuelve más simétrica.
+
+**Por qué aparece en inferencia sobre varianzas.** Se puede demostrar
+que, para una muestra de tamaño $n$ de una población normal, la
+cantidad
+
+$$\frac{(n-1)s^2}{\sigma^2}$$
+
+sigue exactamente una distribución $\chi^2$ con $n-1$ grados de
+libertad. Esto es lo que permite construir pruebas de hipótesis e
+intervalos de confianza sobre la varianza poblacional $\sigma^2$ — no
+se necesita derivar esto en clase con estudiantes de este nivel, pero
+es útil que el docente conozca de dónde sale la conexión, para poder
+responder con seguridad si alguien pregunta "¿y por qué χ² sirve para
+varianzas?"
+
+**Otro uso importante:** χ² es la base de las pruebas de bondad de
+ajuste y de independencia (pruebas no paramétricas), que comparan
+frecuencias observadas contra frecuencias esperadas bajo una hipótesis
+— estas no se cubren en profundidad en este curso, pero vale la pena
+mencionar que existen, para que los estudiantes sepan que χ² tiene más
+usos de los que van a ver aquí.
+
+### 4. Distribución F
+
+Se define como el cociente de dos variables χ² independientes, cada
+una dividida entre sus propios grados de libertad:
+
+$$F_{(k_1,k_2)} = \frac{\chi^2_{(k_1)}/k_1}{\chi^2_{(k_2)}/k_2}$$
+
+**Por qué sirve para comparar varianzas.** Si tienen dos muestras
+independientes de poblaciones normales, el cociente de sus varianzas
+muestrales, $s_1^2/s_2^2$, sigue una distribución F (multiplicada por
+el cociente de las varianzas poblacionales verdaderas) — por eso F es
+la herramienta natural para probar si dos poblaciones tienen la misma
+varianza.
+
+**Conexión directa con ANOVA (más adelante en el curso).** En ANOVA,
+la pregunta es si tres o más grupos tienen la misma media poblacional.
+La prueba F de ANOVA compara dos estimaciones de varianza: una basada
+en la variabilidad **entre** grupos (que crece si las medias son
+distintas) y otra basada en la variabilidad **dentro** de cada grupo
+(que refleja solo el ruido natural de los datos). Si el cociente de
+esas dos varianzas —que sigue una distribución F— es mucho mayor que
+1, es evidencia de que las medias de los grupos son diferentes. Vale
+la pena adelantar esta idea hoy, aunque se desarrolle completamente en
+la unidad de análisis de varianza (ANOVA), para que los estudiantes
+vean la conexión entre las cuatro distribuciones de hoy y lo que viene.
+
+## Resumen para la clase: mapa mental antes de las fórmulas
+
+Recomendación pedagógica: presentar esta tabla **antes** de entrar en
+el detalle matemático de cada distribución, para dar un mapa mental
+que oriente la sesión, y volver a ella al final como cierre.
+
+| Distribución | Se usa para |
+|---|---|
+| Normal / Z | Media con varianza poblacional conocida, $n$ grande |
+| t-student | Media con varianza desconocida (el caso casi siempre real), cualquier $n$ |
+| χ² | Varianza de una población; pruebas de bondad de ajuste |
+| F | Comparar varianzas de dos poblaciones; prueba F en ANOVA |
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Mapa mental (tabla resumen) + distribución normal y estandarización | 30 min |
+| Distribución t-student: derivación intuitiva y por qué colas pesadas | 30 min |
+| Distribución χ²: definición, conexión con varianza muestral | 25 min |
+| Distribución F: definición, conexión con ANOVA (preview) | 25 min |
+| Laboratorio en R (`rchisq`, `rt`, `rf`, distintos grados de libertad) | 40 min |
+| Discusión de resultados + cierre con tabla resumen | 30 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

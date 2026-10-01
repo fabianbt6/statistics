@@ -1,0 +1,128 @@
+---
+title: "Evaluación Económica y Social de Proyectos"
+subtitle: "Sesión 5: Cierre del curso y presentación final de proyectos"
+format: revealjs
+params:
+  materia: "Evaluación Económica y Social de Proyectos"
+  titulo_sesion: "Cierre del curso y presentación final de proyectos"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @cepal_guiainversionsocial, @cepal_cohen_proyectossociales, @mideplan2022_guiapip, @ilpes_marcologico42, @ilpes_metodologiageneral39, @ilpes_evaluacionsocial37
+---
+
+## Contenido {.agenda}
+
+- 🎓 Bienvenida a la última sesión
+- 📋 Recordatorio: formato de la presentación y entrega del documento final
+- 🗣️ Presentaciones de cada grupo (10-15 min + preguntas)
+- 💬 Debate abierto: comparación entre proyectos
+- 🎯 Cierre del curso y reflexión final
+
+::: {.notes}
+"Llegamos a la última sesión. Hoy cada grupo presenta el trabajo
+completo que construyeron a lo largo de las 4 sesiones anteriores:
+desde el planteamiento del problema hasta los indicadores económicos.
+Esta sesión vale el 20% de la nota por la presentación, más el 40% del
+documento final que entregan hoy mismo."
+:::
+
+## Recordatorio: cómo se evalúa hoy {.divisor}
+
+## Formato de la presentación
+
+- **10-15 minutos por grupo**, seguido de preguntas del resto del curso
+- Orden sugerido: problema y objetivos → Marco Lógico (resumen) →
+  costos y beneficios principales → indicadores y su interpretación →
+  conclusiones y recomendaciones
+- Se evalúa la **coherencia del proyecto completo**, no solo si el
+  cálculo numérico "da bien"
+- El documento final escrito se entrega hoy, con toda la estructura
+  trabajada en las 4 sesiones anteriores
+
+::: {.notes}
+"Recordemos el formato antes de empezar: 10 a 15 minutos por grupo, en
+el orden que ya conocen porque es el mismo orden en que construyeron el
+proyecto sesión a sesión. No busco que el VANE les dé positivo a todos
+—un proyecto puede ser socialmente no rentable y aun así estar muy bien
+evaluado, sí lo argumentan bien y sacan conclusiones y recomendaciones
+sensatas a partir de ese resultado. Lo que sí evalúo es que cada parte
+del trabajo esté conectada con las demás: que el problema explique el
+objetivo, que el objetivo explique el Marco Lógico, y que el Marco
+Lógico explique los costos, beneficios e indicadores."
+:::
+
+## Presentaciones de los grupos {.divisor}
+
+## Orden de presentación
+
+- Cada grupo presenta en el orden que se defina al inicio de la sesión
+- Después de cada presentación: 5 minutos de preguntas del resto del
+  curso y observaciones de la docente
+
+::: {.notes}
+"Vamos a definir el orden de presentación al inicio de la sesión —
+puede ser por sorteo o por orden de llegada, como prefieran. Después
+de cada presentación, abramos 5 minutos para preguntas de los
+compañeros: esto no es solo para evaluar, también es para que todos
+aprendan de los distintos temas que trabajaron los demás grupos —
+desempleo, desnutrición, discapacidad, desigualdad, pensiones,
+educación."
+:::
+
+## Debate abierto: comparando proyectos {.divisor}
+
+## Para conversar entre todos, al cierre de las presentaciones
+
+::: {.incremental}
+- ¿Qué proyectos resultaron socialmente rentables (VANE positivo o
+  costo-efectivos) y cuáles no? ¿Por qué?
+- ¿Qué tan sensibles son esos resultados a los supuestos usados (tasa
+  social de descuento, precios sombra, factores de conversión)?
+- Si un proyecto no es rentable en términos económicos estrictos,
+  ¿qué otros argumentos (equidad, derechos, urgencia social) podrían
+  justificar igual su ejecución?
+:::
+
+::: {.notes}
+"Este debate final es importante: quiero que el grupo entienda que la
+evaluación económica y social es una herramienta para informar
+decisiones, no un veredicto automático. Un proyecto puede no ser
+'rentable' en los números y aun así ser prioritario por razones de
+equidad o de derechos —lo importante es que quien decide tenga esa
+información completa y transparente, no que el número decida solo. Es
+una buena forma de cerrar el curso conectando todo lo técnico con la
+pregunta generativa original del programa: cómo aplicar estas
+metodologías para lograr un beneficio real en el bienestar social y de
+desarrollo de Costa Rica."
+:::
+
+## Cierre del curso {.divisor}
+
+## Para llevarse de este curso
+
+- Un proyecto social se evalúa por su **retorno social**, no solo
+  financiero — y eso exige herramientas propias: precios sociales,
+  Marco Lógico, indicadores económicos
+- El Marco Lógico ordena la lógica del proyecto; los precios sociales
+  corrigen las distorsiones del mercado; los indicadores traducen todo
+  eso en un criterio de decisión
+- Estas mismas herramientas son las que usa el Estado costarricense
+  (vía MIDEPLAN) para decidir en qué proyectos sociales invertir
+
+::: {.notes}
+"Para cerrar, quiero que se lleven una idea central: evaluar un
+proyecto social no es un ejercicio puramente técnico o financiero
+—es una forma de tomar decisiones públicas informadas, con
+herramientas que buscan capturar el bienestar de la sociedad como un
+todo. Estas mismas herramientas —Marco Lógico, precios sociales,
+indicadores de rentabilidad social— son las que usan instituciones
+reales en Costa Rica y en toda la región para decidir en qué invertir
+con recursos públicos limitados. Muchas gracias por su trabajo durante
+estas 5 sesiones."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

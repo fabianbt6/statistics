@@ -1,0 +1,149 @@
+---
+title: "Guía de preparación — Sesión 4: Indicadores económicos y sociales"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @ilpes_evaluacionsocial37, @ilpes_metodologiageneral39
+---
+
+<!-- Documento de preparación docente. Ver también
+     content/semanas/semana-04-indicadores-economicos-presentacion.qmd
+     para las slides con el guión de exposición. -->
+
+# Sesión 4. Indicadores económicos y sociales
+
+**Fecha: viernes 27 de noviembre de 2026.**
+
+## Objetivos de aprendizaje
+
+- Entender el rol de la tasa social de descuento y por qué difiere de
+  una tasa de interés comercial.
+- Calcular e interpretar el Valor Actual Neto Económico (VANE) y la
+  Tasa Interna de Rendimiento Económico (TIRE) de su proyecto.
+- Calcular e interpretar la relación Beneficio-Costo y, cuando el
+  beneficio principal no se pueda monetizar, un indicador de
+  costo-efectividad.
+- Dejar un flujo simplificado de costos y beneficios de su proyecto
+  (3-4 períodos) con al menos un indicador calculado, como base numérica
+  directa de la presentación final de la Sesión 5.
+
+## Capítulos sugeridos
+
+| Recurso | Sección | Por qué |
+|---|---|---|
+| ILPES/CEPAL, *Evaluación social de proyectos* (Serie Manuales N.º 37) [@ilpes_evaluacionsocial37] | Capítulos sobre indicadores de rentabilidad social (VAN, TIR, relación B/C) | Referencia central de la sesión — de ahí sale toda la notación y la interpretación de los criterios de decisión. |
+| ILPES/CEPAL, *Metodología general de identificación, preparación y evaluación de proyectos de inversión pública* (Serie Manuales N.º 39) [@ilpes_metodologiageneral39] | Sección de evaluación económica y tasa social de descuento | Complementa con el tratamiento de la tasa social de descuento en el contexto de inversión pública. |
+
+## Contexto y por qué importa esta sesión
+
+Esta es la sesión donde todo el trabajo previo (planteamiento del
+problema, Marco Lógico, identificación de costos y beneficios) se
+traduce en un número y en un criterio de decisión. Es tentador para
+los grupos tratar esto como un ejercicio puramente mecánico ("meter
+números en la fórmula"), pero lo que se evalúa —y lo que hace la
+diferencia en la presentación final— es que sepan **interpretar** el
+resultado: qué significa un VANE positivo o negativo para su proyecto
+específico, y qué recomendación se deriva de ahí. Conviene insistir en
+esto durante toda la sesión.
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Repaso rápido de la lista de costos y beneficios de cada grupo
+2. Tasa social de descuento
+3. Valor Actual Neto Económico (VANE)
+4. Tasa Interna de Rendimiento Económico (TIRE)
+5. Relación Beneficio-Costo y costo-efectividad
+6. Dinámica: cálculo de indicadores en grupo
+7. Cierre y explicación del formato de la presentación final
+
+## Desarrollo — para tu propio estudio antes de la tutoría
+
+### 1. Tasa social de descuento — qué decirles si preguntan por un valor exacto
+
+MIDEPLAN publica y actualiza periódicamente una tasa social de
+descuento oficial para la evaluación de proyectos de inversión pública
+en Costa Rica. Si algún grupo pregunta por el valor vigente exacto,
+remitirlos a la *Guía Metodológica* de MIDEPLAN (ya trabajada en la
+Sesión 1) o a las publicaciones más recientes de MIDEPLAN sobre el
+tema, en vez de afirmar en clase un número que podría estar
+desactualizado. Para efectos prácticos del ejercicio en clase, un rango
+de referencia entre 4% y 8% real anual es razonable y permite avanzar
+sin bloquear el trabajo del grupo — lo importante pedagógicamente es
+que dejen explícito el supuesto usado, no que acierten el valor oficial
+exacto.
+
+### 2. Ejemplo numérico completo — VANE (para usar si un grupo se traba)
+
+Proyecto hipotético de capacitación técnica (3 años, tasa social de
+descuento del 6%), cifras en millones de colones, ya a precios sociales:
+
+| Año | Beneficios ($B_t$) | Costos ($C_t$) | $B_t - C_t$ | Factor de descuento $(1+i)^{-t}$ | Valor presente |
+|---|---|---|---|---|---|
+| 0 | 0 | 40 | -40 | 1,000 | -40,00 |
+| 1 | 15 | 10 | 5 | 0,943 | 4,72 |
+| 2 | 25 | 8 | 17 | 0,890 | 15,13 |
+| 3 | 30 | 8 | 22 | 0,840 | 18,48 |
+
+$$VANE = -40{,}00 + 4{,}72 + 15{,}13 + 18{,}48 = 18{,}33 \text{ (millones)}$$
+
+Como $VANE > 0$, el proyecto es socialmente rentable a esa tasa de
+descuento: genera ₡18,33 millones adicionales de bienestar social, en
+valor presente, por sobre su costo de oportunidad.
+
+### 3. Relación Beneficio-Costo — mismo ejemplo
+
+$$\frac{B}{C} = \frac{4{,}72+15{,}13+18{,}48+... \text{(VP beneficios)}}{40{,}00 + \text{(VP costos años 1-3)}}$$
+
+Con los mismos flujos: VP de beneficios = $14,15+22,25+25,20 \approx 37{,}88$
+(descontando solo $B_t$), VP de costos = $40{,}00+9{,}43+7{,}12+6{,}72 \approx 63{,}27$...
+(nota: al construir este ejemplo con el grupo, conviene separar
+explícitamente los flujos de $B_t$ y $C_t$ por año antes de descontar
+cada uno por separado, para evitar el error común de descontar solo el
+neto $B_t - C_t$ y luego tratar de reconstruir B y C por separado —es
+más limpio pedirles la tabla completa con columnas $B_t$ y $C_t$ ya
+descontadas cada una).
+
+### 4. Costo-efectividad — cuándo usarlo en vez de VANE/TIRE
+
+Recordar a los grupos que el costo-efectividad es la herramienta
+correcta cuando **no es razonable ni deseable monetizar el beneficio
+principal** (ej. años de vida saludable ganados, estudiantes que
+permanecen en el sistema educativo, personas que salen de una condición
+de discapacidad no atendida). No es un sustituto inferior del VANE —es
+el indicador apropiado quando el beneficio central del proyecto es,
+por su naturaleza, no monetario. En esos casos, el criterio de decisión
+no es "positivo o negativo" sino comparativo: ¿este proyecto logra el
+resultado a menor costo por unidad que una alternativa razonable?
+
+### 5. Dinámica de trabajo en grupo — facilitación
+
+- Insistir en que primero decidan la tasa social de descuento y la
+  justifiquen (aunque sea con un supuesto razonable), antes de calcular
+  cualquier indicador.
+- Para los proyectos con beneficios difíciles de monetizar (discapacidad,
+  calidad educativa), dirigirlos hacia costo-efectividad en vez de
+  forzarlos a monetizar todo.
+- Cerrar explicando en detalle el formato de la presentación final,
+  para que lleguen preparados el 18 de diciembre sin sorpresas de
+  formato.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Repaso rápido: costos y beneficios de cada grupo | 10 min |
+| Exposición breve: tasa social de descuento, VANE, TIRE, B/C, costo-efectividad | 25 min |
+| Trabajo en grupo: cálculo de indicadores de su proyecto | 55 min |
+| Puesta en común (interpretación de resultados, dudas) | 20 min |
+| Cierre: explicación del formato de la presentación final | 10 min |
+| **Total** | **120 min** |
+
+## Referencias completas
+
+Ver `referencias/EvaluacionProyectos.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada presentación.

@@ -1,0 +1,33 @@
+<!-- shared/ocultar-logo-portada.html
+     Se incluye project-wide vía _quarto.yml (format.revealjs.include-after-body).
+
+     El logo de reveal.js (format.revealjs.logo, inyectado por
+     R/render_curso.R vía el argumento `metadata` de quarto_render())
+     aparece por defecto en TODAS las slides, incluida la portada.
+     A pedido explícito, la portada no debe llevar logo — este script
+     lo oculta solo cuando la slide horizontal activa es la primera
+     (indexh === 0, que siempre es la portada porque es la primera
+     sección de cada .qmd) y lo vuelve a mostrar en cualquier otra
+     slide.
+
+     NOTA: el selector es ".slide-logo" directo (no
+     "div.has-logo > img.slide-logo") porque en el HTML generado el
+     logo es un <img class="slide-logo"> suelto, sin el div contenedor
+     que documentan algunos ejemplos de versiones distintas de
+     reveal.js/Quarto — se verificó inspeccionando el HTML real
+     generado por este proyecto. -->
+<script type="text/javascript">
+  (function () {
+    function actualizarLogo(indexh) {
+      var logo = document.querySelector(".slide-logo");
+      if (!logo) return;
+      logo.style.display = (indexh === 0) ? "none" : "";
+    }
+    function conectar() {
+      if (!window.Reveal) { setTimeout(conectar, 50); return; }
+      Reveal.on('ready', function (event) { actualizarLogo(event.indexh); });
+      Reveal.on('slidechanged', function (event) { actualizarLogo(event.indexh); });
+    }
+    conectar();
+  })();
+</script>

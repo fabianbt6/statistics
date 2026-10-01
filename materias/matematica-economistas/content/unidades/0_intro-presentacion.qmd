@@ -1,0 +1,173 @@
+---
+title: "Matemática para Economistas"
+subtitle: "Presentación del curso"
+format: revealjs
+params:
+  materia: "Matemática para Economistas"
+  titulo_sesion: "Presentación del curso"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Sesión 1 del calendario REAL de 10 sesiones (jue 17 set 2026). Esta
+     sesión NO imparte materia nueva -- los estudiantes participan primero
+     en una actividad institucional de la escuela (1:30 h) y el tiempo
+     restante se usa para esta presentación. El contenido matemático
+     (Unidad 1, operaciones con matrices) empieza en la Sesión 2 (jue 1
+     oct 2026) -- ver
+     content/unidades/1_operaciones-matrices-presentacion.qmd.
+
+     Este archivo vive junto al resto de unidades en content/unidades/,
+     numerado "0_intro..." (numeración consecutiva desde 0, mismo
+     esquema que estadistica) -- por eso SÍ entra en el filtro numérico
+     de render_curso(unidades = ...) como unidad 0. Render manual:
+     quarto render materias/matematica-economistas/content/unidades/0_intro-presentacion.qmd -->
+
+## Contenido {.agenda}
+
+- Bienvenida y Espacio para Conocernos
+- Repaso del programa
+- Logística
+
+::: {.notes}
+Buenas tardes a todos, bienvenidos a Matemática para Economistas. Hoy
+no vamos a ver materia nueva — esta primera sesión es para que
+conozcan cómo funciona el curso completo: qué vamos a ver, cómo se
+evalúa, cómo funciona el portafolio y el estudio de caso, y el
+calendario de las diez sesiones que tenemos este cuatrimestre. La
+matemática empieza la próxima sesión, con operaciones con matrices.
+:::
+
+## Bienvenida y Espacio para Conocernos {.divisor}
+
+::: {.notes}
+Antes de entrar en el programa, un par de palabras de bienvenida. Este
+es un curso de matemática aplicada — el objetivo no es la matemática
+por sí sola, sino darles herramientas para analizar y resolver
+situaciones económicas reales usando modelos matemáticos: sistemas de
+ecuaciones, derivadas, integrales, funciones de varias variables y
+ecuaciones diferenciales, todo aplicado a problemas de economía.
+:::
+
+## Espacio para conocernos mejor
+
+- Encender la cámara!
+- Experiencia Laboral
+- Expectativa del curso
+- Nivel que están en la carrera
+- ¿Cuáles cursos de matemática y estadística han llevado?
+- ¿Conocen sobre R?
+
+## Unidades del curso {.divisor}
+
+::: {.notes}
+Vamos a recorrer seis unidades a lo largo del cuatrimestre. Solo les
+muestro los nombres hoy — el contenido de cada una lo vemos en detalle
+cuando llegue su turno.
+:::
+
+## Las seis unidades
+
+1. Álgebra lineal
+2. Cálculo diferencial y optimización
+3. Cálculo integral
+4. Funciones en varias variables
+5. Ecuaciones diferenciales
+6. Ética (matemática y el quehacer del economista)
+
+::: {.notes}
+Las primeras cinco unidades son las herramientas matemáticas en sí,
+siempre con su aplicación económica correspondiente — por ejemplo,
+álgebra lineal para puntos de equilibrio de mercado, o cálculo
+diferencial para análisis marginal y elasticidad. La última unidad,
+Ética, es distinta: no es matemática, es una reflexión sobre el papel
+del economista y las implicaciones éticas de los modelos que usamos —
+esa unidad la cerramos con un foro de discusión, no con ejercicios.
+:::
+
+## Evaluación {.divisor}
+
+::: {.notes}
+Ahora la parte que seguro más les interesa: cómo se califica el curso.
+Son cuatro rubros.
+:::
+
+## Cómo se evalúa el curso
+
+| Rubro | Porcentaje |
+|---|---|
+| Ejercicios prácticos (4, 10% cada uno) | 40% |
+| Estudio de caso | 10% |
+| Foro (unidad 6: ética y matemática) | 10% |
+| Portafolio: avance (15%) + entrega final (25%) | 40% |
+| **Total** | **100%** |
+
+::: {.notes}
+Cuatro ejercicios prácticos a lo largo del curso, uno por cada bloque
+de unidades, 10% cada uno — son individuales o en pareja, ejercicios
+de aplicación directa de lo que vamos viendo. Un estudio de caso, de
+fecha libre dentro del curso, en parejas o tríos. Un foro de discusión
+al final, sobre ética y matemática. Y el portafolio, que es el rubro
+más grande — 40% en total, dividido en un avance a mitad de curso y
+una entrega final — y es individual y progresivo, se va construyendo
+sesión a sesión, no es un trabajo que se hace de un tirón al final.
+:::
+
+## Portafolio y estudio de caso {.divisor}
+
+::: {.notes}
+De estos dos rubros les voy a dar el detalle completo por escrito —
+ya tienen o van a tener el documento de instrucciones y la rúbrica de
+cada uno —, pero les adelanto la idea general de cada uno.
+:::
+
+## Estudio de caso (10%)
+
+Un problema real de economía, en parejas o tríos: lo resuelven con las
+herramientas matemáticas del curso y explican qué significa el
+resultado en términos económicos — no solo el número.
+
+::: {.notes}
+El documento de instrucciones trae el detalle completo: qué entregar
+(portada, el problema planteado, el desarrollo, la interpretación
+económica, conclusiones) y la rúbrica de cinco criterios. Fecha libre
+dentro del cuatrimestre — se las confirmo con tiempo.
+:::
+
+## Portafolio (40%)
+
+Una carpeta individual que van llenando **a lo largo de todo el
+curso**, unidad por unidad: un resumen corto, un ejercicio resuelto
+por ustedes, y una nota de para qué sirve ese tema en la vida real.
+
+::: {.notes}
+No es un trabajo de última hora — el portafolio se construye poco a
+poco, así que desde la próxima sesión (cuando empecemos Unidad 1) ya
+pueden ir agregando su primera entrada. Hay una entrega de avance a
+mitad de curso (15%) y la entrega final con todo completo más una
+reflexión (25%). También tienen el documento de instrucciones y la
+rúbrica por escrito.
+:::
+
+## Logística {.divisor}
+
+::: {.notes}
+Para cerrar, un par de puntos prácticos antes de que se vayan.
+:::
+
+## Antes de la próxima sesión
+
+- Revisen el programa del curso (documento aparte, se los comparto hoy)
+- Empiecen a organizar su portafolio (aunque sea la portada y el índice)
+- La próxima sesión (1 de octubre) empezamos con Unidad 1: álgebra
+  lineal — operaciones con matrices
+
+::: {.notes}
+Eso es todo por hoy. Cualquier duda sobre el programa, la evaluación o
+el portafolio, este es el momento — o me escriben cuando quieran.
+Nos vemos el 1 de octubre con la primera unidad.
+:::

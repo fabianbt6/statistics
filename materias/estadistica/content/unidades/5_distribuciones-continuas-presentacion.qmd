@@ -1,0 +1,275 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Distribuciones de probabilidad — normal, t, F y ji-cuadrada"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Distribuciones de probabilidad — normal, t, F y ji-cuadrada"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 5 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Distribución normal
+- Distribución t-student
+- Distribución F
+- Distribución ji-cuadrada (χ²)
+- Laboratorio en R
+
+::: {.notes}
+Hoy cerramos el bloque de distribuciones pasando de discretas
+—Bernoulli, binomial, Poisson— a distribuciones continuas: normal,
+t-student, F y ji-cuadrada. Estas cuatro son, sin exagerar, las
+distribuciones más importantes de todo el curso, porque son la base
+matemática directa de las pruebas de hipótesis que vemos en la
+próxima unidad, los intervalos de confianza más adelante, y el ANOVA
+después de eso.
+
+Mi recomendación para dar esta sesión: antes de entrar en las fórmulas,
+muéstrenles la tabla resumen del final —"¿cuál distribución usar?"— para
+darles un mapa mental de a dónde vamos. Es una sesión más abstracta que
+las anteriores, así que un mapa mental ayuda mucho a que no se pierdan
+en las fórmulas.
+
+La referencia de hoy es Hogg, capítulo 3 para la normal, y capítulo 4
+para cómo se derivan t, F y χ² a partir de la normal.
+:::
+
+## Distribución normal {.divisor}
+
+::: {.notes}
+Empezamos con la reina de las distribuciones: la normal. Ya la
+mencionamos informalmente en sesiones anteriores, hoy la formalizamos.
+:::
+
+## Función de densidad
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \qquad -\infty < x < \infty$$
+
+- Simétrica alrededor de $\mu$
+- $\mu$ controla el centro, $\sigma$ controla la dispersión
+- La **normal estándar** ($Z$) tiene $\mu=0$, $\sigma=1$:
+  $Z = \dfrac{X-\mu}{\sigma}$
+
+::: {.idea-clave}
+La normal es central en estadística porque, por el Teorema del Límite
+Central (que veremos en la próxima unidad), la distribución de la media
+muestral se aproxima a una normal sin importar la distribución original
+de los datos, siempre que $n$ sea suficientemente grande.
+:::
+
+::: {.notes}
+No necesitamos memorizar esta fórmula de memoria para trabajar con
+ella —en la práctica siempre usamos software o tablas— pero sí vale la
+pena que noten su forma: es una campana simétrica, centrada en $\mu$,
+cuya "anchura" está controlada por $\sigma$. Cuanto mayor $\sigma$,
+más aplanada y ancha es la campana; cuanto menor, más alta y angosta.
+
+Una regla práctica útil, la regla empírica: aproximadamente 68% de la
+probabilidad cae dentro de un desvío estándar de la media
+($\\mu\\pm1\\sigma$), 95% dentro de dos desvíos, y 99.7% dentro de
+tres. Esta regla la van a usar intuitivamente para chequear si un dato
+es "raro" o no.
+
+Ahora, la estandarización: cualquier normal, sin importar sus valores
+de $\\mu$ y $\\sigma$, se puede transformar en la normal estándar $Z$
+restando la media y dividiendo entre la desviación estándar. ¿Por qué
+funciona esto? Restar $\\mu$ centra la variable en cero, porque
+$E(X-\\mu)=E(X)-\\mu=0$. Dividir entre $\\sigma$ reescala la varianza a
+exactamente 1, porque $Var\\!\\left(\\frac{X-\\mu}{\\sigma}\\right) =
+\\frac{1}{\\sigma^2}Var(X) = \\frac{\\sigma^2}{\\sigma^2}=1$. Esto es
+extremadamente útil en la práctica: nos permite usar una sola tabla de
+probabilidades —la tabla Z— para cualquier variable normal del mundo,
+sin importar sus valores específicos.
+
+La razón profunda de por qué la normal es tan omnipresente en
+estadística —y esto lo van a ver formalmente en la próxima unidad con
+el Teorema del Límite Central— es que la distribución de la media
+muestral se acerca a una normal a medida que crece el tamaño de
+muestra, sin importar qué forma tenga la distribución original de los
+datos individuales. Eso es lo que permite construir pruebas de
+hipótesis válidas incluso cuando los datos individuales no son
+normales.
+:::
+
+## Distribución t-student {.divisor}
+
+::: {.notes}
+La segunda distribución de hoy responde a una pregunta muy práctica:
+¿qué pasa cuando queremos hacer inferencia sobre una media, pero no
+conocemos la varianza poblacional?
+:::
+
+## Cuándo se usa
+
+Se usa en lugar de la normal cuando se estima la media de una
+población normal con **varianza desconocida** y tamaño de muestra
+pequeño, usando la desviación estándar muestral $s$ en vez de $\sigma$.
+
+- Tiene colas más pesadas que la normal (más probabilidad en los
+  extremos)
+- A medida que aumentan los grados de libertad ($n-1$), se acerca a
+  la distribución normal estándar
+
+::: {.notes}
+Muchos estudiantes confunden t-student con normal — quiero remarcar
+que la diferencia práctica es simple: ¿conocemos $\\sigma$
+poblacional? Si sí, algo que casi nunca pasa en la práctica real,
+usamos Z. Si no —el caso casi siempre real, porque casi nunca
+conocemos la varianza verdadera de toda la población—, usamos t con
+$n-1$ grados de libertad, usando la desviación estándar muestral $s$
+en su lugar.
+
+¿Por qué la t tiene colas más pesadas? Piensen en esto: al reemplazar
+$\\sigma$, que es una constante fija y conocida, por $s$, que es una
+cantidad *aleatoria* estimada de la misma muestra, estamos
+introduciendo una fuente adicional de incertidumbre. Esa incertidumbre
+extra —no saber con precisión cuál es realmente $\\sigma$— es lo que
+hace que la distribución t tenga más probabilidad en los extremos,
+reflejando que hay más "cosas que pueden salir mal" comparado con
+cuando conocemos $\\sigma$ con certeza.
+
+A medida que aumenta el tamaño de muestra $n$, la estimación $s$ se
+vuelve cada vez más precisa, y la t converge hacia la normal estándar.
+En la práctica, con $n$ mayor a 30, la diferencia entre usar t o Z es
+casi despreciable — pero con software estadístico usar t no cuesta
+nada extra, así que el criterio correcto sigue siendo: si no conocemos
+$\\sigma$, usamos t, sin importar qué tan grande sea la muestra.
+:::
+
+## Distribución ji-cuadrada (χ²) {.divisor}
+
+::: {.notes}
+Cambiamos de tema: ya no hablamos de medias, sino de varianzas. La
+distribución χ² es la herramienta natural para hacer inferencia sobre
+la varianza de una población.
+:::
+
+## Definición y uso
+
+Surge como la suma de $k$ variables normales estándar independientes
+al cuadrado. Se usa para:
+
+- Hacer inferencia sobre la **varianza** de una población normal
+- Construir la distribución F (razón de dos χ²)
+- Pruebas de bondad de ajuste e independencia (no paramétricas)
+
+::: {.notes}
+Formalmente, χ² con $k$ grados de libertad se define como la suma de
+$k$ normales estándar independientes, cada una al cuadrado:
+$\\chi^2_{(k)} = Z_1^2+Z_2^2+\\dots+Z_k^2$. Como es una suma de
+cuadrados, χ² solo puede tomar valores no negativos, y su forma está
+sesgada hacia la derecha —no es simétrica como la normal o la t—,
+aunque se va pareciendo más a una campana simétrica a medida que
+crecen los grados de libertad.
+
+¿Por qué sirve para inferencia sobre varianzas? Se puede demostrar
+—no lo vamos a derivar en detalle aquí, pero vale la pena que lo
+sepan— que la cantidad $(n-1)s^2/\\sigma^2$ sigue exactamente una
+distribución χ² con $n-1$ grados de libertad, cuando los datos vienen
+de una población normal. Esa es la conexión que permite construir
+pruebas de hipótesis e intervalos de confianza sobre la varianza
+poblacional.
+
+χ² también aparece en pruebas de bondad de ajuste y de independencia
+—que comparan frecuencias observadas contra frecuencias esperadas—,
+aunque esas no las vamos a desarrollar en profundidad en este curso;
+solo quiero que sepan que existen, para que reconozcan χ² si la ven en
+otro contexto más adelante.
+:::
+
+## Distribución F {.divisor}
+
+::: {.notes}
+La última distribución de hoy es la que vamos a necesitar directamente
+para ANOVA más adelante en el curso.
+:::
+
+## Definición y uso
+
+Es el cociente de dos variables χ² independientes, cada una dividida
+entre sus grados de libertad. Se usa para:
+
+- Comparar las varianzas de dos poblaciones
+- La prueba F en ANOVA (más adelante en el curso), para comparar tres
+  o más medias
+
+::: {.notes}
+La distribución F se construye como un cociente de dos χ², cada una
+dividida entre sus propios grados de libertad. Si tienen dos muestras
+independientes de poblaciones normales, el cociente de sus varianzas
+muestrales sigue una distribución F — por eso es la herramienta
+natural para comparar si dos poblaciones tienen la misma varianza.
+
+Pero el uso que más vamos a necesitar es en ANOVA, más adelante en el
+curso. Adelanto la idea aquí para que la vean venir: en ANOVA, la
+pregunta es si tres o más grupos tienen la misma media poblacional. La
+prueba F compara dos estimaciones de varianza —una que mide qué tan
+distintas son las medias *entre* grupos, y otra que mide el ruido
+natural *dentro* de cada grupo—. Si el cociente de esas dos varianzas,
+que sigue una F, resulta mucho mayor que 1, es evidencia de que las
+medias de los grupos son realmente diferentes. Vamos a desarrollar
+esto con todo detalle más adelante, en la unidad de ANOVA, pero ya
+tienen la pieza matemática —la distribución F— lista para ese momento.
+:::
+
+## Resumen: ¿cuál distribución usar?
+
+| Distribución | Se usa para |
+|---|---|
+| Normal / Z | Media con varianza poblacional conocida, $n$ grande |
+| t-student | Media con varianza desconocida, $n$ pequeño |
+| χ² | Varianza de una población; pruebas no paramétricas |
+| F | Comparar varianzas; ANOVA |
+
+::: {.notes}
+Esta tabla es el resumen que quiero que se lleven de la sesión de hoy.
+Practico recomendación: vuelvan a mostrar esta tabla al principio de
+la próxima sesión, como puente hacia pruebas de hipótesis, porque ahí
+vamos a estar decidiendo constantemente "¿uso Z o uso t?" según si
+conocemos o no la varianza poblacional — exactamente el criterio que
+acabamos de ver hoy.
+:::
+
+## Laboratorio en R
+
+Generar 3 conjuntos de datos y graficar su densidad:
+
+```r
+rchisq(n = 1000, df = 5)
+rt(n = 1000, df = 5)
+rf(n = 1000, df1 = 5, df2 = 20)
+```
+
+¿Qué forma tiene cada distribución? ¿Cómo cambia si se modifican los
+grados de libertad?
+
+::: {.notes}
+En el laboratorio, pídanles a los estudiantes que grafiquen la
+densidad de cada distribución con distintos grados de libertad —por
+ejemplo, `df=2`, `df=10`, `df=50` para χ² y t— y que noten dos cosas:
+primero, que χ² se vuelve más simétrica a medida que aumentan los
+grados de libertad; segundo, que t se acerca cada vez más a una normal
+estándar a medida que aumentan sus grados de libertad, confirmando
+visualmente lo que discutimos en la teoría. Esto cierra el bloque de
+distribuciones. La próxima sesión empezamos con pruebas de hipótesis,
+donde vamos a usar directamente estas cuatro distribuciones que
+acabamos de ver.
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

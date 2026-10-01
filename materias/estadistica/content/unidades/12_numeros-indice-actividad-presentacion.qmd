@@ -1,0 +1,97 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Números índice — actividad participativa (Caso 3)"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Números índice — actividad participativa (Caso 3)"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 12 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Actividad participativa — corresponde al **Caso 3** de la evaluación
+- Actividad participativa (fuera del flujo normal de presentaciones)
+- Ver documento propio de la actividad y `fuente/Presentaciones ppt/14/Guía de Lectura - metodología del IPC.docx`
+
+::: {.notes}
+Esta sesión tiene un formato distinto a todas las anteriores, así que
+quiero explicarles eso primero. Hoy no vamos a tener una clase
+magistral con slides como las sesiones anteriores — hoy es una
+actividad participativa, y cuenta como el Caso 3 de la evaluación, con
+el mismo peso que los Casos 1 y 2 que ya presentaron: 10% de la nota
+final. La diferencia es la dinámica: en vez de que ustedes presenten
+un análisis ya preparado, hoy vamos a trabajar juntos, de forma más
+interactiva, sobre el tema de números índice.
+
+El material de apoyo para hoy no es esta presentación —que es
+intencionalmente breve, solo para dar el marco introductorio—, sino un
+documento propio de la actividad y la guía de lectura sobre la
+metodología del Índice de Precios al Consumidor que tienen en la
+carpeta de materiales del curso. Les recomiendo haber leído esa guía
+antes de venir a clase, porque la actividad de hoy parte de ahí.
+
+Antes de entrar en la actividad como tal, les voy a dar un marco
+teórico breve —unos 30 minutos— sobre qué es un número índice y cómo
+se construyen los principales tipos, porque eso les da el vocabulario
+técnico que van a necesitar para participar en la discusión.
+:::
+
+## Números índice — actividad participativa (Caso 3) {.divisor}
+
+<!-- TODO: contenido de la sesión — definiciones, ejemplos, ejercicios,
+     laboratorio en R. Material fuente a reutilizar como base:
+     Se desarrolla con documento propio, no en esta presentación (ver nota en programa.qmd).
+     Seguir el patrón de
+     content/unidades/3_probabilidad-reglas-bayes-presentacion.qmd
+     y PATRONES.md (tabla de datos, código R, pregunta de discusión,
+     slide destacada, comparación de columnas, figura con fuente citada). -->
+
+::: {.notes}
+Esta sesión se conduce con un formato distinto a las demás (actividad
+participativa, no exposición magistral) y con un documento propio, no
+con esta plantilla de slides — dejar esta presentación solo como
+placeholder/recordatorio de que la actividad de hoy es el Caso 3 de la
+evaluación (10%). Ver
+`fuente/Presentaciones ppt/14/Guía de Lectura - metodología del IPC.docx`
+como insumo de la actividad.
+
+Para el marco teórico introductorio de 30 minutos, la guía de
+preparación de esta unidad tiene el desarrollo completo: qué es un
+número índice, la diferencia entre los índices de Laspeyres (pondera
+con cantidades del período base) y Paasche (pondera con cantidades del
+período actual), el sesgo de sustitución que cada uno introduce en
+direcciones opuestas, el índice de Fisher como corrección parcial, y
+un ejemplo numérico pequeño con dos bienes para ilustrar la mecánica
+de cálculo antes de pasar a datos reales del IPC. Resuelvan ese
+ejemplo en el pizarrón antes de arrancar la actividad participativa,
+para que todos tengan el vocabulario y la mecánica frescos.
+:::
+
+## Actividad de la sesión
+
+Trabajo en clase / laboratorio en R sobre el tema de la sesión.
+
+::: {.notes}
+El formato específico de la actividad participativa —dinámica de
+grupos, entregable, rúbrica de evaluación del Caso 3— se define en el
+documento propio de la actividad, separado de esta presentación,
+según lo acordado al planificar el curso. Esta sesión no tiene un
+laboratorio de R estandarizado como las sesiones anteriores; el
+contenido específico de hoy depende del diseño final de esa actividad.
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

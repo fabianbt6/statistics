@@ -1,0 +1,171 @@
+---
+title: "Guía de preparación — Sesión 1: Bienvenida, naturaleza de los proyectos sociales y planteamiento del problema"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @cepal_guiainversionsocial, @cepal_cohen_proyectossociales, @mideplan2022_guiapip
+---
+
+<!-- Documento de preparación docente. Objetivo: que esta guía sola
+     alcance para dar la tutoría, sin tener que revisar toda la
+     bibliografía antes. Ver también
+     content/semanas/semana-01-planteamiento-problema-presentacion.qmd
+     para las slides con el guión de exposición. -->
+
+# Sesión 1. Bienvenida, naturaleza de los proyectos sociales y planteamiento del problema
+
+**Fecha: viernes 18 de setiembre de 2026.** Primera de las **5
+sesiones de tutoría** del curso; coincide con la Sesión 1 (o 2, según
+se acomode) de Estadística — es el único cruce de fechas entre ambos
+cursos en todo el cuatrimestre.
+
+## Objetivos de aprendizaje
+
+- Comprender que este curso reemplaza el esquema tradicional de
+  unidades/exámenes por un único proyecto, evaluado 100% a lo largo de
+  las 5 sesiones (40% avances + 40% documento final + 20% presentación).
+- Distinguir un proyecto social de un proyecto privado: la rentabilidad
+  se mide en bienestar social, no solo en retorno financiero.
+- Ubicar el rol de MIDEPLAN y el Sistema Nacional de Inversión Pública
+  en la evaluación de proyectos sociales en Costa Rica.
+- Formar grupos (máx. 4) y elegir uno de los seis temas del programa
+  (desempleo, desnutrición, discapacidad, desigualdad social, pensiones
+  y seguridad social, calidad de la educación primaria y secundaria).
+- Redactar un primer borrador de antecedentes, justificación,
+  formulación del problema (como pregunta), objetivo general y al
+  menos 3 objetivos específicos.
+
+## Capítulos sugeridos
+
+| Recurso | Sección | Por qué |
+|---|---|---|
+| CEPAL, *Guía metodológica general para la preparación y evaluación de proyectos de inversión social* [@cepal_guiainversionsocial] | Capítulo introductorio (qué es un proyecto de inversión social) | Marco conceptual de la sesión: en qué se diferencia un proyecto social de uno privado. |
+| Cohen y Martínez, *Manual: Formulación, evaluación y monitoreo de proyectos sociales* [@cepal_cohen_proyectossociales] | Capítulo sobre identificación del problema y diagnóstico | Guía práctica para acompañar a los grupos en la formulación del problema y la justificación. |
+| MIDEPLAN (2022), *Guía Metodológica para la Identificación, Formulación y Evaluación de Proyectos de Inversión Pública* [@mideplan2022_guiapip] | Capítulo 1 (ciclo de vida del proyecto, Sistema Nacional de Inversión Pública) | Contexto institucional costarricense — de dónde vienen los proyectos sociales reales del país. |
+
+## Contexto y por qué importa esta sesión
+
+Esta es la primera sesión de un curso muy corto (5 sesiones de
+tutoría, en vez de las 15 semanas del curso regular) y con una lógica
+de evaluación distinta: no hay debates ni mapas mentales sueltos como
+en el programa oficial — **todo** el curso gira en torno a un único
+proyecto que se construye sesión a sesión. Dos cosas conviene dejar
+sin ambigüedad desde hoy: (1) el esquema de evaluación (40% avances +
+40% documento final + 20% presentación, todo dentro del mismo
+proyecto), porque el estudiante puede esperar, por costumbre, un
+examen o entregables independientes; y (2) que la elección del tema y
+la formulación del problema de hoy son la base de todo lo que sigue —
+si el problema queda mal planteado, se arrastra el error durante las 4
+sesiones restantes.
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Bienvenida y ronda de presentación
+2. Cómo funciona el curso: 5 sesiones, evaluación 100% proyecto final
+3. ¿Qué es un proyecto social o de desarrollo?
+4. Los proyectos sociales en Costa Rica (MIDEPLAN, Sistema Nacional de
+   Inversión Pública)
+5. Formación de grupos y elección de tema
+6. Los primeros pasos del proyecto: antecedentes, justificación,
+   problema, objetivos
+7. Dinámica: trabajo en grupo y puesta en común
+8. Cierre, próxima sesión y lecturas asignadas
+
+## Desarrollo — para tu propio estudio antes de la tutoría
+
+### 1. Por qué "evaluación económica y social" y no evaluación financiera
+
+En un proyecto privado, los costos y beneficios se valoran a precios
+de mercado y el criterio de decisión es la rentabilidad financiera para
+el inversionista. En un proyecto social, muchos beneficios no tienen
+precio de mercado (una vida salvada, un año adicional de escolaridad,
+la reducción del hacinamiento en un centro penitenciario) y, además,
+algunos precios de mercado están distorsionados (impuestos, subsidios,
+aranceles, monopolios) y no reflejan el verdadero costo de oportunidad
+para el país. Por eso se necesitan **precios sociales** (tema de la
+Sesión 3-4) y criterios de decisión que capturen el bienestar social, no
+solo el retorno privado.
+
+### 2. El ciclo de la inversión pública en Costa Rica
+
+MIDEPLAN administra el Sistema Nacional de Inversión Pública (SNIP),
+que regula el ciclo de vida de cualquier proyecto de inversión pública
+costarricense: idea → perfil → prefactibilidad → factibilidad →
+diseño → ejecución → operación → evaluación ex-post. Para efectos de
+este curso no es necesario memorizar todo el ciclo, pero sí que los
+estudiantes entiendan que su "proyecto final" imita, a escala de un
+trabajo de curso, el tipo de análisis que MIDEPLAN exige antes de que
+el Estado invierta en un proyecto social real (por ejemplo, un CEN-
+CINAI nuevo, un programa de pensiones, o una reforma en la atención de
+la discapacidad).
+
+### 3. Elección de tema — notas por tema (para orientar a los grupos)
+
+- **Desempleo**: pensar en subgrupos (juvenil, femenino, por región) —
+  facilita acotar el problema en vez de "el desempleo en general".
+- **Desnutrición**: distinguir desnutrición infantil de inseguridad
+  alimentaria en adultos mayores — son poblaciones y políticas
+  distintas.
+- **Discapacidad**: pensar en el acceso a servicios (educación, empleo,
+  salud) más que en la discapacidad como diagnóstico médico.
+- **Desigualdad social**: el índice de Gini de Costa Rica y su
+  evolución reciente es un buen punto de partida para antecedentes.
+- **Pensiones y seguridad social**: sostenibilidad del régimen de la
+  CCSS o de regímenes especiales — tema con mucha data pública
+  disponible.
+- **Calidad de la educación primaria y secundaria**: pruebas
+  estandarizadas (FARO/pruebas nacionales), deserción, brecha rural-
+  urbana.
+
+En todos los casos, insistir en que el grupo acote el problema a algo
+manejable en 4 sesiones — un problema demasiado amplio ("la pobreza en
+Costa Rica") no se puede evaluar con las herramientas del curso.
+
+### 4. Formulación del problema y objetivos — errores comunes a corregir
+
+- **Problema formulado como afirmación, no como pregunta**: corregir en
+  el momento ("el desempleo juvenil es alto" → "¿qué factores explican
+  la persistencia del desempleo juvenil en la Zona Sur?").
+- **Pregunta que admite respuesta sí/no**: igual, corregir en vivo.
+- **Objetivos específicos que repiten el objetivo general**: pedir que
+  cada uno aporte una dimensión distinta (diagnóstico, comparación,
+  propuesta).
+- **Objetivos con verbos de acción en vez de pensamiento** ("capacitar",
+  "implementar"): recordar que en esta etapa son de análisis
+  (analizar, comparar, evaluar, identificar), no de ejecución.
+
+### 5. Dinámica de trabajo en grupo — facilitación
+
+- Dar 30-40 minutos de trabajo en grupo después de la exposición breve.
+- Circular entre los grupos para ayudar a acotar el problema — es el
+  punto donde más se traban.
+- Cerrar con 2 minutos por grupo compartiendo tema + pregunta +
+  objetivo general, para que el resto del curso también conozca los
+  proyectos de los demás grupos (útil para la sesión de cierre).
+
+## Distribución de tiempo sugerida
+
+(Ajustar según la duración real de la tutoría en su horario — se asume
+un bloque de 2 horas.)
+
+| Actividad | Tiempo |
+|---|---|
+| Bienvenida y ronda de presentación | 10 min |
+| Cómo funciona el curso: evaluación y metodología | 15 min |
+| Exposición breve: naturaleza de los proyectos sociales + Costa Rica | 20 min |
+| Formación de grupos y elección de tema | 10 min |
+| Trabajo en grupo: antecedentes, justificación, problema, objetivos | 40 min |
+| Puesta en común (2 min por grupo) | 15 min |
+| Cierre, próxima sesión y lecturas asignadas | 10 min |
+| **Total** | **120 min** |
+
+## Referencias completas
+
+Ver `referencias/EvaluacionProyectos.bib` para el detalle bibliográfico
+completo (incluye enlaces de acceso abierto a cada fuente), y
+`content/blocks/bibliografia.qmd` para el bloque reutilizable que
+genera la sección de referencias en cada presentación.

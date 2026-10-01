@@ -1,0 +1,253 @@
+---
+title: "Guía de preparación — Análisis de varianza (ANOVA)"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hanglee2023
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/9_anova-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 9 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Análisis de varianza (ANOVA)
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Explicar por qué no basta con hacer varias pruebas t para comparar
+  tres o más medias (el problema de la inflación del error tipo I).
+- Verificar los supuestos del ANOVA de un factor.
+- Descomponer la variabilidad total en sus dos fuentes y construir e
+  interpretar una tabla ANOVA completa, con un ejemplo numérico
+  resuelto a mano.
+- Explicar el enunciado de la Práctica 2 (aplicación de ANOVA a datos
+  reales de la ECE), que se entrega a partir de esta sesión.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Hang Lee, *Foundations of Applied Statistical Methods* [@hanglee2023] | Capítulo 4 (Inference Using Analysis of Variance) | Es el libro con el desarrollo más completo de ANOVA de toda la bibliografía del curso — cubre sumas de cuadrados, prueba F y la tabla ANOVA con el mismo nivel que necesita esta sesión (ver p. 86-88 para sumas de cuadrados). |
+
+## Desarrollo teórico completo
+
+### 1. Por qué no basta con varias pruebas t
+
+Supongamos que quieren comparar las medias de 4 grupos. Podrían pensar
+en hacer una prueba t para cada par de grupos —serían
+$\binom{4}{2}=6$ pruebas—. El problema es que cada prueba individual
+tiene una probabilidad $\alpha$ de cometer un error tipo I (rechazar
+$H_0$ siendo verdadera), y al hacer *múltiples* pruebas, la
+probabilidad de cometer **al menos un** error tipo I en el conjunto
+completo de comparaciones crece rápidamente por encima del $\alpha$
+nominal de cada prueba individual. Por ejemplo, con 6 pruebas
+independientes a $\alpha=0.05$ cada una, la probabilidad de al menos
+un falso positivo es aproximadamente
+$1-(1-0.05)^6 \approx 0.265$ — más del 26%, muy por encima del 5%
+nominal. El ANOVA resuelve esto haciendo **una sola prueba** que
+evalúa simultáneamente si hay evidencia de que *alguna* de las medias
+difiere, controlando el error tipo I global al nivel $\alpha$ elegido.
+
+### 2. Supuestos del ANOVA de un factor
+
+- Los valores de la variable dependiente, dentro de cada grupo, siguen
+  una distribución normal.
+- Las varianzas poblacionales son iguales entre los niveles del factor
+  (homocedasticidad) — este supuesto es importante porque, como van a
+  ver, la variabilidad "dentro de grupos" se combina (se "pool-ea")
+  asumiendo que todos los grupos comparten la misma varianza.
+- Las observaciones son independientes entre sí, tanto dentro de cada
+  grupo como entre grupos.
+
+### 3. Descomposición de la variabilidad — sumas de cuadrados
+
+La idea central del ANOVA es descomponer la variabilidad **total** de
+todos los datos (sin distinguir grupos) en dos fuentes:
+
+$$SS_{total} = SS_{entre} + SS_{dentro}$$
+
+**Suma de cuadrados total ($SS_{total}$):** mide qué tan dispersos
+están *todos* los datos, sin importar a qué grupo pertenecen, respecto
+a la media general (gran media) de todos los datos juntos:
+
+$$SS_{total} = \sum_{i}\sum_{j} (x_{ij} - \bar{x})^2$$
+
+**Suma de cuadrados entre grupos ($SS_{entre}$):** mide qué tan
+distintas son las medias de cada grupo respecto a la gran media —es la
+parte de la variabilidad que se "explica" por pertenecer a un grupo u
+otro:
+
+$$SS_{entre} = \sum_{i} n_i (\bar{x}_i - \bar{x})^2$$
+
+donde $\bar{x}_i$ es la media del grupo $i$ y $n_i$ su tamaño de
+muestra.
+
+**Suma de cuadrados dentro de grupos ($SS_{dentro}$):** mide la
+variabilidad residual —el "ruido"— que queda dentro de cada grupo,
+alrededor de su propia media, sin explicar por la pertenencia al
+grupo:
+
+$$SS_{dentro} = \sum_{i}\sum_{j} (x_{ij} - \bar{x}_i)^2$$
+
+**La lógica intuitiva de la prueba F:** si las medias de los grupos
+son realmente todas iguales, $SS_{entre}$ debería ser "pequeño" en
+relación con $SS_{dentro}$ —la variabilidad entre grupos no sería más
+que ruido aleatorio, del mismo orden que el ruido dentro de cada
+grupo—. Si, en cambio, las medias son realmente distintas,
+$SS_{entre}$ tenderá a ser grande en relación con $SS_{dentro}$. La
+prueba F formaliza exactamente esta comparación.
+
+### 4. La prueba F y la tabla ANOVA
+
+Para comparar $SS_{entre}$ y $SS_{dentro}$ de forma justa, cada uno se
+divide entre sus respectivos grados de libertad, dando los cuadrados
+medios (MS, de *mean square*):
+
+$$MS_{entre} = \frac{SS_{entre}}{k-1}, \qquad MS_{dentro} = \frac{SS_{dentro}}{n-k}$$
+
+donde $k$ es el número de grupos y $n$ el número total de
+observaciones. El estadístico de prueba es:
+
+$$F = \frac{MS_{entre}}{MS_{dentro}}$$
+
+Bajo $H_0$ (todas las medias son iguales), este estadístico sigue una
+distribución F con $(k-1, n-k)$ grados de libertad —exactamente la
+distribución F que vimos en la unidad de distribuciones — normal, t, F
+y ji-cuadrada, como cociente de dos varianzas—. Se rechaza $H_0$ si el
+$F$ calculado es mayor que el valor crítico de la tabla F para el
+nivel de significancia elegido: valores grandes de F son evidencia de
+que la variabilidad *entre* grupos es demasiado grande para
+explicarse solo por el ruido *dentro* de los grupos.
+
+$$H_0: \mu_1=\mu_2=\dots=\mu_k \qquad H_1: \text{al menos una } \mu_i \text{ es diferente}$$
+
+**Tabla ANOVA (formato estándar):**
+
+| Fuente | SS | gl | MS | F |
+|---|---|---|---|---|
+| Entre grupos | $SS_{entre}$ | $k-1$ | $MS_{entre}$ | $MS_{entre}/MS_{dentro}$ |
+| Dentro de grupos | $SS_{dentro}$ | $n-k$ | $MS_{dentro}$ | |
+| Total | $SS_{total}$ | $n-1$ | | |
+
+**Nota importante para la clase:** el ANOVA solo dice *si* hay al
+menos una diferencia entre las medias, no *cuáles* grupos difieren
+entre sí. Para eso se necesitarían pruebas post-hoc (Tukey, Bonferroni,
+etc.), que no son parte de este curso, pero vale la pena mencionar que
+existen si algún estudiante pregunta "¿y cuál de los grupos era
+diferente?"
+
+**Conexión con pruebas t (unidad de pruebas de hipótesis):** si el
+ANOVA se aplica con exactamente $k=2$ grupos, el resultado —el valor F
+y su conclusión— es matemáticamente equivalente al de una prueba t de
+dos muestras independientes con varianzas iguales (de hecho, $F=t^2$
+en ese caso particular). Esto ayuda a que los estudiantes vean el
+ANOVA no como algo completamente nuevo, sino como una generalización
+natural de lo que ya conocen.
+
+## Ejemplo completo resuelto a mano (para preparar antes de clase)
+
+Supongamos ingresos mensuales (en cientos de miles de colones) de
+cuatro trabajadores muestreados en cada uno de tres sectores
+económicos:
+
+- Sector A (agropecuario): 10, 12, 11, 13
+- Sector B (tecnología): 18, 20, 19, 17
+- Sector C (comercio): 14, 15, 13, 16
+
+**Medias de grupo:** $\bar{x}_A=11.5$, $\bar{x}_B=18.5$,
+$\bar{x}_C=14.5$. **Gran media:** $\bar{x} = 14.833$ ($n=12$ en total,
+$k=3$ grupos).
+
+**Cálculo de $SS_{entre}$:**
+
+$$SS_{entre} = 4(11.5-14.833)^2 + 4(18.5-14.833)^2 + 4(14.5-14.833)^2 \approx 98.67$$
+
+**Cálculo de $SS_{dentro}$** (suma de las desviaciones al cuadrado
+respecto a la media de cada grupo, dentro de cada grupo):
+
+$$SS_{dentro} = 15.00$$
+
+**Cálculo de $SS_{total}$** (verificación: debe ser la suma de los dos
+anteriores):
+
+$$SS_{total} = 98.67 + 15.00 = 113.67$$
+
+**Grados de libertad:** $k-1=2$ (entre grupos), $n-k=9$ (dentro de
+grupos).
+
+**Cuadrados medios y estadístico F:**
+
+$$MS_{entre} = 98.67/2 = 49.33, \qquad MS_{dentro} = 15.00/9 \approx 1.667$$
+
+$$F = 49.33/1.667 \approx 29.6$$
+
+Con $(2,9)$ grados de libertad, este valor de F es muy superior al
+valor crítico usual a $\alpha=0.05$ (aproximadamente 4.26), y el valor
+p correspondiente es extremadamente pequeño (≈0.00011). **Conclusión:**
+se rechaza $H_0$ — hay evidencia estadística fuerte de que al menos un
+sector tiene un ingreso promedio distinto a los demás (visualmente, el
+sector B —tecnología— tiene una media notablemente más alta que los
+otros dos).
+
+**Código R para reproducir y verificar este cálculo:**
+
+```r
+ingreso <- c(10,12,11,13, 18,20,19,17, 14,15,13,16)
+sector <- factor(rep(c("A","B","C"), each = 4))
+modelo <- aov(ingreso ~ sector)
+summary(modelo)
+```
+
+Este mismo ejemplo, resuelto a mano primero y verificado con `aov()`
+después, es una buena forma de mostrar en clase que la tabla ANOVA no
+es una "caja negra" de R, sino un cálculo que pueden reproducir con
+lápiz y papel.
+
+**Para el ejercicio en clase con datos reales de la ECE**, repitan
+exactamente esta misma lógica pero con el ingreso promedio agrupado
+por región o sector económico de la encuesta — la mecánica de `aov()`
+es idéntica, solo cambia la fuente de los datos.
+
+### 4. Práctica 2 (a partir de esta sesión)
+
+La Práctica 2 se movió a esta sesión al reordenar el cronograma
+(decisión del usuario, 2026-09-19; antes estaba en la sesión de series
+de tiempo — componentes). Vale 10% de la nota final (ver
+`content/docs/programa.qmd`). Es individual, se entrega en la
+plataforma antes de la próxima clase, y cubre ANOVA de un factor
+—desde plantear las hipótesis hasta construir e interpretar la tabla
+ANOVA completa—, aplicado a datos reales de la ECE (mismo tipo de
+ejercicio que el resuelto en clase, con otra variable de agrupación).
+Enunciado y ejemplos de soluciones de cursos anteriores en
+`fuente/Presentaciones ppt/5/Práctica 2/`.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Introducción: por qué no varias pruebas t (inflación del error tipo I) | 20 min |
+| Supuestos del ANOVA | 15 min |
+| Sumas de cuadrados: derivación e intuición | 30 min |
+| Prueba F y tabla ANOVA (con el ejemplo numérico completo) | 35 min |
+| Ejemplo con datos económicos reales (ECE) + R | 50 min |
+| Cierre, conexión con prueba t, e instrucciones de la Práctica 2 | 30 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

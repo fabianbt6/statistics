@@ -1,0 +1,122 @@
+---
+title: "Guía de preparación — Sesión 5: Cierre del curso y presentación final de proyectos"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @cepal_guiainversionsocial, @cepal_cohen_proyectossociales, @mideplan2022_guiapip, @ilpes_marcologico42, @ilpes_metodologiageneral39, @ilpes_evaluacionsocial37
+---
+
+<!-- Documento de preparación docente. Ver también
+     content/semanas/semana-05-presentacion-final-presentacion.qmd
+     para las slides con el guión de exposición. -->
+
+# Sesión 5. Cierre del curso y presentación final de proyectos
+
+**Fecha: viernes 18 de diciembre de 2026.** Última sesión del curso —
+coincide con el último viernes del cuatrimestre.
+
+## Objetivos de aprendizaje (de todo el curso, evaluados hoy)
+
+- Presentar de forma coherente un proyecto social completo: problema,
+  objetivos, Marco Lógico, costos y beneficios, indicadores económicos
+  y conclusiones.
+- Defender e interpretar los resultados de sus indicadores frente a
+  preguntas del resto del curso.
+- Comparar críticamente los resultados de distintos proyectos y
+  discutir los límites de la evaluación puramente económica frente a
+  otros criterios (equidad, derechos, urgencia social).
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Bienvenida a la última sesión
+2. Recordatorio del formato de la presentación y de la entrega del
+   documento final
+3. Presentaciones de cada grupo (10-15 min + 5 min de preguntas)
+4. Debate abierto: comparación entre proyectos
+5. Cierre del curso
+
+## Cómo evaluar la presentación (rúbrica sugerida)
+
+Dado que el 20% de la nota corresponde a esta presentación (dentro del
+100% del proyecto final), conviene evaluar con un criterio consistente
+entre grupos. Sugerencia de rúbrica, adaptando el estilo analítico ya
+usado en el programa oficial del curso regular (niveles de dominio
+receptivo/resolutivo/autónomo/estratégico):
+
+| Criterio | Qué observar |
+|---|---|
+| Claridad del problema y objetivos | El problema está bien formulado (pregunta, acotado) y los objetivos son coherentes con él |
+| Coherencia del Marco Lógico | Fin, propósito, componentes y actividades están conectados lógicamente; indicadores medibles |
+| Identificación de costos y beneficios | Clasificación correcta (directos/indirectos, tangibles/intangibles); uso apropiado de precios sociales |
+| Cálculo e interpretación de indicadores | VANE/TIRE/B-C o costo-efectividad calculados con supuestos explícitos, e interpretados correctamente (no solo "dio positivo/negativo") |
+| Conclusiones y recomendaciones | Se derivan lógicamente del análisis, y consideran los límites de los supuestos usados |
+| Manejo de preguntas | Responde con argumentos, reconoce límites y supuestos de su propio análisis |
+
+## Contexto y por qué importa esta sesión
+
+Esta es la culminación de las 4 sesiones anteriores y el momento donde
+se evalúa si el proyecto —tomado como un todo— es coherente: si el
+problema realmente explica el objetivo, si el objetivo realmente se
+refleja en el Marco Lógico, y si los costos/beneficios e indicadores
+realmente corresponden a ese Marco Lógico. Vale la pena, al dar
+retroalimentación después de cada presentación, señalar explícitamente
+cuándo esa coherencia se rompe (por ejemplo, un indicador que no se
+deriva de los costos/beneficios presentados, o conclusiones que no se
+desprenden del análisis), más que solo señalar errores de cálculo
+puntuales.
+
+## Desarrollo — para tu propio estudio antes de la tutoría
+
+### 1. Facilitación del debate final
+
+El debate abierto al cierre de las presentaciones cumple dos
+funciones: (a) consolidar el aprendizaje comparando resultados entre
+proyectos de temas distintos, y (b) introducir explícitamente el
+límite de la evaluación económica pura — un proyecto puede no ser
+"rentable" en los números y aun así ser socialmente prioritario por
+razones de equidad, derechos o urgencia. Esto conecta directamente con
+la pregunta generativa del programa oficial: cómo aplicar estas
+metodologías para lograr beneficios reales en el bienestar social y de
+desarrollo de Costa Rica, sin que el número sustituya el criterio de
+política pública.
+
+### 2. Manejo del tiempo entre presentaciones
+
+Con 5 grupos (uno por cada tema: desempleo, desnutrición, discapacidad,
+desigualdad social, pensiones, calidad educativa — ajustar si el
+número real de grupos difiere), a 10-15 minutos de presentación + 5 de
+preguntas cada uno, el bloque de presentaciones ocupa entre 75 y 100
+minutos. Conviene anunciar el tiempo restante a cada grupo (por
+ejemplo, avisar a los 10 minutos) para no comprimir el debate final.
+
+### 3. Qué hacer si un grupo llega con el documento incompleto
+
+Dado que el documento final vale 40% y la presentación 20% dentro del
+mismo proyecto, un grupo puede presentar razonablemente bien aunque su
+documento escrito tenga huecos menores — en ese caso, es válido
+anotarlo como observación para la nota del documento sin penalizar la
+presentación oral, siempre que la exposición en sí sea coherente.
+
+## Distribución de tiempo sugerida
+
+(Ajustar el número de grupos y por tanto el tiempo total real, según
+cuántos grupos se conformaron en la Sesión 1.)
+
+| Actividad | Tiempo (5 grupos) |
+|---|---|
+| Bienvenida y recordatorio del formato | 10 min |
+| Presentaciones (15 min c/u, incl. preguntas) | 75 min |
+| Debate abierto: comparación entre proyectos | 25 min |
+| Cierre del curso | 10 min |
+| **Total** | **120 min** |
+
+## Referencias completas
+
+Ver `referencias/EvaluacionProyectos.bib` para el detalle bibliográfico
+completo de todo el curso, y `content/blocks/bibliografia.qmd` para el
+bloque reutilizable que genera la sección de referencias en cada
+presentación.

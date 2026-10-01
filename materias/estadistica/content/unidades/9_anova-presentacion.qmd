@@ -1,0 +1,263 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Análisis de varianza (ANOVA)"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Análisis de varianza (ANOVA)"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hanglee2023
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 9 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Introducción: de comparar dos medias a comparar tres o más
+- Supuestos del ANOVA
+- Cálculo de variaciones (sumas de cuadrados)
+- Prueba F y tabla ANOVA
+- Práctica 2
+
+::: {.notes}
+Hoy cerramos la parte "clásica" del curso con ANOVA, análisis de
+varianza. El nombre es un poco engañoso —"análisis de varianza"— para
+algo que en realidad compara *medias*, no varianzas; van a ver por qué
+en un momento: usamos varianzas como herramienta para comparar medias.
+
+ANOVA es, en esencia, la generalización natural de la prueba t que
+vimos en la unidad de pruebas de hipótesis: la prueba t compara la
+media de un grupo contra un valor de referencia, o de dos grupos entre
+sí; ANOVA compara tres o más grupos al mismo tiempo. Vamos a ver por
+qué no basta simplemente con hacer varias pruebas t por separado.
+
+La estructura de hoy: primero la motivación —por qué necesitamos algo
+distinto a múltiples pruebas t—; después los supuestos; después la
+descomposición de la variabilidad en sumas de cuadrados, que es el
+corazón matemático del método; y cerramos con la prueba F y un
+ejemplo completo con datos económicos.
+
+Referencia principal: Hang Lee, capítulo 4, que tiene el desarrollo
+más completo de ANOVA de toda la bibliografía del curso.
+:::
+
+## Introducción {.divisor}
+
+::: {.notes}
+Empecemos con la pregunta motivadora: ¿por qué no simplemente hacer
+varias pruebas t, una por cada par de grupos que queramos comparar?
+:::
+
+## De dos medias a tres o más
+
+- En pruebas de hipótesis se evaluó si un promedio era igual a un
+  valor de referencia
+- El **ANOVA** permite evaluar si **tres o más promedios** son
+  estadísticamente diferentes entre sí
+- "De un factor" significa que los grupos comparados corresponden a
+  niveles de **una sola** variable de clasificación (el factor)
+
+::: {.notes}
+Imaginen que quieren comparar el ingreso promedio de 4 sectores
+económicos. Podrían pensar en hacer una prueba t para cada par de
+sectores —serían 6 pruebas en total—. El problema es este: cada prueba
+individual tiene una probabilidad $\\alpha$, digamos 5%, de cometer un
+error tipo I —rechazar $H_0$ cuando en realidad es verdadera—. Pero si
+hacen 6 pruebas, la probabilidad de cometer **al menos un** error tipo
+I en el conjunto completo sube muy por encima del 5% nominal —con 6
+pruebas independientes al 5% cada una, la probabilidad de al menos un
+falso positivo es de aproximadamente 26.5%, más de cinco veces el
+nivel que creían estar usando.
+
+ANOVA resuelve este problema haciendo **una sola prueba** que evalúa
+simultáneamente si hay evidencia de que *alguna* de las medias
+difiere, manteniendo controlado el error tipo I global al nivel
+$\\alpha$ que elijan. "De un factor" significa que solo estamos
+clasificando los grupos según una variable —por ejemplo, sector
+económico— y no combinando varias variables de clasificación a la vez;
+eso último sería ANOVA de dos o más factores, que no cubrimos en este
+curso pero está en la bibliografía si alguien quiere profundizar.
+:::
+
+## Supuestos del análisis
+
+- Los valores de la variable dependiente siguen una distribución
+  normal
+- Las varianzas poblacionales son iguales entre los niveles del factor
+  (homocedasticidad)
+
+::: {.notes}
+Dos supuestos clave, además de la independencia de las observaciones
+que ya damos por sentada de cursos anteriores. Primero, normalidad
+dentro de cada grupo. Segundo, homocedasticidad —varianzas iguales
+entre los grupos—, que es importante porque, como van a ver en un
+momento, vamos a "combinar" la variabilidad de todos los grupos en un
+solo número asumiendo que todos comparten la misma varianza
+poblacional. Si las varianzas son muy distintas entre grupos, ese
+supuesto se rompe y el ANOVA clásico deja de ser confiable —existen
+versiones robustas para ese caso, pero están fuera del alcance de este
+curso.
+:::
+
+## Cálculo de variaciones {.divisor}
+
+::: {.notes}
+Ahora entramos al corazón matemático del método: cómo descomponemos
+la variabilidad total de los datos.
+:::
+
+## Sumas de cuadrados
+
+Se descompone la variabilidad total de los datos en dos fuentes:
+
+$$SS_{total} = SS_{entre} + SS_{dentro}$$
+
+- $SS_{entre}$: variabilidad explicada por las diferencias entre los
+  grupos
+- $SS_{dentro}$: variabilidad residual o de error (no explicada) —
+  variación muestral dentro de cada grupo
+
+*(Lee, 2023, p. 86-88)*
+
+::: {.notes}
+La idea central es esta: la variabilidad total de todos los datos
+juntos —sin distinguir a qué grupo pertenece cada dato, medida
+respecto a la gran media general— se puede descomponer exactamente en
+dos partes. Una parte, $SS_{entre}$, mide qué tan distintas son las
+medias de cada grupo entre sí, respecto a la gran media —es la
+variabilidad que se "explica" por saber a qué grupo pertenece cada
+dato—. La otra parte, $SS_{dentro}$, mide el "ruido" que queda dentro
+de cada grupo, alrededor de su propia media —la variabilidad que *no*
+se explica por el grupo—.
+
+La lógica intuitiva de todo el método está aquí: si las medias
+poblacionales de los grupos son realmente todas iguales, entonces
+$SS_{entre}$ debería ser pequeño en relación con $SS_{dentro}$ —la
+diferencia entre grupos no sería más que ruido aleatorio, del mismo
+orden que el ruido que ya vemos dentro de cada grupo—. Si, en cambio,
+las medias son realmente distintas, $SS_{entre}$ va a ser grande en
+relación con $SS_{dentro}$. Toda la prueba F que viene ahora es,
+literalmente, formalizar esta comparación intuitiva con un
+estadístico preciso.
+:::
+
+## Prueba de hipótesis: prueba F {.divisor}
+
+## Estadístico de prueba
+
+$$F = \frac{SS_{entre}/(k-1)}{SS_{dentro}/(n-k)} = \frac{MS_{entre}}{MS_{dentro}}$$
+
+donde $k$ = número de grupos, $n$ = número total de observaciones.
+
+- $H_0$: todas las medias de los grupos son iguales
+- $H_1$: al menos una media es diferente
+- Se rechaza $H_0$ si $F$ calculado supera el valor crítico de la
+  distribución F (unidad de distribuciones continuas), con
+  $(k-1, n-k)$ grados de libertad
+
+::: {.notes}
+Para comparar $SS_{entre}$ y $SS_{dentro}$ de forma justa, cada una se
+divide entre sus propios grados de libertad —dando los "cuadrados
+medios", MS—, porque no sería justo comparar directamente dos sumas
+que tienen distinto número de términos. El cociente de esos dos
+cuadrados medios es el estadístico F, que sigue exactamente la
+distribución F que vimos en la unidad de distribuciones continuas
+—como cociente de dos varianzas—, ahora con $(k-1, n-k)$ grados de
+libertad.
+
+Noten la hipótesis nula con cuidado: $H_0$ dice que **todas** las
+medias son iguales; $H_1$ solo dice que **al menos una** es distinta,
+no cuál. Esto es importante: el ANOVA les dice *si* hay una diferencia
+en algún lugar, pero no *cuál* grupo es el diferente — para eso
+necesitarían pruebas adicionales, llamadas pruebas post-hoc, que no
+son parte de este curso pero existen si alguna vez las necesitan.
+
+Valores grandes de F son evidencia en contra de $H_0$: significa que
+la variabilidad entre grupos es demasiado grande para explicarse solo
+por el ruido normal dentro de los grupos.
+:::
+
+## Tabla ANOVA
+
+| Fuente | SS | gl | MS | F |
+|---|---|---|---|---|
+| Entre grupos | $SS_{entre}$ | $k-1$ | $MS_{entre}$ | $MS_{entre}/MS_{dentro}$ |
+| Dentro de grupos | $SS_{dentro}$ | $n-k$ | $MS_{dentro}$ | |
+| Total | $SS_{total}$ | $n-1$ | | |
+
+::: {.notes}
+Esta tabla es el resumen estándar de un ANOVA, y es literalmente lo
+que van a ver como salida cuando ejecuten `summary(aov(...))` en R.
+Cada fila corresponde a una fuente de variabilidad —entre grupos,
+dentro de grupos, y el total, que debe ser exactamente la suma de las
+otras dos—. Practiquen leyendo esta tabla de izquierda a derecha:
+suma de cuadrados, grados de libertad, cuadrado medio, y finalmente el
+estadístico F en la primera fila.
+
+Un buen dato de conexión con la unidad de pruebas de hipótesis: si el
+ANOVA se aplica con exactamente $k=2$ grupos, el resultado es
+matemáticamente equivalente al de una prueba t de dos muestras — de
+hecho, se puede demostrar que $F=t^2$ en ese caso particular. Esto
+ayuda a ver el ANOVA no como algo completamente nuevo, sino como la
+generalización natural de algo que ya conocen.
+:::
+
+## Ejemplo
+
+Comparar el ingreso promedio entre tres o más regiones/sectores
+económicos, usando datos reales (ej. ECE), y construir la tabla ANOVA
+completa a mano y luego con `aov()` en R.
+
+::: {.notes}
+La guía de preparación de esta unidad tiene un ejemplo completo
+resuelto a mano —con datos ficticios de tres sectores económicos y
+cuatro observaciones cada uno— que les recomiendo resolver en clase
+antes de pasar a `aov()` en R, exactamente en ese orden: primero a
+mano, para que vean que la tabla ANOVA no es una caja negra, y después
+verificado con R, para que confirmen que el cálculo manual coincide.
+
+Después, repitan el mismo ejercicio pero con datos reales de la ECE,
+agrupando el ingreso por región o sector económico real — la mecánica
+en R es idéntica, solo cambia de dónde vienen los datos.
+
+Si el tiempo lo permite, mencionar brevemente ANOVA de dos factores
+—no es tema explícito de este programa, pero está en la bibliografía,
+Hang Lee sección 4.4— como extensión para quien quiera profundizar más
+allá de este curso. Con esto cerramos la parte "clásica" de inferencia
+estadística del curso. Las próximas dos unidades entramos a un tema
+completamente nuevo: series de tiempo.
+:::
+
+## Práctica 2
+
+Ejercicios de aplicación de análisis de varianza (ANOVA de un factor)
+a problemas de negocios/economía. Ver
+`fuente/Presentaciones ppt/5/Práctica 2/` para el enunciado y ejemplos
+de soluciones de estudiantes de cursos anteriores.
+
+::: {.notes}
+Para cerrar la sesión, explico las instrucciones de la Práctica 2: es
+individual, se entrega en la plataforma antes de la próxima clase, y
+cubre el ANOVA de un factor visto hoy —desde plantear las hipótesis
+hasta construir la tabla ANOVA completa e interpretar la prueba F—.
+Les recomiendo repasar el ejemplo resuelto a mano de la guía de
+preparación de esta unidad si algún paso del cálculo de sumas de
+cuadrados no les quedó claro. La Práctica 2 vale 10% de la nota final
+(ver `content/docs/programa.qmd` para el detalle completo de
+evaluación) — se movió de la sesión de series de tiempo a esta sesión
+al reordenar el cronograma (decisión del usuario, 2026-09-19).
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

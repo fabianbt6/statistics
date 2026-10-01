@@ -1,0 +1,65 @@
+---
+title: "Trabajo de Investigación Final: Análisis Estadístico de Datos Económicos"
+engine: knitr
+format:
+  html:
+    embed-resources: true
+    title-block-banner: false
+params:
+  universidad: "Universidad Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+---
+
+**Valor:** 30% de la nota final
+**Entrega:** Sesión 10 (viernes 11 de diciembre de 2026) — presentación en clase
+**Modalidad de trabajo:** en grupos (los mismos del Caso 1)
+
+### En qué consiste
+
+Este trabajo continúa directamente el **Caso 1** (20% de la nota,
+sesión 5): usan la **misma variable económica** que seleccionaron y
+describieron ahí, y ahora la analizan de forma comparativa entre dos
+periodos, aplicando las herramientas de inferencia estadística vistas
+en el curso (intervalos de confianza y pruebas de hipótesis).
+
+Instrucción general: con la variable del Caso 1 (misma fuente, API del
+BCCR), seleccionen dos periodos para comparar y realicen un análisis
+comparativo completo.
+
+### Qué deben entregar
+
+Una presentación con la siguiente estructura:
+
+1. Portada.
+2. Objetivos: describir el comportamiento de la variable seleccionada,
+   y realizar inferencias poblacionales mediante intervalos y pruebas
+   de hipótesis.
+3. Análisis descriptivo: estadísticos (media, mediana, desviación
+   estándar y coeficiente de variación) y gráficos (histograma o
+   diagrama de caja) para comparar los dos periodos, con una breve
+   interpretación de la tendencia y la dispersión observada.
+4. Análisis inferencial:
+   - Intervalos de confianza: estimación de la media poblacional para
+     cada periodo (95% de confianza).
+   - Prueba de hipótesis para la media: planteamiento de $H_0$ (no hay
+     diferencia) vs $H_1$ (hay diferencia), nivel de significancia
+     ($\alpha$, habitualmente 0.05), estadístico de prueba (Z o t de
+     Student, según el tamaño de la muestra), y regla de decisión
+     (comparación del p-valor o valor crítico para rechazar o no la
+     hipótesis nula).
+5. Conclusiones: resumen de hallazgos basado en la evidencia
+   estadística (p-valor), y una recomendación basada en los resultados.
+
+### Rúbrica
+
+| # | Criterio | Descripción | Puntos |
+|---|---|---|---|
+| 1 | Claridad y organización | Presentación bien estructurada, redacción clara, uso adecuado de gráficos/tablas | 25 |
+| 2 | Análisis estadístico | Correcto cálculo de descriptivos, intervalos y ejecución de la prueba de hipótesis | 50 |
+| 3 | Interpretación | Conclusiones coherentes con los resultados obtenidos en las pruebas | 25 |
+| | **Total** | | **100** |
+
+**Puntaje total:** 100 puntos → equivalen al 30% de la nota final
+(regla de 3).

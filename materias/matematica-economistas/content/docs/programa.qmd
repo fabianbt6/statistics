@@ -1,0 +1,256 @@
+---
+title: "Programa del curso — EC-620 Matemática para Economistas"
+format:
+  html:
+    theme: [default, institucional.scss]
+    embed-resources: true
+    title-block-banner: false
+brand: false
+engine: knitr
+params:
+  universidad: "Universidad Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+  formato: "10-sesiones"   # "10-sesiones" o "15-sesiones" — pasar con
+                            # -P formato:15-sesiones al renderizar
+nocite: |
+  @stewart2021, @kuttler2021, @buscalc2013, @trench2013, @axler2024
+---
+
+::: {.programa-header}
+![](../../../../images/logos/fidelitas.jpg)
+
+::: {.programa-header-titles}
+## EC-620 · Matemática para Economistas
+
+`r params$universidad` — Bachillerato en Economía. Docente: `r params$docente` — Cuatrimestre `r params$cuatri`, `r params$anio`
+:::
+:::
+
+::: {.notes}
+Migrado desde el programa institucional oficial (Universidad Fidélitas,
+Facultad de Ciencias Sociales y Económicas, Bachillerato en Economía) —
+ver `materias/matematica-economistas/fuente/MALLA ECONOMIA 2026
+BACHILLERATO (1).docx` para el documento original completo, incluyendo
+las rúbricas detalladas de cada rubro de evaluación (no se transcriben
+aquí en su totalidad, solo los porcentajes). El resto de la materia
+(unidades, ejercicios, laboratorios) se construye en
+`content/semanas/`, `content/tareas/` y `content/blocks/`. Este bloque
+no se muestra en el HTML final (ver `institucional.scss`, `.notes`).
+:::
+
+## Información general del curso
+
+| Campo | Detalle |
+|---|---|
+| Código | EC-620 |
+| Nombre | Matemática para Economistas |
+| Créditos | 4 |
+| Duración | `r if (params$formato == "10-sesiones") "10 sesiones (17 de setiembre – 17 de diciembre de 2026)" else "15 sesiones (una por semana)"` |
+| Modalidad | Presencial |
+| Naturaleza | Teórico-práctico |
+| Requisitos | MA-104 |
+| Correquisitos | No tiene |
+| Sede | Central y Heredia |
+
+## Descripción del curso
+
+El curso Matemática para Economistas por su naturaleza es un curso de
+matemática en el cual los tópicos están ordenados de manera progresiva
+para proporcionar a los estudiantes las habilidades y herramientas
+necesarias para analizar, comprender y calcular a partir de modelos
+matemáticos situaciones económicas.
+
+Estos modelos matemáticos tienen como base los conceptos fundamentales
+del álgebra lineal, el cálculo y el análisis en varias variables,
+explorando conceptos previos como: sistemas de ecuaciones, vectores,
+matrices, determinantes, funciones, derivadas, integrales, ecuaciones
+diferenciales y extremos relativos.
+
+El propósito para el estudiante de cursar Matemática para Economistas
+es desarrollar habilidades matemáticas y de pensamiento superior
+(lógica, criticidad, creatividad) mediante la resolución de ejercicios
+prácticos y resolución de problemas matemáticos orientados a la
+economía.
+
+Al finalizar este curso el estudiante podrá responder a la pregunta:
+¿Cómo analizar la resolución de una situación por medio del
+análisis de las herramientas matemáticas inherentes en los modelos
+económicos?
+
+## Contenidos
+
+### Unidad 1. Álgebra lineal
+
+- Operaciones con matrices
+- Solución de sistemas de ecuaciones lineales, método de Jordan-Gauss
+- Aplicaciones a la economía: punto de equilibrio en el mercado
+  (análisis de equilibrio), matrices de costos y ventas
+
+### Unidad 2. Cálculo diferencial y optimización
+
+- Límites y derivadas
+- Propiedades de las derivadas
+- Derivadas de las funciones exponenciales y logarítmicas
+- Derivadas de grado superior
+- Máximo y mínimo relativo: criterio de la primera derivada
+- Segunda derivada y derivadas de orden superior
+- Criterio de la segunda derivada
+- Aplicaciones a la economía: análisis marginal, optimización de
+  ingresos, costos y utilidades, elasticidad de la demanda
+
+### Unidad 3. Cálculo integral
+
+- Definición de integrales definidas e indefinidas
+- Técnicas de integración
+- Aplicaciones a la economía: funciones marginales y funciones
+  totales, inversión y formación de capital, valor presente de flujo
+  de efectivo
+- Coeficientes de igualdad para distribución de ingreso (curva de
+  Lorenz), maximización de las unidades con respecto al tiempo,
+  superávit del consumidor y productor, modelo de crecimiento de Domar
+
+### Unidad 4. Funciones en varias variables
+
+- Representación gráfica
+- Derivadas parciales
+- Optimización de funciones, máximos y mínimos
+- Funciones implícitas, derivadas, derivadas sucesivas
+- Funciones homogéneas, teorema de Euler
+- Aplicaciones a la economía: productividad marginal de mano de obra y
+  capital, elasticidades cruzadas, decisión de fijación de precios,
+  combinación de insumos de costos mínimos
+
+### Unidad 5. Ecuaciones diferenciales
+
+- Definición de una ecuación diferencial
+- Solución de ecuaciones diferenciales separables y homogéneas
+- Solución de ecuaciones diferenciales lineales de primer orden,
+  ecuaciones de Bernoulli, de Ricatti
+- Solución de ecuaciones diferenciales lineales no homogéneas de
+  primer orden
+- Solución de ecuaciones lineales homogéneas y no homogéneas de
+  segundo orden, método de variables separables
+- Aplicaciones a la economía: crecimiento exponencial (ley exponencial
+  de crecimiento), función logística, modelo de telaraña, elasticidad
+  de la demanda
+
+### Unidad 6. Ética
+
+- Definición de ética
+- Ética y matemática: aspectos sobre la praxis
+- Influencia de la matemática en el quehacer del economista:
+  implicaciones éticas
+
+## Estrategias de evaluación
+
+```{r}
+#| echo: false
+#| output: asis
+#| eval: !expr identical(params$formato, "10-sesiones")
+
+cat(r"(
+| Rubro | Porcentaje |
+|---|---|
+| Ejercicios prácticos (4, 10% cada uno — sesiones 3, 4, 6 y 9) | 40% |
+| Estudio de caso (fecha libre, no atada a una sesión) | 10% |
+| Foro (unidad 6: ética y matemática) | 10% |
+| Portafolio: avance (15%) + entrega final (25%) | 40% |
+| **Total** | **100%** |
+)")
+```
+
+```{r}
+#| echo: false
+#| output: asis
+#| eval: !expr identical(params$formato, "15-sesiones")
+
+cat(r"(
+| Rubro | Porcentaje |
+|---|---|
+| Ejercicios prácticos (2): Práctica 1 — unidades 1, 2 y 3 (15%); Práctica 2 — unidades 4 y 5 (10%) | 25% |
+| Estudios de caso (3, 15% cada uno) | 45% |
+| Foro (unidad 6: ética y matemática) | 5% |
+| Portafolio: avance (10%) + entrega final (15%) | 25% |
+| **Total** | **100%** |
+)")
+```
+
+```{r}
+#| echo: false
+#| output: asis
+#| eval: !expr identical(params$formato, "10-sesiones")
+
+cat(r"(
+## Cronograma (10 sesiones · 2026-C3)
+
+| Sesión | Fecha | Formato | Unidad y temas | Actividad clave |
+|---|---|---|---|---|
+| 1 | jue 17 set 2026 | Presencial | — (actividad institucional 1:30 h) | Presentación del curso, revisión de programa y cronograma |
+| 2 | jue 1 oct 2026 | Presencial — clase completa | Unidad 1: Operaciones con matrices; sistemas de ecuaciones lineales (Jordan-Gauss); aplicaciones a la economía | — |
+| 3 | jue 8 oct 2026 | Presencial — mitad clase / mitad práctica | Unidad 1 (cierre) / Unidad 2: límites, derivadas, optimización | **Ejercicio 1** |
+| 4 | jue 15 oct 2026 | **Asincrónica** (sin clase en vivo) | Unidad 2 | **Ejercicio 2** |
+| 5 | jue 22 oct 2026 | Presencial — clase completa | Unidad 2 (cierre) / Unidad 3: integrales definidas e indefinidas, técnicas de integración | — |
+| 6 | jue 5 nov 2026 | Presencial — mitad clase / mitad práctica | Unidad 3 (cierre): aplicaciones a la economía | **Ejercicio 3** |
+| 7 | jue 12 nov 2026 | Presencial — clase completa | Unidad 4: representación gráfica, derivadas parciales, optimización | — |
+| 8 | jue 26 nov 2026 | Presencial — clase completa | Unidad 4 (cierre) / Unidad 5: ecuaciones diferenciales separables, homogéneas y lineales de primer orden | — |
+| 9 | jue 10 dic 2026 | Presencial — mitad clase / mitad práctica | Unidad 5 (cierre): aplicaciones a la economía | **Ejercicio 4** |
+| 10 | **jue 17 dic 2026** | Presencial| Unidad 6: ética y matemática | **Foro** + **Entrega final de portafolio** |
+)")
+```
+
+```{r}
+#| echo: false
+#| output: asis
+#| eval: !expr identical(params$formato, "15-sesiones")
+
+cat(r"(
+## Cronograma (15 sesiones)
+
+| Sesión | Unidad y temas | Actividad clave |
+|---|---|---|
+| 1 | Unidad 1: Operaciones con matrices | Presentación del curso y del portafolio |
+| 2 | Unidad 1: Sistemas de ecuaciones lineales (Jordan-Gauss) | Ejercicios en clase |
+| 3 | Unidad 1: Aplicaciones a la economía (punto de equilibrio, matrices de costos y ventas) | **Estudio de caso 1** |
+| 4 | Unidad 2: Límites, derivadas, propiedades, derivadas exponenciales/logarítmicas, derivadas de grado superior | Ejercicios en clase |
+| 5 | Unidad 2: Máximo/mínimo relativo, segunda derivada, criterio de la segunda derivada, aplicaciones (análisis marginal, elasticidad) | **Avance de portafolio** |
+| 6 | Unidad 3: Integrales definidas e indefinidas, técnicas de integración | Ejercicios en clase |
+| 7 | Unidad 3: Aplicaciones a la economía (funciones marginales, inversión, valor presente, curva de Lorenz, modelo de Domar) | **Ejercicios prácticos 1** |
+| 8 | Unidad 3: Coeficientes de igualdad, maximización respecto al tiempo, superávit consumidor/productor | **Estudio de caso 2** |
+| 9 | Unidad 4: Representación gráfica, derivadas parciales | Ejercicios en clase |
+| 10 | Unidad 4: Optimización, funciones implícitas, funciones homogéneas, teorema de Euler | Ejercicios en clase |
+| 11 | Unidad 4: Aplicaciones a la economía (productividad marginal, elasticidades cruzadas, fijación de precios) | Ejercicios en clase |
+| 12 | Unidad 5: Definición de ecuación diferencial, soluciones separables y homogéneas | Ejercicios en clase |
+| 13 | Unidad 5: Ecuaciones lineales de primer orden, Bernoulli, Ricatti | **Ejercicios prácticos 2** |
+| 14 | Unidad 5: Ecuaciones de segundo orden, aplicaciones (crecimiento exponencial, función logística, modelo de telaraña) | **Estudio de caso 3** |
+| 15 | Unidad 6: Ética y matemática | **Foro** + **Entrega final de portafolio** |
+)")
+```
+
+## Bibliografía
+
+Bibliografía de acceso abierto/gratuito (sin depender de textos
+institucionales de pago), elegida para que este curso sea reutilizable
+en cualquier universidad o periodo:
+
+- **Unidad 1 (álgebra lineal):** Kuttler (2021), *A First Course in
+  Linear Algebra*.
+- **Unidades 2-4 (cálculo, optimización, funciones de varias
+  variables):** Stewart (2021), *Cálculo: Trascendentes Tempranas*;
+  Calaway, Hoffman y Lippman (2013), *Business Calculus*.
+- **Unidad 5 (ecuaciones diferenciales):** Trench (2013), *Elementary
+  Differential Equations*.
+- **Unidad 6 (ética):** sin libro asignado — contenido y preguntas de
+  reflexión propias.
+- **Referencia complementaria (opcional):** Axler (2024), *Linear
+  Algebra Done Right*.
+
+::: {.notes}
+Ver `referencias/MatEconomistas.bib` para la nota de licencia y
+cobertura detallada de cada texto.
+::: 
+
+
+::: {#refs}
+:::

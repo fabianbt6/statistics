@@ -1,0 +1,285 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Series de tiempo — regresión espuria y modelos básicos"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Series de tiempo — regresión espuria y modelos básicos"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @cryerchan2008
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 11 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Regresión espuria
+- Operador backshift y notación compacta de modelos AR, MA, ARMA
+- Introducción al pronóstico
+- Laboratorio en R
+
+::: {.notes}
+Cerramos la unidad de series de tiempo. En la sesión anterior vimos
+cómo descomponer una serie en tendencia, estacionalidad y ruido; hoy
+vemos primero un problema práctico muy importante —la regresión
+espuria—, y después una herramienta de notación que les va a dar
+perspectiva sobre los modelos de series de tiempo: el operador de
+rezago, o "backshift".
+
+Quiero ser claro sobre por qué el foco está ahí y no en desarrollar
+cada modelo (AR, MA, ARMA) a fondo por separado: eso da para un curso
+entero, no para unas cuantas diapositivas. Lo que sí es alcanzable hoy,
+y les va a servir más, es la notación con la que se escriben. Con el
+operador backshift van a poder escribir cualquiera de estos modelos de
+forma compacta y sin ambigüedad — la misma notación que necesitarían
+si alguna vez quisieran montar uno de estos modelos a mano, por ejemplo
+en una hoja de cálculo, sin depender de que R lo haga por ustedes.
+
+Referencia: Cryer y Chan, capítulos 3 y 4.
+:::
+
+## Regresión espuria {.divisor}
+
+::: {.notes}
+Empezamos con un problema práctico muy importante que conecta
+directamente con regresión, un tema que probablemente vean o hayan
+visto en otros cursos de economía.
+:::
+
+## El problema
+
+En presencia de variables que no son estacionarias, estimar un modelo
+de regresión lineal puede generar una **regresión espuria**: una
+relación que parece estadísticamente significativa sin que exista
+ninguna teoría económica que la respalde.
+
+::: {.idea-clave}
+Señal de alerta: estadísticos t y F muy altos (que rechazan con fuerza
+la hipótesis nula de coeficientes iguales a cero), combinados con un
+$R^2$ alto, en un modelo entre dos series que no tienen ninguna
+relación económica plausible entre sí — típico síntoma de regresión
+espuria entre series no estacionarias.
+:::
+
+::: {.notes}
+Este es un problema real y bien documentado: si estiman una regresión
+lineal entre dos series de tiempo que **no** son estacionarias —por
+ejemplo, ambas simplemente crecen sistemáticamente con el tiempo, sin
+tener ninguna relación económica genuina entre sí—, pueden obtener un
+$R^2$ alto y estadísticos t muy significativos, sugiriendo una
+relación fuerte, cuando en realidad no hay ninguna relación causal ni
+correlacional real entre las variables.
+
+¿Por qué pasa esto? Porque dos series que simplemente tienden a crecer
+con el tiempo van a "moverse juntas" solo porque ambas se mueven en la
+misma dirección general, no porque una explique realmente a la otra.
+Hay un ejemplo clásico y un poco cómico en la literatura, de Granger y
+Newbold en 1974, que documentaron formalmente este fenómeno: el número
+de patentes registradas en Estados Unidos y el consumo total de queso
+mozzarella en ese mismo país están altamente correlacionados a lo
+largo de las décadas —simplemente porque ambos han crecido de forma
+sostenida—, no porque exista ninguna relación causal entre comer queso
+y patentar inventos.
+
+La señal de alerta práctica, como dice la diapositiva: estadísticos t
+y F altísimos junto con un $R^2$ alto, en un modelo entre variables sin
+ninguna relación económica plausible. La solución práctica es
+verificar la estacionariedad de las series antes de estimar una
+regresión entre ellas, o trabajar con las series diferenciadas si no
+son estacionarias en niveles.
+:::
+
+## Estacionariedad (idea intuitiva)
+
+Una serie es (débilmente) **estacionaria** si su media y su varianza
+no cambian a lo largo del tiempo, y la relación entre dos observaciones
+depende solo de la distancia temporal entre ellas, no del momento en
+que se miden.
+
+::: {.notes}
+Formalmente, estacionariedad débil pide tres cosas: media constante en
+el tiempo, varianza constante en el tiempo, y que la covarianza entre
+dos observaciones dependa solo de la distancia temporal entre ellas
+—el rezago—, no del momento específico en que se miden.
+
+Pero para reconocerla visualmente, la intuición práctica es más
+simple: una serie estacionaria "fluctúa alrededor de un nivel fijo",
+sin una tendencia sistemática de crecimiento o decrecimiento, y con
+una dispersión de las fluctuaciones que se ve más o menos igual de
+"ancha" en todo el gráfico. El PIB en niveles, que vimos en la unidad
+anterior, claramente **no** es estacionario —crece sistemáticamente—.
+
+Un dato práctico muy importante para el laboratorio de hoy: muchas
+series económicas no son estacionarias en niveles, pero su **primera
+diferencia** —la tasa de cambio de un período al siguiente— sí suele
+serlo. Por ejemplo, el PIB en niveles crece sistemáticamente, pero la
+*tasa de crecimiento* del PIB de un trimestre a otro suele fluctuar
+alrededor de un nivel relativamente estable. Por eso, en el laboratorio
+de hoy, van a evaluar tanto la serie original como su primera
+diferencia.
+:::
+
+## Operador de rezago (backshift) {.divisor}
+
+::: {.notes}
+Con estacionariedad ya clara, vamos a ver una notación que se usa para
+escribir modelos de series de tiempo — el operador de rezago, o
+"backshift" — y con ella vamos a nombrar los modelos AR, MA y ARMA.
+:::
+
+## El operador backshift ($B$)
+
+El operador **backshift** $B$ "retrocede" una serie un período:
+
+$$B\,Y_t = Y_{t-1}$$
+
+Aplicarlo $k$ veces retrocede $k$ períodos: $B^k Y_t = Y_{t-k}$.
+
+::: {.notes}
+Es literalmente una instrucción: "tomá el valor de la serie y retrocedé
+un período". Con $Y_1, Y_2, Y_3, \dots$ como la serie, $B Y_3 = Y_2$, y
+$B^2 Y_3 = Y_1$ — aplicarlo dos veces es lo mismo que retroceder dos
+períodos de una vez.
+:::
+
+## Diferenciar con $B$
+
+La primera diferencia que usamos hace un momento para evaluar
+estacionariedad se escribe con $B$:
+
+$$(1 - B)\,Y_t = Y_t - Y_{t-1} = \Delta Y_t$$
+
+Diferenciar $d$ veces (para series que necesitan más de una diferencia)
+se escribe $(1-B)^d Y_t$.
+
+::: {.notes}
+Esto conecta con algo que ya vieron hoy: la primera diferencia que
+evaluaron en el laboratorio de estacionariedad es exactamente
+$(1-B)Y_t$. Este operador $(1-B)^d$ es, de hecho, la "I" (de
+"integrado") en la sigla ARIMA — un ARIMA es un ARMA aplicado a la
+serie ya diferenciada $d$ veces. No vamos a desarrollar ARIMA hoy, pero
+así queda conectado con lo que probablemente encuentren si siguen
+leyendo sobre el tema.
+:::
+
+## AR, MA y ARMA con notación de $B$
+
+$$\text{AR}(p): \quad \phi(B)\,Y_t = \varepsilon_t, \qquad \phi(B) = 1 - \phi_1 B - \dots - \phi_p B^p$$
+
+$$\text{MA}(q): \quad Y_t = \theta(B)\,\varepsilon_t, \qquad \theta(B) = 1 + \theta_1 B + \dots + \theta_q B^q$$
+
+$$\text{ARMA}(p,q): \quad \phi(B)\,Y_t = \theta(B)\,\varepsilon_t$$
+
+::: {.notes}
+Verifiquen la equivalencia con el caso más simple, un AR(1): $\phi(B)
+= 1 - \phi_1 B$, entonces $\phi(B) Y_t = \varepsilon_t$ es
+$(1-\phi_1 B)Y_t = \varepsilon_t$, es decir $Y_t - \phi_1 Y_{t-1} =
+\varepsilon_t$, o $Y_t = \phi_1 Y_{t-1} + \varepsilon_t$ — el mismo
+modelo autorregresivo de siempre, solo que escrito de forma compacta.
+Un MA(1) es $Y_t = (1+\theta_1 B)\varepsilon_t = \varepsilon_t +
+\theta_1 \varepsilon_{t-1}$: el valor de hoy depende de shocks pasados
+en vez de valores pasados de la serie — esa sigue siendo la diferencia
+conceptual clave entre AR y MA. Un ARMA combina ambos polinomios.
+
+No hace falta desarrollar más los tres modelos por separado — como
+familia, dan para mucho más que una sesión. Lo que sí quiero que se
+lleven es que con $\phi(B)$ y $\theta(B)$ pueden escribir cualquiera
+de los tres sin ambigüedad sobre qué rezagos entran y con qué
+coeficiente, que es justo lo que necesitan si alguna vez tienen que
+montar uno de estos modelos a mano en una hoja de cálculo, en vez de
+dejar que `arima()` lo haga por ustedes en R.
+:::
+
+## Por qué importa esta notación
+
+- Permite escribir cualquier AR, MA o ARMA sin ambigüedad sobre qué
+  rezagos entran y con qué coeficiente
+- Es la que se necesita para implementar un modelo "a mano" (ej. en
+  Excel), sin depender de una función que lo haga por ustedes
+- Conecta con la condición de estacionariedad: las raíces de
+  $\phi(B) = 0$ deben quedar fuera del círculo unitario
+
+::: {.notes}
+El último punto conecta con algo que ya vimos: para un AR(1), $\phi(B)
+= 1 - \phi_1 B = 0$ implica $B = 1/\phi_1$. Que esa raíz quede "fuera
+del círculo unitario" significa $|1/\phi_1| > 1$, que es exactamente
+$|\phi_1| < 1$ — la condición de estacionariedad que ya habíamos visto,
+ahora con una explicación de por qué es esa y no otra. No hace falta
+que la deriven ustedes mismos ni que memoricen "círculo unitario" —
+alcanza con que vean que la condición no es arbitraria, sale
+directamente de la notación.
+:::
+
+## Introducción al pronóstico {.divisor}
+
+::: {.notes}
+Cerramos la parte teórica con la aplicación más directa de todo esto:
+¿para qué sirve ajustar uno de estos modelos, en la práctica?
+:::
+
+## Idea general
+
+Un modelo de series de tiempo ajustado (ej. un ARMA) permite generar
+**pronósticos**: proyecciones del valor futuro de la serie, junto con
+una banda de incertidumbre que típicamente se amplía mientras más
+lejano es el horizonte de pronóstico.
+
+::: {.notes}
+Esta banda de incertidumbre es, en espíritu, muy parecida al intervalo
+de confianza que construimos en la unidad de intervalos de confianza
+—solo que ahora en vez de estimar un parámetro poblacional fijo,
+estamos prediciendo un valor futuro de la serie—. Tiene sentido
+intuitivamente que la banda se amplíe mientras más lejano sea el
+horizonte: es mucho más fácil predecir con precisión qué va a pasar
+mañana que qué va a pasar dentro de dos años, porque la incertidumbre
+acumulada crece con cada período adicional hacia el futuro. Van a ver
+esto directamente en el laboratorio, cuando grafiquen un pronóstico
+con su banda.
+:::
+
+## Laboratorio en R
+
+- Retomar la serie del PIB o del tipo de cambio usada en la unidad
+  anterior
+- Evaluar visualmente si la serie (o su primera diferencia) parece
+  estacionaria
+- Ajustar un modelo simple con `arima()` y generar un pronóstico de
+  corto plazo con `predict()` o `forecast()`
+
+::: {.notes}
+Ver `fuente/Presentaciones ppt/12/Lab - series de tiempo parte II.R`
+y `Tipo de Cambio.xlsx` como base de datos y código de partida para
+este laboratorio.
+
+Guíen a los estudiantes por estos pasos: primero, graficar la serie
+original y evaluar visualmente si parece estacionaria —¿fluctúa
+alrededor de un nivel fijo, o tiene una tendencia clara?—. Si no
+parece estacionaria, calculen la primera diferencia y repitan la
+evaluación visual. Después, ajusten un modelo simple —por ejemplo, un
+AR(1)— con `arima()`, y generen un pronóstico de corto plazo,
+idealmente usando el paquete `forecast`, que además grafica
+automáticamente la banda de incertidumbre que acabamos de discutir en
+la teoría — es una forma muy directa de que vean, visualmente, cómo
+esa banda se va ensanchando mientras más lejos pronostican. Vale la
+pena mencionar antes del ejercicio: `arima()` hace automáticamente, con
+máxima verosimilitud, exactamente lo que la notación de $B$ que
+acabamos de ver describe de forma explícita — por eso tenía sentido
+verla antes de usar la función.
+
+Con esto cerramos la unidad de series de tiempo. La próxima sesión es
+repaso integrador y presentación del Caso 2.
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

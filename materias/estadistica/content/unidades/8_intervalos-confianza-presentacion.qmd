@@ -1,0 +1,273 @@
+---
+title: "Teoría Estadística y Métodos Cuantitativos"
+subtitle: "Estimación e intervalos de confianza"
+format: revealjs
+params:
+  materia: "Teoría Estadística y Métodos Cuantitativos"
+  titulo_sesion: "Estimación e intervalos de confianza"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015, @hanglee2023
+---
+
+<!-- Nota para el docente (comentario HTML, no visible para estudiantes):
+     Esta es la Unidad 8 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido al renderizar).
+     El título visible NO incluye el número de unidad a propósito: qué
+     unidades entran en cada sesión de clase depende del calendario del
+     cuatrimestre (15 sesiones semanales, 10 sesiones comprimidas, u
+     otro formato futuro), y esa decisión se toma al armar el curso, no
+     en este archivo. Ver materias/estadistica/README.md. -->
+
+## Contenido {.agenda}
+
+- Introducción: ¿por qué usar intervalos en vez de un único valor?
+- Intervalo de confianza de la media
+- Intervalo de confianza de una proporción
+- Laboratorio con datos de la ECE 2025
+
+::: {.notes}
+Después de las presentaciones de Caso 1, retomamos contenido nuevo:
+intervalos de confianza. Esta unidad está directamente conectada con
+la prueba de hipótesis que vimos en la unidad de pruebas de hipótesis
+— de hecho, vamos a usar exactamente el mismo estadístico t que usamos
+entonces, solo que en vez de comparar contra un valor fijo, lo vamos a
+usar para construir un rango. Si $\mu_0$ cae fuera del intervalo que
+construyamos hoy, eso sería equivalente a rechazar $H_0:\mu=\mu_0$ al
+mismo nivel de significancia — es la misma matemática, vista desde
+otro ángulo.
+
+La sesión de hoy: primero la motivación de por qué preferimos un
+intervalo a un solo número; después el intervalo de confianza de la
+media, con ejercicios; después el intervalo de confianza de una
+proporción, con dos ejercicios de aplicación política/social; y
+cerramos con un laboratorio usando datos reales de la Encuesta
+Continua de Empleo 2025, que integra prácticamente todo lo que hemos
+visto desde la unidad de descripción de datos.
+
+Referencias: Hogg, capítulo 7, y Hang Lee, sección 2.2.6.
+:::
+
+## Intervalos de confianza: aplicaciones {.divisor}
+
+::: {.notes}
+Empecemos con la pregunta motivadora: ¿por qué no basta con dar un
+solo número como estimación?
+:::
+
+## ¿Por qué un intervalo y no un solo valor?
+
+Al trabajar con estimaciones muestrales, es difícil conocer el valor
+exacto del parámetro poblacional. En vez de un único valor puntual, se
+define un rango de valores plausibles que podría contener al
+parámetro real.
+
+En el análisis económico, parámetros de interés (medias, elasticidades,
+tasas de crecimiento) no se observan directamente y deben estimarse a
+partir de muestras — los intervalos de confianza cuantifican esa
+incertidumbre.
+
+::: {.notes}
+Piensen en esto: cuando calculan una media muestral $\bar{x}$, ese
+número casi con certeza **no** es exactamente igual a la media
+poblacional verdadera $\mu$ — es una aproximación basada en una
+muestra particular. Si tomaran otra muestra, obtendrían un $\bar{x}$
+ligeramente distinto. Dar solo ese número, sin ninguna indicación de
+qué tan preciso es, oculta esa incertidumbre.
+
+Un intervalo de confianza hace explícita esa incertidumbre: en vez de
+decir "la media es 4.2", decimos "la media está, con cierto nivel de
+confianza, entre 3.8 y 4.6". Esa segunda afirmación es mucho más
+honesta sobre lo que realmente sabemos con los datos que tenemos. En
+economía esto es crucial porque casi ningún parámetro de interés se
+observa directamente — siempre lo estamos estimando de muestras, y
+comunicar esa incertidumbre es parte esencial de un análisis riguroso.
+:::
+
+## Intervalo de confianza de la media {.divisor}
+
+::: {.notes}
+Vamos a derivar la fórmula, no solo mostrarla — porque en el fondo es
+el mismo estadístico que usamos en la unidad anterior, visto desde
+otro ángulo.
+:::
+
+## Fórmula general
+
+$$\bar{x} \pm t_{\alpha/2, \, n-1} \cdot \frac{s}{\sqrt{n}}$$
+
+(o con $z_{\alpha/2}$ en vez de $t_{\alpha/2,n-1}$ si se conoce la
+varianza poblacional $\sigma$)
+
+- $\bar{x}$ = media muestral
+- $\alpha$ = 1 - nivel de confianza (ej. 0.05 para 95% de confianza)
+- $s/\sqrt{n}$ = error estándar de la media
+
+::: {.idea-clave}
+Interpretación correcta: "si se repitiera el muestreo muchas veces, el
+95% de los intervalos construidos de esta forma contendrían al
+verdadero valor de $\mu$" — **no** significa que hay 95% de
+probabilidad de que $\mu$ esté en este intervalo específico.
+:::
+
+::: {.notes}
+Partimos exactamente del mismo estadístico t de la unidad anterior:
+$t = \\frac{\\bar{x}-\\mu}{s/\\sqrt{n}}$, que sabemos sigue una
+distribución t con $n-1$ grados de libertad. Como sabemos que, con
+probabilidad $1-\\alpha$, ese estadístico cae dentro del rango
+$[-t_{\\alpha/2,n-1}, t_{\\alpha/2,n-1}]$, podemos escribir esa
+afirmación de probabilidad y despejar $\\mu$ del centro de la
+desigualdad —multiplicando por $s/\\sqrt{n}$ y reordenando—. Lo que
+queda, después de despejar, es exactamente la fórmula que ven en
+pantalla.
+
+Ahora, la parte más importante de la diapositiva —y quiero que le
+presten atención especial, porque es el error de interpretación más
+común de todo intervalos de confianza—: la interpretación correcta,
+frecuentista, es que si repitiéramos el proceso de muestreo muchas
+veces, y cada vez construyéramos un intervalo así, el 95% de esos
+intervalos contendrían al verdadero $\\mu$. Esto **no** es lo mismo
+que decir "hay 95% de probabilidad de que $\\mu$ esté en este
+intervalo específico que ya calculamos" — una vez que el intervalo ya
+está calculado con nuestra muestra particular, $\\mu$ o está adentro o
+no está, no hay aleatoriedad restante en esa afirmación puntual. La
+aleatoriedad está en el *procedimiento* de construcción del intervalo,
+repetido sobre muchas muestras posibles, no en el intervalo ya
+calculado ni en $\\mu$, que es una constante fija aunque desconocida.
+
+Y la conexión con la unidad anterior: si el valor $\\mu_0$ que
+plantearíamos en una hipótesis nula cae **fuera** de este intervalo,
+eso sería equivalente a rechazar $H_0:\\mu=\\mu_0$ al mismo nivel de
+significancia con una prueba de dos colas. Es literalmente la misma
+matemática, vista desde otro ángulo.
+:::
+
+## Ejemplo y ejercicios
+
+- Ejercicio 1: construir el intervalo de confianza de la media a
+  partir de una muestra dada, con $\sigma$ conocida
+- Ejercicio 2: construir el intervalo con varianza desconocida
+  (usar la distribución t)
+
+::: {.notes}
+Resuelvan estos dos ejercicios en clase, siguiendo el mismo criterio
+de "conocida vs. desconocida" que ya usamos para pruebas de hipótesis:
+si conocen $\\sigma$ poblacional, usen $z_{\\alpha/2}$; si no la
+conocen —el caso casi siempre real—, usen $t_{\\alpha/2,n-1}$ con la
+desviación estándar muestral $s$.
+:::
+
+## Intervalo de confianza de una proporción {.divisor}
+
+::: {.notes}
+Cambiamos de parámetro: en vez de una media, ahora queremos estimar
+una proporción poblacional — por ejemplo, qué fracción de la población
+apoya algo.
+:::
+
+## Definición
+
+Se usa cuando interesa la proporción $p$ de una población con cierta
+característica (ej. intención de voto por un candidato). Se codifica
+la muestra como 0/1 (Bernoulli) y se construye un intervalo para $p$
+basado en $\hat{p} = Y/n$:
+
+$$\hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+::: {.notes}
+Recuerden de la unidad de distribuciones discretas que si $Y$ es el
+número de éxitos en $n$ ensayos de Bernoulli independientes, $Y$ sigue
+una binomial con $Var(Y)=np(1-p)$. Como $\\hat{p}=Y/n$,
+$Var(\\hat{p}) = Var(Y)/n^2 = p(1-p)/n$, y su error estándar es
+$\\sqrt{p(1-p)/n}$. En la práctica reemplazamos el $p$ desconocido
+dentro de la raíz por su estimación $\\hat{p}$, algo válido para $n$
+razonablemente grande.
+
+Noten que aquí usamos $z_{\\alpha/2}$, no $t$ — a diferencia del caso
+de la media, aquí no hay una varianza "aparte" que estimar con $s$: la
+varianza de una proporción está completamente determinada por $p$
+mismo (y $n$), así que una vez que sustituimos $\\hat{p}$, usamos
+directamente la aproximación normal.
+:::
+
+## Ejercicio 4
+
+En una campaña política, un candidato mide intención de voto:
+$Y = 185$ (votantes a favor) de $n = 351$. Calcular el intervalo de
+confianza de $p$, con $\alpha = 5\%$.
+
+::: {.notes}
+Resolvamos: $\\hat{p}=185/351\\approx 0.527$, error estándar
+$\\approx 0.0266$, y con $z_{0.025}=1.96$, el intervalo es
+aproximadamente $0.527 \\pm 0.052 = (0.475, 0.579)$.
+
+Punto de discusión importante: como este intervalo **incluye** el
+50%, no hay evidencia suficientemente fuerte, a este nivel de
+confianza, para concluir que el candidato tiene una mayoría clara de
+apoyo — aunque el punto estimado, 52.7%, esté por encima de 50%. Este
+es un buen ejemplo de por qué el intervalo completo comunica más
+información que el punto estimado solo.
+:::
+
+## Ejercicio 5
+
+Sea $p$ la proporción de personas a favor de una reforma fiscal. De
+una muestra de 1200 personas, 600 afirmaron estar de acuerdo.
+Encontrar el intervalo de confianza de 95% para $p$.
+
+::: {.notes}
+Aquí $\\hat{p}=600/1200=0.5$ exactamente, con error estándar
+$\\approx 0.0144$, dando un intervalo aproximado de
+$(0.472, 0.528)$.
+
+Comparen este resultado con el ejercicio anterior: aunque $\\hat{p}$
+es prácticamente el mismo en ambos casos —cerca de 0.50 en los dos—,
+este intervalo es mucho más angosto que el del ejercicio 4. ¿Por qué?
+Porque el tamaño de muestra aquí es mucho mayor: 1200 contra 351. El
+error estándar tiene $n$ en el denominador dentro de la raíz cuadrada,
+así que una muestra más grande siempre produce un intervalo más
+preciso, para el mismo nivel de confianza. Vale la pena que los
+estudiantes vean este contraste numérico directamente, no solo como
+una afirmación teórica.
+:::
+
+## Laboratorio: Encuesta Continua de Empleo 2025 {.divisor}
+
+::: {.notes}
+Cerramos la sesión con un laboratorio que integra casi todo el curso
+hasta este punto, usando datos reales de la Encuesta Continua de
+Empleo.
+:::
+
+## Ejercicio
+
+Con la base de datos de la ECE 2025 y la variable `Ingreso_total`:
+
+- Graficar la densidad de la variable
+- Calcular mediana, media, varianza, desviación estándar y
+  coeficiente de variación
+- Construir el intervalo de confianza de la media, con $\alpha = 5\%$
+
+::: {.notes}
+Este ejercicio integra todo lo visto desde la unidad de descripción de
+datos (descriptivos) hasta hoy (intervalos) sobre una base de datos
+real y relevante para economistas — buen cierre de la unidad.
+
+Si al graficar la densidad de `Ingreso_total` ven una distribución muy
+asimétrica —algo típico en variables de ingreso, con una cola larga
+hacia la derecha—, aprovechen ese momento para recordar que el
+Teorema del Límite Central sigue funcionando para la *media muestral*,
+aunque los datos individuales no sean simétricos ni normales, siempre
+que el tamaño de muestra sea razonablemente grande — y con una
+encuesta del tamaño de la ECE, ciertamente lo es. Esto es un buen
+cierre conceptual de la unidad: conecta el TLC de la unidad de pruebas
+de hipótesis, la descriptiva de la unidad de descripción de datos, y
+el intervalo que acabamos de construir hoy, todo en un solo ejercicio
+aplicado.
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}

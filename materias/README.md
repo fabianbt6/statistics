@@ -23,6 +23,22 @@ materias/<materia>/
 ## Materias disponibles
 
 - **estadistica** — Teoría Estadística y Métodos Cuantitativos
+- **matematica-economistas** — EC-620 Matemática para Economistas
+  (Universidad Fidélitas, Bachillerato en Economía). Programa
+  institucional oficial en `content/docs/programa.qmd`; fuente original
+  en `fuente/`.
+- **economia-innovacion** — EC-910 Economía de la Innovación
+  (Universidad Fidélitas, Licenciatura en Economía). Docente: Marianne
+  Pérez Gómez. Cronograma propio (7 sesiones presenciales, teórico-
+  práctico) — ver `claude/plan-economia-innovacion.md` en el Project de
+  Claude. Programa oficial y malla en `fuente/`.
+- **evaluacion-proyectos** — EC-912 Evaluación Económica y Social de
+  Proyectos (Universidad Fidélitas, Licenciatura en Economía). Docente:
+  Marianne Pérez Gómez. Formato tutorías: **5 sesiones**, cada una un
+  paso del proyecto final (que vale el 100% de la nota), con
+  bibliografía reemplazada por manuales de acceso abierto de CEPAL/ILPES
+  y MIDEPLAN — ver `claude/plan-evaluacion-proyectos.md` en el Project
+  de Claude. Programa oficial en `fuente/`.
 
 ## Agregar una materia nueva
 
@@ -51,5 +67,7 @@ source("R/render_curso.R")
 render_curso(materia = "series-de-tiempo", universidad = "UCR", anio = 2026, cuatri = 2)
 ```
 
-No hace falta tocar `_quarto.yml` — `materias/**` ya cubre cualquier
-materia nueva que agregues.
+No hace falta tocar `_quarto.yml` para que el contenido se renderice —
+`materias/**` ya cubre cualquier materia nueva que agregues. Sí hay que
+agregar la línea del `.bib` de la materia nueva a la lista `bibliography:`
+de `_quarto.yml` (ver los cuatro `.bib` ya listados ahí como ejemplo).

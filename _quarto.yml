@@ -3,16 +3,53 @@ project:
   render:
     - "materias/**"
     - "temas/**"
-    - "!tutoriales/**"   # learnr: motor distinto (Rmd + shiny), nunca vía quarto render
+    - "!materias/*/tutoriales/**"   # learnr: motor distinto (Rmd + shiny), nunca vía quarto render
 
-bibliography: referencias/Estadistica.bib
+# Fuerza el motor de ejecución de R (knitr) para TODO el proyecto.
+# Sin esto, un .qmd que no tiene ningún bloque de código R propio (solo
+# expresiones `r ...` que llegan vía {{< include shared/portada.qmd >}})
+# se renderiza como markdown puro sin ejecutar nada — las variables
+# quedan como texto literal. Se detectó este bug al revisar el primer
+# render real de matematica-economistas.
+engine: knitr
+
+bibliography:
+  - referencias/Estadistica.bib
+  - referencias/MatEconomistas.bib
+  - referencias/EconomiaInnovacion.bib
+  - referencias/EvaluacionProyectos.bib
 
 format:
   revealjs:
     slide-number: true
     embed-resources: true   # HTML autocontenido: un solo archivo, sin carpetas "libs/" sueltas
     theme: [default, styles.scss]
+    auto-stretch: false
+    # Sin esto, Quarto detecta que una imagen que es el ÚLTIMO elemento
+    # de una slide se estira automáticamente (clase r-stretch de
+    # reveal.js) para llenar el espacio vertical restante — pisando
+    # cualquier tamaño fijo que le pongamos en CSS.
+    title-slide-attributes:
+      data-background-color: "#281E5D"   # $brand-azul-profundo (índigo) — mismo tono que portada/divisores
+    # La slide de título ahora es la NATIVA de reveal.js (poblada desde
+    # title/subtitle en el YAML de cada semana.qmd, y author/date
+    # inyectados por curso desde render_curso.R) en vez de la portada
+    # manual de shared/portada.qmd — así ya no hay dos slides de título
+    # (una vacía de Quarto + la nuestra). Se corrigió acá un error propio:
+    # "title-slide: false" NO es una opción real de Quarto (no aparece
+    # en la documentación oficial), pese a que una fuente secundaria la
+    # había reportado como solución — quedó descartada tras revisar
+    # https://quarto.org/docs/presentations/revealjs/advanced.html
+    # directamente. El estilo de esta slide vive en styles.scss, bajo
+    # section.title-slide.
+
+# El logo (format.revealjs.logo) SE ELIMINÓ a pedido explícito: quedaba
+# superpuesto sobre el contenido en la mayoría de las slides. Ya no se
+# inyecta desde R/render_curso.R. shared/ocultar-logo-portada.html quedó
+# sin uso (no se referencia desde ningún lado) — se puede borrar del
+# repo cuando quieras.
 
 # _brand.yml en la raíz se detecta automáticamente y aplica tu paleta/tipografía
 # personal a todos los formatos (revealjs, html, pdf/typst) sin tocar cada .qmd.
-# styles.scss agrega los divisores de sección y el acento bajo títulos.
+# styles.scss agrega los divisores de sección, la slide de título y el acento
+# bajo títulos.

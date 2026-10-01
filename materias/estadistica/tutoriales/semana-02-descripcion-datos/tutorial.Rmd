@@ -1,0 +1,157 @@
+---
+title: "Tutorial — Semana 2: Descripción de datos"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+
+experiencia <- c(11, 5, 13, 21, 2, 3, 18, 4, 12, 19, 2, 17, 7, 2, 3,
+                  14, 14, 3, 8, 3, 18, 14, 2, 19, 4, 8, 21, 21, 19, 2)
+ingreso <- c(737, 522, 888, 4433, 461, 431, 1089, 534, 790, 1213, 463,
+             1102, 593, 386, 449, 904, 948, 3444, 643, 413, 1039, 983,
+             382, 1125, 536, 581, 1193, 1268, 989, 411)
+datos <- data.frame(experiencia, ingreso)
+```
+
+## Bienvenida
+
+Este tutorial acompaña la sesión de la semana 2: tendencia central,
+dispersión y asociación, con una muestra simulada de 30 personas
+(ingreso mensual vs. años de experiencia). Cada ejercicio tiene un
+botón **Run Code** — probá tu respuesta, y si te trabás, el botón
+**Solution** te muestra el código correcto.
+
+Trabajamos con estos datos durante todo el tutorial:
+
+```{r mostrar-datos, exercise=FALSE}
+experiencia <- c(11, 5, 13, 21, 2, 3, 18, 4, 12, 19, 2, 17, 7, 2, 3,
+                  14, 14, 3, 8, 3, 18, 14, 2, 19, 4, 8, 21, 21, 19, 2)
+ingreso <- c(737, 522, 888, 4433, 461, 431, 1089, 534, 790, 1213, 463,
+             1102, 593, 386, 449, 904, 948, 3444, 643, 413, 1039, 983,
+             382, 1125, 536, 581, 1193, 1268, 989, 411)
+datos <- data.frame(experiencia, ingreso)
+head(datos, 10)
+```
+
+## Tendencia central
+
+La media de `ingreso` da alrededor de 965, pero la mediana da
+alrededor de 763 — casi 200 mil colones menos. Eso pasa porque dos
+valores muy altos (índices 4 y 18, con 4433 y 3444) arrastran la media
+hacia arriba, mientras que la mediana no les da ningún peso extra.
+
+### Ejercicio 1
+
+Quitá los dos valores más altos de `ingreso` y volvé a calcular la
+media y la mediana. Usá `sort(ingreso)` para identificarlos, y después
+filtrá con `ingreso[ingreso < ___]`.
+
+```{r ej1, exercise=TRUE, exercise.setup = "mostrar-datos"}
+sort(ingreso)
+
+ingreso_sin_atipicos <- ingreso[ingreso < ___]
+mean(ingreso_sin_atipicos)
+median(ingreso_sin_atipicos)
+```
+
+```{r ej1-solution}
+sort(ingreso)
+
+ingreso_sin_atipicos <- ingreso[ingreso < 3444]
+mean(ingreso_sin_atipicos)
+median(ingreso_sin_atipicos)
+```
+
+> **Pista para interpretar el resultado:** con los dos valores atípicos
+> afuera, la media y la mediana deberían acercarse bastante más entre
+> sí — esa es la señal de que esos dos valores eran los que causaban
+> la diferencia.
+
+## Dispersión
+
+Un coeficiente de variación (CV) cercano a 90% en `ingreso` es una
+dispersión relativa muy alta.
+
+### Ejercicio 2
+
+Calculá el CV (`sd/mean * 100`) de `experiencia` y de `ingreso`, y
+compará cuál es mayor.
+
+```{r ej2, exercise=TRUE, exercise.setup = "mostrar-datos"}
+cv_experiencia <- sd(experiencia) / mean(experiencia) * 100
+cv_ingreso <- ___
+
+cv_experiencia
+cv_ingreso
+```
+
+```{r ej2-solution}
+cv_experiencia <- sd(experiencia) / mean(experiencia) * 100
+cv_ingreso <- sd(ingreso) / mean(ingreso) * 100
+
+cv_experiencia
+cv_ingreso
+```
+
+### Quiz — dispersión
+
+```{r quiz-cv}
+question(
+  "El CV de ingreso sale bastante más alto que el de experiencia. ¿Qué significa eso?",
+  answer("El ingreso tiene mayor dispersión relativa que la experiencia", correct = TRUE),
+  answer("El ingreso tiene menor dispersión relativa que la experiencia"),
+  answer("Ambas variables tienen la misma dispersión, el CV no distingue eso"),
+  answer("El CV no se puede comparar entre variables con unidades distintas"),
+  allow_retry = TRUE,
+  incorrect = "Pensá en qué mide el CV: dispersión relativa al promedio, en porcentaje -- por eso sí se puede comparar entre variables con unidades distintas."
+)
+```
+
+## Asociación
+
+### Ejercicio 3
+
+Calculá la correlación entre `experiencia` e `ingreso`.
+
+```{r ej3, exercise=TRUE, exercise.setup = "mostrar-datos"}
+cor(___, ___)
+```
+
+```{r ej3-solution}
+cor(experiencia, ingreso)
+```
+
+### Quiz — asociación y causalidad
+
+```{r quiz-cor}
+question(
+  "La correlación entre experiencia e ingreso dio aproximadamente 0.42. ¿Qué podemos concluir?",
+  answer("Que la experiencia y el ingreso se mueven juntos de forma moderada, sin que eso implique causalidad", correct = TRUE),
+  answer("Que más experiencia causa directamente más ingreso"),
+  answer("Que no hay ninguna relación entre las dos variables"),
+  answer("Que la relación es perfecta y lineal"),
+  allow_retry = TRUE,
+  incorrect = "Una correlación de 0.42 es una asociación positiva moderada -- ni nula ni perfecta -- y correlación nunca implica causalidad por sí sola."
+)
+```
+
+```{r quiz-media-mediana}
+question(
+  "Si la media de una variable es bastante mayor que su mediana, lo más probable es que:",
+  answer("Existan uno o más valores atípicos altos que arrastran la media hacia arriba", correct = TRUE),
+  answer("La variable tenga distribución perfectamente simétrica"),
+  answer("La mediana esté mal calculada"),
+  answer("La variable tenga varianza cero"),
+  allow_retry = TRUE
+)
+```
+
+## Para cerrar
+
+Con esto ya tenés las tres preguntas básicas que le hacés a cualquier
+conjunto de datos económicos: ¿dónde está el centro?, ¿qué tan
+dispersos están?, y ¿se mueven dos variables juntas? La próxima semana
+empezamos con probabilidad.

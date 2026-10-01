@@ -1,0 +1,725 @@
+---
+title: "Guía docente — Operaciones con matrices"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @kuttler2021
+---
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 1 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/matematica-economistas/README.md.
+
+     Este documento es para PREPARACIÓN DEL DOCENTE, no para
+     estudiantes: es una guía EXHAUSTIVA de la materia misma —
+     conceptos, definiciones formales, desarrollos matemáticos
+     completos y demostraciones — pensada para que, aunque no hayas
+     tenido tiempo de releer el libro, este documento solo te alcance
+     para dar la clase con solidez. No es un resumen de "qué cubrir"
+     — es la materia desarrollada. No confundir con guia-lecturas.qmd
+     (esa sí es estudiante-facing y cubre todo el curso de un
+     vistazo). Nombre de archivo: mismo prefijo que la presentación
+     equivalente (content/unidades/1_operaciones-matrices-
+     presentacion.qmd), sufijo "-guia" al final.
+
+     REPLANTEADA el 2026-09-29 a pedido del usuario: se agregó
+     transponer, matriz identidad y determinante a lo que antes era
+     "solo operaciones básicas" (suma, escalar, multiplicación). El
+     método de Gauss-Jordan vive en su propia Unidad 2, con su propia
+     guía (2_sistemas-ecuaciones-guia.qmd). La antigua Unidad 3
+     ("equilibrio-mercado") se retiró -- ver
+     materias/matematica-economistas/README.md para el detalle
+     completo de esta reorganización.
+
+     ACTUALIZACIÓN 2026-10-01 (objeción del usuario sobre la versión
+     del 2026-09-29): el usuario eliminó directamente de la
+     presentación el ejercicio de matriz identidad (se respetó ese
+     cambio acá también -- la sección 4 de esta guía ya no incluye
+     ejercicio) y pidió agregar matriz inversa y extender el
+     determinante a 3x3 y órdenes superiores. También preguntó si el
+     contenido se basó en Kuttler: la versión anterior NO estaba
+     verificada contra el PDF real -- esta sí: se extrajo el texto
+     real del libro (`pdftotext -layout`) y el contenido nuevo está
+     basado en Kuttler secciones 2.6 "The Identity and Inverses", 2.7
+     "Finding the Inverse of a Matrix", 3.1 "Basic Techniques" y 3.2
+     "Properties of Determinants". El algoritmo general de Kuttler
+     para la inversa de matrices n>2 usa la matriz aumentada [A|I]
+     reducida con Gauss-Jordan -- se remite esa parte a la Unidad 2
+     para no duplicar contenido.
+
+     ACTUALIZACIÓN 2026-10-01 (2): el usuario reemplazó por completo la
+     práctica en R (antes un repaso de t()/diag()/det()/solve()/%*%
+     sobre la matriz A y la matriz de costos) por un ejercicio nuevo:
+     promedio ponderado de tasas de interés bancarias, resuelto "a
+     mano" (sum(cuotas * t(tasas))) y como multiplicación de matrices
+     (cuotas %*% tasas) -- conecta con la lógica de probabilidad total
+     que el grupo ya vio en estadística, y el usuario lo va a proponer
+     también en Excel (SUMAPRODUCTO). Hubo un bug real al renderizar:
+     `cuotas * tasas` sin transponer truena ("non-conformable arrays")
+     porque ambas son matrices (1x6 y 6x1) y `*` exige dimensiones
+     idénticas, no solo igual cantidad de elementos -- se corrigió con
+     `t(tasas)`. Las slides de esta práctica llevan `{.smaller}` porque
+     el bloque pregunta+tabla+código desbordaba con el tamaño de fuente
+     normal del tema. -->
+
+# Guía docente — Operaciones con matrices
+
+Duración de referencia si se dicta como sesión propia: **3 horas
+(180 min)**. Reparto objetivo: ~55% teoría / ~45% aplicado-ejercicios
+— no incluye ningún bloque administrativo de presentación del curso
+(eso vive en su propio archivo, `content/unidades/0_intro-
+presentacion.qmd`, sesión 1 del calendario de 10 sesiones). Esta
+unidad es la **primera parte** de la Sesión 2 del calendario; la
+segunda parte (Gauss-Jordan) vive en `2_sistemas-ecuaciones-guia.qmd`.
+
+## Objetivos de aprendizaje
+
+- Definir una matriz y reconocer sus dimensiones ($m \times n$).
+- Sumar, restar y multiplicar matrices por un escalar, y conocer las
+  propiedades algebraicas de estas operaciones.
+- Transponer una matriz y reconocer cómo cambian sus dimensiones.
+- Reconocer la matriz identidad y su rol como neutro multiplicativo
+  ($AI = IA = A$).
+- Calcular el determinante de una matriz $2\times2$ y $3\times3$
+  (por cofactores/Laplace), e interpretarlo como indicador de
+  invertibilidad (anticipo directo de Gauss-Jordan en la Unidad 2:
+  $\det \neq 0$ ⟹ solución única).
+- Explicar, en términos generales, cómo se calculan determinantes de
+  matrices más grandes que $3\times3$ (expansión de Laplace recursiva,
+  o triangulación por filas).
+- Calcular la inversa de una matriz $2\times2$ con la fórmula directa,
+  y saber que para matrices más grandes se usa el algoritmo de la
+  matriz aumentada $[A|I]$ con Gauss-Jordan (desarrollado en la
+  Unidad 2).
+- Multiplicar matrices, entender la condición de compatibilidad de
+  dimensiones, y explicar **por qué no conmuta** ($AB \neq BA$ en
+  general, incluso cuando ambos productos existen).
+- Interpretar una multiplicación de matrices como un cálculo
+  económico real (costo total de insumos por producto) y ubicarlo
+  como caso particular de un modelo de coeficientes técnicos
+  insumo-producto.
+- Reconocer la multiplicación de matrices como una generalización del
+  promedio ponderado (la misma lógica de probabilidad total vista en
+  estadística) y aplicarla en R (`%*%`) para calcularlo rápidamente en
+  vez de sumar productos a mano.
+
+## Capítulos sugeridos para esta sesión
+
+Esta sesión se cubre completa con un solo libro — no hace falta
+combinar fuentes:
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Kuttler (2021), *A First Course in Linear Algebra* [@kuttler2021] | Capítulo de **matrices** (sec. 2.1-2.7, 2.9: definición, notación, suma/resta, multiplicación por escalar, transpuesta, matriz identidad e inversa) y capítulo de **determinantes** (sec. 3.1-3.2: cofactores, Laplace, propiedades) | Cubre el 100% del contenido matemático de la sesión. Es la única lectura obligatoria para vos antes de esta clase. |
+
+**No hace falta leer nada de** Stewart, Business Calculus, Trench ni
+Axler para esta sección — esos libros entran más adelante en el curso,
+con cálculo diferencial y ecuaciones diferenciales, y
+Axler no se usa en el temario regular (es referencia de consulta para
+profundizar álgebra lineal si algún estudiante lo pide).
+
+**Nota sobre numeración de capítulo/sección:** verificada directamente
+contra el texto del PDF que está en
+`materias/matematica-economistas/bibliografia/A first Course in Linear
+Algebra_Kuttler.pdf` (no solo contra la tabla de contenidos, sino
+leyendo el contenido real de cada sección). La numeración de esa
+copia específica: 2.6 "The Identity and Inverses", 2.7 "Finding the
+Inverse of a Matrix", 2.9 "More on Matrix Inverses", 3.1 "Basic
+Techniques" (cofactores, menores, Laplace, matrices triangulares),
+3.2 "Properties of Determinants" (efecto de operaciones elementales
+sobre el determinante). Si tu copia es de otra edición, confirmá los
+números antes de citarlos con estudiantes.
+
+**Aplicación económica y práctica en R** (matriz de costos; promedio
+ponderado de tasas bancarias con `%*%`): esto es contenido propio, no
+sale de ningún libro de la bibliografía — ver el desarrollo completo
+más abajo.
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Definición de matriz.
+2. Suma, resta y multiplicación por escalar (con ejemplo y ejercicio).
+3. Transponer una matriz (con ejemplo y ejercicio).
+4. Matriz identidad (con ejemplo; sin ejercicio propio -- ver nota en
+   la sección 4).
+5. Determinante $2\times2$ (con ejemplo y ejercicio).
+6. Determinante $3\times3$ por cofactores (con ejemplo y ejercicio), y
+   mención de métodos para órdenes superiores.
+7. Matriz inversa $2\times2$ (con ejemplo y ejercicio).
+8. Multiplicación de matrices (definición, no conmutatividad, ejemplo
+   y dos ejercicios).
+9. Aplicación económica: matriz de costos de producción.
+10. Práctica en R: promedio ponderado de tasas de interés bancarias
+    ("a mano" vs. `%*%`), con paralelo a Excel (`SUMAPRODUCTO`).
+
+## 1. Definición de matriz — desarrollo completo
+
+Una **matriz** $A$ de tamaño (u orden) $m \times n$ es un arreglo
+rectangular de $m \times n$ números reales, ordenados en $m$ filas y
+$n$ columnas:
+
+$$
+A = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+$$
+
+El elemento en la fila $i$, columna $j$ se denota $a_{ij}$ (primer
+subíndice = fila, segundo = columna — **nunca al revés**). La
+convención "$m \times n$" es SIEMPRE filas por columnas: es el error
+de notación más común en quien ve matrices por primera vez, y vale la
+pena remarcarlo con fuerza en clase.
+
+**Vocabulario que conviene tener a mano, aunque no esté en la
+diapositiva:**
+
+- Una matriz con $m = 1$ (una sola fila) se llama **vector fila**.
+  Aparece literalmente en esta sesión: el vector de costos $c$ en la
+  aplicación económica es una matriz $1 \times 3$.
+- Una matriz con $n = 1$ (una sola columna) se llama **vector
+  columna**.
+- Una matriz con $m = n$ se llama **matriz cuadrada** — importante
+  desde ya, porque tanto la matriz identidad como el determinante
+  solo se definen para matrices cuadradas.
+- Dos matrices son **iguales** si y solo si tienen el mismo tamaño
+  Y todas sus entradas correspondientes son iguales.
+
+**Referencia:** Kuttler (2021), *A First Course in Linear Algebra*,
+capítulo de matrices — definición y notación de matrices
+[@kuttler2021].
+
+## 2. Suma, resta y multiplicación por escalar — desarrollo completo
+
+**Definición.** Si $A = (a_{ij})$ y $B = (b_{ij})$ son matrices del
+mismo tamaño $m \times n$, y $k \in \mathbb{R}$ es un escalar:
+
+$$(A + B)_{ij} = a_{ij} + b_{ij} \qquad (A - B)_{ij} = a_{ij} - b_{ij}
+\qquad (kA)_{ij} = k \cdot a_{ij}$$
+
+La suma y la resta están definidas **únicamente** entre matrices del
+mismo tamaño — no existe "completar con ceros" ni ningún otro
+mecanismo; simplemente la operación no está definida. La
+multiplicación por escalar, en cambio, no tiene ninguna restricción de
+tamaño.
+
+Ambas operaciones son elemento-por-elemento, así que son
+conceptualmente idénticas a la suma/escalar de vectores.
+
+### Propiedades (con justificación breve)
+
+- **Conmutatividad:** $A + B = B + A$.
+- **Asociatividad:** $(A+B)+C = A+(B+C)$.
+- **Neutro aditivo:** existe una matriz cero $0$ del mismo tamaño que
+  $A$, tal que $A + 0 = A$.
+- **Distributividad del escalar sobre la suma:** $k(A+B) = kA+kB$.
+
+No hace falta demostrar nada de esto formalmente en clase — alcanza
+con mencionarlas para que quede la idea de que el álgebra de matrices
+"se porta bien" en estos aspectos. La sorpresa pedagógica viene con la
+multiplicación, más adelante en esta misma guía.
+
+**Ejemplo de la presentación** (resuelto en conjunto):
+
+$$A = \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}$$
+
+$$A + B = \begin{pmatrix} 4 & 3 \\ 2 & 7 \end{pmatrix} \qquad
+A - B = \begin{pmatrix} 2 & -1 \\ 2 & 1 \end{pmatrix}$$
+
+**Ejercicio de la presentación** (suma y $2A-B$, mecánico —
+acostumbra al grupo a la aritmética elemento por elemento antes del
+producto, que es conceptualmente más pesado):
+
+$$A = \begin{pmatrix} 1 & 2 & 0 \\ 3 & -1 & 4 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 0 & 1 & 2 \\ -2 & 5 & 1 \end{pmatrix}$$
+
+$$A+B = \begin{pmatrix} 1 & 3 & 2 \\ 1 & 4 & 5 \end{pmatrix}, \qquad
+2A-B = \begin{pmatrix} 2 & 3 & -2 \\ 8 & -7 & 7 \end{pmatrix}$$
+
+El error más común en $2A-B$ es olvidarse de multiplicar alguna de las
+seis entradas de $A$ por 2 antes de restar $B$ — vale la pena verificar
+eso en voz alta al revisar.
+
+**Referencia:** Kuttler (2021), mismo capítulo — operaciones básicas
+con matrices [@kuttler2021].
+
+## 3. Transponer una matriz — desarrollo completo
+
+**Definición.** Si $A$ es $m \times n$, su transpuesta $A^{T}$ es la
+matriz $n \times m$ que resulta de intercambiar filas por columnas:
+
+$$(A^{T})_{ij} = a_{ji}$$
+
+Es puramente mecánico: la fila $i$ de $A$ se convierte en la columna
+$i$ de $A^T$.
+
+**Propiedades útiles (no están en la diapositiva, tenerlas a mano por
+si preguntan):**
+
+- $(A^T)^T = A$ — transponer dos veces devuelve la matriz original.
+- $(A+B)^T = A^T + B^T$.
+- $(AB)^T = B^T A^T$ — **ojo, el orden se invierte**. No hace falta
+  demostrarlo hoy (se ve, si acaso, cuando el grupo llegue a modelos
+  econométricos y a la fórmula de mínimos cuadrados), pero es un error
+  común asumir que $(AB)^T = A^T B^T$ — es falso en general.
+
+**Por qué importa para economistas:** la transpuesta aparece
+constantemente en econometría (la fórmula de mínimos cuadrados
+ordinarios usa $X^TX$ y $X^Ty$) y en la construcción de matrices de
+insumo-producto (a veces se necesita la transpuesta de la matriz de
+coeficientes técnicos para pasar de "insumos por producto" a
+"productos por insumo"). Por ahora, con saber calcularla mecánicamente
+alcanza.
+
+**Ejemplo de la presentación:**
+
+$$A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}
+\ (2\times3) \qquad
+A^{T} = \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix}
+\ (3\times2)$$
+
+**Ejercicio de la presentación:**
+
+$$C = \begin{pmatrix} 2 & 0 \\ 1 & 3 \\ -1 & 4 \end{pmatrix}
+\ (3\times2) \qquad
+C^{T} = \begin{pmatrix} 2 & 1 & -1 \\ 0 & 3 & 4 \end{pmatrix}
+\ (2\times3)$$
+
+**Referencia:** Kuttler (2021), capítulo de matrices, sección de
+transpuesta [@kuttler2021].
+
+## 4. Matriz identidad — desarrollo completo
+
+**Definición.** La matriz identidad $I_n$ es la matriz cuadrada
+$n\times n$ con unos en la diagonal principal y ceros en el resto:
+
+$$I_2 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad
+I_3 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
+
+Es el **neutro multiplicativo**: $AI = IA = A$ siempre que las
+dimensiones sean compatibles — funciona por ambos lados, a diferencia
+de la multiplicación de matrices en general (que no conmuta, ver la
+sección 6 más abajo).
+
+**Por qué importa, más allá de "es como el 1":**
+
+- Aparece en la definición de **matriz inversa**: $A A^{-1} = A^{-1}A
+  = I$. Todavía no calculamos inversas en esta sesión, pero la
+  identidad es la pieza que hace falta para definirlas.
+- La próxima sesión (Gauss-Jordan, Unidad 2) el objetivo del método es
+  llevar la matriz de coeficientes de un sistema a que se vea
+  **exactamente como $I$** (forma escalonada reducida) — ahí es donde
+  se puede leer la solución directamente. Vale la pena decir esto en
+  voz alta en esta sesión para que el grupo llegue con el concepto
+  fresco.
+
+**Ejemplo de la presentación:** verificar $AI_2 = A$ para
+$A = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$ — se resuelve
+multiplicando fila por columna como cualquier producto de matrices
+(anticipando la mecánica de la sección 6, todavía no formalizada en
+ese punto de la clase, pero transparente en este ejemplo porque el
+resultado es obviamente $A$ sin cambios).
+
+**Nota (2026-10-01):** esta sección tenía originalmente un ejercicio
+propio ($I_3 D$ con $D$ de $3\times3$) -- el usuario lo eliminó
+directamente de la presentación al revisar la versión del 2026-09-29.
+Se respetó ese cambio acá también: la sesión pasa de la definición y
+el ejemplo directo a determinante sin ejercicio adicional de
+identidad. Si en algún momento se quiere reintroducir, el ejercicio
+que se usaba era exactamente ese ($I_3 D$, resultado $D$ sin cambios).
+
+**Referencia:** Kuttler (2021), capítulo de matrices, sección 2.6,
+"The Identity and Inverses" [@kuttler2021].
+
+## 5. Determinante ($2\times2$) — desarrollo completo
+
+**Definición.** Para $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$:
+
+$$\det(A) = ad - bc$$
+
+**Interpretación (el punto pedagógico central de esta sección):** si
+$\det(A) \neq 0$, $A$ es invertible y cualquier sistema $Ax=b$ con esa
+matriz de coeficientes tiene solución única. Si $\det(A) = 0$, $A$ no
+es invertible, y el sistema asociado o no tiene solución, o tiene
+infinitas.
+
+Esto es **exactamente** lo que se retoma al abrir la Unidad 2
+(Gauss-Jordan): antes de resolver un sistema, calcular el determinante
+de la matriz de coeficientes permite anticipar qué tipo de solución
+vamos a encontrar, sin resolver nada todavía. Vale la pena remarcarlo
+explícitamente al cerrar esta sección, como puente hacia la próxima
+sesión.
+
+**Ejemplo de la presentación:** retomando $A = \begin{pmatrix} 2 & 1
+\\ 0 & 3 \end{pmatrix}$ (la misma matriz de la sección de identidad,
+por continuidad): $\det(A) = (2)(3)-(1)(0) = 6 \neq 0$ → invertible.
+
+**Ejercicio de la presentación:** $B = \begin{pmatrix} 1 & -1 \\ 2 & 4
+\end{pmatrix}$ (misma $B$ que se reutiliza más abajo para inversa y
+multiplicación, a propósito, para que el grupo llegue a esas secciones
+ya familiarizado con ella): $\det(B) = (1)(4)-(-1)(2) = 4+2 = 6 \neq 0$
+→ invertible.
+
+**Referencia:** Kuttler (2021), capítulo de determinantes, sección
+3.1, "Basic Techniques" [@kuttler2021].
+
+## 6. Determinante ($3\times3$ y órdenes superiores) — desarrollo completo
+
+**Agregado el 2026-10-01 a pedido del usuario** (la versión del
+2026-09-29 solo cubría $2\times2$; el usuario pidió explícitamente
+3x3 y una explicación de métodos para matrices más grandes).
+
+**Definición (menor, cofactor, expansión de Laplace).** Para una
+matriz $A$ de tamaño $n\times n$, el **menor** $M_{ij}$ es el
+determinante de la matriz $(n-1)\times(n-1)$ que resulta de eliminar
+la fila $i$ y la columna $j$ de $A$. El **cofactor** es
+$C_{ij} = (-1)^{i+j} M_{ij}$. La **expansión de Laplace** (o por
+cofactores) a lo largo de la fila $i$ (o cualquier columna $j$) da:
+
+$$\det(A) = \sum_{j=1}^{n} a_{ij} C_{ij}$$
+
+El teorema clave (Kuttler, sec. 3.1) es que **el resultado es el mismo
+sin importar qué fila o columna se elija** para expandir -- útil tanto
+para elegir la fila/columna con más ceros (menos trabajo) como para
+verificar un cálculo expandiendo por una segunda fila/columna.
+
+**Caso $3\times3$, expandiendo por la primera fila:**
+
+$$\det(A) = a_{11}\begin{vmatrix}a_{22}&a_{23}\\a_{32}&a_{33}\end{vmatrix}
+- a_{12}\begin{vmatrix}a_{21}&a_{23}\\a_{31}&a_{33}\end{vmatrix}
++ a_{13}\begin{vmatrix}a_{21}&a_{22}\\a_{31}&a_{32}\end{vmatrix}$$
+
+El patrón de signos para $3\times3$, fila por fila, es
+$+,-,+\ /\ -,+,-\ /\ +,-,+$ (tablero de ajedrez empezando en $+$ en la
+posición $(1,1)$).
+
+**Ejemplo de la presentación:**
+
+$$A = \begin{pmatrix} 1 & 2 & 3 \\ 0 & 1 & 4 \\ 5 & 6 & 0 \end{pmatrix}
+\implies \det(A) = 1(-24) - 2(-20) + 3(-5) = -24+40-15 = 1$$
+
+**Ejercicio de la presentación** (con un cero en la primera fila, a
+propósito, para que vean que ese término desaparece sin calcular el
+menor):
+
+$$C = \begin{pmatrix} 2 & 0 & 1 \\ 1 & 3 & -1 \\ 0 & 2 & 1 \end{pmatrix}
+\implies \det(C) = 2(5) - 0 + 1(2) = 12$$
+
+**Órdenes superiores ($4\times4$ en adelante) -- las dos salidas:**
+
+1. **Expansión de Laplace recursiva:** se aplica igual, pero cada
+   menor de un determinante $n\times n$ es a su vez un determinante
+   $(n-1)\times(n-1)$ que hay que expandir de nuevo. El número de
+   multiplicaciones crece como $O(n!)$ -- para $n=10$ ya es
+   impracticable a mano y costoso incluso en computadora.
+2. **Triangulación por filas** (el método realmente usado en la
+   práctica, y el que conecta directamente con Gauss-Jordan,
+   Unidad 2): si $U$ es el resultado de llevar $A$ a forma triangular
+   con las 3 operaciones elementales por fila, $\det(U)$ es el
+   producto de la diagonal (Kuttler, sec. 3.1, teorema del
+   determinante de una matriz triangular). Hay que ajustar por el
+   efecto de cada operación sobre el determinante (Kuttler, sec. 3.2):
+   intercambiar dos filas cambia el signo; multiplicar una fila por un
+   escalar $k$ multiplica el determinante por $k$ (hay que dividir al
+   final para compensar); sumar un múltiplo de una fila a otra no
+   cambia el determinante.
+
+**Puente explícito hacia la Unidad 2:** este es el mismo motivo por el
+que conviene presentar esto *antes* de Gauss-Jordan y no después --
+cuando el grupo vea el método de eliminación la próxima sesión, ya
+sabe que las mismas operaciones sirven, con las reglas de arriba, para
+calcular determinantes de cualquier tamaño.
+
+**Referencia:** Kuttler (2021), capítulo de determinantes, sección
+3.1 ("Basic Techniques": menores, cofactores, Laplace, matrices
+triangulares) y sección 3.2 ("Properties of Determinants": efecto de
+las operaciones elementales) [@kuttler2021].
+
+## 7. Matriz inversa ($2\times2$) — desarrollo completo
+
+**Agregado el 2026-10-01 a pedido del usuario** (la versión del
+2026-09-29 no incluía matriz inversa -- objeción directa del usuario,
+a pesar de que la nota de la sección de matriz identidad ya mencionaba
+$AA^{-1}=I$ como adelanto).
+
+**Definición.** $A^{-1}$ es la matriz que cumple $AA^{-1}=A^{-1}A=I$.
+$A$ tiene inversa si y solo si $\det(A)\neq0$. Para $2\times2$:
+
+$$A^{-1} = \frac{1}{\det(A)}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
+
+(intercambiar la diagonal principal, cambiar de signo la diagonal
+secundaria, dividir entre el determinante).
+
+**Por qué va justo después del determinante y no antes:** la condición
+de existencia y la fórmula misma dependen directamente de $\det(A)$ --
+pedagógicamente no se puede presentar la inversa sin haber calculado
+determinantes primero.
+
+**Para matrices $n>2$ (no se desarrolla en esta sesión, solo se
+menciona):** Kuttler (sec. 2.7, "Finding the Inverse of a Matrix")
+usa el **algoritmo de la matriz aumentada**: se arma $[A \mid I]$ y se
+reduce con las mismas operaciones de Gauss-Jordan hasta que el lado
+izquierdo sea $I$; lo que queda del lado derecho es $A^{-1}$. Es,
+literalmente, el mismo procedimiento que se usa para resolver sistemas
+de ecuaciones -- por eso se desarrolla recién en la Unidad 2
+(`2_sistemas-ecuaciones-guia.qmd`), una vez que el grupo ya domina
+Gauss-Jordan, en vez de duplicarlo acá con un método distinto.
+
+**Ejemplo de la presentación:** $A = \begin{pmatrix}2&1\\0&3\end{pmatrix}$,
+$\det(A)=6$:
+
+$$A^{-1} = \frac{1}{6}\begin{pmatrix}3&-1\\0&2\end{pmatrix}
+= \begin{pmatrix}1/2&-1/6\\0&1/3\end{pmatrix}$$
+
+**Ejercicio de la presentación:** $B=\begin{pmatrix}1&-1\\2&4\end{pmatrix}$
+(mismo $B$ del ejercicio de determinante, $\det(B)=6$):
+
+$$B^{-1} = \frac{1}{6}\begin{pmatrix}4&1\\-2&1\end{pmatrix}
+= \begin{pmatrix}2/3&1/6\\-1/3&1/6\end{pmatrix}$$
+
+Vale la pena sugerir, como verificación rápida en clase o de tarea,
+multiplicar $AA^{-1}$ (o $BB^{-1}$) y confirmar que da $I$ exactamente.
+
+**Referencia:** Kuttler (2021), capítulo de matrices, sección 2.6,
+"The Identity and Inverses" (definición y unicidad de la inversa) y
+sección 2.7, "Finding the Inverse of a Matrix" (algoritmo general con
+matriz aumentada) [@kuttler2021].
+
+## 8. Multiplicación de matrices — desarrollo completo
+
+**Definición.** Si $A$ es $m \times n$ y $B$ es $n \times p$, el
+producto $AB$ es la matriz $m \times p$ definida por:
+
+$$(AB)_{ij} = \sum_{k=1}^{n} a_{ik}\, b_{kj}$$
+
+Es decir: la entrada $(i,j)$ del producto es el resultado de tomar la
+fila $i$ de $A$, la columna $j$ de $B$, multiplicar entrada por
+entrada, y sumar ("regla fila por columna").
+
+**Condición de compatibilidad:** el número de **columnas de $A$**
+($n$) debe coincidir con el número de **filas de $B$** ($n$). Si no
+coincide, el producto simplemente **no existe**. El resultado, cuando
+existe, tiene tantas filas como $A$ y tantas columnas como $B$.
+
+### Por qué la multiplicación de matrices NO conmuta — argumento completo
+
+Hay **dos niveles** de no-conmutatividad, y vale la pena distinguirlos
+en clase:
+
+**Nivel 1 — ni siquiera existen los dos productos, o no tienen el
+mismo tamaño.** Si $A$ es $m\times n$ y $B$ es $n\times p$ con
+$m \neq p$: $AB$ existe (es $m\times p$), pero $BA$ requiere que las
+columnas de $B$ ($p$) coincidan con las filas de $A$ ($m$) — si
+$m \neq p$, $BA$ ni siquiera está definido, o si lo está, da un
+tamaño distinto a $AB$. Este es exactamente el caso del Ejercicio —
+Multiplicación II de hoy ($A$ es $3\times2$, $B$ es $2\times3$: $AB$
+es $3\times3$, $BA$ es $2\times2$).
+
+**Nivel 2 — incluso cuando $AB$ y $BA$ SÍ tienen el mismo tamaño,
+casi nunca son iguales.** Contraejemplo estándar, útil si alguien pide
+ver este caso también:
+
+$$A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$$
+
+$$AB = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}, \qquad
+BA = \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}$$
+
+Mismo tamaño ($2\times2$), pero $AB \neq BA$.
+
+**Conclusión pedagógica para remarcar en voz alta:** "$AB \neq BA$ en
+general" no es un tecnicismo raro — es la norma. Los casos en que sí
+conmutan (por ejemplo, cuando una de las dos es la matriz identidad)
+son la excepción, no la regla.
+
+### Qué SÍ se conserva del álgebra escalar
+
+- **Asociatividad:** $(AB)C = A(BC)$, siempre que las dimensiones
+  sean compatibles.
+- **Distributividad respecto a la suma:** $A(B+C) = AB+AC$ y
+  $(A+B)C = AC+BC$.
+- **Compatibilidad con el escalar:** $k(AB) = (kA)B = A(kB)$.
+
+**Ejemplo de la presentación** (fila por columna, las 4 entradas
+explícitas):
+
+$$A = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 1 & -1 \\ 2 & 4 \end{pmatrix} \qquad
+AB = \begin{pmatrix} 4 & 2 \\ 6 & 12 \end{pmatrix}$$
+
+**Ejercicio — Multiplicación I** ($A$ es $2\times3$, $B$ es $3\times2$,
+producto $2\times2$):
+
+$$A = \begin{pmatrix} 1 & 2 & 0 \\ 3 & -1 & 4 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 0 & 1 \\ -2 & 5 \\ 2 & 1 \end{pmatrix}$$
+
+$$AB = \begin{pmatrix} -4 & 11 \\ 10 & 2 \end{pmatrix}$$
+
+**Ejercicio — Multiplicación II** (el punto pedagógico central: $AB$
+da $3\times3$ y $BA$ da $2\times2$ — ni siquiera son del mismo
+tamaño):
+
+$$A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 0 & 1 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 2 & 0 & 1 \\ 1 & 1 & -1 \end{pmatrix}$$
+
+$$AB = \begin{pmatrix} 4 & 2 & -1 \\ 10 & 4 & -1 \\ 1 & 1 & -1 \end{pmatrix}$$
+
+Si alguien pregunta cuánto da $BA$ (no está en la diapositiva):
+
+$$BA = \begin{pmatrix} 2 & 5 \\ 4 & 5 \end{pmatrix}$$
+
+**Referencia:** Kuttler (2021), mismo capítulo — multiplicación de
+matrices y sus propiedades [@kuttler2021].
+
+## Aplicación económica — desarrollo extendido
+
+La matriz $R$ de requerimientos de insumos por unidad producida es un
+caso particular de lo que en microeconomía de la producción se llama
+**matriz de coeficientes técnicos** (insumo-producto): la entrada
+$r_{ij}$ dice cuánto del insumo $i$ se necesita para producir una
+unidad del bien $j$.
+
+$$R = \begin{pmatrix} 4 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix}
+\quad \text{(filas: insumos } I_1,I_2,I_3 \text{; columnas: productos } P_1,P_2\text{)}$$
+
+Si $c = \begin{pmatrix} 5 & 8 & 3 \end{pmatrix}$ es el vector fila
+($1\times3$) de costos unitarios de cada insumo, el producto $cR$
+(una fila $1\times3$ por una matriz $3\times2$, resultado $1\times2$)
+da el **costo total de insumos por unidad de cada producto**:
+
+$$cR = \begin{pmatrix} 5(4)+8(1)+3(2) & 5(2)+8(3)+3(1) \end{pmatrix}
+= \begin{pmatrix} 34 & 37 \end{pmatrix}$$
+
+Producir una unidad de $P_1$ cuesta ₡34 en insumos; una unidad de
+$P_2$ cuesta ₡37.
+
+**Por qué es $cR$ y no $Rc$:** $c$ es $1\times3$ y $R$ es $3\times2$
+— las dimensiones internas ($3$ y $3$) calzan, y el resultado es
+$1\times2$. $Rc$ requeriría que las columnas de $R$ ($2$) coincidieran
+con las filas de $c$ ($1$) — no coinciden, así que $Rc$ ni siquiera
+está definido.
+
+**Conexión con el modelo de Leontief.** Este es exactamente el tipo
+de cálculo que aparece en los modelos insumo-producto de Wassily
+Leontief (economista, premio Nobel 1973). No hace falta nombrarlo así
+con el grupo todavía, pero podés mencionarlo como adelanto si
+preguntan "¿esto para qué sirve en la vida real?". No hay libro de la
+bibliografía del curso que desarrolle específicamente matrices
+insumo-producto — es contenido propio de aplicación económica,
+construido sobre la definición pura de Kuttler.
+
+**Puente hacia la Unidad 2 (Gauss-Jordan):** hoy calculamos un costo
+*conocidas* las cantidades. La próxima sesión hacemos el cálculo
+inverso: dadas ciertas condiciones (por ejemplo, una condición de
+equilibrio de mercado), planteamos un **sistema de ecuaciones** y lo
+resolvemos con Gauss-Jordan para encontrar cantidades *desconocidas*
+— precio y cantidad de equilibrio. El determinante que vimos en la
+sección 5 es justo la herramienta que permite anticipar, antes de
+resolver, si ese sistema va a tener solución única.
+
+## Práctica en R — desarrollo extendido
+
+**Caso:** ¿cuál es la tasa de interés de mercado en un sistema
+financiero con la siguiente composición?
+
+| Banco | Cuota de Mercado | Tasa de Interés |
+|:---|---:|---:|
+| Banco A   | 15% | 12% |
+| Banco B   | 21% | 18% |
+| Banco C   | 10% | 20% |
+| Banco D   | 24% | 7%  |
+| Banco E   | 17% | 14% |
+| Banco F   | 13% | 11% |
+
+Las cuotas suman exactamente 100% — es la misma estructura que una
+distribución de probabilidad, y el cálculo es la misma lógica de
+**probabilidad total** que el grupo ya vio en estadística: una suma de
+productos (probabilidad por valor). Normalmente se calcula "a mano"
+(cuota por tasa de cada banco, sumado); el punto pedagógico es que esa
+suma de productos **es, literalmente, una multiplicación de
+matrices**: el vector fila de cuotas por el vector columna de tasas.
+
+```r
+cuotas <- matrix(c(0.15, 0.21, 0.10, 0.24, 0.17, 0.13), nrow = 1)
+tasas  <- matrix(c(0.12, 0.18, 0.20, 0.07, 0.14, 0.11), nrow = 6)
+
+# Método "a mano": multiplicar par por par y sumar
+sum(cuotas * t(tasas))
+
+# Método matricial: vector fila (1x6) por vector columna (6x1) = 1x1
+cuotas %*% tasas
+```
+
+Resultado esperado: **13.07%** en ambos casos — el punto es que dan
+exactamente lo mismo, porque son la misma operación.
+
+**Bug real encontrado al renderizar esta sección (2026-10-01), dejarlo
+documentado por si se repite en otra sesión:** `cuotas * tasas` SIN el
+`t()` truena con `Error ... : non-conformable arrays`. Motivo: `cuotas`
+es $1\times6$ y `tasas` es $6\times1$ — ambas son matrices (tienen
+atributo `dim`), y `*` exige que las dimensiones calcen EXACTAMENTE,
+no solo que el total de elementos coincida. Esto es distinto de lo que
+pasa con vectores sueltos de R (sin `dim`), que sí reciclan en
+silencio — es un buen contraste en vivo con la advertencia de la
+sección de multiplicación (`c_costos * R` más arriba, que si acaso se
+mantiene como ejemplo histórico): con matrices de verdad, un error de
+dimensiones SÍ truena; con vectores sueltos, NO truena y da mal en
+silencio. Se corrigió transponiendo `tasas` con `t()` antes de
+multiplicar elemento a elemento — reutiliza algo que el grupo ya vio
+al inicio de esta misma unidad.
+
+**Paralelo con Excel** (el usuario también va a proponer este ejercicio
+ahí): la fórmula equivalente es `=SUMAPRODUCTO(rango_cuotas,
+rango_tasas)` (`SUMPRODUCT` en inglés) — es, otra vez, el mismo
+producto punto, solo que en una hoja de cálculo. Vale la pena mostrar
+las tres formas (a mano, R, Excel) una al lado de la otra para que
+quede claro que es una sola idea con tres implementaciones.
+
+**Por qué importa:** `%*%` escala sin esfuerzo — con 50 bancos en vez
+de 6 el código no cambia en una sola letra, solo los datos. La suma a
+mano habría que reescribirla entera.
+
+## Distribución de tiempo
+
+| Bloque | Minutos |
+|---|---|
+| Portada + agenda | 3 |
+| Definición de matriz | 8 |
+| Suma/resta/escalar (definición + ejemplo + ejercicio) | 15 |
+| Transponer (definición + ejemplo + ejercicio) | 12 |
+| Matriz identidad (definición + ejemplo, sin ejercicio) | 8 |
+| Determinante $2\times2$ (definición + ejemplo + ejercicio) | 12 |
+| Determinante $3\times3$ (definición + ejemplo + ejercicio) | 12 |
+| Determinantes de orden superior (concepto, sin ejercicio) | 5 |
+| Matriz inversa $2\times2$ (definición + ejemplo + ejercicio) | 12 |
+| Multiplicación (definición + ejemplo + 2 ejercicios) | 40 |
+| Aplicación económica | 15 |
+| Práctica en R (promedio ponderado de tasas bancarias) | 10 |
+| **Subtotal contenido** | **152** |
+| Buffer (preguntas, transiciones, imprevistos) | ~28 |
+| **Total sesión** | **180** |
+
+**Nota de tiempo (histórico, 2026-10-01):** agregar determinante 3×3,
+órdenes superiores y matriz inversa había bajado el buffer a ~23 min.
+El reemplazo de la práctica en R (del repaso de 5 funciones a un solo
+ejercicio de tasas bancarias) recuperó algo de margen (~28 min ahora).
+Sigue más ajustado que la versión original (~45 min) — si el grupo va
+lento, las candidatas menos costosas para recortar son el ejercicio de
+"Multiplicación I" (dejar solo "Multiplicación II") o comprimir
+"órdenes superiores" a una mención oral. Si no alcanza, considerar
+partir esta unidad en dos sesiones — decisión de calendario, fuera del
+alcance de esta guía.
+
+## Referencias completas
+
+::: {#refs}
+:::

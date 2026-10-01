@@ -1,0 +1,285 @@
+---
+title: "Guía de preparación — Probabilidad — reglas y teorema de Bayes"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/3_probabilidad-reglas-bayes-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 3 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Probabilidad — reglas y teorema de Bayes
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Calcular probabilidades condicionales e interpretar su significado en
+  contexto.
+- Determinar si dos eventos son independientes usando la definición
+  formal, no la intuición.
+- Derivar y aplicar la fórmula de la probabilidad total.
+- Derivar y aplicar el teorema de Bayes para actualizar una
+  probabilidad previa con evidencia nueva.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Hogg, Tanis y Zimmerman, *Probability and Statistical Inference* [@hogg2015] | Capítulo 1 (Probability), secciones sobre probabilidad condicional, independencia y Bayes | Continuación directa de la unidad anterior (probabilidad — conceptos y técnicas de conteo) — todo forma parte del mismo capítulo conceptual. |
+
+## Desarrollo teórico completo
+
+### 1. Probabilidad condicional
+
+La probabilidad condicional responde la pregunta: "si ya sé que
+ocurrió $B$, ¿cómo cambia mi probabilidad de que ocurra $A$?" La
+definición formal es:
+
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) > 0$$
+
+**Intuición de dónde sale esta fórmula.** Piensen en $P(B)$ como el
+nuevo "espacio muestral efectivo": una vez que sabemos que $B$ ocurrió,
+ya no nos interesa todo $S$, sino solo la porción de $S$ donde $B$ es
+cierto. Dentro de esa porción reducida, la probabilidad de que también
+ocurra $A$ es la fracción de $B$ que se traslapa con $A$ — es decir,
+$P(A \cap B)$ — relativa al tamaño de $B$ en sí. De ahí la razón
+$\dfrac{P(A \cap B)}{P(B)}$.
+
+**Regla de la multiplicación.** Despejando $P(A \cap B)$ de la
+definición anterior, obtenemos la regla que usamos para calcular
+probabilidades conjuntas cuando conocemos una condicional:
+
+$$P(A \cap B) = P(A) \, P(B \mid A) = P(B) \, P(A \mid B)$$
+
+Esta regla es simétrica — pueden condicionar en cualquiera de los dos
+eventos, según cuál probabilidad condicional conozcan.
+
+### 2. Eventos independientes
+
+Dos eventos son **independientes** cuando conocer que uno ocurrió no
+cambia en absoluto la probabilidad del otro. Formalmente:
+
+$$A \text{ y } B \text{ son independientes} \iff P(A \cap B) = P(A) \, P(B)$$
+
+**Conexión con la probabilidad condicional.** Si sustituimos esta
+condición de independencia en la definición de probabilidad
+condicional, obtenemos:
+
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A) P(B)}{P(B)} = P(A)$$
+
+Esto es exactamente lo que esperaríamos: si $A$ y $B$ son
+independientes, entonces saber que $B$ ocurrió no me da ninguna
+información adicional sobre $A$ — la probabilidad condicional
+$P(A \mid B)$ es idéntica a la probabilidad incondicional $P(A)$. Este
+punto es clave para que el estudiante entienda *por qué* la definición
+formal tiene sentido, en vez de memorizarla como una fórmula aislada.
+
+**Advertencia pedagógica importante:** independencia **no es lo mismo**
+que mutuamente excluyentes. De hecho, si $A$ y $B$ son mutuamente
+excluyentes (no pueden ocurrir juntos) y ambos tienen probabilidad
+positiva, entonces **no pueden** ser independientes, porque
+$P(A \cap B) = 0 \neq P(A)P(B)$ (que sería positivo). Vale la pena
+mencionar esto en clase porque es una confusión extremadamente común.
+
+### 3. Fórmula de la probabilidad total
+
+Cuando el espacio muestral $S$ se puede dividir en $k$ eventos
+$B_1, B_2, \dots, B_k$ que son **mutuamente excluyentes** (no se
+traslapan entre sí) y **exhaustivos** (cubren todo $S$), decimos que
+forman una **partición** de $S$.
+
+**Derivación.** Cualquier evento $A$ se puede escribir como la unión de
+sus intersecciones con cada pieza de la partición:
+
+$$A = A \cap S = A \cap (B_1 \cup B_2 \cup \dots \cup B_k) = (A \cap B_1) \cup (A \cap B_2) \cup \dots \cup (A \cap B_k)$$
+
+Como los $B_i$ son mutuamente excluyentes entre sí, las piezas
+$(A \cap B_i)$ también lo son entre sí (cada una vive "dentro" de un
+$B_i$ distinto y sin traslape). Por el axioma 3 de probabilidad (la
+regla de la suma para eventos mutuamente excluyentes), la probabilidad
+de la unión es la suma de las probabilidades:
+
+$$P(A) = \sum_{i=1}^{k} P(A \cap B_i) = \sum_{i=1}^{k} P(B_i) \, P(A \mid B_i)$$
+
+usando la regla de la multiplicación de la sección anterior en el
+último paso. Esta es la **fórmula de la probabilidad total**: permite
+calcular la probabilidad de $A$ "promediando" las probabilidades
+condicionales $P(A \mid B_i)$, ponderadas por qué tan probable es cada
+escenario $B_i$.
+
+**Ejemplo (teléfonos).** Con participación de mercado 30%/40%/30% para
+las compañías A/B/C, y tasas de fallo 5%/8%/10% respectivamente:
+
+$$P(\text{falla}) = 0.30(0.05) + 0.40(0.08) + 0.30(0.10) = 0.015 + 0.032 + 0.030 = 0.077$$
+
+Es decir, 7.7% de todos los teléfonos vendidos (sin importar la marca)
+fallan en el primer año. Noten que este número es un promedio
+ponderado de las tres tasas de fallo (5%, 8%, 10%), ponderado por la
+participación de mercado — por eso 0.077 cae entre 0.05 y 0.10, más
+cerca de 0.08 porque la compañía B tiene la mayor participación.
+
+### 4. Teorema de Bayes
+
+El teorema de Bayes responde la pregunta **inversa** a la probabilidad
+total: en vez de "dado el escenario $B_i$, ¿cuál es la probabilidad de
+$A$?", pregunta "dado que $A$ ya ocurrió, ¿cuál es la probabilidad de
+que hayamos estado en el escenario $B_i$?" Es decir, invierte la
+dirección de la condicionalidad.
+
+**Derivación.** Partimos de la definición de probabilidad condicional
+aplicada en ambas direcciones:
+
+$$P(B_i \mid A) = \frac{P(B_i \cap A)}{P(A)} = \frac{P(B_i) P(A \mid B_i)}{P(A)}$$
+
+y sustituimos el denominador $P(A)$ usando la fórmula de la
+probabilidad total que acabamos de derivar:
+
+$$P(B_i \mid A) = \frac{P(B_i) \, P(A \mid B_i)}{\displaystyle\sum_{j=1}^{k} P(B_j) \, P(A \mid B_j)}$$
+
+Esta es la fórmula del teorema de Bayes. La terminología es importante
+para que el estudiante entienda el "flujo de información": $P(B_i)$ es
+la **probabilidad previa** (lo que sabíamos antes de observar $A$), y
+$P(B_i \mid A)$ es la **probabilidad posterior** (lo que sabemos
+después de observar que $A$ ocurrió). El teorema de Bayes es,
+literalmente, la regla matemática para **actualizar creencias con
+evidencia nueva** — esta idea (previa → evidencia → posterior) es la
+base de toda la estadística bayesiana moderna, aunque en este curso
+solo veamos la versión clásica con probabilidades discretas.
+
+**Ejemplo (teléfonos, continuación).** ¿Cuál es la probabilidad de que
+un teléfono que falló haya sido de la compañía A?
+
+$$P(B_1 \mid A) = \frac{P(B_1)P(A\mid B_1)}{P(A)} = \frac{0.30 \times 0.05}{0.077} = \frac{0.015}{0.077} \approx 0.1948$$
+
+Noten algo interesante pedagógicamente: la probabilidad *previa* de
+que un teléfono fuera de la compañía A era 30% (su participación de
+mercado), pero la probabilidad *posterior*, sabiendo que el teléfono
+falló, baja a 19.5%. Esto tiene sentido: la compañía A tiene la tasa de
+fallo más baja (5%), así que un teléfono fallado es *menos* probable
+que sea de A de lo que sugeriría su sola participación de mercado —
+vale la pena señalar explícitamente esta reducción en clase para que
+el estudiante vea que Bayes no es solo mecánica, sino que produce un
+resultado interpretable.
+
+## Ejercicios de la sesión — soluciones y comentarios ampliados
+
+**Ejercicio 1 (globos).** 25 globos: 10 amarillos, 8 rojos, 7 verdes.
+Ya explotó un globo amarillo (sin reemplazo, quedan 24 globos, 9
+amarillos). $P(B \mid A) = 9/24 = 3/8 = 37.5\%$. La probabilidad
+conjunta de amarillo-luego-amarillo es
+$P(A)P(B\mid A) = (10/25)(9/24) = 0.40 \times 0.375 = 0.15 = 15\%$.
+Punto pedagógico: esto es muestreo sin reemplazo — el denominador baja
+de 25 a 24 y el numerador de amarillos baja de 10 a 9, porque ya se
+usó un globo amarillo.
+
+**Ejercicio 2 (diagrama de Venn con probabilidades).** Del diagrama:
+$P(A) = 0.5+0.2=0.7$, $P(B)=0.1+0.2=0.3$, $P(A\cap B)=0.2$ (la región
+de traslape). Entonces $P(A\mid B) = 0.2/0.3 = 2/3 \approx 66.7\%$.
+Punto pedagógico: leer un diagrama de Venn con números ya asignados a
+cada región es una habilidad en sí misma — hay que sumar las regiones
+correctas para obtener $P(A)$ y $P(B)$ marginales antes de aplicar la
+fórmula condicional.
+
+**Ejercicio 3 (bolas azules/rojas, sin reemplazo).** Caja con 7 azules,
+3 rojas (10 total). $P(\text{roja primero}) = 3/10$. Dado que salió
+roja, quedan 9 bolas (7 azules, 2 rojas), entonces
+$P(\text{azul segundo} \mid \text{roja primero}) = 7/9$. Conjunta:
+$(3/10)(7/9) = 21/90 = 7/30 \approx 23.3\%$.
+
+**Ejercicios 4 y 5 (dados, independencia).** Ambos usan la misma
+mecánica: calcular $P(A)$, $P(B)$, su producto, y compararlo con
+$P(A \cap B)$ dado directamente en el enunciado.
+
+- Ejercicio 4: $P(A)=6/36$, $P(B)=18/36$, producto $=1/12$; dado
+  $P(A\cap B)=3/36=1/12$. Coinciden → **independientes**.
+- Ejercicio 5: $P(C)=6/36$, $P(D)=2/36$, producto $=1/108$; dado
+  $P(C\cap D)=1/36=3/108$. No coinciden ($1/108 \neq 3/108$) → **no
+  independientes**.
+
+Punto pedagógico importante para el ejercicio 5: aunque $C$ y $D$
+comparten el resultado "obtener 5 en el dado rojo con suma 11" (el
+único caso favorable es rojo=5, azul=6), la intersección observada
+($1/36$) es *mayor* que la que predeciría la independencia ($1/108$),
+lo cual indica que conocer $C$ *aumenta* la probabilidad de $D$ — hay
+una dependencia positiva entre ambos eventos.
+
+**Ejercicio 6 (teléfonos, compañía B).**
+$P(B_2\mid A) = (0.40\times0.08)/0.077 = 0.032/0.077 \approx 0.4155$.
+Nota: la suma de las tres probabilidades posteriores
+($P(B_1\mid A)+P(B_2\mid A)+P(B_3\mid A)$) debe dar 1 — es un buen
+chequeo para hacer en clase: $0.1948+0.4155+P(B_3\mid A)=1 \Rightarrow
+P(B_3\mid A)=0.3896$. Verificación directa:
+$P(B_3\mid A)=(0.30\times0.10)/0.077=0.030/0.077\approx0.3896$ ✓.
+
+**Ejercicio 7 (chips, tres máquinas).** Participaciones 35%/25%/40%,
+tasas de fallo 2%/1%/3%.
+
+$$P(\text{daño}) = 0.35(0.02)+0.25(0.01)+0.40(0.03) = 0.007+0.0025+0.012=0.0215$$
+
+$$P(B_3\mid A) = \frac{0.40\times0.03}{0.0215} = \frac{0.012}{0.0215} = \frac{24}{43} \approx 0.5581$$
+
+## Nota importante sobre el ejercicio de Laboratorio (revisar antes de clase)
+
+El enunciado del laboratorio, tal como está migrado del material
+original, dice: *"Cada banco cobra en promedio intereses por 25%, 5%,
+30%, 15%, 7%, 14%, 7% respectivamente. Si tengo un préstamo de 10%,
+¿cuál es la probabilidad de que ese préstamo haya sido otorgado por el
+banco A?"* — pero **ninguno de los siete bancos cobra exactamente
+10%**, así que el enunciado, tal cual está, no tiene una lectura
+literal resoluble (no hay un evento $A$="tasa = 10%" con el que
+condicionar).
+
+**Antes de dar esta sesión, decidir cómo resolver esta ambigüedad.**
+La interpretación más probable (y la que recomiendo usar en clase) es
+que el evento de interés es "el préstamo tiene una tasa **mayor** al
+10%" — con esa lectura, los bancos que califican son A (25%), C (30%),
+D (15%) y F (14%), con participaciones de mercado 10%, 15%, 14% y 4%
+respectivamente. El cálculo, con esa interpretación, sería:
+
+$$P(\text{tasa}>10\%) = 0.10(1)+0.15(1)+0.14(1)+0.04(1) = 0.10+0.15+0.14+0.04 = 0.43$$
+
+(aquí $P(A\mid B_i)=1$ para los bancos que cobran más de 10%, y $0$
+para los que cobran 10% o menos, porque no hay incertidumbre dentro de
+cada banco — cada banco cobra una tasa fija conocida). Entonces:
+
+$$P(\text{Banco A} \mid \text{tasa}>10\%) = \frac{0.10}{0.43} \approx 0.2326$$
+
+Alternativa: presentar el ejercicio como una construcción libre en
+clase — pedirles a los estudiantes que ellos mismos decidan qué
+umbral de tasa usar y resuelvan con su propia partición, para
+practicar la traducción de un enunciado ambiguo a una partición de
+eventos bien definida. Esto puede ser pedagógicamente más rico que
+simplemente corregir el enunciado. Decidir el enfoque antes de clase
+según el tiempo disponible.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Probabilidad condicional: definición + regla de multiplicación | 20 min |
+| Ejercicios 1-3 (globos, Venn, bolas) | 30 min |
+| Eventos independientes: definición + ejercicios 4-5 | 30 min |
+| Probabilidad total: derivación + ejemplo teléfonos | 25 min |
+| Teorema de Bayes: derivación + ejemplo + ejercicios 6-7 | 40 min |
+| Laboratorio (bancos, trabajo en grupos) | 35 min |
+| **Total** | **180 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

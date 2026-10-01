@@ -1,0 +1,364 @@
+---
+title: "Guía docente — Sistemas de ecuaciones lineales (Jordan-Gauss)"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @kuttler2021
+---
+
+<!-- Nota para el docente (comentario HTML): esta guía corresponde a
+     la Unidad 2 del curso (numeración interna que usa
+     render_curso(unidades = ...) para filtrar contenido). El título
+     visible no incluye el número de unidad a propósito -- ver
+     materias/matematica-economistas/README.md.
+
+     Este documento es para PREPARACIÓN DEL DOCENTE, no para
+     estudiantes: es una guía EXHAUSTIVA de la materia misma, pensada
+     para que este documento solo te alcance para dar la clase con
+     solidez. No confundir con guia-lecturas.qmd. Nombre de archivo:
+     mismo prefijo que la presentación equivalente
+     (content/unidades/2_sistemas-ecuaciones-presentacion.qmd), sufijo
+     "-guia" al final.
+
+     Creada el 2026-09-29 (antes no existía; la presentación era un
+     TODO). Es la SEGUNDA parte de la Sesión 2 del calendario -- la
+     primera es la Unidad 1 (operaciones con matrices,
+     1_operaciones-matrices-guia.qmd), de la que esta unidad depende
+     directamente (identidad y determinante). La antigua Unidad 3
+     ("equilibrio-mercado") se retiró: su aplicación económica ahora
+     cierra esta unidad. -->
+
+# Guía docente — Sistemas de ecuaciones lineales (Jordan-Gauss)
+
+Duración de referencia si se dicta como sesión propia: **3 horas
+(180 min)**. Esta unidad es la **segunda parte** de la Sesión 2 del
+calendario; la primera parte (operaciones con matrices, de la que esta
+unidad depende) vive en `1_operaciones-matrices-guia.qmd`. Repartida en
+una sola sesión de 3 horas con la Unidad 1, cada una ocupa
+aproximadamente la mitad del tiempo disponible — ver la nota en
+"Distribución de tiempo" más abajo.
+
+## Objetivos de aprendizaje
+
+- Escribir un sistema de ecuaciones lineales en forma matricial
+  $Ax=b$, identificando la matriz de coeficientes, el vector de
+  incógnitas y el vector de términos independientes.
+- Construir la matriz aumentada $[A\mid b]$ y aplicar las tres
+  operaciones elementales de fila.
+- Resolver un sistema con el método de Gauss-Jordan, llevando la
+  matriz de coeficientes a la forma de la identidad.
+- Reconocer, a partir del resultado de Gauss-Jordan, los tres tipos de
+  solución posibles: única, infinitas, ninguna.
+- Usar el determinante (visto en la Unidad 1) para anticipar, antes de
+  resolver, si un sistema tiene solución única.
+- Plantear y resolver un problema de equilibrio de mercado como
+  sistema de ecuaciones lineales.
+- Verificar todo lo anterior en R con `solve()` y `det()`.
+
+## Capítulos sugeridos para esta sesión
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| Kuttler (2021), *A First Course in Linear Algebra* [@kuttler2021] | Capítulo de **sistemas de ecuaciones lineales** — forma matricial, matriz aumentada, operaciones elementales, eliminación de Gauss-Jordan, tipos de solución | Cubre el 100% del contenido matemático de la sesión. Es la misma fuente que la Unidad 1 — no hace falta un libro nuevo. |
+
+**Aplicación económica y práctica en R** (equilibrio de mercado,
+`solve()`/`det()` en R): contenido propio, no sale de ningún libro de
+la bibliografía — ver el desarrollo completo más abajo.
+
+## Qué se va a cubrir (coincide con el orden de la presentación)
+
+1. Forma matricial $Ax=b$ de un sistema de ecuaciones.
+2. Matriz aumentada y las tres operaciones elementales de fila.
+3. Método de Gauss-Jordan (con ejemplo y ejercicio).
+4. Tipos de solución: única, infinitas, ninguna (con ejercicio).
+5. Aplicación económica: equilibrio de mercado.
+6. Práctica en R: `solve()`, `det()`.
+
+## 1. Forma matricial $Ax=b$ — desarrollo completo
+
+Cualquier sistema de $m$ ecuaciones lineales con $n$ incógnitas se
+puede escribir de forma compacta como $Ax=b$, donde:
+
+- $A$ ($m\times n$) es la **matriz de coeficientes**: la entrada
+  $a_{ij}$ es el coeficiente de la variable $j$ en la ecuación $i$.
+- $x$ ($n\times1$) es el **vector de incógnitas**.
+- $b$ ($m\times1$) es el **vector de términos independientes**.
+
+**Ejemplo de la presentación:**
+
+$$\begin{aligned}
+2x + y &= 5 \\
+x - y &= 1
+\end{aligned}
+\quad\Longleftrightarrow\quad
+\begin{pmatrix} 2 & 1 \\ 1 & -1 \end{pmatrix}
+\begin{pmatrix} x \\ y \end{pmatrix}
+= \begin{pmatrix} 5 \\ 1 \end{pmatrix}$$
+
+**Por qué esto es más que notación:** escribir el sistema como $Ax=b$
+es lo que permite aplicar todo lo que se vio en la Unidad 1. En
+particular:
+
+- Si $\det(A) \neq 0$, existe $A^{-1}$ (aunque no la calculemos
+  explícitamente en esta sesión) y la solución es, conceptualmente,
+  $x = A^{-1}b$ — Gauss-Jordan es, en esencia, una forma de calcular
+  ese resultado sin construir $A^{-1}$ explícitamente.
+- Si $\det(A) = 0$, $A$ no es invertible, y el sistema no tiene
+  solución única (ver sección 4).
+
+Vale la pena verificar en voz alta, antes de seguir, que multiplicar
+$A$ por $x$ efectivamente recupera las dos ecuaciones originales — es
+un buen chequeo de que el grupo entendió la notación antes de avanzar
+a la matriz aumentada.
+
+**Referencia:** Kuttler (2021), capítulo de sistemas de ecuaciones
+lineales — forma matricial [@kuttler2021].
+
+## 2. Matriz aumentada y operaciones elementales — desarrollo completo
+
+**Matriz aumentada:** $[A\mid b]$ junta la matriz de coeficientes y el
+vector de términos independientes en una sola tabla, separando
+visualmente ambas partes con una línea:
+
+$$[A \mid b] = \left(\begin{array}{cc|c} 2 & 1 & 5 \\ 1 & -1 & 1 \end{array}\right)$$
+
+**Las tres operaciones elementales de fila** (cualquier combinación de
+ellas produce un sistema equivalente — mismo conjunto de soluciones):
+
+1. **Intercambiar dos filas** ($R_i \leftrightarrow R_j$).
+2. **Multiplicar una fila por un escalar distinto de cero**
+   ($R_i \to k R_i$, $k\neq0$).
+3. **Sumar a una fila un múltiplo de otra fila**
+   ($R_i \to R_i + k R_j$).
+
+**Por qué preservan la solución (justificación breve, no hace falta
+demostrarla formalmente en clase):** cada operación corresponde
+exactamente a una manipulación algebraica válida sobre las ecuaciones
+originales — intercambiar el orden de dos ecuaciones no cambia el
+sistema; multiplicar ambos lados de una ecuación por un número
+distinto de cero tampoco; y sumar un múltiplo de una ecuación a otra
+es exactamente lo que se hacía en el colegio para "eliminar una
+variable". Ninguna de las tres introduce ni elimina soluciones.
+
+**Referencia:** Kuttler (2021), mismo capítulo — matriz aumentada y
+operaciones elementales [@kuttler2021].
+
+## 3. Método de Gauss-Jordan — desarrollo completo
+
+**Objetivo:** aplicar operaciones elementales, columna por columna de
+izquierda a derecha, hasta que la parte izquierda de la matriz
+aumentada sea exactamente la matriz identidad $I$. Cuando se logra, la
+columna de la derecha es la solución del sistema — se lee
+directamente, sin sustitución adicional.
+
+**Procedimiento columna por columna (para tener en la cabeza mientras
+se resuelve en vivo):**
+
+1. En la columna actual, conseguir un 1 en la posición de la diagonal
+   (intercambiando filas o dividiendo, si hace falta).
+2. Usar esa fila (con operación 3) para hacer cero el resto de las
+   entradas de esa columna, arriba y abajo.
+3. Repetir con la siguiente columna.
+
+**Ejemplo desarrollado (el de la presentación), con cada paso
+explicado:**
+
+$$\left(\begin{array}{cc|c} 2 & 1 & 5 \\ 1 & -1 & 1 \end{array}\right)$$
+
+*Paso 1* ($R_1 \leftrightarrow R_2$, conviene por tener ya un 1):
+
+$$\left(\begin{array}{cc|c} 1 & -1 & 1 \\ 2 & 1 & 5 \end{array}\right)$$
+
+*Paso 2* ($R_2 \to R_2 - 2R_1$, hace cero la primera entrada de $R_2$):
+$2-2(1)=0$, $1-2(-1)=3$, $5-2(1)=3$:
+
+$$\left(\begin{array}{cc|c} 1 & -1 & 1 \\ 0 & 3 & 3 \end{array}\right)$$
+
+*Paso 3* ($R_2 \to R_2/3$, deja un 1 en la diagonal de $R_2$):
+
+$$\left(\begin{array}{cc|c} 1 & -1 & 1 \\ 0 & 1 & 1 \end{array}\right)$$
+
+*Paso 4* ($R_1 \to R_1 + R_2$, hace cero la segunda entrada de $R_1$):
+$-1+1=0$, $1+1=2$:
+
+$$\left(\begin{array}{cc|c} 1 & 0 & 2 \\ 0 & 1 & 1 \end{array}\right)$$
+
+**Solución:** $x=2$, $y=1$. Verificación en las ecuaciones originales:
+$2(2)+1=5$ ✓, $2-1=1$ ✓. Nota: $\det(A) = 2(-1)-1(1) = -3 \neq 0$,
+consistente con que hubo solución única.
+
+**Ejercicio de la presentación** (mismo procedimiento, sistema
+distinto):
+
+$$\begin{aligned} x+2y&=7 \\ 3x-y&=7 \end{aligned}
+\quad\Rightarrow\quad
+\left(\begin{array}{cc|c} 1 & 2 & 7 \\ 3 & -1 & 7 \end{array}\right)
+\xrightarrow{R_2-3R_1}
+\left(\begin{array}{cc|c} 1 & 2 & 7 \\ 0 & -7 & -14 \end{array}\right)$$
+
+$$\xrightarrow{R_2/(-7)}
+\left(\begin{array}{cc|c} 1 & 2 & 7 \\ 0 & 1 & 2 \end{array}\right)
+\xrightarrow{R_1-2R_2}
+\left(\begin{array}{cc|c} 1 & 0 & 3 \\ 0 & 1 & 2 \end{array}\right)$$
+
+Solución: $x=3$, $y=2$. Verificación: $3+2(2)=7$ ✓, $3(3)-2=7$ ✓. Antes
+de resolver, $\det\begin{pmatrix}1&2\\3&-1\end{pmatrix}=-1-6=-7\neq0$
+ya anticipaba solución única — vale la pena pedirle al grupo que lo
+calcule antes de empezar Gauss-Jordan, como hábito.
+
+**Referencia:** Kuttler (2021), mismo capítulo — método de
+Gauss-Jordan [@kuttler2021].
+
+## 4. Tipos de solución — desarrollo completo
+
+Al terminar de aplicar Gauss-Jordan (o incluso a medio camino), pueden
+aparecer tres situaciones:
+
+- **Solución única:** se llega a $I$ del lado izquierdo. Corresponde a
+  $\det(A) \neq 0$ (cuando $A$ es cuadrada).
+- **Infinitas soluciones:** aparece una fila $(0\;0\;\cdots\;0 \mid 0)$
+  — una ecuación redundante, que no aporta información nueva más allá
+  de las otras.
+- **Ninguna solución:** aparece una fila
+  $(0\;0\;\cdots\;0 \mid k)$ con $k\neq0$ — una contradicción
+  ($0=k$, falso).
+
+**Interpretación geométrica (útil si preguntan "por qué pasa esto"),
+para un sistema de 2 ecuaciones y 2 incógnitas:** cada ecuación es una
+recta en el plano. Solución única = las rectas se cruzan en un punto.
+Infinitas soluciones = son la misma recta. Ninguna solución = son
+rectas paralelas distintas (nunca se cruzan).
+
+**Ejercicio de la presentación** (caso "ninguna solución"):
+
+$$\begin{aligned} x+y&=2 \\ 2x+2y&=5 \end{aligned}
+\quad\Rightarrow\quad
+\left(\begin{array}{cc|c} 1 & 1 & 2 \\ 2 & 2 & 5 \end{array}\right)
+\xrightarrow{R_2-2R_1}
+\left(\begin{array}{cc|c} 1 & 1 & 2 \\ 0 & 0 & 1 \end{array}\right)$$
+
+La fila 2 dice $0=1$ — contradicción, **no hay solución**.
+Geométricamente: dividiendo la segunda ecuación entre 2 se obtiene
+$x+y=2.5$, paralela a $x+y=2$ pero nunca coincide con ella.
+
+**Si querés tener a mano un ejemplo de "infinitas soluciones" por si
+el grupo pregunta** (no está en la diapositiva):
+$x+y=2$, $2x+2y=4$ — la segunda ecuación es exactamente el doble de la
+primera, así que Gauss-Jordan produce una fila de puros ceros
+($0=0$), y hay infinitas soluciones (cualquier punto sobre la recta
+$x+y=2$).
+
+**Referencia:** Kuttler (2021), mismo capítulo — tipos de solución de
+un sistema lineal [@kuttler2021].
+
+## Aplicación económica — desarrollo extendido
+
+**Planteamiento.** Un mercado tiene una función de demanda
+$Q_d = 100-4P$ (la cantidad demandada baja con el precio) y una
+función de oferta $Q_s = -20+6P$ (la cantidad ofrecida sube con el
+precio). El **equilibrio de mercado** es el punto $(P^*, Q^*)$ donde
+$Q_d = Q_s$.
+
+**Por qué esto es un sistema lineal, y cómo se plantea:** en
+equilibrio, ambas funciones son iguales a la misma cantidad $Q$.
+Despejando $Q$ de cada una y pasando todo al lado izquierdo:
+
+$$Q_d = 100-4P \;\Rightarrow\; Q+4P=100 \qquad
+Q_s = -20+6P \;\Rightarrow\; Q-6P=-20$$
+
+En forma matricial:
+
+$$\begin{pmatrix} 1 & 4 \\ 1 & -6 \end{pmatrix}
+\begin{pmatrix} Q \\ P \end{pmatrix}
+= \begin{pmatrix} 100 \\ -20 \end{pmatrix}$$
+
+**Resolución con Gauss-Jordan:**
+
+$$\left(\begin{array}{cc|c} 1 & 4 & 100 \\ 1 & -6 & -20 \end{array}\right)
+\xrightarrow{R_2-R_1}
+\left(\begin{array}{cc|c} 1 & 4 & 100 \\ 0 & -10 & -120 \end{array}\right)
+\xrightarrow{R_2/(-10)}
+\left(\begin{array}{cc|c} 1 & 4 & 100 \\ 0 & 1 & 12 \end{array}\right)$$
+
+$$\xrightarrow{R_1-4R_2}
+\left(\begin{array}{cc|c} 1 & 0 & 52 \\ 0 & 1 & 12 \end{array}\right)$$
+
+**Equilibrio:** $Q^{*}=52$, $P^{*}=12$. Verificación:
+$Q_d(12)=100-48=52$ ✓; $Q_s(12)=-20+72=52$ ✓.
+
+**Interpretación económica para remarcar en voz alta:** a un precio de
+12 (en la unidad monetaria que se use), la cantidad que los
+consumidores quieren comprar coincide exactamente con la que los
+productores quieren vender — 52 unidades. A cualquier otro precio,
+$Q_d \neq Q_s$ y el mercado no está en equilibrio (hay exceso de
+demanda si $P<12$, exceso de oferta si $P>12$; no hace falta
+desarrollar esto formalmente hoy, pero es una buena pregunta de
+cierre para el grupo).
+
+**Puente hacia el resto del curso:** este mismo tipo de sistema, con
+más ecuaciones y más variables, es la base de modelos de varios
+mercados relacionados entre sí (equilibrio general) y de las matrices
+de costos y ventas más completas que se ven más adelante — la
+mecánica de Gauss-Jordan es exactamente la misma, solo cambia el
+tamaño del sistema.
+
+## Práctica en R — desarrollo extendido
+
+```r
+# Sistema del ejemplo: 2x+y=5, x-y=1
+A <- matrix(c(2, 1, 1, -1), nrow = 2, byrow = TRUE)
+b <- c(5, 1)
+solve(A, b)   # x=2, y=1
+
+# Equilibrio de mercado: Q+4P=100, Q-6P=-20
+A_mercado <- matrix(c(1, 4, 1, -6), nrow = 2, byrow = TRUE)
+b_mercado <- c(100, -20)
+solve(A_mercado, b_mercado)   # Q=52, P=12
+
+det(A_mercado)   # -10, distinto de cero -> confirma solución única
+```
+
+`solve(A, b)` resuelve $Ax=b$ directamente (internamente usa
+descomposición LU, no Gauss-Jordan literal, pero el resultado
+matemático es el mismo). Si `det(A)` da 0, `solve()` lanza un error en
+vez de una respuesta — es la confirmación en R, en vivo, del vínculo
+entre determinante y existencia de solución única que se vio en la
+Unidad 1.
+
+**Sugerencia de cierre de sesión:** si el tiempo alcanza, correr
+`solve(A, b)` ANTES de resolver el ejercicio a mano, como forma de que
+el grupo sepa de antemano la respuesta correcta y pueda verificar su
+propio trabajo en la pizarra contra el resultado de R.
+
+## Distribución de tiempo
+
+Esta unidad comparte la sesión de 3 horas con la Unidad 1 (operaciones
+con matrices). Distribución de referencia para **esta** unidad
+(segunda mitad de la sesión):
+
+| Bloque | Minutos |
+|---|---|
+| Forma matricial $Ax=b$ | 10 |
+| Matriz aumentada y operaciones elementales | 10 |
+| Gauss-Jordan (definición + ejemplo + ejercicio) | 25 |
+| Tipos de solución (definición + ejercicio) | 15 |
+| Aplicación económica: equilibrio de mercado | 15 |
+| Práctica en R | 10 |
+| **Subtotal contenido** | **85** |
+| Buffer (preguntas, transiciones, imprevistos) | ~5 |
+| **Total esta unidad** | **~90** |
+
+Sumado a los ~90 minutos de la Unidad 1 (ver su guía), da los 180
+minutos totales de la Sesión 2. El buffer es mínimo — si el grupo va
+lento en la Unidad 1, priorizar terminar Gauss-Jordan y la aplicación
+de equilibrio de mercado antes que "tipos de solución", que se puede
+retomar brevemente al inicio de la siguiente sesión si hace falta.
+
+## Referencias completas
+
+::: {#refs}
+:::

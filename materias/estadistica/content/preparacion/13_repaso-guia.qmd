@@ -1,0 +1,140 @@
+---
+title: "Guía de preparación — Repaso e integración — Caso 2"
+format: html
+params:
+  universidad: "Fidélitas"
+  docente: "Fabián Brenes"
+  anio: 2026
+  cuatri: 1
+nocite: |
+  @hogg2015, @hanglee2023, @cryerchan2008
+---
+
+<!-- Documento para PREPARACIÓN DEL DOCENTE, no para estudiantes.
+     Ver también materias/estadistica/content/unidades/repaso-caso2-presentacion.qmd
+     para la presentación reveal.js de esta misma sesión. -->
+
+<!-- Nota para el docente (comentario HTML): esta guía (identidad
+     interna "repaso-caso2") no tiene número de unidad -- es una
+     sesión de repaso e integración que combina contenido de varias
+     unidades, y queda fuera del filtro numérico que usa
+     render_curso(unidades = ...) salvo cuando se llama con
+     unidades = NULL (que incluye todo el material). Ver
+     materias/estadistica/README.md. -->
+
+# Guía docente — Repaso e integración — Caso 2
+
+Duración de la sesión: **3 horas (180 min)**.
+
+## Objetivos de aprendizaje
+
+- Conectar, con un solo hilo conductor, el procedimiento común a
+  pruebas de hipótesis, intervalos de confianza, ANOVA y series de
+  tiempo.
+- Evaluar el desempeño de los grupos en el Caso 2 según la rúbrica del
+  curso.
+
+## Capítulos sugeridos
+
+| Libro | Capítulo / sección | Por qué |
+|---|---|---|
+| (repaso — no hay lectura nueva) | — | Sesión de integración de los bloques de pruebas de hipótesis, intervalos de confianza, ANOVA y series de tiempo; no introduce contenido nuevo de bibliografía. Repasar mentalmente Hogg caps. 7-8, Hang Lee caps. 2-4, y Cryer & Chan caps. 2-4. |
+
+## Desarrollo — repaso teórico completo para el docente
+
+### El hilo conductor: un mismo esqueleto lógico, cuatro parámetros distintos
+
+El punto pedagógico central de esta sesión es que estos cuatro bloques
+del curso —pruebas de hipótesis, intervalos de confianza, ANOVA y
+series de tiempo—, aunque parecen temas separados, comparten
+exactamente el mismo esqueleto lógico: **estadístico de prueba →
+distribución de referencia → conclusión con base en evidencia**. Lo
+único que cambia entre ellos es *qué parámetro* se está evaluando y
+*qué distribución* de referencia se usa.
+
+| Tema | Pregunta que responde | Herramienta |
+|---|---|---|
+| Pruebas de hipótesis | ¿Es la media igual a un valor de referencia? | Estadístico t / Z |
+| Intervalos de confianza | ¿En qué rango plausible está el parámetro? | $\bar{x} \pm t_{\alpha/2}\cdot SE$ |
+| ANOVA | ¿Son iguales tres o más medias? | Estadístico F |
+| Series de tiempo | ¿Cómo se comporta una variable en el tiempo? | Descomposición, AR/MA/ARMA |
+
+**Recomendación pedagógica:** presentar esta tabla en una slide grande
+y visible, y volver a ella explícitamente durante la discusión — no
+mencionarla solo de pasada. El valor de esta sesión está más en la
+*conexión* entre estos bloques que en repasar cada uno desde cero.
+
+### Respuestas de referencia para las preguntas de discusión
+
+**¿Cómo se relaciona un intervalo de confianza de 95% con una prueba
+de hipótesis de dos colas al 5% de significancia?** Ya lo derivamos en
+la unidad de intervalos de confianza: son dos caras de la misma
+matemática. Si un valor hipotético $\mu_0$ cae **fuera** del intervalo
+de confianza del 95%, entonces una prueba de hipótesis de dos colas
+$H_0:\mu=\mu_0$ al 5% de significancia **rechazaría** $H_0$. Si $\mu_0$
+cae **dentro** del intervalo, la prueba **no rechazaría** $H_0$. El
+intervalo de confianza, en cierto sentido, resume de una sola vez el
+resultado de *todas* las pruebas de hipótesis posibles con distintos
+valores de $\mu_0$.
+
+**¿Por qué el ANOVA no es simplemente "hacer varias pruebas t"
+seguidas?** Como vimos en la unidad de ANOVA: porque hacer múltiples
+pruebas t infla la probabilidad de cometer al menos un error tipo I
+muy por encima del $\alpha$ nominal de cada prueba individual (con 6
+comparaciones a 5% cada una, la probabilidad de al menos un falso
+positivo sube a más del 26%). El ANOVA controla el error tipo I global
+con una sola prueba conjunta.
+
+**¿Qué problema evita la descomposición de una serie de tiempo antes
+de analizar su autocorrelación?** Como vimos en las unidades de series
+de tiempo: la tendencia y la estacionalidad generan, por sí mismas,
+una correlación "trivial" entre observaciones sucesivas que no refleja
+ninguna dinámica interesante de la serie — dos períodos consecutivos
+de una serie con tendencia creciente van a estar correlacionados
+simplemente porque ambos son altos, no porque haya una relación
+dinámica genuina. Descomponer primero, y analizar el residuo, evita
+confundir esa correlación "trivial" con la dependencia temporal real
+que los modelos AR/MA/ARMA de la unidad de series de tiempo — modelos
+buscan capturar. Esto también se conecta con el problema de regresión
+espuria: dos series con tendencia van a parecer relacionadas entre sí
+por la misma razón.
+
+### Nota adicional de integración (para enriquecer la discusión si el tiempo lo permite)
+
+Vale la pena señalar explícitamente en esta sesión que **todas** estas
+herramientas —de pruebas de hipótesis a series de tiempo— descansan,
+en última instancia, sobre el mismo fundamento que se estableció en la
+unidad de pruebas de hipótesis: el Teorema del Límite Central, que es
+lo que justifica usar distribuciones como Z, t o F para hacer
+inferencia, incluso sin conocer la distribución exacta de los datos
+originales. Es un buen cierre conceptual mencionar esto explícitamente,
+para que los estudiantes vean que no son cuatro conjuntos de
+herramientas desconectadas, sino aplicaciones distintas de un mismo
+marco de razonamiento estadístico.
+
+## Notas de preparación logística
+
+Reservar la mayor parte del tiempo a las presentaciones de Caso 2,
+igual que se hizo en la sesión de pruebas de hipótesis — laboratorio y
+Caso 1 — el repaso integrador debe ser conciso (40 minutos es
+suficiente si la tabla comparativa está bien preparada de antemano).
+Recordar a los estudiantes, explícitamente, que el Caso 3 (la actividad
+de números índices) **no** es una presentación adicional de este mismo
+formato, sino la actividad participativa de números índices — para
+evitar confusión sobre qué se espera en esa sesión.
+
+## Distribución de tiempo sugerida
+
+| Actividad | Tiempo |
+|---|---|
+| Repaso integrador (tabla comparativa + preguntas de discusión con respuestas de referencia) | 40 min |
+| Presentaciones de Caso 2 | 100 min |
+| Retroalimentación grupal | 25 min |
+| **Total** | **165 min** |
+
+## Referencias completas
+
+Ver `referencias/Estadistica.bib` para el detalle bibliográfico
+completo, y `content/blocks/bibliografia.qmd` para el bloque
+reutilizable que genera la sección de referencias en cada
+presentación.

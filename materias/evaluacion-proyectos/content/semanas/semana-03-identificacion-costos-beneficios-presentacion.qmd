@@ -1,0 +1,202 @@
+---
+title: "Evaluación Económica y Social de Proyectos"
+subtitle: "Sesión 3: Identificación y valoración de costos y beneficios; precios sociales"
+format: revealjs
+params:
+  materia: "Evaluación Económica y Social de Proyectos"
+  titulo_sesion: "Identificación y valoración de costos y beneficios; precios sociales"
+  universidad: "Fidélitas"
+  logo_path: "/images/logos/fidelitas.jpg"
+  docente: "Marianne Pérez Gómez"
+  anio: 2026
+  cuatri: 3
+nocite: |
+  @ilpes_metodologiageneral39, @ilpes_evaluacionsocial37
+---
+
+## Contenido {.agenda}
+
+- 🔄 Repaso: su matriz de Marco Lógico
+- 💰 Costos y beneficios: directos, indirectos, tangibles, intangibles, externalidades
+- ⚖️ Precios de mercado vs. precios sociales — por qué difieren
+- 🔧 Factores de conversión y precios de cuenta
+- 🕶️ Precios sombra
+- 🗣️ Dinámica: identifiquen y clasifiquen los costos y beneficios de su proyecto
+
+::: {.notes}
+"Bienvenidos a la Sesión 3. Con su matriz de Marco Lógico ya lista,
+hoy vamos a identificar todos los costos y beneficios de su proyecto —
+componentes y actividades les dan los costos, fin y propósito les dan
+los beneficios— y vamos a aprender por qué, en un proyecto social,
+usamos precios sociales en vez de precios de mercado para valorarlos."
+:::
+
+## Repaso rápido {.divisor}
+
+## Su matriz de Marco Lógico
+
+- Cada grupo comparte en 1 minuto: su fin, su propósito, y un
+  componente de su matriz
+- ¿Qué actividades tiene planteadas ese componente? (esas actividades
+  son, literalmente, sus futuros costos)
+
+::: {.notes}
+"Recordemos rápido la matriz de cada grupo. Cuando mencionen sus
+actividades, ténganlas presentes: cada actividad de su matriz de Marco
+Lógico es, en la práctica, un costo del proyecto que vamos a identificar
+hoy."
+:::
+
+## Costos y beneficios {.divisor}
+
+## Tipos de costos y beneficios
+
+- **Directos**: los que se originan directamente en la ejecución del
+  proyecto (ej. salarios de instructores, materiales)
+- **Indirectos**: efectos colaterales sobre terceros no involucrados
+  directamente (ej. congestión vial durante la construcción de un CEN-CINAI)
+- **Tangibles**: se pueden valorar en dinero con relativa facilidad
+- **Intangibles**: difíciles de valorar en dinero (bienestar, dignidad,
+  cohesión social) pero igual de reales
+- **Externalidades**: efectos sobre terceros que no participan en la
+  transacción, positivos o negativos (ej. una escuela reduce la
+  criminalidad del barrio — externalidad positiva)
+
+::: {.notes}
+"Esta clasificación es la base de todo el análisis de esta sesión. Los
+costos y beneficios directos son los más fáciles de ver —salarios,
+materiales, matrícula. Los indirectos y las externalidades son los que
+más se les van a escapar si no se detienen a pensarlos: por ejemplo, un
+programa de capacitación técnica no solo beneficia a quien se capacita,
+también puede generar una externalidad positiva si reduce la
+informalidad laboral en la zona. Y los intangibles —dignidad,
+bienestar, cohesión social— son reales aunque no tengan un precio de
+mercado obvio; en la Sesión 4 vamos a ver cómo se aproximan con
+indicadores aunque no se puedan monetizar del todo."
+:::
+
+## Precios de mercado vs. precios sociales {.destacado}
+
+- El precio de mercado de un insumo puede estar **distorsionado** por
+  impuestos, subsidios, aranceles, monopolios, o por un mercado laboral
+  con desempleo
+- El **precio social** (o precio de cuenta) intenta capturar el
+  verdadero **costo de oportunidad** de ese recurso para la sociedad,
+  eliminando esas distorsiones
+- Por eso el mismo insumo puede tener un precio de mercado y un precio
+  social distintos — y en la evaluación social usamos siempre el
+  segundo
+
+::: {.notes}
+"Este es el concepto más importante de la sesión. Si contratan un
+trabajador en una zona con alto desempleo, su salario de mercado puede
+estar sobrestimando lo que realmente 'cuesta' a la sociedad emplearlo,
+porque ese trabajador de otra forma estaría desempleado —su costo de
+oportunidad es bajo. Al revés, si importan un insumo que tiene un
+arancel alto, el precio de mercado que pagan incluye ese arancel, pero
+el arancel es solo una transferencia interna del país —no es un costo
+real para la sociedad como un todo—, así que el precio social de ese
+insumo es más bajo que su precio de mercado."
+:::
+
+## Factores de conversión y precios de cuenta
+
+- Un **factor de conversión** es la razón entre el precio social y el
+  precio de mercado de un bien o insumo: $FC = \dfrac{\text{precio social}}{\text{precio de mercado}}$
+- Existen factores de conversión estándar publicados (mano de obra,
+  divisa) y factores específicos por sector
+- El **precio de cuenta** de un insumo es su precio de mercado
+  multiplicado por su factor de conversión
+
+::: {.notes}
+"El factor de conversión es simplemente un multiplicador: tomamos el
+precio de mercado de un insumo y lo multiplicamos por su factor de
+conversión para obtener su precio de cuenta, que es el precio que sí
+usamos en la evaluación social. En la Sesión 4 vamos a ver con más
+detalle los factores de conversión de mano de obra y de divisa, que
+son los más comunes en proyectos sociales."
+:::
+
+## Precios sombra
+
+- Un **precio sombra** es el precio social de un bien o servicio que
+  **no tiene ningún precio de mercado observable** (ej. el valor social
+  de un año de vida saludable, o de un año adicional de escolaridad)
+- Se estiman con métodos indirectos: costo de oportunidad, disposición
+  a pagar, costos evitados, entre otros
+- En proyectos sociales, muchos beneficios centrales (salud, educación,
+  seguridad) requieren precios sombra — no aparecen en ningún mercado
+
+::: {.notes}
+"Los precios sombra son necesarios precisamente porque los beneficios
+más importantes de un proyecto social —salvar vidas, mejorar la
+educación, reducir la criminalidad— no se compran ni se venden en
+ningún mercado. No esperen que cada grupo calcule un precio sombra
+riguroso en este curso —eso requiere estudios especializados—, pero sí
+que identifiquen claramente cuáles de sus beneficios necesitarían un
+precio sombra, y que propongan al menos una forma razonable de
+aproximarlo (por ejemplo, costos evitados en el sistema de salud, o el
+retorno salarial promedio de un año adicional de escolaridad)."
+:::
+
+## Dinámica: identifiquen los costos y beneficios de su proyecto {.divisor}
+
+## Trabajo en grupo (el resto de la sesión)
+
+::: {.incremental}
+- A partir de sus actividades (Marco Lógico), listen todos los costos
+  del proyecto y clasifíquenlos (directos/indirectos, tangibles/intangibles)
+- A partir de su fin y propósito, listen todos los beneficios y
+  clasifíquenlos de la misma forma
+- Para cada costo/beneficio, indiquen si tiene un precio de mercado
+  observable o si necesitaría un precio sombra
+- Identifiquen si algún insumo importante requeriría un factor de
+  conversión (ej. mano de obra en una zona de alto desempleo)
+:::
+
+::: {.notes}
+"El resto de la sesión es trabajo en grupo. Quiero que salgan con una
+lista ordenada de costos y beneficios, cada uno clasificado, y con una
+nota de si necesita precio sombra o factor de conversión. No hace
+falta calcular números todavía —eso es la Sesión 4—, pero sí que la
+lista esté completa y bien razonada, porque ahí es donde más se
+pierden puntos si queda incompleta."
+:::
+
+## Cierre y próxima sesión
+
+- Próxima sesión (Sesión 4, **27 de noviembre**): **Indicadores
+  económicos y sociales** — VANE, TIRE, relación beneficio-costo,
+  costo-efectividad
+- Entre sesiones: terminen su lista de costos y beneficios clasificados,
+  y empiecen a estimar valores (aunque sean aproximados) para cada uno
+
+::: {.notes}
+"Para el 27 de noviembre, con esta lista de costos y beneficios ya
+clasificada, vamos a calcular los indicadores económicos de su
+proyecto: Valor Actual Neto Económico, Tasa Interna de Rendimiento
+Económico, relación beneficio-costo y costo-efectividad. Aprovechen las
+semanas entre sesiones para conseguir cifras aproximadas —no tienen que
+ser perfectas, pero sí razonables y justificadas."
+:::
+
+## Lecturas para la próxima sesión {.destacado}
+
+**Sesión 4 — Indicadores económicos y sociales**
+
+- 📄 ILPES/CEPAL — *Evaluación social de proyectos* (Serie Manuales N.º 37),
+  capítulos sobre indicadores de rentabilidad económica
+- 📄 ILPES/CEPAL — *Metodología general de identificación, preparación
+  y evaluación de proyectos de inversión pública* (Serie Manuales N.º 39),
+  sección de evaluación económica
+
+Enlaces y ficha completa de cada fuente: `referencias/EvaluacionProyectos.bib`
+
+::: {.notes}
+"Los mismos dos manuales de esta sesión, pero ahora enfocados en los
+capítulos de indicadores —VAN, TIR, relación beneficio-costo. Ya los
+tienen, así que solo hace falta que revisen esas secciones específicas
+antes de la próxima sesión."
+:::
+
+{{< include ../blocks/bibliografia.qmd >}}
